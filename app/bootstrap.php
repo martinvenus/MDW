@@ -27,6 +27,7 @@ NEnvironment::loadConfig();
 // 3a) get and setup a front controller
 $application = NEnvironment::getApplication();
 $application->errorPresenter = 'Error';
+
 //$application->catchExceptions = TRUE;
 
 require_once('db.php');

@@ -18,7 +18,7 @@
 class Admin_DefaultPresenter extends Admin_BasePresenter
 {
 
-	public function renderDefault()
+	public function actionDefault()
 	{
 		$this->template->message = 'We hope you enjoy this framework!';
 	}

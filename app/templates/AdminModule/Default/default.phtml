@@ -1,44 +1,8 @@
-{block content}
+{block #content}
+{$message}
+{/block}
 
-<div id="header">
-	<h1>It works!</h1>
-
-	<h2>Congratulations on your first ADMIN Nette Framework powered page.</h2>
-</div>
-
-<div>
-	<p>{$message}</p>
-
-	<a href="http://nette.org" title="Nette Framework - The most innovative PHP framework"><img
-	src="{$basePath}/images/nette-powered2.gif" width="80" height="15" alt="Nette Framework powered"></a>
-</div>
-
-<style>
-	body {
-		margin: 0;
-		padding: 0;
-	}
-
-	div {
-		padding: .2em 1em;
-	}
-
-	#header {
-		background: #EEE;
-		border-bottom: 1px #DDD solid;
-	}
-
-	h1 {
-		color: #0056ad;
-		font-size: 30px;
-	}
-
-	h2 {
-		color: gray;
-		font-size: 20px;
-	}
-
-	img {
-		border: none;
-	}
-</style>
+{block #head}
+<h2><span>Hlavička</span></h2>
+<p>popis</p>
+{/block}
