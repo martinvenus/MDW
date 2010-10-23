@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Interface IDibiProfiler</title>
+
+	<script type="text/javascript" src="media/jquery.min.js"></script>
+	<script type="text/javascript" src="media/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="media/jquery.sortElements.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<script type="text/javascript" src="media/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2010100816" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li>dibi</li>
+		<li><a href="namespace-dibi.drivers.html">dibi\drivers</a></li>
+		<li><a href="namespace-internal.html">internal</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="dibi.html">dibi</a></li>
+		<li><a href="DibiColumnInfo.html">DibiColumnInfo</a></li>
+		<li><a href="DibiConnection.html">DibiConnection</a></li>
+		<li><a href="DibiDatabaseInfo.html">DibiDatabaseInfo</a></li>
+		<li><a href="DibiDataSource.html">DibiDataSource</a></li>
+		<li><a href="DibiDateTime.html">DibiDateTime</a></li>
+		<li><a href="DibiDriverException.html">DibiDriverException</a></li>
+		<li><a href="DibiException.html">DibiException</a></li>
+		<li><a href="DibiFluent.html">DibiFluent</a></li>
+		<li><a href="DibiForeignKeyInfo.html">DibiForeignKeyInfo</a></li>
+		<li><a href="DibiIndexInfo.html">DibiIndexInfo</a></li>
+		<li><a href="DibiLazyStorage.html">DibiLazyStorage</a></li>
+		<li><a href="DibiLazyStorageBase.html">DibiLazyStorageBase</a></li>
+		<li><a href="DibiObject.html">DibiObject</a></li>
+		<li><a href="DibiPcreException.html">DibiPcreException</a></li>
+		<li><a href="DibiProfiler.html">DibiProfiler</a></li>
+		<li><a href="DibiResult.html">DibiResult</a></li>
+		<li><a href="DibiResultInfo.html">DibiResultInfo</a></li>
+		<li><a href="DibiResultIterator.html">DibiResultIterator</a></li>
+		<li><a href="DibiRow.html">DibiRow</a></li>
+		<li><a href="DibiTableInfo.html">DibiTableInfo</a></li>
+		<li><a href="DibiTranslator.html">DibiTranslator</a></li>
+		<li><a href="DibiVariable.html">DibiVariable</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+		<li><a href="IDataSource.html">IDataSource</a></li>
+		<li><a href="IDebugPanel.html">IDebugPanel</a></li>
+		<li><a href="IDibiDriver.html">IDibiDriver</a></li>
+		<li>IDibiProfiler</li>
+		<li><a href="IDibiReflector.html">IDibiReflector</a></li>
+		<li><a href="IDibiResultDriver.html">IDibiResultDriver</a></li>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Interface IDibiProfiler</h1>
+		<div class="classDescription">
+
+		
+<p>Defines method that must profiler implement.</p>
+
+		</div>
+		<div>
+
+			<h4>Direct Known Implementers</h4>
+			<a href="DibiProfiler.html">DibiProfiler</a>
+		</div>
+
+		<div class="classInfo">
+			<b>Abstract Interface</b><br />
+				<b>Package:</b> dibi<br />
+			<b>Located at</b> <a href="source-libs.interfaces.php.html#29">/libs/interfaces.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 before" id="_before">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_before">#</a>
+			<code class="nowrap">
+				<a href="source-libs.interfaces.php.html#50" title="go to source code"><b>before</b></a>(
+					<a href="DibiConnection.html">DibiConnection</a>
+					
+					<var>$connection</var>, 
+					int
+					<var>$event</var>, 
+					string
+					<var>$sql</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Before event notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Before event notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$connection</code> DibiConnection<br />
+						<code>$event</code> int     event name<br />
+						<code>$sql</code> string  sql<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 after" id="_after">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_after">#</a>
+			<code class="nowrap">
+				<a href="source-libs.interfaces.php.html#59" title="go to source code"><b>after</b></a>(
+					int
+					<var>$ticket</var>, 
+					<a href="DibiResult.html">DibiResult</a>
+					<var>$result</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>After event notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>After event notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$ticket</code> int<br />
+						<code>$result</code> DibiResult<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 exception" id="_exception">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_exception">#</a>
+			<code class="nowrap">
+				<a href="source-libs.interfaces.php.html#67" title="go to source code"><b>exception</b></a>(
+					<a href="DibiDriverException.html">DibiDriverException</a>
+					
+					<var>$exception</var>
+			)</code>
+
+			<div class="short">
+				
+<p>After exception notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>After exception notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$exception</code> DibiDriverException<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="CONNECT" id="CONNECT">
+			<td align="right" width="1%"><code><b>CONNECT</b></code></td>
+			<td><code><span class="php-num">1</span></code> <a href="#CONNECT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="SELECT" id="SELECT">
+			<td align="right" width="1%"><code><b>SELECT</b></code></td>
+			<td><code><span class="php-num">4</span></code> <a href="#SELECT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="INSERT" id="INSERT">
+			<td align="right" width="1%"><code><b>INSERT</b></code></td>
+			<td><code><span class="php-num">8</span></code> <a href="#INSERT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="DELETE" id="DELETE">
+			<td align="right" width="1%"><code><b>DELETE</b></code></td>
+			<td><code><span class="php-num">16</span></code> <a href="#DELETE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="UPDATE" id="UPDATE">
+			<td align="right" width="1%"><code><b>UPDATE</b></code></td>
+			<td><code><span class="php-num">32</span></code> <a href="#UPDATE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="QUERY" id="QUERY">
+			<td align="right" width="1%"><code><b>QUERY</b></code></td>
+			<td><code><span class="php-num">60</span></code> <a href="#QUERY" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="BEGIN" id="BEGIN">
+			<td align="right" width="1%"><code><b>BEGIN</b></code></td>
+			<td><code><span class="php-num">64</span></code> <a href="#BEGIN" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="COMMIT" id="COMMIT">
+			<td align="right" width="1%"><code><b>COMMIT</b></code></td>
+			<td><code><span class="php-num">128</span></code> <a href="#COMMIT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="ROLLBACK" id="ROLLBACK">
+			<td align="right" width="1%"><code><b>ROLLBACK</b></code></td>
+			<td><code><span class="php-num">256</span></code> <a href="#ROLLBACK" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="TRANSACTION" id="TRANSACTION">
+			<td align="right" width="1%"><code><b>TRANSACTION</b></code></td>
+			<td><code><span class="php-num">448</span></code> <a href="#TRANSACTION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="EXCEPTION" id="EXCEPTION">
+			<td align="right" width="1%"><code><b>EXCEPTION</b></code></td>
+			<td><code><span class="php-num">512</span></code> <a href="#EXCEPTION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="ALL" id="ALL">
+			<td align="right" width="1%"><code><b>ALL</b></code></td>
+			<td><code><span class="php-num">1023</span></code> <a href="#ALL" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+</div>
+
+	<div id="footer">
+		dibi API documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>

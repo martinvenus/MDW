@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Class dibi</title>
+
+	<script type="text/javascript" src="media/jquery.min.js"></script>
+	<script type="text/javascript" src="media/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="media/jquery.sortElements.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<script type="text/javascript" src="media/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2010100816" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li>dibi</li>
+		<li><a href="namespace-dibi.drivers.html">dibi\drivers</a></li>
+		<li><a href="namespace-internal.html">internal</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li>dibi</li>
+		<li><a href="DibiColumnInfo.html">DibiColumnInfo</a></li>
+		<li><a href="DibiConnection.html">DibiConnection</a></li>
+		<li><a href="DibiDatabaseInfo.html">DibiDatabaseInfo</a></li>
+		<li><a href="DibiDataSource.html">DibiDataSource</a></li>
+		<li><a href="DibiDateTime.html">DibiDateTime</a></li>
+		<li><a href="DibiDriverException.html">DibiDriverException</a></li>
+		<li><a href="DibiException.html">DibiException</a></li>
+		<li><a href="DibiFluent.html">DibiFluent</a></li>
+		<li><a href="DibiForeignKeyInfo.html">DibiForeignKeyInfo</a></li>
+		<li><a href="DibiIndexInfo.html">DibiIndexInfo</a></li>
+		<li><a href="DibiLazyStorage.html">DibiLazyStorage</a></li>
+		<li><a href="DibiLazyStorageBase.html">DibiLazyStorageBase</a></li>
+		<li><a href="DibiObject.html">DibiObject</a></li>
+		<li><a href="DibiPcreException.html">DibiPcreException</a></li>
+		<li><a href="DibiProfiler.html">DibiProfiler</a></li>
+		<li><a href="DibiResult.html">DibiResult</a></li>
+		<li><a href="DibiResultInfo.html">DibiResultInfo</a></li>
+		<li><a href="DibiResultIterator.html">DibiResultIterator</a></li>
+		<li><a href="DibiRow.html">DibiRow</a></li>
+		<li><a href="DibiTableInfo.html">DibiTableInfo</a></li>
+		<li><a href="DibiTranslator.html">DibiTranslator</a></li>
+		<li><a href="DibiVariable.html">DibiVariable</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+		<li><a href="IDataSource.html">IDataSource</a></li>
+		<li><a href="IDebugPanel.html">IDebugPanel</a></li>
+		<li><a href="IDibiDriver.html">IDibiDriver</a></li>
+		<li><a href="IDibiProfiler.html">IDibiProfiler</a></li>
+		<li><a href="IDibiReflector.html">IDibiReflector</a></li>
+		<li><a href="IDibiResultDriver.html">IDibiResultDriver</a></li>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Class dibi</h1>
+		<div class="classDescription">
+
+		
+<p>Interface for database drivers.</p>
+
+<p>This class is static container class for creating DB objects and store
+connections info.</p>
+
+		</div>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> David Grudl<br />
+			<b>Located at</b> <a href="source-dibi.php.html#98">/dibi.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				final public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#173" title="go to source code"><b>__construct</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Static class – cannot be instantiated.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Static class – cannot be instantiated.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 connect" id="_connect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiConnection.html">DibiConnection</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_connect">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#187" title="go to source code"><b>connect</b></a>(
+					mixed
+					<var>$config</var> = <span class="php-keyword1">array</span> (
+), 
+					string
+					<var>$name</var> = <span class="php-num">0</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Creates a new DibiConnection object and connects it to specified
+database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Creates a new DibiConnection object and connects it to specified
+database.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$config</code> mixed   connection parameters<br />
+						<code>$name</code> string  connection name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 disconnect" id="_disconnect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_disconnect">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#201" title="go to source code"><b>disconnect</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Disconnects from database (doesn't destroy DibiConnection object).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Disconnects from database (doesn't destroy DibiConnection object).</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 isConnected" id="_isConnected">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_isConnected">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#212" title="go to source code"><b>isConnected</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns TRUE when connection was established.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns TRUE when connection was established.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 getConnection" id="_getConnection">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiConnection.html">DibiConnection</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getConnection">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#223" title="go to source code"><b>getConnection</b></a>(
+					string
+					<var>$name</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieve active connection.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve active connection.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$name</code> string   connection registy name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 setConnection" id="_setConnection">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiConnection.html">DibiConnection</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setConnection">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#248" title="go to source code"><b>setConnection</b></a>(
+					<a href="DibiConnection.html">DibiConnection</a>
+					
+					<var>$connection</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets connection.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets connection.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$connection</code> DibiConnection<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 activate" id="_activate">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_activate">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#260" title="go to source code"><b>activate</b></a>(
+					string
+					<var>$name</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Change active connection.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Change active connection.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$name</code> string   connection registy name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 getProfiler" id="_getProfiler">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="IDibiProfiler.html">IDibiProfiler</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getProfiler">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#273" title="go to source code"><b>getProfiler</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieve active connection profiler.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieve active connection profiler.</p>
+
+
+
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 query" id="_query">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiResult.html">DibiResult</a>|int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_query">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#289" title="go to source code"><b>query</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Generates and executes SQL query – Monostate for
+DibiConnection::qu­ery().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Generates and executes SQL query – Monostate for
+DibiConnection::qu­ery().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed      one or more arguments<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">DibiResult|int   result set object (if any)</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 nativeQuery" id="_nativeQuery">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiResult.html">DibiResult</a>|int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_nativeQuery">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#303" title="go to source code"><b>nativeQuery</b></a>(
+					string
+					<var>$sql</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes the SQL query – Monostate for
+DibiConnection::na­tiveQuery().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes the SQL query – Monostate for
+DibiConnection::na­tiveQuery().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string           SQL statement.<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">DibiResult|int   result set object (if any)</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 test" id="_test">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_test">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#315" title="go to source code"><b>test</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Generates and prints SQL query – Monostate for
+DibiConnection::tes­t().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Generates and prints SQL query – Monostate for
+DibiConnection::tes­t().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed  one or more arguments<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 dataSource" id="_dataSource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiDataSource.html">DibiDataSource</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_dataSource">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#328" title="go to source code"><b>dataSource</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Generates and returns SQL query as DibiDataSource – Monostate for
+DibiConnection::tes­t().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Generates and returns SQL query as DibiDataSource – Monostate for
+DibiConnection::tes­t().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed      one or more arguments<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 fetch" id="_fetch">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiRow.html">DibiRow</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetch">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#341" title="go to source code"><b>fetch</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes SQL query and fetch result – Monostate for
+DibiConnection::qu­ery() &amp; fetch().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes SQL query and fetch result – Monostate for
+DibiConnection::qu­ery() &amp; fetch().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed    one or more arguments<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 fetchAll" id="_fetchAll">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetchAll">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#355" title="go to source code"><b>fetchAll</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes SQL query and fetch results – Monostate for
+DibiConnection::qu­ery() &amp; fetchAll().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes SQL query and fetch results – Monostate for
+DibiConnection::qu­ery() &amp; fetchAll().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed    one or more arguments<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">array of DibiRow</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 fetchSingle" id="_fetchSingle">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetchSingle">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#369" title="go to source code"><b>fetchSingle</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes SQL query and fetch first column – Monostate for
+DibiConnection::qu­ery() &amp; fetchSingle().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes SQL query and fetch first column – Monostate for
+DibiConnection::qu­ery() &amp; fetchSingle().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed    one or more arguments<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 fetchPairs" id="_fetchPairs">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetchPairs">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#383" title="go to source code"><b>fetchPairs</b></a>(
+					array|mixed
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes SQL query and fetch pairs – Monostate for
+DibiConnection::qu­ery() &amp; fetchPairs().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes SQL query and fetch pairs – Monostate for
+DibiConnection::qu­ery() &amp; fetchPairs().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> array|mixed    one or more arguments<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 getAffectedRows" id="_getAffectedRows">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getAffectedRows">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#397" title="go to source code"><b>getAffectedRows</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets the number of affected rows.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets the number of affected rows. Monostate for
+DibiConnection::ge­tAffectedRows()</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">int  number of rows</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 affectedRows" id="_affectedRows">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_affectedRows">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#410" title="go to source code"><b>affectedRows</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets the number of affected rows. Alias for getAffectedRows().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets the number of affected rows. Alias for getAffectedRows().</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">int  number of rows</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 getInsertId" id="_getInsertId">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getInsertId">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#422" title="go to source code"><b>getInsertId</b></a>(
+					string
+					<var>$sequence</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query. Monostate for DibiConnection::ge­tInsertId()</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sequence</code> string     optional sequence name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 insertId" id="_insertId">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_insertId">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#436" title="go to source code"><b>insertId</b></a>(
+					string
+					<var>$sequence</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column. Alias for
+getInsertId().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column. Alias for
+getInsertId().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sequence</code> string     optional sequence name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 begin" id="_begin">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_begin">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#449" title="go to source code"><b>begin</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Begins a transaction – Monostate for DibiConnection::be­gin().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Begins a transaction – Monostate for DibiConnection::be­gin().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 commit" id="_commit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_commit">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#462" title="go to source code"><b>commit</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Commits statements in a transaction – Monostate for
+DibiConnection::com­mit($savepoint = NULL).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Commits statements in a transaction – Monostate for
+DibiConnection::com­mit($savepoint = NULL).</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 rollback" id="_rollback">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_rollback">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#475" title="go to source code"><b>rollback</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Rollback changes in a transaction – Monostate for
+DibiConnection::ro­llback().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Rollback changes in a transaction – Monostate for
+DibiConnection::ro­llback().</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 getDatabaseInfo" id="_getDatabaseInfo">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiDatabaseInfo.html">DibiDatabaseInfo</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getDatabaseInfo">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#488" title="go to source code"><b>getDatabaseInfo</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets a information about the current database – Monostate for
+DibiConnection::get­DatabaseInfo().</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets a information about the current database – Monostate for
+DibiConnection::get­DatabaseInfo().</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 loadFile" id="_loadFile">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_loadFile">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#499" title="go to source code"><b>loadFile</b></a>(
+					string
+					<var>$file</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Import SQL dump from file – extreme fast!</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Import SQL dump from file – extreme fast!</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$file</code> string  filename<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">int  count of sql commands</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 __callStatic" id="___callStatic">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___callStatic">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#511" title="go to source code"><b>__callStatic</b></a>(
+					
+					<var>$name</var>, 
+					
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Replacement for majority of dibi::methods() in future.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Replacement for majority of dibi::methods() in future.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 command" id="_command">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiFluent.html">DibiFluent</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_command">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#528" title="go to source code"><b>command</b></a>(
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 select" id="_select">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiFluent.html">DibiFluent</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_select">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#538" title="go to source code"><b>select</b></a>(
+					string
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$args</code> string    column name<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 update" id="_update">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiFluent.html">DibiFluent</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_update">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#550" title="go to source code"><b>update</b></a>(
+					string
+					<var>$table</var>, 
+					array
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string   table<br />
+						<code>$args</code> array<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 insert" id="_insert">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiFluent.html">DibiFluent</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_insert">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#562" title="go to source code"><b>insert</b></a>(
+					string
+					<var>$table</var>, 
+					array
+					<var>$args</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string   table<br />
+						<code>$args</code> array<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 delete" id="_delete">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				<a href="DibiFluent.html">DibiFluent</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_delete">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#574" title="go to source code"><b>delete</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string   table<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 datetime" id="_datetime">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_datetime">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#589" title="go to source code"><b>datetime</b></a>(
+					
+					<var>$time</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 date" id="_date">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_date">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#599" title="go to source code"><b>date</b></a>(
+					
+					<var>$date</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 addSubst" id="_addSubst">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_addSubst">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#613" title="go to source code"><b>addSubst</b></a>(
+					string
+					<var>$expr</var>, 
+					string
+					<var>$subst</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Create a new substitution pair for indentifiers.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Create a new substitution pair for indentifiers.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$expr</code> string from<br />
+						<code>$subst</code> string to<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 removeSubst" id="_removeSubst">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_removeSubst">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#626" title="go to source code"><b>removeSubst</b></a>(
+					mixed
+					<var>$expr</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Remove substitution pair.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Remove substitution pair.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$expr</code> mixed from or TRUE<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 setSubstFallback" id="_setSubstFallback">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setSubstFallback">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#642" title="go to source code"><b>setSubstFallback</b></a>(
+					callback
+					<var>$callback</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets substitution fallback handler.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets substitution fallback handler.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$callback</code> callback<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 defaultSubstFallback" id="_defaultSubstFallback">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_defaultSubstFallback">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#654" title="go to source code"><b>defaultSubstFallback</b></a>(
+					string
+					<var>$expr</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Default substitution fallback handler.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Default substitution fallback handler.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$expr</code> string<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="0 dump" id="_dump">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_dump">#</a>
+			<code class="nowrap">
+				<a href="source-dibi.php.html#670" title="go to source code"><b>dump</b></a>(
+					string|<a href="DibiResult.html">DibiResult</a>
+					<var>$sql</var> = <span class="php-keyword1">NULL</span>, 
+					bool
+					<var>$return</var> = <span class="php-keyword1">false</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Prints out a syntax highlighted version of the SQL command or DibiResult.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Prints out a syntax highlighted version of the SQL command or DibiResult.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string|DibiResult<br />
+						<code>$return</code> bool  return output instead of printing it?<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="TEXT" id="TEXT">
+			<td align="right" width="1%"><code><b>TEXT</b></code></td>
+			<td><code><span class="php-quote">'s'</span></code> <a href="#TEXT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="BINARY" id="BINARY">
+			<td align="right" width="1%"><code><b>BINARY</b></code></td>
+			<td><code><span class="php-quote">'bin'</span></code> <a href="#BINARY" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="BOOL" id="BOOL">
+			<td align="right" width="1%"><code><b>BOOL</b></code></td>
+			<td><code><span class="php-quote">'b'</span></code> <a href="#BOOL" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="INTEGER" id="INTEGER">
+			<td align="right" width="1%"><code><b>INTEGER</b></code></td>
+			<td><code><span class="php-quote">'i'</span></code> <a href="#INTEGER" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FLOAT" id="FLOAT">
+			<td align="right" width="1%"><code><b>FLOAT</b></code></td>
+			<td><code><span class="php-quote">'f'</span></code> <a href="#FLOAT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="DATE" id="DATE">
+			<td align="right" width="1%"><code><b>DATE</b></code></td>
+			<td><code><span class="php-quote">'d'</span></code> <a href="#DATE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="DATETIME" id="DATETIME">
+			<td align="right" width="1%"><code><b>DATETIME</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#DATETIME" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="TIME" id="TIME">
+			<td align="right" width="1%"><code><b>TIME</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#TIME" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="IDENTIFIER" id="IDENTIFIER">
+			<td align="right" width="1%"><code><b>IDENTIFIER</b></code></td>
+			<td><code><span class="php-quote">'n'</span></code> <a href="#IDENTIFIER" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_TEXT" id="FIELD_TEXT">
+			<td align="right" width="1%"><code><b>FIELD_TEXT</b></code></td>
+			<td><code><span class="php-quote">'s'</span></code> <a href="#FIELD_TEXT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_BINARY" id="FIELD_BINARY">
+			<td align="right" width="1%"><code><b>FIELD_BINARY</b></code></td>
+			<td><code><span class="php-quote">'bin'</span></code> <a href="#FIELD_BINARY" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_BOOL" id="FIELD_BOOL">
+			<td align="right" width="1%"><code><b>FIELD_BOOL</b></code></td>
+			<td><code><span class="php-quote">'b'</span></code> <a href="#FIELD_BOOL" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_INTEGER" id="FIELD_INTEGER">
+			<td align="right" width="1%"><code><b>FIELD_INTEGER</b></code></td>
+			<td><code><span class="php-quote">'i'</span></code> <a href="#FIELD_INTEGER" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_FLOAT" id="FIELD_FLOAT">
+			<td align="right" width="1%"><code><b>FIELD_FLOAT</b></code></td>
+			<td><code><span class="php-quote">'f'</span></code> <a href="#FIELD_FLOAT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_DATE" id="FIELD_DATE">
+			<td align="right" width="1%"><code><b>FIELD_DATE</b></code></td>
+			<td><code><span class="php-quote">'d'</span></code> <a href="#FIELD_DATE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_DATETIME" id="FIELD_DATETIME">
+			<td align="right" width="1%"><code><b>FIELD_DATETIME</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#FIELD_DATETIME" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="FIELD_TIME" id="FIELD_TIME">
+			<td align="right" width="1%"><code><b>FIELD_TIME</b></code></td>
+			<td><code><span class="php-quote">'t'</span></code> <a href="#FIELD_TIME" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="VERSION" id="VERSION">
+			<td align="right" width="1%"><code><b>VERSION</b></code></td>
+			<td><code><span class="php-quote">'1.3-dev'</span></code> <a href="#VERSION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="REVISION" id="REVISION">
+			<td align="right" width="1%"><code><b>REVISION</b></code></td>
+			<td><code><span class="php-quote">'1f438fa released on 2010-10-06'</span></code> <a href="#REVISION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="ASC" id="ASC">
+			<td align="right" width="1%"><code><b>ASC</b></code></td>
+			<td><code><span class="php-quote">'ASC'</span></code> <a href="#ASC" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="DESC" id="DESC">
+			<td align="right" width="1%"><code><b>DESC</b></code></td>
+			<td><code><span class="php-quote">'DESC'</span></code> <a href="#DESC" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="substs" id="$substs">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				<a href="DibiLazyStorage.html">DibiLazyStorage</a>
+			</code></td>
+
+			<td width="1%"><var>$substs</var></td>
+			<td><pre>DibiLazyStorage::__set_state(<span class="php-keyword1">array</span>(
+   <span class="php-quote">'callback'</span> =&gt; 
+  <span class="php-keyword1">array</span> (
+    <span class="php-num">0</span> =&gt; <span class="php-quote">'dibi'</span>,
+    <span class="php-num">1</span> =&gt; <span class="php-quote">'defaultSubstFallback'</span>,
+  ),
+))</pre></td>
+			<td>Substitutions for identifiers <a href="#$substs" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="sql" id="$sql">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				string
+			</code></td>
+
+			<td width="1%"><var>$sql</var></td>
+			<td><pre><span class="php-keyword1">NULL</span></pre></td>
+			<td>Last SQL command @see dibi::query() <a href="#$sql" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="elapsedTime" id="$elapsedTime">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				int
+			</code></td>
+
+			<td width="1%"><var>$elapsedTime</var></td>
+			<td><pre><span class="php-keyword1">NULL</span></pre></td>
+			<td>Elapsed time for last query <a href="#$elapsedTime" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="totalTime" id="$totalTime">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				int
+			</code></td>
+
+			<td width="1%"><var>$totalTime</var></td>
+			<td><pre><span class="php-keyword1">NULL</span></pre></td>
+			<td>Elapsed time for all queries <a href="#$totalTime" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="numOfQueries" id="$numOfQueries">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				int
+			</code></td>
+
+			<td width="1%"><var>$numOfQueries</var></td>
+			<td><pre><span class="php-num">0</span></pre></td>
+			<td>Number or queries <a href="#$numOfQueries" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="defaultDriver" id="$defaultDriver">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				string
+			</code></td>
+
+			<td width="1%"><var>$defaultDriver</var></td>
+			<td><pre><span class="php-quote">'mysql'</span></pre></td>
+			<td>Default dibi driver <a href="#$defaultDriver" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+	<div id="footer">
+		dibi API documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>

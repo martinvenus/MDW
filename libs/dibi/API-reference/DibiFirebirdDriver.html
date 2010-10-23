@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Class DibiFirebirdDriver</title>
+
+	<script type="text/javascript" src="media/jquery.min.js"></script>
+	<script type="text/javascript" src="media/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="media/jquery.sortElements.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<script type="text/javascript" src="media/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2010100816" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li><a href="namespace-dibi.html">dibi</a></li>
+		<li>dibi\drivers</li>
+		<li><a href="namespace-internal.html">internal</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li>DibiFirebirdDriver</li>
+		<li><a href="DibiMsSql2005Driver.html">DibiMsSql2005Driver</a></li>
+		<li><a href="DibiMsSqlDriver.html">DibiMsSqlDriver</a></li>
+		<li><a href="DibiMySqlDriver.html">DibiMySqlDriver</a></li>
+		<li><a href="DibiMySqliDriver.html">DibiMySqliDriver</a></li>
+		<li><a href="DibiOdbcDriver.html">DibiOdbcDriver</a></li>
+		<li><a href="DibiOracleDriver.html">DibiOracleDriver</a></li>
+		<li><a href="DibiPdoDriver.html">DibiPdoDriver</a></li>
+		<li><a href="DibiPostgreDriver.html">DibiPostgreDriver</a></li>
+		<li><a href="DibiProcedureException.html">DibiProcedureException</a></li>
+		<li><a href="DibiSqlite3Driver.html">DibiSqlite3Driver</a></li>
+		<li><a href="DibiSqliteDriver.html">DibiSqliteDriver</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Class DibiFirebirdDriver</h1>
+		<div class="classDescription">
+
+		
+<p>The dibi driver for Firebird/InterBase database.</p>
+
+<p>Driver options:<br>
+- database ⇒ the path to database file (server:/path/da­tabase.fdb)<br>
+- username (or user)<br>
+- password (or pass)<br>
+- charset ⇒ character encoding to set<br>
+- buffers (int) ⇒ buffers is the number of database buffers to allocate for
+the server-side cache. If 0 or omitted, server chooses its own default.<br>
+- resource (resource) ⇒ existing connection resource<br>
+- lazy, profiler, result, substitutes, … ⇒ see DibiConnection options</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px">				<a href="DibiObject.html">DibiObject</a>
+				
+			</dd>
+			<dd style="padding-left:30px">				<img src="media/inherit.gif" alt="extended by" />
+<b>DibiFirebirdDriver</b>				 implements <a href="IDibiDriver.html">IDibiDriver</a>, <a href="IDibiResultDriver.html">IDibiResultDriver</a>, <a href="IDibiReflector.html">IDibiReflector</a>
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> Tomáš Kraina, Roman Sklenář<br />
+				<b>Package:</b> dibi\drivers<br />
+			<b>Located at</b> <a href="source-drivers.firebird.php.html#14">/drivers/firebird.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#46" title="go to source code"><b>__construct</b></a>(
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 connect" id="_connect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_connect">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#58" title="go to source code"><b>connect</b></a>(
+					array
+					
+					<var>&amp; $config</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Connects to a database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Connects to a database.</p>
+
+
+
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_connect">IDibiDriver::connect</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 disconnect" id="_disconnect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_disconnect">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#97" title="go to source code"><b>disconnect</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Disconnects from a database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Disconnects from a database.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_disconnect">IDibiDriver::disconnect</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 query" id="_query">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="IDibiResultDriver.html">IDibiResultDriver</a>|NULL
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_query">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#108" title="go to source code"><b>query</b></a>(
+					string
+					<var>$sql</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes the SQL query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes the SQL query.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string      SQL statement.<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+DibiDriverException|DibiException<br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_query">IDibiDriver::query</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getAffectedRows" id="_getAffectedRows">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int|FALSE
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getAffectedRows">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#139" title="go to source code"><b>getAffectedRows</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets the number of affected rows by the last INSERT, UPDATE or
+DELETE query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets the number of affected rows by the last INSERT, UPDATE or
+DELETE query.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">int|FALSE  number of rows or FALSE on error</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getAffectedRows">IDibiDriver::getAffectedRows</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getInsertId" id="_getInsertId">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int|FALSE
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getInsertId">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#150" title="go to source code"><b>getInsertId</b></a>(
+					string
+					<var>$sequence</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sequence</code> string     generator name<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">int|FALSE  int on success or FALSE on failure</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getInsertId">IDibiDriver::getInsertId</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 begin" id="_begin">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_begin">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#162" title="go to source code"><b>begin</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Begins a transaction (if supported).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Begins a transaction (if supported).</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_begin">IDibiDriver::begin</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 commit" id="_commit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_commit">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#179" title="go to source code"><b>commit</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Commits statements in a transaction.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Commits statements in a transaction.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_commit">IDibiDriver::commit</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 rollback" id="_rollback">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_rollback">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#200" title="go to source code"><b>rollback</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Rollback changes in a transaction.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Rollback changes in a transaction.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_rollback">IDibiDriver::rollback</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 inTransaction" id="_inTransaction">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_inTransaction">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#221" title="go to source code"><b>inTransaction</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Is in transaction?</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Is in transaction?</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResource" id="_getResource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				resource
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResource">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#232" title="go to source code"><b>getResource</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the connection resource.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the connection resource.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getResource">IDibiDriver::getResource</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getReflector" id="_getReflector">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="IDibiReflector.html">IDibiReflector</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getReflector">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#243" title="go to source code"><b>getReflector</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the connection reflector.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the connection reflector.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getReflector">IDibiDriver::getReflector</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 escape" id="_escape">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_escape">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#258" title="go to source code"><b>escape</b></a>(
+					mixed
+					<var>$value</var>, 
+					string
+					<var>$type</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Encodes data for use in a SQL statement.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Encodes data for use in a SQL statement.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> mixed     value<br />
+						<code>$type</code> string    type (dibi::TEXT, dibi::BOOL, ...)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string    encoded value</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+InvalidArgumentException<br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_escape">IDibiDriver::escape</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 escapeLike" id="_escapeLike">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_escapeLike">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#291" title="go to source code"><b>escapeLike</b></a>(
+					string
+					<var>$value</var>, 
+					int
+					<var>$pos</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Encodes string for use in a LIKE statement.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Encodes string for use in a LIKE statement.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> string<br />
+						<code>$pos</code> int<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_escapeLike">IDibiDriver::escapeLike</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 unescape" id="_unescape">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_unescape">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#304" title="go to source code"><b>unescape</b></a>(
+					string
+					<var>$value</var>, 
+					string
+					<var>$type</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Decodes data from result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Decodes data from result set.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> string    value<br />
+						<code>$type</code> string    type (dibi::BINARY)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string    decoded value</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+InvalidArgumentException<br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_unescape">IDibiResultDriver::unescape</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 applyLimit" id="_applyLimit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_applyLimit">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#321" title="go to source code"><b>applyLimit</b></a>(
+					string
+					<var>&amp; $sql</var>, 
+					int
+					<var>$limit</var>, 
+					int
+					<var>$offset</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Injects LIMIT/OFFSET to the SQL query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Injects LIMIT/OFFSET to the SQL query.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string &amp;$sql  The SQL query that will be modified.<br />
+						<code>$limit</code> int $limit<br />
+						<code>$offset</code> int $offset<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_applyLimit">IDibiDriver::applyLimit</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getRowCount" id="_getRowCount">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getRowCount">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#342" title="go to source code"><b>getRowCount</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the number of rows in a result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the number of rows in a result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getRowCount">IDibiResultDriver::getRowCount</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 fetch" id="_fetch">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetch">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#353" title="go to source code"><b>fetch</b></a>(
+					bool
+					<var>$assoc</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Fetches the row at current position and moves the internal cursor to the next
+position.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Fetches the row at current position and moves the internal cursor to the next
+position.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$assoc</code> bool     TRUE for associative array, FALSE for numeric<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">array    array on success, nonarray if no next record</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_fetch">IDibiResultDriver::fetch</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 seek" id="_seek">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_seek">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#378" title="go to source code"><b>seek</b></a>(
+					int
+					<var>$row</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Moves cursor position without fetching row.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Moves cursor position without fetching row.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$row</code> int      the 0-based cursor pos to seek to<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean  TRUE on success, FALSE if unable to seek to specified record</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_seek">IDibiResultDriver::seek</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 free" id="_free">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_free">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#391" title="go to source code"><b>free</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Frees the resources allocated for this result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Frees the resources allocated for this result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_free">IDibiResultDriver::free</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResultResource" id="_getResultResource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mysqli_result
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResultResource">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#403" title="go to source code"><b>getResultResource</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the result set resource.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the result set resource.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getResultResource">IDibiResultDriver::getResultResource</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResultColumns" id="_getResultColumns">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResultColumns">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#414" title="go to source code"><b>getResultColumns</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all columns in a result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all columns in a result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getResultColumns">IDibiResultDriver::getResultColumns</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getTables" id="_getTables">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTables">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#429" title="go to source code"><b>getTables</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of tables.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of tables.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getTables">IDibiReflector::getTables</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getColumns" id="_getColumns">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getColumns">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#454" title="go to source code"><b>getColumns</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all columns in a table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all columns in a table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getColumns">IDibiReflector::getColumns</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getIndexes" id="_getIndexes">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getIndexes">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#511" title="go to source code"><b>getIndexes</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all indexes in a table (the constraints are
+included).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all indexes in a table (the constraints are
+included).</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getIndexes">IDibiReflector::getIndexes</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getForeignKeys" id="_getForeignKeys">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getForeignKeys">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#547" title="go to source code"><b>getForeignKeys</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all foreign keys in a table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all foreign keys in a table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getForeignKeys">IDibiReflector::getForeignKeys</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getIndices" id="_getIndices">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getIndices">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#579" title="go to source code"><b>getIndices</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of indices in given table (the constraints are not listed).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of indices in given table (the constraints are not listed).</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getConstraints" id="_getConstraints">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getConstraints">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#603" title="go to source code"><b>getConstraints</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of constraints in given table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of constraints in given table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getTriggersMeta" id="_getTriggersMeta">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTriggersMeta">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#629" title="go to source code"><b>getTriggersMeta</b></a>(
+					string
+					<var>$table</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all triggers in a table or database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all triggers in a table or database. (Only if user has
+permissions on ALTER TABLE, INSERT/UPDATE/DE­LETE record in table)</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getTriggers" id="_getTriggers">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTriggers">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#680" title="go to source code"><b>getTriggers</b></a>(
+					string
+					<var>$table</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of triggers for given table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of triggers for given table. (Only if user has permissions on
+ALTER TABLE, INSERT/UPDATE/DE­LETE record in table)</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getProceduresMeta" id="_getProceduresMeta">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getProceduresMeta">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#704" title="go to source code"><b>getProceduresMeta</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata from stored procedures and their input and output
+parameters.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata from stored procedures and their input and output
+parameters.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getProcedures" id="_getProcedures">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getProcedures">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#759" title="go to source code"><b>getProcedures</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of stored procedures.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of stored procedures.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getGenerators" id="_getGenerators">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getGenerators">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#779" title="go to source code"><b>getGenerators</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of generators.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of generators.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getFunctions" id="_getFunctions">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getFunctions">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.firebird.php.html#800" title="go to source code"><b>getFunctions</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of user defined functions (UDF).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of user defined functions (UDF).</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+	<h2>Methods Inherited From <a href="DibiObject.html#methodSummary">DibiObject</a></h2>
+	<div class="box"><code>
+		<a href="DibiObject.html#_getClass">getClass()</a>, <a href="DibiObject.html#_getReflection">getReflection()</a>, <a href="DibiObject.html#___call">__call()</a>, <a href="DibiObject.html#___callStatic">__callStatic()</a>, <a href="DibiObject.html#_extensionMethod">extensionMethod()</a>, <a href="DibiObject.html#___get">__get()</a>, <a href="DibiObject.html#___set">__set()</a>, <a href="DibiObject.html#___isset">__isset()</a>, <a href="DibiObject.html#___unset">__unset()</a>
+	</code></div>
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="ERROR_EXCEPTION_THROWN" id="ERROR_EXCEPTION_THROWN">
+			<td align="right" width="1%"><code><b>ERROR_EXCEPTION_THROWN</b></code></td>
+			<td><code>-<span class="php-num">836</span></code> <a href="#ERROR_EXCEPTION_THROWN" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+</div>
+
+	<div id="footer">
+		dibi API documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>

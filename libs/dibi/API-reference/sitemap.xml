@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://api.nette.org/2.0/ArrayAccess.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Countable.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DateTime.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/dibi.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiColumnInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiConnection.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiDatabaseInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiDataSource.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiDateTime.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiDriverException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiFirebirdDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiFluent.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiForeignKeyInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiIndexInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiLazyStorage.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiLazyStorageBase.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiMsSql2005Driver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiMsSqlDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiMySqlDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiMySqliDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiObject.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiOdbcDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiOracleDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiPcreException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiPdoDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiPostgreDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiProcedureException.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiProfiler.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiResult.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiResultInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiResultIterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiRow.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiSqlite3Driver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiSqliteDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiTableInfo.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiTranslator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/DibiVariable.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Exception.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDataSource.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDebugPanel.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDibiDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDibiProfiler.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDibiReflector.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IDibiResultDriver.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Iterator.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/IteratorAggregate.html</loc>
+</url>
+<url>
+	<loc>http://api.nette.org/2.0/Traversable.html</loc>
+</url>
+</urlset>

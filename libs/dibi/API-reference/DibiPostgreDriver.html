@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Class DibiPostgreDriver</title>
+
+	<script type="text/javascript" src="media/jquery.min.js"></script>
+	<script type="text/javascript" src="media/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="media/jquery.sortElements.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<script type="text/javascript" src="media/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2010100816" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li><a href="namespace-dibi.html">dibi</a></li>
+		<li>dibi\drivers</li>
+		<li><a href="namespace-internal.html">internal</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="DibiFirebirdDriver.html">DibiFirebirdDriver</a></li>
+		<li><a href="DibiMsSql2005Driver.html">DibiMsSql2005Driver</a></li>
+		<li><a href="DibiMsSqlDriver.html">DibiMsSqlDriver</a></li>
+		<li><a href="DibiMySqlDriver.html">DibiMySqlDriver</a></li>
+		<li><a href="DibiMySqliDriver.html">DibiMySqliDriver</a></li>
+		<li><a href="DibiOdbcDriver.html">DibiOdbcDriver</a></li>
+		<li><a href="DibiOracleDriver.html">DibiOracleDriver</a></li>
+		<li><a href="DibiPdoDriver.html">DibiPdoDriver</a></li>
+		<li>DibiPostgreDriver</li>
+		<li><a href="DibiProcedureException.html">DibiProcedureException</a></li>
+		<li><a href="DibiSqlite3Driver.html">DibiSqlite3Driver</a></li>
+		<li><a href="DibiSqliteDriver.html">DibiSqliteDriver</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Class DibiPostgreDriver</h1>
+		<div class="classDescription">
+
+		
+<p>The dibi driver for PostgreSQL database.</p>
+
+<p>Driver options:<br>
+- host, hostaddr, port, dbname, user, password, connect_timeout, options,
+sslmode, service ⇒ see PostgreSQL API<br>
+- string ⇒ or use connection string<br>
+- schema ⇒ the schema search path<br>
+- charset ⇒ character encoding to set (default is utf8)<br>
+- persistent (bool) ⇒ try to find a persistent link?<br>
+- resource (resource) ⇒ existing connection resource<br>
+- lazy, profiler, result, substitutes, … ⇒ see DibiConnection options</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px">				<a href="DibiObject.html">DibiObject</a>
+				
+			</dd>
+			<dd style="padding-left:30px">				<img src="media/inherit.gif" alt="extended by" />
+<b>DibiPostgreDriver</b>				 implements <a href="IDibiDriver.html">IDibiDriver</a>, <a href="IDibiResultDriver.html">IDibiResultDriver</a>, <a href="IDibiReflector.html">IDibiReflector</a>
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> David Grudl<br />
+				<b>Package:</b> dibi\drivers<br />
+			<b>Located at</b> <a href="source-drivers.postgre.php.html#14">/drivers/postgre.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#42" title="go to source code"><b>__construct</b></a>(
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 connect" id="_connect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_connect">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#54" title="go to source code"><b>connect</b></a>(
+					array
+					
+					<var>&amp; $config</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Connects to a database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Connects to a database.</p>
+
+
+
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiException.html">DibiException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_connect">IDibiDriver::connect</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 disconnect" id="_disconnect">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_disconnect">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#109" title="go to source code"><b>disconnect</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Disconnects from a database.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Disconnects from a database.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_disconnect">IDibiDriver::disconnect</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 query" id="_query">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="IDibiResultDriver.html">IDibiResultDriver</a>|NULL
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_query">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#120" title="go to source code"><b>query</b></a>(
+					string
+					<var>$sql</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Executes the SQL query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Executes the SQL query.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string      SQL statement.<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_query">IDibiDriver::query</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getAffectedRows" id="_getAffectedRows">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int|FALSE
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getAffectedRows">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#139" title="go to source code"><b>getAffectedRows</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets the number of affected rows by the last INSERT, UPDATE or
+DELETE query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets the number of affected rows by the last INSERT, UPDATE or
+DELETE query.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">int|FALSE  number of rows or FALSE on error</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getAffectedRows">IDibiDriver::getAffectedRows</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getInsertId" id="_getInsertId">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int|FALSE
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getInsertId">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#150" title="go to source code"><b>getInsertId</b></a>(
+					
+					<var>$sequence</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Retrieves the ID generated for an AUTO_INCREMENT column by the previous
+INSERT query.</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="smallList">int|FALSE  int on success or FALSE on failure</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getInsertId">IDibiDriver::getInsertId</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 begin" id="_begin">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_begin">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#172" title="go to source code"><b>begin</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Begins a transaction (if supported).</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Begins a transaction (if supported).</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_begin">IDibiDriver::begin</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 commit" id="_commit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_commit">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#185" title="go to source code"><b>commit</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Commits statements in a transaction.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Commits statements in a transaction.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_commit">IDibiDriver::commit</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 rollback" id="_rollback">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_rollback">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#198" title="go to source code"><b>rollback</b></a>(
+					string
+					<var>$savepoint</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Rollback changes in a transaction.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Rollback changes in a transaction.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$savepoint</code> string  optional savepoint name<br />
+					</div>
+
+
+					<h4>Throws</h4>
+					<div class="smallList">
+						<a href="DibiDriverException.html">DibiDriverException</a><br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_rollback">IDibiDriver::rollback</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 inTransaction" id="_inTransaction">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_inTransaction">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#211" title="go to source code"><b>inTransaction</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Is in transaction?</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Is in transaction?</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResource" id="_getResource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResource">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#222" title="go to source code"><b>getResource</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the connection resource.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the connection resource.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getResource">IDibiDriver::getResource</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getReflector" id="_getReflector">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="IDibiReflector.html">IDibiReflector</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getReflector">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#233" title="go to source code"><b>getReflector</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the connection reflector.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the connection reflector.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_getReflector">IDibiDriver::getReflector</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 escape" id="_escape">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_escape">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#248" title="go to source code"><b>escape</b></a>(
+					mixed
+					<var>$value</var>, 
+					string
+					<var>$type</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Encodes data for use in a SQL statement.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Encodes data for use in a SQL statement.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> mixed     value<br />
+						<code>$type</code> string    type (dibi::TEXT, dibi::BOOL, ...)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string    encoded value</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+InvalidArgumentException<br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_escape">IDibiDriver::escape</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 escapeLike" id="_escapeLike">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_escapeLike">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#292" title="go to source code"><b>escapeLike</b></a>(
+					string
+					<var>$value</var>, 
+					int
+					<var>$pos</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Encodes string for use in a LIKE statement.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Encodes string for use in a LIKE statement.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> string<br />
+						<code>$pos</code> int<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_escapeLike">IDibiDriver::escapeLike</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 unescape" id="_unescape">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_unescape">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#305" title="go to source code"><b>unescape</b></a>(
+					string
+					<var>$value</var>, 
+					string
+					<var>$type</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Decodes data from result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Decodes data from result set.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$value</code> string    value<br />
+						<code>$type</code> string    type (dibi::BINARY)<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">string    decoded value</div>
+
+					<h4>Throws</h4>
+					<div class="smallList">
+InvalidArgumentException<br />
+					</div>
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_unescape">IDibiResultDriver::unescape</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 applyLimit" id="_applyLimit">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_applyLimit">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#322" title="go to source code"><b>applyLimit</b></a>(
+					string
+					<var>&amp; $sql</var>, 
+					int
+					<var>$limit</var>, 
+					int
+					<var>$offset</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Injects LIMIT/OFFSET to the SQL query.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Injects LIMIT/OFFSET to the SQL query.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$sql</code> string &amp;$sql  The SQL query that will be modified.<br />
+						<code>$limit</code> int $limit<br />
+						<code>$offset</code> int $offset<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiDriver.html#_applyLimit">IDibiDriver::applyLimit</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getRowCount" id="_getRowCount">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getRowCount">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#344" title="go to source code"><b>getRowCount</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the number of rows in a result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the number of rows in a result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getRowCount">IDibiResultDriver::getRowCount</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 fetch" id="_fetch">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_fetch">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#355" title="go to source code"><b>fetch</b></a>(
+					bool
+					<var>$assoc</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Fetches the row at current position and moves the internal cursor to the next
+position.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Fetches the row at current position and moves the internal cursor to the next
+position.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$assoc</code> bool     TRUE for associative array, FALSE for numeric<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">array    array on success, nonarray if no next record</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_fetch">IDibiResultDriver::fetch</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 seek" id="_seek">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				boolean
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_seek">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#367" title="go to source code"><b>seek</b></a>(
+					int
+					<var>$row</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Moves cursor position without fetching row.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Moves cursor position without fetching row.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$row</code> int      the 0-based cursor pos to seek to<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">boolean  TRUE on success, FALSE if unable to seek to specified record</div>
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_seek">IDibiResultDriver::seek</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 free" id="_free">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_free">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#379" title="go to source code"><b>free</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Frees the resources allocated for this result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Frees the resources allocated for this result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_free">IDibiResultDriver::free</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResultColumns" id="_getResultColumns">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResultColumns">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#391" title="go to source code"><b>getResultColumns</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all columns in a result set.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all columns in a result set.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getResultColumns">IDibiResultDriver::getResultColumns</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getResultResource" id="_getResultResource">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getResultResource">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#414" title="go to source code"><b>getResultResource</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the result set resource.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the result set resource.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiResultDriver.html#_getResultResource">IDibiResultDriver::getResultResource</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getTables" id="_getTables">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTables">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#429" title="go to source code"><b>getTables</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns list of tables.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns list of tables.</p>
+
+
+
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getTables">IDibiReflector::getTables</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getColumns" id="_getColumns">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getColumns">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#452" title="go to source code"><b>getColumns</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all columns in a table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all columns in a table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getColumns">IDibiReflector::getColumns</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getIndexes" id="_getIndexes">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getIndexes">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#494" title="go to source code"><b>getIndexes</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all indexes in a table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all indexes in a table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getIndexes">IDibiReflector::getIndexes</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getForeignKeys" id="_getForeignKeys">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getForeignKeys">#</a>
+			<code class="nowrap">
+				<a href="source-drivers.postgre.php.html#537" title="go to source code"><b>getForeignKeys</b></a>(
+					string
+					<var>$table</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Returns metadata for all foreign keys in a table.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns metadata for all foreign keys in a table.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$table</code> string<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiReflector.html#_getForeignKeys">IDibiReflector::getForeignKeys</a></code></div>
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+	<h2>Methods Inherited From <a href="DibiObject.html#methodSummary">DibiObject</a></h2>
+	<div class="box"><code>
+		<a href="DibiObject.html#_getClass">getClass()</a>, <a href="DibiObject.html#_getReflection">getReflection()</a>, <a href="DibiObject.html#___call">__call()</a>, <a href="DibiObject.html#___callStatic">__callStatic()</a>, <a href="DibiObject.html#_extensionMethod">extensionMethod()</a>, <a href="DibiObject.html#___get">__get()</a>, <a href="DibiObject.html#___set">__set()</a>, <a href="DibiObject.html#___isset">__isset()</a>, <a href="DibiObject.html#___unset">__unset()</a>
+	</code></div>
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		dibi API documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>

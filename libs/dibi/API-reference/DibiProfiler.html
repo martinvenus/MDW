@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Class DibiProfiler</title>
+
+	<script type="text/javascript" src="media/jquery.min.js"></script>
+	<script type="text/javascript" src="media/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="media/jquery.sortElements.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<script type="text/javascript" src="media/main.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2010100816" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li>dibi</li>
+		<li><a href="namespace-dibi.drivers.html">dibi\drivers</a></li>
+		<li><a href="namespace-internal.html">internal</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="dibi.html">dibi</a></li>
+		<li><a href="DibiColumnInfo.html">DibiColumnInfo</a></li>
+		<li><a href="DibiConnection.html">DibiConnection</a></li>
+		<li><a href="DibiDatabaseInfo.html">DibiDatabaseInfo</a></li>
+		<li><a href="DibiDataSource.html">DibiDataSource</a></li>
+		<li><a href="DibiDateTime.html">DibiDateTime</a></li>
+		<li><a href="DibiDriverException.html">DibiDriverException</a></li>
+		<li><a href="DibiException.html">DibiException</a></li>
+		<li><a href="DibiFluent.html">DibiFluent</a></li>
+		<li><a href="DibiForeignKeyInfo.html">DibiForeignKeyInfo</a></li>
+		<li><a href="DibiIndexInfo.html">DibiIndexInfo</a></li>
+		<li><a href="DibiLazyStorage.html">DibiLazyStorage</a></li>
+		<li><a href="DibiLazyStorageBase.html">DibiLazyStorageBase</a></li>
+		<li><a href="DibiObject.html">DibiObject</a></li>
+		<li><a href="DibiPcreException.html">DibiPcreException</a></li>
+		<li>DibiProfiler</li>
+		<li><a href="DibiResult.html">DibiResult</a></li>
+		<li><a href="DibiResultInfo.html">DibiResultInfo</a></li>
+		<li><a href="DibiResultIterator.html">DibiResultIterator</a></li>
+		<li><a href="DibiRow.html">DibiRow</a></li>
+		<li><a href="DibiTableInfo.html">DibiTableInfo</a></li>
+		<li><a href="DibiTranslator.html">DibiTranslator</a></li>
+		<li><a href="DibiVariable.html">DibiVariable</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+		<li><a href="IDataSource.html">IDataSource</a></li>
+		<li><a href="IDebugPanel.html">IDebugPanel</a></li>
+		<li><a href="IDibiDriver.html">IDibiDriver</a></li>
+		<li><a href="IDibiProfiler.html">IDibiProfiler</a></li>
+		<li><a href="IDibiReflector.html">IDibiReflector</a></li>
+		<li><a href="IDibiResultDriver.html">IDibiResultDriver</a></li>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Class DibiProfiler</h1>
+		<div class="classDescription">
+
+		
+<p>dibi basic logger &amp; profiler (experimental).</p>
+
+<p>Profiler options:<br>
+- ‚explain‘ – explain SELECT queries?<br>
+- ‚filter‘ – which queries to log?</p>
+
+		</div>
+		<dl class="tree">
+
+			<dd style="padding-left:0px">				<a href="DibiObject.html">DibiObject</a>
+				
+			</dd>
+			<dd style="padding-left:30px">				<img src="media/inherit.gif" alt="extended by" />
+<b>DibiProfiler</b>				 implements <a href="IDibiProfiler.html">IDibiProfiler</a>, <a href="IDebugPanel.html">IDebugPanel</a>
+			</dd>
+		</dl>
+
+		<div class="classInfo">
+			
+				<b>Author:</b> David Grudl<br />
+			<b>Located at</b> <a href="source-libs.DibiProfiler.php.html#15">/libs/DibiProfiler.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="1 __construct" id="___construct">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#___construct">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#51" title="go to source code"><b>__construct</b></a>(
+					array
+					
+					<var>$config</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setFile" id="_setFile">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="DibiProfiler.html">DibiProfiler</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setFile">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#79" title="go to source code"><b>setFile</b></a>(
+					string
+					<var>$file</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$file</code> string  filename<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">DibiProfiler  provides a fluent interface</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 setFilter" id="_setFilter">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				<a href="DibiProfiler.html">DibiProfiler</a>
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_setFilter">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#91" title="go to source code"><b>setFilter</b></a>(
+					int
+					<var>$filter</var>
+			)</code>
+
+			<div class="short">
+				
+			</div>
+
+			<div class="detailed">
+				
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$filter</code> int<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">DibiProfiler  provides a fluent interface</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 before" id="_before">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_before">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#103" title="go to source code"><b>before</b></a>(
+					<a href="DibiConnection.html">DibiConnection</a>
+					
+					<var>$connection</var>, 
+					int
+					<var>$event</var>, 
+					string
+					<var>$sql</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>Before event notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Before event notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$connection</code> DibiConnection<br />
+						<code>$event</code> int     event name<br />
+						<code>$sql</code> string  sql<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiProfiler.html#_before">IDibiProfiler::before</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 after" id="_after">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_after">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#121" title="go to source code"><b>after</b></a>(
+					int
+					<var>$ticket</var>, 
+					<a href="DibiResult.html">DibiResult</a>
+					<var>$res</var> = <span class="php-keyword1">NULL</span>
+			)</code>
+
+			<div class="short">
+				
+<p>After event notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>After event notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$ticket</code> int<br />
+						<code>$res</code> DibiResult<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiProfiler.html#_after">IDibiProfiler::after</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 exception" id="_exception">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_exception">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#201" title="go to source code"><b>exception</b></a>(
+					<a href="DibiDriverException.html">DibiDriverException</a>
+					
+					<var>$exception</var>
+			)</code>
+
+			<div class="short">
+				
+<p>After exception notification.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>After exception notification.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$exception</code> DibiDriverException<br />
+					</div>
+
+
+
+					<h4>Implementation of</h4>
+					<div class="smallList"><code><a href="IDibiProfiler.html#_exception">IDibiProfiler::exception</a></code></div>
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getTab" id="_getTab">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getTab">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#247" title="go to source code"><b>getTab</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns HTML code for custom tab.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns HTML code for custom tab.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getPanel" id="_getPanel">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				mixed
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getPanel">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#259" title="go to source code"><b>getPanel</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns HTML code for custom panel.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns HTML code for custom panel.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 getId" id="_getId">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_getId">#</a>
+			<code class="nowrap">
+				<a href="source-libs.DibiProfiler.php.html#303" title="go to source code"><b>getId</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns panel ID.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns panel ID.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+	<h2>Methods Inherited From <a href="DibiObject.html#methodSummary">DibiObject</a></h2>
+	<div class="box"><code>
+		<a href="DibiObject.html#_getClass">getClass()</a>, <a href="DibiObject.html#_getReflection">getReflection()</a>, <a href="DibiObject.html#___call">__call()</a>, <a href="DibiObject.html#___callStatic">__callStatic()</a>, <a href="DibiObject.html#_extensionMethod">extensionMethod()</a>, <a href="DibiObject.html#___get">__get()</a>, <a href="DibiObject.html#___set">__set()</a>, <a href="DibiObject.html#___isset">__isset()</a>, <a href="DibiObject.html#___unset">__unset()</a>
+	</code></div>
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="CONNECT" id="CONNECT">
+			<td align="right" width="1%"><code><b>CONNECT</b></code></td>
+			<td><code><span class="php-num">1</span></code> <a href="#CONNECT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="SELECT" id="SELECT">
+			<td align="right" width="1%"><code><b>SELECT</b></code></td>
+			<td><code><span class="php-num">4</span></code> <a href="#SELECT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="INSERT" id="INSERT">
+			<td align="right" width="1%"><code><b>INSERT</b></code></td>
+			<td><code><span class="php-num">8</span></code> <a href="#INSERT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="DELETE" id="DELETE">
+			<td align="right" width="1%"><code><b>DELETE</b></code></td>
+			<td><code><span class="php-num">16</span></code> <a href="#DELETE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="UPDATE" id="UPDATE">
+			<td align="right" width="1%"><code><b>UPDATE</b></code></td>
+			<td><code><span class="php-num">32</span></code> <a href="#UPDATE" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="QUERY" id="QUERY">
+			<td align="right" width="1%"><code><b>QUERY</b></code></td>
+			<td><code><span class="php-num">60</span></code> <a href="#QUERY" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="BEGIN" id="BEGIN">
+			<td align="right" width="1%"><code><b>BEGIN</b></code></td>
+			<td><code><span class="php-num">64</span></code> <a href="#BEGIN" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="COMMIT" id="COMMIT">
+			<td align="right" width="1%"><code><b>COMMIT</b></code></td>
+			<td><code><span class="php-num">128</span></code> <a href="#COMMIT" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="ROLLBACK" id="ROLLBACK">
+			<td align="right" width="1%"><code><b>ROLLBACK</b></code></td>
+			<td><code><span class="php-num">256</span></code> <a href="#ROLLBACK" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="TRANSACTION" id="TRANSACTION">
+			<td align="right" width="1%"><code><b>TRANSACTION</b></code></td>
+			<td><code><span class="php-num">448</span></code> <a href="#TRANSACTION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="EXCEPTION" id="EXCEPTION">
+			<td align="right" width="1%"><code><b>EXCEPTION</b></code></td>
+			<td><code><span class="php-num">512</span></code> <a href="#EXCEPTION" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="ALL" id="ALL">
+			<td align="right" width="1%"><code><b>ALL</b></code></td>
+			<td><code><span class="php-num">1023</span></code> <a href="#ALL" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+	<div id="propertySummary">
+
+		<table class="summary">
+		<caption>Property Summary</caption>
+		<tr data-order="maxQueries" id="$maxQueries">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				
+			</code></td>
+
+			<td width="1%"><var>$maxQueries</var></td>
+			<td><pre><span class="php-num">30</span></pre></td>
+			<td>maximum number of rows <a href="#$maxQueries" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="maxLength" id="$maxLength">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				
+			</code></td>
+
+			<td width="1%"><var>$maxLength</var></td>
+			<td><pre><span class="php-num">1000</span></pre></td>
+			<td>maximum SQL length <a href="#$maxLength" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="useFirebug" id="$useFirebug">
+			<td align="right" width="1%"><code class="nowrap">
+				 
+				bool
+			</code></td>
+
+			<td width="1%"><var>$useFirebug</var></td>
+			<td><pre><span class="php-keyword1">NULL</span></pre></td>
+			<td>log to firebug? <a href="#$useFirebug" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="explainQuery" id="$explainQuery">
+			<td align="right" width="1%"><code class="nowrap">
+				 
+				bool
+			</code></td>
+
+			<td width="1%"><var>$explainQuery</var></td>
+			<td><pre><span class="php-keyword1">true</span></pre></td>
+			<td>explain queries? <a href="#$explainQuery" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="tickets" id="$tickets">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				array
+			</code></td>
+
+			<td width="1%"><var>$tickets</var></td>
+			<td><pre><span class="php-keyword1">array</span> (
+)</pre></td>
+			<td> <a href="#$tickets" class="anchor">#</a></td>
+		</tr>
+		<tr data-order="fireTable" id="$fireTable">
+			<td align="right" width="1%"><code class="nowrap">
+				 static
+				array
+			</code></td>
+
+			<td width="1%"><var>$fireTable</var></td>
+			<td><pre><span class="php-keyword1">array</span> (
+  <span class="php-num">0</span> =&gt; 
+  <span class="php-keyword1">array</span> (
+    <span class="php-num">0</span> =&gt; <span class="php-quote">'Time'</span>,
+    <span class="php-num">1</span> =&gt; <span class="php-quote">'SQL Statement'</span>,
+    <span class="php-num">2</span> =&gt; <span class="php-quote">'Rows'</span>,
+    <span class="php-num">3</span> =&gt; <span class="php-quote">'Connection'</span>,
+  ),
+)</pre></td>
+			<td> <a href="#$fireTable" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+</div>
+
+	<div id="footer">
+		dibi API documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>
