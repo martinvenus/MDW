@@ -15,7 +15,7 @@
  * @author     John Doe
  * @package    MyApplication
  */
-class HomepagePresenter extends BasePresenter
+class Front_DefaultPresenter extends Front_BasePresenter
 {
 
 	public function renderDefault()
