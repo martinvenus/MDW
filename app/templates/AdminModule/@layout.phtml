@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>eManager 1.0</title>
-        <meta http-equiv="content-language" content="en" />
+        <title>Request Tracking System</title>
+        <meta http-equiv="content-language" content="cs" />
         <meta http-equiv="cache-control" content="no-cache" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
@@ -22,7 +22,12 @@
         <div id="wrap">
             <div id="header">
                 <h1><a class="bg" href="#" title="Home"></a>Manager 1.0</h1>
-                <p id="status">Logged is as Username, <a href="#" title="Sign Out?">Sign Out?</a></p>
+                {if isset($user)}
+                    <p id="status">Přihlášen jako Username, <a href="#" title="odhlásit?">odhlásit</a>.</p>
+                {else}
+                    <p id="status">Pro plný přístup do systému musíte být <a href="#" title="Přihlášení">přihlášeni</a>.</p>
+                {/if}
+
 		@{include #head}
             </div>
             <div id="sidebar">

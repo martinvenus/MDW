@@ -180,6 +180,7 @@ strong	{
 #redbox	{
 	height: 115px;
 	margin-top: 190px;
+        margin-bottom: 100px;
 	padding-right: 20px;
 	background: url(../../images/admin/bg_redbox.png) no-repeat right top;
 }
