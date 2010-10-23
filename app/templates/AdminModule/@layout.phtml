@@ -22,11 +22,15 @@
         <div id="wrap">
             <div id="header">
                 <h1><a class="bg" href="#" title="Home"></a>Manager 1.0</h1>
-                    <p id="status">Přihlášen jako <strong>Anténín Šlach</strong>, <a href="#" title="odhlásit?">odhlásit</a>.</p>
-
+                {if isset($user)}
+                <p id="status">Přihlášen jako <strong>Anténín Šlach</strong>, <a href="#" title="odhlásit?">odhlásit</a>.</p>
+                {/if}
 		@{include #head}
             </div>
             <div id="sidebar">
+
+                {if isset($user)}
+                
                 <ul class="items">
                     <li>
                         <a href="#" title="Správa ticketů">Správa ticketů</a>
@@ -48,6 +52,9 @@
                     </li>
 
                 </ul>
+                
+                {/if}
+
                 <span class="clear"></span>
                 <div id="redbox">
                     <h4>Request Tracking System</h4>
