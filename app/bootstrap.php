@@ -11,6 +11,7 @@
 // you don't have to litter your code with 'require' statements
 require LIBS_DIR . '/Nette/loader.php';
 
+Environment::setMode('production', FALSE);
 
 
 // Step 2: Configure environment
