@@ -79,12 +79,12 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
             $this->user->setExpiration(120 * 60, TRUE, TRUE);
         } catch (Exception $e) {
 
-            $this->flashMessage('Wrong user name or password given.');
+            $this->flashMessage('Bylo zadáno špatné uživatelské jméno nebo heslo.');
         }
 
         if ($this->user->isLoggedIn()) {
 
-            $this->flashMessage('You are sucesfully logged in.');
+            $this->flashMessage('Přihlášení proběhlo úspěšně.');
 
             if (!empty($this->backlink)) {
                 $this->getApplication()->restoreRequest($this->backlink);

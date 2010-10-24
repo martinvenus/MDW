@@ -1,7 +1,7 @@
 <?php
 
 /**
- * My NApplication
+ * My Application
  *
  * @copyright  Copyright (c) 2010 John Doe
  * @package    MyApplication
