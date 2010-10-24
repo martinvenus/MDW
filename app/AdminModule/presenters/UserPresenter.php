@@ -92,10 +92,10 @@ class Admin_UserPresenter extends Admin_BasePresenter {
 
         $grid->keyName = 'id';
 
-        $grid->addAction('Activate/Deactivate', 'userActivateChange!', Html::el('span')->class('Xapprove_icon'), $useAjax = TRUE);
-        $grid->addAction('Edit', 'userChangeRedirect', Html::el('span')->class('Xedit_icon'), $useAjax = FALSE);
-        $grid->addAction('Change password', 'userPasswordChangeRedirect', Html::el('span')->setText('Change password'), $useAjax = FALSE);
-        $grid->addAction('Delete', 'confirmForm:confirmUserDelete!', Html::el('span')->class('Xdelete_icon'), $useAjax = TRUE);
+        $grid->addAction('Activate/Deactivate', 'userActivateChange!', Html::el('span')->setText('Aktivace/Deaktivace'), $useAjax = TRUE);
+        $grid->addAction('Edit', 'userChangeRedirect', Html::el('span')->setText('Editovat'), $useAjax = FALSE);
+        $grid->addAction('Change password', 'userPasswordChangeRedirect', Html::el('span')->setText('Změnit heslo'), $useAjax = FALSE);
+        $grid->addAction('Delete', 'confirmForm:confirmUserDelete!', Html::el('span')->setText('Smazat'), $useAjax = TRUE);
 
         return $grid;
     }
