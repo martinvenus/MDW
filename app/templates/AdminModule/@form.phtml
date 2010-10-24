@@ -1,0 +1,39 @@
+{control $form begin}
+
+<!-- hidden fields -->
+<div n:foreach="$form->getComponents(TRUE, 'Nette\Forms\HiddenField') as $control">{$control->control}</div>
+
+<!-- errors -->
+{assign errors => $form->errors}
+<ul class="error" n:if="$errors" n:block="#errors">
+        <li n:foreach="$errors as $error">{$error}</li>
+</ul>
+
+<!-- groups -->
+<fieldset n:foreach="$form->groups as $group" n:if="$group->controls && $group->getOption('visual')" n:block="#group">
+        <legend n:ifset="$group->options['label']">{$group->options['label']}</legend>
+        <p n:ifset="$group->options['description']">{$group->options['description']}</p>
+
+        <table n:block="#controls" id="form_table">
+        <tr {attr class('required', $control->getOption('required'))} n:foreach="$group->controls as $control" n:if="!$control->getOption('rendered') && $control->getForm(FALSE) === $form" n:block="#pair">
+
+                <td n:block="#label">{if $control instanceof Button || $control instanceof Checkbox}&nbsp;{else}{!$control->label}{/if}</td>
+            
+                {if $control instanceof TextInput}
+                    <?php $control->getControlPrototype()->class = "small"; ?>
+                {/if}
+
+                {if $control instanceof SubmitButton}
+                    <?php $control->getControlPrototype()->class = "submit"; ?>
+                {/if}
+                
+                <td n:block="#control">{!$control->control}{if $control instanceof Checkbox}{!$control->label}{/if}</td>
+
+        </tr>
+        </table>
+</fieldset>
+
+<!-- non-group -->
+{include #controls, group => $form}
+
+{control $form end}
