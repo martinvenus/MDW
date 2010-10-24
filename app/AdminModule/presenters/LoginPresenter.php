@@ -30,9 +30,18 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
         $this->backlink = '';
     }
 
-    protected function createComponentLoginForm($backlink){
+        /*
+     * Vykreslení stránky pro administraci automobilů
+    */
+    public function renderDefault($backlink) {
 
-        $this->backlink = $backlink;
+        $this['loginForm']; // získá komponentu
+
+    }
+
+    protected function createComponentLoginForm(){
+
+        //$this->backlink = $backlink;
 
         $form = new AppForm;
 
