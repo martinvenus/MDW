@@ -2,7 +2,6 @@
 
 $form['userName']->getControlPrototype()->class = "small";
 $form['password']->getControlPrototype()->class = "small";
-$form['login']->getControlPrototype()->class = "button";
 
 ?>
 
@@ -18,9 +17,9 @@ $form['login']->getControlPrototype()->class = "button";
     <label>{!$form['userName']->label}</label>
     <span class="small_input">{!$form['userName']->control}</span>
     <label>{!$form['password']->label}</label>
-    <span class="small_input">{!$form['password']->control}</span>
-    <br /><br /><br />
-    {!$form['login']->control}<br />
+    <span class="small_input">{!$form['password']->control}</span><br /><br /><br /><br />
+    {!$form['login']->control}<br /><br />
+    <a href="#" class="button" title="Submit"><span>Submit</span></a>
     <span class="clear"></span>
 </fieldset>
 </form>

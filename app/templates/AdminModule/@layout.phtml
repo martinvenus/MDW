@@ -25,8 +25,9 @@
                 {if isset($user)}
                 <p id="status">Přihlášen <a href="{link User:userChange 1, $user->id}"><strong>{$user->firstName} {$user->surname}</strong></a>  |  <a href="{link User:userChange 2, $user->id}">Změnit heslo</a> | <a href="{link User:logout}">Odhlásit</a></p>
                 {/if}
-                <?php //TODO: Co je to HEAD??? ?>
-                <?php //@{include #head} ?>
+                
+                @{include #head}
+                
             </div>
             <div id="sidebar">
 
