@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NCachingHelper extends NObject
+class CachingHelper extends Object
 {
 	/** @var array */
 	private $frame;
@@ -28,11 +28,11 @@ class NCachingHelper extends NObject
 
 
 	/**
-	 * Starts the output cache. Returns NCachingHelper object if buffering was started.
+	 * Starts the output cache. Returns CachingHelper object if buffering was started.
 	 * @param  string
 	 * @param  string
 	 * @param  array
-	 * @return NCachingHelper
+	 * @return CachingHelper
 	 */
 	public static function create($key, $file, $tags)
 	{
@@ -45,9 +45,9 @@ class NCachingHelper extends NObject
 			$obj = new self;
 			$obj->key = $key;
 			$obj->frame = array(
-				NCache::FILES => array($file),
-				NCache::TAGS => $tags,
-				NCache::EXPIRE => rand(86400 * 4, 86400 * 7),
+				Cache::FILES => array($file),
+				Cache::TAGS => $tags,
+				Cache::EXPIRE => rand(86400 * 4, 86400 * 7),
 			);
 			ob_start();
 			return $obj;
@@ -75,7 +75,7 @@ class NCachingHelper extends NObject
 	 */
 	public function addFile($file)
 	{
-		$this->frame[NCache::FILES][] = $file;
+		$this->frame[Cache::FILES][] = $file;
 	}
 
 
@@ -87,7 +87,7 @@ class NCachingHelper extends NObject
 	 */
 	public function addItem($item)
 	{
-		$this->frame[NCache::ITEMS][] = $item;
+		$this->frame[Cache::ITEMS][] = $item;
 	}
 
 
@@ -97,11 +97,11 @@ class NCachingHelper extends NObject
 
 
 	/**
-	 * @return NCache
+	 * @return Cache
 	 */
 	protected static function getCache()
 	{
-		return NEnvironment::getCache('Nette.Template.Curly');
+		return Environment::getCache('Nette.Template.Curly');
 	}
 
 }

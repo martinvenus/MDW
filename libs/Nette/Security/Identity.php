@@ -22,7 +22,7 @@
  *
  * @serializationVersion 0.9.3
  */
-class NIdentity extends NFreezableObject implements IIdentity
+class Identity extends FreezableObject implements IIdentity
 {
 	/** @var string */
 	private $name;
@@ -51,7 +51,7 @@ class NIdentity extends NFreezableObject implements IIdentity
 	/**
 	 * Sets the name of user.
 	 * @param  string
-	 * @return NIdentity  provides a fluent interface
+	 * @return Identity  provides a fluent interface
 	 */
 	public function setName($name)
 	{
@@ -76,7 +76,7 @@ class NIdentity extends NFreezableObject implements IIdentity
 	/**
 	 * Sets a list of roles that the user is a member of.
 	 * @param  array
-	 * @return NIdentity  provides a fluent interface
+	 * @return Identity  provides a fluent interface
 	 */
 	public function setRoles(array $roles)
 	{

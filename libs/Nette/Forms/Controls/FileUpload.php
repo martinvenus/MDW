@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NFileUpload extends NFormControl
+class FileUpload extends FormControl
 {
 
 	/**
@@ -39,8 +39,8 @@ class NFileUpload extends NFormControl
 	 */
 	protected function attached($form)
 	{
-		if ($form instanceof NForm) {
-			if ($form->getMethod() !== NForm::POST) {
+		if ($form instanceof Form) {
+			if ($form->getMethod() !== Form::POST) {
 				throw new InvalidStateException('File upload requires method POST.');
 			}
 			$form->getElementPrototype()->enctype = 'multipart/form-data';
@@ -52,19 +52,19 @@ class NFileUpload extends NFormControl
 
 	/**
 	 * Sets control's value.
-	 * @param  array|NHttpUploadedFile
-	 * @return NFileUpload  provides a fluent interface
+	 * @param  array|HttpUploadedFile
+	 * @return FileUpload  provides a fluent interface
 	 */
 	public function setValue($value)
 	{
 		if (is_array($value)) {
-			$this->value = new NHttpUploadedFile($value);
+			$this->value = new HttpUploadedFile($value);
 
-		} elseif ($value instanceof NHttpUploadedFile) {
+		} elseif ($value instanceof HttpUploadedFile) {
 			$this->value = $value;
 
 		} else {
-			$this->value = new NHttpUploadedFile(NULL);
+			$this->value = new HttpUploadedFile(NULL);
 		}
 		return $this;
 	}
@@ -79,35 +79,35 @@ class NFileUpload extends NFormControl
 	public static function validateFilled(IFormControl $control)
 	{
 		$file = $control->getValue();
-		return $file instanceof NHttpUploadedFile && $file->isOK();
+		return $file instanceof HttpUploadedFile && $file->isOK();
 	}
 
 
 
 	/**
 	 * FileSize validator: is file size in limit?
-	 * @param  NFileUpload
+	 * @param  FileUpload
 	 * @param  int  file size limit
 	 * @return bool
 	 */
-	public static function validateFileSize(NFileUpload $control, $limit)
+	public static function validateFileSize(FileUpload $control, $limit)
 	{
 		$file = $control->getValue();
-		return $file instanceof NHttpUploadedFile && $file->getSize() <= $limit;
+		return $file instanceof HttpUploadedFile && $file->getSize() <= $limit;
 	}
 
 
 
 	/**
 	 * MimeType validator: has file specified mime type?
-	 * @param  NFileUpload
+	 * @param  FileUpload
 	 * @param  array|string  mime type
 	 * @return bool
 	 */
-	public static function validateMimeType(NFileUpload $control, $mimeType)
+	public static function validateMimeType(FileUpload $control, $mimeType)
 	{
 		$file = $control->getValue();
-		if ($file instanceof NHttpUploadedFile) {
+		if ($file instanceof HttpUploadedFile) {
 			$type = strtolower($file->getContentType());
 			$mimeTypes = is_array($mimeType) ? $mimeType : explode(',', $mimeType);
 			if (in_array($type, $mimeTypes, TRUE)) {

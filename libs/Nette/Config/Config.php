@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NConfig extends NHashtable
+class Config extends Hashtable
 {
 	/**#@+ flag */
 	const READONLY = 1;
@@ -26,7 +26,7 @@ class NConfig extends NHashtable
 
 	/** @var array */
 	private static $extensions = array(
-		'ini' => 'NConfigAdapterIni',
+		'ini' => 'ConfigAdapterIni',
 	);
 
 
@@ -43,7 +43,7 @@ class NConfig extends NHashtable
 			throw new InvalidArgumentException("Class '$class' was not found.");
 		}
 
-		if (!NClassReflection::from($class)->implementsInterface('IConfigAdapter')) {
+		if (!ClassReflection::from($class)->implementsInterface('IConfigAdapter')) {
 			throw new InvalidArgumentException("Configuration adapter '$class' is not Nette\\Config\\IConfigAdapter implementor.");
 		}
 
@@ -57,7 +57,7 @@ class NConfig extends NHashtable
 	 * @param  string  file name
 	 * @param  string  section to load
 	 * @param  int     flags (readOnly, autoexpand variables)
-	 * @return NConfig
+	 * @return Config
 	 */
 	public static function fromFile($file, $section = NULL, $flags = self::READONLY)
 	{
@@ -128,7 +128,7 @@ class NConfig extends NHashtable
 		$data = $this->getArrayCopy();
 		foreach ($data as $key => $val) {
 			if (is_string($val)) {
-				$data[$key] = NEnvironment::expand($val);
+				$data[$key] = Environment::expand($val);
 			} elseif ($val instanceof self) {
 				$val->expand();
 			}

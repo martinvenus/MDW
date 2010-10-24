@@ -11,21 +11,21 @@
 // you don't have to litter your code with 'require' statements
 require LIBS_DIR . '/Nette/loader.php';
 
-NEnvironment::setMode('production', FALSE);
+Environment::setMode('production', FALSE);
 
 
 // Step 2: Configure environment
 // 2a) enable NDebug for better exception and error visualisation
-NDebug::enable();
+Debug::enable();
 
 // 2b) load configuration from config.ini file
-NEnvironment::loadConfig();
+Environment::loadConfig();
 
 
 
 // Step 3: Configure application
 // 3a) get and setup a front controller
-$application = NEnvironment::getApplication();
+$application = Environment::getApplication();
 $application->errorPresenter = 'Error';
 
 //$application->catchExceptions = TRUE;
@@ -50,13 +50,13 @@ $router = $application->getRouter();
 
 // mod_rewrite detection
 if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) {
-    $router[] = new NRoute('index.php', array(
+    $router[] = new Route('index.php', array(
                 'module' => 'Front',
                 'presenter' => 'Default',
-                    ), NRoute::ONE_WAY);
+                    ), Route::ONE_WAY);
 
 
-    $router[] = new NRoute('<module>/<presenter>/<action>/<id>', array(
+    $router[] = new Route('<module>/<presenter>/<action>/<id>', array(
                 'module' => 'Front',
                 'presenter' => 'Default',
                 'action' => 'default',

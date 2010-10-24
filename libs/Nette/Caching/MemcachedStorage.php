@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NMemcachedStorage extends NObject implements ICacheStorage
+class MemcachedStorage extends Object implements ICacheStorage
 {
 	/**#@+ @internal cache structure */
 	const META_CALLBACKS = 'callbacks';
@@ -76,7 +76,7 @@ class NMemcachedStorage extends NObject implements ICacheStorage
 		// )
 
 		// verify dependencies
-		if (!empty($meta[self::META_CALLBACKS]) && !NCache::checkCallbacks($meta[self::META_CALLBACKS])) {
+		if (!empty($meta[self::META_CALLBACKS]) && !Cache::checkCallbacks($meta[self::META_CALLBACKS])) {
 			$this->memcache->delete($key, 0);
 			return NULL;
 		}
@@ -99,7 +99,7 @@ class NMemcachedStorage extends NObject implements ICacheStorage
 	 */
 	public function write($key, $data, array $dp)
 	{
-		if (!empty($dp[NCache::TAGS]) || isset($dp[NCache::PRIORITY]) || !empty($dp[NCache::ITEMS])) {
+		if (!empty($dp[Cache::TAGS]) || isset($dp[Cache::PRIORITY]) || !empty($dp[Cache::ITEMS])) {
 			throw new NotSupportedException('Tags, priority and dependent items are not supported by MemcachedStorage.');
 		}
 
@@ -108,15 +108,15 @@ class NMemcachedStorage extends NObject implements ICacheStorage
 		);
 
 		$expire = 0;
-		if (!empty($dp[NCache::EXPIRE])) {
-			$expire = (int) $dp[NCache::EXPIRE];
-			if (!empty($dp[NCache::SLIDING])) {
+		if (!empty($dp[Cache::EXPIRE])) {
+			$expire = (int) $dp[Cache::EXPIRE];
+			if (!empty($dp[Cache::SLIDING])) {
 				$meta[self::META_DELTA] = $expire; // sliding time
 			}
 		}
 
-		if (!empty($dp[NCache::CALLBACKS])) {
-			$meta[self::META_CALLBACKS] = $dp[NCache::CALLBACKS];
+		if (!empty($dp[Cache::CALLBACKS])) {
+			$meta[self::META_CALLBACKS] = $dp[Cache::CALLBACKS];
 		}
 
 		$this->memcache->set($this->prefix . $key, $meta, 0, $expire);
@@ -143,10 +143,10 @@ class NMemcachedStorage extends NObject implements ICacheStorage
 	 */
 	public function clean(array $conds)
 	{
-		if (!empty($conds[NCache::ALL])) {
+		if (!empty($conds[Cache::ALL])) {
 			$this->memcache->flush();
 
-		} elseif (isset($conds[NCache::TAGS]) || isset($conds[NCache::PRIORITY])) {
+		} elseif (isset($conds[Cache::TAGS]) || isset($conds[Cache::PRIORITY])) {
 			throw new NotSupportedException('Tags and priority is not supported by MemcachedStorage.');
 		}
 	}

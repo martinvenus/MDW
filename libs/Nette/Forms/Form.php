@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  *
- * @example    forms/basic-example.php  NForm definition using fluent interfaces
+ * @example    forms/basic-example.php  Form definition using fluent interfaces
  * @example    forms/manual-rendering.php  Manual form rendering and separated form and rules definition
  * @example    forms/localization.php  Localization (with Zend_Translate)
  * @example    forms/custom-rendering.php  Custom form rendering
@@ -33,11 +33,11 @@
  * @property   string $encoding
  * @property   ITranslator $translator
  * @property-read array $errors
- * @property-read NHtml $elementPrototype
+ * @property-read Html $elementPrototype
  * @property   IFormRenderer $renderer
  * @property-read boold $submitted
  */
-class NForm extends NFormContainer
+class Form extends FormContainer
 {
 	/**#@+ operation name */
 	const EQUAL = ':equal';
@@ -79,10 +79,10 @@ class NForm extends NFormContainer
 	/** @internal protection token ID */
 	const PROTECTOR_ID = '_token_';
 
-	/** @var array of function(NForm $sender); Occurs when the form is submitted and successfully validated */
+	/** @var array of function(Form $sender); Occurs when the form is submitted and successfully validated */
 	public $onSubmit;
 
-	/** @var array of function(NForm $sender); Occurs when the form is submitted and not validated */
+	/** @var array of function(Form $sender); Occurs when the form is submitted and not validated */
 	public $onInvalidSubmit;
 
 	/** @var mixed or NULL meaning: not detected yet */
@@ -91,7 +91,7 @@ class NForm extends NFormContainer
 	/** @var array */
 	private $httpData;
 
-	/** @var NHtml  <form> element */
+	/** @var Html  <form> element */
 	private $element;
 
 	/** @var IFormRenderer */
@@ -100,7 +100,7 @@ class NForm extends NFormContainer
 	/** @var ITranslator */
 	private $translator;
 
-	/** @var array of NFormGroup */
+	/** @var array of FormGroup */
 	private $groups = array();
 
 	/** @var array */
@@ -112,19 +112,19 @@ class NForm extends NFormContainer
 
 
 	/**
-	 * NForm constructor.
+	 * Form constructor.
 	 * @param  string
 	 */
 	public function __construct($name = NULL)
 	{
-		$this->element = NHtml::el('form');
+		$this->element = Html::el('form');
 		$this->element->action = ''; // RFC 1808 -> empty uri means 'this'
 		$this->element->method = self::POST;
 		$this->element->id = 'frm-' . $name;
 
 		$this->monitor(__CLASS__);
 		if ($name !== NULL) {
-			$tracker = new NHiddenField($name);
+			$tracker = new HiddenField($name);
 			$tracker->unmonitor(__CLASS__);
 			$this[self::TRACKER_ID] = $tracker;
 		}
@@ -150,7 +150,7 @@ class NForm extends NFormContainer
 
 	/**
 	 * Returns self.
-	 * @return NForm
+	 * @return Form
 	 */
 	final public function getForm($need = TRUE)
 	{
@@ -162,7 +162,7 @@ class NForm extends NFormContainer
 	/**
 	 * Sets form's action.
 	 * @param  mixed URI
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setAction($url)
 	{
@@ -186,7 +186,7 @@ class NForm extends NFormContainer
 	/**
 	 * Sets form's method.
 	 * @param  string get | post
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setMethod($method)
 	{
@@ -236,7 +236,7 @@ class NForm extends NFormContainer
 			$session->$key = $token = md5(uniqid('', TRUE));
 		}
 		$session->setExpiration($timeout, $key);
-		$this[self::PROTECTOR_ID] = new NHiddenField($token);
+		$this[self::PROTECTOR_ID] = new HiddenField($token);
 		$this[self::PROTECTOR_ID]->addRule(':equal', empty($message) ? 'Security token did not match. Possible CSRF attack.' : $message, $token);
 	}
 
@@ -246,11 +246,11 @@ class NForm extends NFormContainer
 	 * Adds fieldset group to the form.
 	 * @param  string  caption
 	 * @param  bool    set this group as current
-	 * @return NFormGroup
+	 * @return FormGroup
 	 */
 	public function addGroup($caption = NULL, $setAsCurrent = TRUE)
 	{
-		$group = new NFormGroup;
+		$group = new FormGroup;
 		$group->setOption('label', $caption);
 		$group->setOption('visual', TRUE);
 
@@ -269,7 +269,7 @@ class NForm extends NFormContainer
 
 	/**
 	 * Removes fieldset group from form.
-	 * @param  string|NFormGroup
+	 * @param  string|FormGroup
 	 * @return void
 	 */
 	public function removeGroup($name)
@@ -277,7 +277,7 @@ class NForm extends NFormContainer
 		if (is_string($name) && isset($this->groups[$name])) {
 			$group = $this->groups[$name];
 
-		} elseif ($name instanceof NFormGroup && in_array($name, $this->groups, TRUE)) {
+		} elseif ($name instanceof FormGroup && in_array($name, $this->groups, TRUE)) {
 			$group = $name;
 			$name = array_search($group, $this->groups, TRUE);
 
@@ -296,7 +296,7 @@ class NForm extends NFormContainer
 
 	/**
 	 * Returns all defined groups.
-	 * @return array of NFormGroup
+	 * @return array of FormGroup
 	 */
 	public function getGroups()
 	{
@@ -308,7 +308,7 @@ class NForm extends NFormContainer
 	/**
 	 * Returns the specified group.
 	 * @param  string  name
-	 * @return NFormGroup
+	 * @return FormGroup
 	 */
 	public function getGroup($name)
 	{
@@ -318,9 +318,9 @@ class NForm extends NFormContainer
 
 
 	/**
-	 * NSet the encoding for the values.
+	 * Set the encoding for the values.
 	 * @param  string
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setEncoding($value)
 	{
@@ -351,7 +351,7 @@ class NForm extends NFormContainer
 	/**
 	 * Sets translate adapter.
 	 * @param  ITranslator
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setTranslator(ITranslator $translator = NULL)
 	{
@@ -405,7 +405,7 @@ class NForm extends NFormContainer
 	/**
 	 * Sets the submittor control.
 	 * @param  ISubmitterControl
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setSubmittedBy(ISubmitterControl $by = NULL)
 	{
@@ -473,7 +473,7 @@ class NForm extends NFormContainer
 
 		$httpRequest->setEncoding($this->encoding);
 		if ($httpRequest->isMethod('post')) {
-			$data = NArrayTools::mergeTree($httpRequest->getPost(), $httpRequest->getFiles());
+			$data = ArrayTools::mergeTree($httpRequest->getPost(), $httpRequest->getFiles());
 		} else {
 			$data = $httpRequest->getQuery();
 		}
@@ -574,7 +574,7 @@ class NForm extends NFormContainer
 
 	/**
 	 * Returns form's HTML element template.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getElementPrototype()
 	{
@@ -586,7 +586,7 @@ class NForm extends NFormContainer
 	/**
 	 * Sets form renderer.
 	 * @param  IFormRenderer
-	 * @return NForm  provides a fluent interface
+	 * @return Form  provides a fluent interface
 	 */
 	public function setRenderer(IFormRenderer $renderer)
 	{
@@ -603,7 +603,7 @@ class NForm extends NFormContainer
 	final public function getRenderer()
 	{
 		if ($this->renderer === NULL) {
-			$this->renderer = new NConventionalRenderer;
+			$this->renderer = new ConventionalRenderer;
 		}
 		return $this->renderer;
 	}
@@ -647,7 +647,7 @@ class NForm extends NFormContainer
 			if (func_get_args() && func_get_arg(0)) {
 				throw $e;
 			} else {
-				NDebug::toStringException($e);
+				Debug::toStringException($e);
 			}
 		}
 	}
@@ -663,17 +663,17 @@ class NForm extends NFormContainer
 	 */
 	protected function getHttpRequest()
 	{
-		return class_exists('NEnvironment') ? NEnvironment::getHttpRequest() : new NHttpRequest;
+		return class_exists('Environment') ? Environment::getHttpRequest() : new HttpRequest;
 	}
 
 
 
 	/**
-	 * @return NSession
+	 * @return Session
 	 */
 	protected function getSession()
 	{
-		return NEnvironment::getSession();
+		return Environment::getSession();
 	}
 
 }

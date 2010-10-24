@@ -23,14 +23,15 @@
             <div id="header">
                 <h1><a class="bg" href="#" title="Home"></a>Manager 1.0</h1>
                 {if isset($user)}
-                <p id="status">Přihlášen jako <strong>Anténín Šlach</strong>, <a href="#" title="odhlásit?">odhlásit</a>.</p>
+                <p id="status"><a href="{link User:userChange 1, $user->id}"><strong>{$user->firstName} {$user->surname}</strong></a>  |  <a href="{link User:userChange 2, $user->id}">Password</a> | <a href="{link User:logout}">Logout</a>.</p>
                 {/if}
-		@{include #head}
+                <?php //TODO: Co je to HEAD??? ?>
+		<?php //@{include #head} ?>
             </div>
             <div id="sidebar">
 
                 {if isset($user)}
-                
+
                 <ul class="items">
                     <li>
                         <a href="#" title="Správa ticketů">Správa ticketů</a>
@@ -52,12 +53,16 @@
                     </li>
 
                 </ul>
-                
+
                 {/if}
 
                 <span class="clear"></span>
                 <div id="redbox">
-                    <h4>Request Tracking System</h4>
+                    <h4>Request Tracking System<br />
+                        {snippet flashMessage}
+                        {foreach $flashes as $flash}<div class="flash">{$flash->message}</div>{/foreach}
+                        {/snippet}
+                    </h4>
                     <p>
                         <big>Copyright 2010</big>
 				Build: 20101023

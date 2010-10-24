@@ -23,7 +23,7 @@ interface IPresenterLoader
 	/**
 	 * @param  string  presenter name
 	 * @return string  class name
-	 * @throws NInvalidPresenterException
+	 * @throws InvalidPresenterException
 	 */
 	function getPresenterClass(& $name);
 

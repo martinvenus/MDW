@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NHiddenField extends NFormControl
+class HiddenField extends FormControl
 {
 	/** @var string */
 	private $forcedValue;
@@ -48,7 +48,7 @@ class NHiddenField extends NFormControl
 	/**
 	 * Sets control's value.
 	 * @param  string
-	 * @return NHiddenField  provides a fluent interface
+	 * @return HiddenField  provides a fluent interface
 	 */
 	public function setValue($value)
 	{
@@ -60,7 +60,7 @@ class NHiddenField extends NFormControl
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{

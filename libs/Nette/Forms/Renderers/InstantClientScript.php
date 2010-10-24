@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NInstantClientScript extends NObject
+final class InstantClientScript extends Object
 {
 	/** @var array */
 	private $validateScripts;
@@ -28,12 +28,12 @@ final class NInstantClientScript extends NObject
 	/** @var bool */
 	private $central;
 
-	/** @var NForm */
+	/** @var Form */
 	private $form;
 
 
 
-	public function __construct(NForm $form)
+	public function __construct(Form $form)
 	{
 		$this->form = $form;
 	}
@@ -92,7 +92,7 @@ final class NInstantClientScript extends NObject
 
 
 
-	private function getValidateScript(NRules $rules)
+	private function getValidateScript(Rules $rules)
 	{
 		$res = '';
 		foreach ($rules as $rule) {
@@ -106,16 +106,16 @@ final class NInstantClientScript extends NObject
 			$script = $this->getClientScript($rule->control, $rule->operation, $rule->arg);
 			if (!$script) continue;
 
-			if ($rule->type === NRule::VALIDATOR && !empty($rule->message)) {
-				$message = NRules::formatMessage($rule, FALSE);
+			if ($rule->type === Rule::VALIDATOR && !empty($rule->message)) {
+				$message = Rules::formatMessage($rule, FALSE);
 				$res .= "$script\n"
 					. "if (" . ($rule->isNegative ? '' : '!') . "res) "
 					. "return " . json_encode((string) $message) . (strpos($message, '%value') === FALSE ? '' : ".replace('%value', val);\n") . ";\n";
 
-			} elseif ($rule->type === NRule::CONDITION) {
+			} elseif ($rule->type === Rule::CONDITION) {
 				$innerScript = $this->getValidateScript($rule->subRules);
 				if ($innerScript) {
-					$res .= "$script\nif (" . ($rule->isNegative ? '!' : '') . "res) {\n" . NString::indent($innerScript) . "}\n";
+					$res .= "$script\nif (" . ($rule->isNegative ? '!' : '') . "res) {\n" . String::indent($innerScript) . "}\n";
 					if ($rule->control instanceof ISubmitterControl) {
 						$this->central = FALSE;
 					}
@@ -127,7 +127,7 @@ final class NInstantClientScript extends NObject
 
 
 
-	private function getToggleScript(NRules $rules, $cond = NULL)
+	private function getToggleScript(Rules $rules, $cond = NULL)
 	{
 		$s = '';
 		foreach ($rules->getToggles() as $id => $visible) {
@@ -136,7 +136,7 @@ final class NInstantClientScript extends NObject
 		}
 		$formName = json_encode((string) $this->form->getElementPrototype()->id);
 		foreach ($rules as $rule) {
-			if ($rule->type === NRule::CONDITION && is_string($rule->operation)) {
+			if ($rule->type === Rule::CONDITION && is_string($rule->operation)) {
 				$script = $this->getClientScript($rule->control, $rule->operation, $rule->arg);
 				if ($script) {
 					$res = $this->getToggleScript($rule->subRules, $cond . "$script visible = visible && " . ($rule->isNegative ? '!' : '') . "res;\n");
@@ -164,16 +164,16 @@ final class NInstantClientScript extends NObject
 		$elem = 'form[' . json_encode($control->getHtmlName()) . ']';
 
 		switch (TRUE) {
-		case $control instanceof NHiddenField || $control->isDisabled():
+		case $control instanceof HiddenField || $control->isDisabled():
 			return NULL;
 
-		case $operation === ':filled' && $control instanceof NRadioList:
+		case $operation === ':filled' && $control instanceof RadioList:
 			return "res = (val = nette.getValue($elem)) !== null;";
 
-		case $operation === ':submitted' && $control instanceof NSubmitButton:
+		case $operation === ':submitted' && $control instanceof SubmitButton:
 			return "res = sender && sender.name==" . json_encode($control->getHtmlName()) . ";";
 
-		case $operation === ':equal' && $control instanceof NMultiSelectBox:
+		case $operation === ':equal' && $control instanceof MultiSelectBox:
 			$tmp = array();
 			foreach ((is_array($arg) ? $arg : array($arg)) as $item) {
 				$tmp[] = "options[i].value==" . json_encode((string) $item);
@@ -183,56 +183,56 @@ final class NInstantClientScript extends NObject
 				. "for (var i=$first, len=options.length; i<len; i++)\n\t"
 				. "if (options[i].selected && (" . implode(' || ', $tmp) . ")) { res = true; break; }";
 
-		case $operation === ':filled' && $control instanceof NSelectBox:
+		case $operation === ':filled' && $control instanceof SelectBox:
 			return "res = $elem.selectedIndex >= " . ($control->isFirstSkipped() ? 1 : 0) . ";";
 
-		case $operation === ':filled' && $control instanceof NTextBase:
+		case $operation === ':filled' && $control instanceof TextBase:
 			return "val = nette.getValue($elem); res = val!='' && val!=" . json_encode((string) $control->getEmptyValue()) . ";";
 
-		case $operation === ':minlength' && $control instanceof NTextBase:
+		case $operation === ':minlength' && $control instanceof TextBase:
 			return "res = (val = nette.getValue($elem)).length>=" . (int) $arg . ";";
 
-		case $operation === ':maxlength' && $control instanceof NTextBase:
+		case $operation === ':maxlength' && $control instanceof TextBase:
 			return "res = (val = nette.getValue($elem)).length<=" . (int) $arg . ";";
 
-		case $operation === ':length' && $control instanceof NTextBase:
+		case $operation === ':length' && $control instanceof TextBase:
 			if (!is_array($arg)) {
 				$arg = array($arg, $arg);
 			}
 			return "val = nette.getValue($elem); res = " . ($arg[0] === NULL ? "true" : "val.length>=" . (int) $arg[0]) . " && "
 				. ($arg[1] === NULL ? "true" : "val.length<=" . (int) $arg[1]) . ";";
 
-		case $operation === ':email' && $control instanceof NTextBase:
+		case $operation === ':email' && $control instanceof TextBase:
 			return 'res = /^[^@\s]+@[^@\s]+\.[a-z]{2,10}$/i.test(val = nette.getValue('.$elem.'));';
 
-		case $operation === ':url' && $control instanceof NTextBase:
+		case $operation === ':url' && $control instanceof TextBase:
 			return 'res = /^.+\.[a-z]{2,6}(\\/.*)?$/i.test(val = nette.getValue('.$elem.'));';
 
-		case $operation === ':regexp' && $control instanceof NTextBase:
+		case $operation === ':regexp' && $control instanceof TextBase:
 			if (!preg_match('#^(/.*/)([imu]*)$#', $arg, $matches)) {
 				return NULL; // regular expression must be JavaScript compatible
 			}
 			$arg = $matches[1] . str_replace('u', '', $matches[2]);
 			return "res = $arg.test(val = nette.getValue($elem));";
 
-		case $operation === ':integer' && $control instanceof NTextBase:
+		case $operation === ':integer' && $control instanceof TextBase:
 			return "res = /^-?[0-9]+$/.test(val = nette.getValue($elem));";
 
-		case $operation === ':float' && $control instanceof NTextBase:
+		case $operation === ':float' && $control instanceof TextBase:
 			return "res = /^-?[0-9]*[.,]?[0-9]+$/.test(val = nette.getValue($elem));";
 
-		case $operation === ':range' && $control instanceof NTextBase:
+		case $operation === ':range' && $control instanceof TextBase:
 			return "val = nette.getValue($elem); res = " . ($arg[0] === NULL ? "true" : "parseFloat(val)>=" . json_encode((float) $arg[0])) . " && "
 				. ($arg[1] === NULL ? "true" : "parseFloat(val)<=" . json_encode((float) $arg[1])) . ";";
 
-		case $operation === ':filled' && $control instanceof NFormControl:
+		case $operation === ':filled' && $control instanceof FormControl:
 			return "res = (val = nette.getValue($elem)) != '';";
 
-		case $operation === ':valid' && $control instanceof NFormControl:
+		case $operation === ':valid' && $control instanceof FormControl:
 			return "res = !this[" . json_encode($control->getHtmlName()) . "](sender);";
 
-		case $operation === ':equal' && $control instanceof NFormControl:
-			if ($control instanceof NCheckbox) $arg = (bool) $arg;
+		case $operation === ':equal' && $control instanceof FormControl:
+			if ($control instanceof Checkbox) $arg = (bool) $arg;
 			$tmp = array();
 			foreach ((is_array($arg) ? $arg : array($arg)) as $item) {
 				if ($item instanceof IFormControl) { // compare with another form control?

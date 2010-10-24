@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NAnnotation extends NObject implements IAnnotation
+class Annotation extends Object implements IAnnotation
 {
 
 	public function __construct(array $values)

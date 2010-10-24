@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NLimitedScope
+final class LimitedScope
 {
 	private static $vars;
 

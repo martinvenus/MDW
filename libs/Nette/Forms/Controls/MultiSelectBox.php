@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NMultiSelectBox extends NSelectBox
+class MultiSelectBox extends SelectBox
 {
 
 
@@ -84,7 +84,7 @@ class NMultiSelectBox extends NSelectBox
 
 
 	/**
-	 * Returns name of control within a NForm & INamingContainer scope.
+	 * Returns name of control within a Form & INamingContainer scope.
 	 * @return string
 	 */
 	public function getHtmlName()
@@ -96,7 +96,7 @@ class NMultiSelectBox extends NSelectBox
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{

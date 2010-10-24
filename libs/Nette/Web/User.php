@@ -13,7 +13,7 @@
 
 
 /**
- * NUser authentication and authorization.
+ * User authentication and authorization.
  *
  * @author     David Grudl
  *
@@ -24,9 +24,9 @@
  * @property-read array $roles
  * @property-read bool $authenticated
  */
-class NUser extends NObject implements IUser
+class User extends Object implements IUser
 {
-	/**#@+ log-out reason {@link NUser::getLogoutReason()} */
+	/**#@+ log-out reason {@link User::getLogoutReason()} */
 	const MANUAL = 1;
 	const INACTIVITY = 2;
 	const BROWSER_CLOSED = 3;
@@ -38,10 +38,10 @@ class NUser extends NObject implements IUser
 	/** @var string  default role for authenticated user without own identity */
 	public $authenticatedRole = 'authenticated';
 
-	/** @var array of function(NUser $sender); Occurs when the user is successfully logged in */
+	/** @var array of function(User $sender); Occurs when the user is successfully logged in */
 	public $onLoggedIn;
 
-	/** @var array of function(NUser $sender); Occurs when the user is logged out */
+	/** @var array of function(User $sender); Occurs when the user is logged out */
 	public $onLoggedOut;
 
 	/** @deprecated */
@@ -59,7 +59,7 @@ class NUser extends NObject implements IUser
 	/** @var string */
 	private $namespace = '';
 
-	/** @var NSessionNamespace */
+	/** @var SessionNamespace */
 	private $session;
 
 
@@ -83,7 +83,7 @@ class NUser extends NObject implements IUser
 	 * @param  string
 	 * @param  mixed
 	 * @return void
-	 * @throws NAuthenticationException if authentication was not successful
+	 * @throws AuthenticationException if authentication was not successful
 	 */
 	public function login($username, $password, $extra = NULL)
 	{
@@ -153,7 +153,7 @@ class NUser extends NObject implements IUser
 	/**
 	 * Sets authentication handler.
 	 * @param  IAuthenticator
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	public function setAuthenticationHandler(IAuthenticator $handler)
 	{
@@ -170,7 +170,7 @@ class NUser extends NObject implements IUser
 	final public function getAuthenticationHandler()
 	{
 		if ($this->authenticationHandler === NULL) {
-			$this->authenticationHandler = NEnvironment::getService('Nette\\Security\\IAuthenticator');
+			$this->authenticationHandler = Environment::getService('Nette\\Security\\IAuthenticator');
 		}
 		return $this->authenticationHandler;
 	}
@@ -180,7 +180,7 @@ class NUser extends NObject implements IUser
 	/**
 	 * Changes namespace; allows more users to share a session.
 	 * @param  string
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	public function setNamespace($namespace)
 	{
@@ -209,13 +209,13 @@ class NUser extends NObject implements IUser
 	 * @param  string|int|DateTime number of seconds or timestamp
 	 * @param  bool  log out when the browser is closed?
 	 * @param  bool  clear the identity from persistent storage?
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	public function setExpiration($time, $whenBrowserIsClosed = TRUE, $clearIdentity = FALSE)
 	{
 		$session = $this->getSessionNamespace(TRUE);
 		if ($time) {
-			$time = NTools::createDateTime($time)->format('U');
+			$time = Tools::createDateTime($time)->format('U');
 			$session->expireTime = $time;
 			$session->expireDelta = $time - time();
 
@@ -246,7 +246,7 @@ class NUser extends NObject implements IUser
 
 	/**
 	 * Returns and initializes $this->session.
-	 * @return NSessionNamespace
+	 * @return SessionNamespace
 	 */
 	protected function getSessionNamespace($need)
 	{
@@ -299,14 +299,14 @@ class NUser extends NObject implements IUser
 	/**
 	 * Sets the authenticated status of this user.
 	 * @param  bool  flag indicating the authenticated status of user
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	protected function setAuthenticated($state)
 	{
 		$session = $this->getSessionNamespace(TRUE);
 		$session->authenticated = (bool) $state;
 
-		// NSession Fixation defence
+		// Session Fixation defence
 		$this->getSession()->regenerateId();
 
 		if ($state) {
@@ -325,7 +325,7 @@ class NUser extends NObject implements IUser
 	/**
 	 * Sets the user identity.
 	 * @param  IIdentity
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	protected function setIdentity(IIdentity $identity = NULL)
 	{
@@ -393,7 +393,7 @@ class NUser extends NObject implements IUser
 	/**
 	 * Sets authorization handler.
 	 * @param  IAuthorizator
-	 * @return NUser  provides a fluent interface
+	 * @return User  provides a fluent interface
 	 */
 	public function setAuthorizationHandler(IAuthorizator $handler)
 	{
@@ -410,7 +410,7 @@ class NUser extends NObject implements IUser
 	final public function getAuthorizationHandler()
 	{
 		if ($this->authorizationHandler === NULL) {
-			$this->authorizationHandler = NEnvironment::getService('Nette\\Security\\IAuthorizator');
+			$this->authorizationHandler = Environment::getService('Nette\\Security\\IAuthorizator');
 		}
 		return $this->authorizationHandler;
 	}
@@ -423,11 +423,11 @@ class NUser extends NObject implements IUser
 
 	/**
 	 * Returns session handler.
-	 * @return NSession
+	 * @return Session
 	 */
 	protected function getSession()
 	{
-		return NEnvironment::getSession();
+		return Environment::getSession();
 	}
 
 

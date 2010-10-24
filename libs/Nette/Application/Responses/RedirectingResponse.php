@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NRedirectingResponse extends NObject implements IPresenterResponse
+class RedirectingResponse extends Object implements IPresenterResponse
 {
 	/** @var string */
 	private $uri;
@@ -65,7 +65,7 @@ class NRedirectingResponse extends NObject implements IPresenterResponse
 	 */
 	public function send()
 	{
-		NEnvironment::getHttpResponse()->redirect($this->uri, $this->code);
+		Environment::getHttpResponse()->redirect($this->uri, $this->code);
 	}
 
 }

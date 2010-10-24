@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NJsonResponse extends NObject implements IPresenterResponse
+class JsonResponse extends Object implements IPresenterResponse
 {
 	/** @var array|stdClass */
 	private $payload;
@@ -58,8 +58,8 @@ class NJsonResponse extends NObject implements IPresenterResponse
 	 */
 	public function send()
 	{
-		NEnvironment::getHttpResponse()->setContentType($this->contentType);
-		NEnvironment::getHttpResponse()->setExpiration(FALSE);
+		Environment::getHttpResponse()->setContentType($this->contentType);
+		Environment::getHttpResponse()->setExpiration(FALSE);
 		echo json_encode($this->payload);
 	}
 

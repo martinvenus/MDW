@@ -13,7 +13,7 @@
 
 
 /**
- * NComponent with ability to receive signal.
+ * Component with ability to receive signal.
  *
  * @author     David Grudl
  */

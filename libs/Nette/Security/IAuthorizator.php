@@ -20,13 +20,13 @@
  */
 interface IAuthorizator
 {
-	/** NSet type: all */
+	/** Set type: all */
 	const ALL = NULL;
 
-	/** NPermission type: allow */
+	/** Permission type: allow */
 	const ALLOW = TRUE;
 
-	/** NPermission type: deny */
+	/** Permission type: deny */
 	const DENY = FALSE;
 
 

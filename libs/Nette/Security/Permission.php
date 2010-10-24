@@ -20,7 +20,7 @@
  * @copyright  Copyright (c) 2005, 2007 Zend Technologies USA Inc.
  * @author     David Grudl
  */
-class NPermission extends NObject implements IAuthorizator
+class Permission extends Object implements IAuthorizator
 {
 	/** @var array  Role storage */
 	private $roles = array();
@@ -28,7 +28,7 @@ class NPermission extends NObject implements IAuthorizator
 	/** @var array  Resource storage */
 	private $resources = array();
 
-	/** @var array  Access NControl List rules; whitelist (deny everything to all) by default */
+	/** @var array  Access Control List rules; whitelist (deny everything to all) by default */
 	private $rules = array(
 		'allResources' => array(
 			'allRoles' => array(
@@ -67,7 +67,7 @@ class NPermission extends NObject implements IAuthorizator
 	 * @param  string|array
 	 * @throws InvalidArgumentException
 	 * @throws InvalidStateException
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function addRole($role, $parents = NULL)
 	{
@@ -194,7 +194,7 @@ class NPermission extends NObject implements IAuthorizator
 	 *
 	 * @param  string
 	 * @throws InvalidStateException
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeRole($role)
 	{
@@ -232,7 +232,7 @@ class NPermission extends NObject implements IAuthorizator
 	/**
 	 * Removes all Roles from the list.
 	 *
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeAllRoles()
 	{
@@ -263,7 +263,7 @@ class NPermission extends NObject implements IAuthorizator
 	 * @param  string
 	 * @throws InvalidArgumentException
 	 * @throws InvalidStateException
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function addResource($resource, $parent = NULL)
 	{
@@ -368,7 +368,7 @@ class NPermission extends NObject implements IAuthorizator
 	 *
 	 * @param  string
 	 * @throws InvalidStateException
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeResource($resource)
 	{
@@ -403,7 +403,7 @@ class NPermission extends NObject implements IAuthorizator
 	/**
 	 * Removes all Resources.
 	 *
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeAllResources()
 	{
@@ -429,8 +429,8 @@ class NPermission extends NObject implements IAuthorizator
 	 * Adds an "allow" rule to the list. A rule is added that would allow one
 	 * or more Roles access to [certain $privileges upon] the specified Resource(s).
 	 *
-	 * If either $roles or $resources is NPermission::ALL, then the rule applies to all Roles or all Resources,
-	 * respectively. Both may be NPermission::ALL in order to work with the default rule of the ACL.
+	 * If either $roles or $resources is Permission::ALL, then the rule applies to all Roles or all Resources,
+	 * respectively. Both may be Permission::ALL in order to work with the default rule of the ACL.
 	 *
 	 * The $privileges parameter may be used to further specify that the rule applies only
 	 * to certain privileges upon the Resource(s) in question. This may be specified to be a single
@@ -440,11 +440,11 @@ class NPermission extends NObject implements IAuthorizator
 	 * the rule to apply. If $assertion is provided with $roles, $resources, and $privileges all
 	 * equal to NULL, then a rule will imply a type of DENY when the rule's assertion fails.
 	 *
-	 * @param  string|array|NPermission::ALL  roles
-	 * @param  string|array|NPermission::ALL  resources
-	 * @param  string|array|NPermission::ALL  privileges
+	 * @param  string|array|Permission::ALL  roles
+	 * @param  string|array|Permission::ALL  resources
+	 * @param  string|array|Permission::ALL  privileges
 	 * @param  IPermissionAssertion  assertion
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function allow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, IPermissionAssertion $assertion = NULL)
 	{
@@ -458,8 +458,8 @@ class NPermission extends NObject implements IAuthorizator
 	 * Adds a "deny" rule to the list. A rule is added that would deny one
 	 * or more Roles access to [certain $privileges upon] the specified Resource(s).
 	 *
-	 * If either $roles or $resources is NPermission::ALL, then the rule applies to all Roles or all Resources,
-	 * respectively. Both may be NPermission::ALL in order to work with the default rule of the ACL.
+	 * If either $roles or $resources is Permission::ALL, then the rule applies to all Roles or all Resources,
+	 * respectively. Both may be Permission::ALL in order to work with the default rule of the ACL.
 	 *
 	 * The $privileges parameter may be used to further specify that the rule applies only
 	 * to certain privileges upon the Resource(s) in question. This may be specified to be a single
@@ -469,11 +469,11 @@ class NPermission extends NObject implements IAuthorizator
 	 * the rule to apply. If $assertion is provided with $roles, $resources, and $privileges all
 	 * equal to NULL, then a rule will imply a type of ALLOW when the rule's assertion fails.
 	 *
-	 * @param  string|array|NPermission::ALL  roles
-	 * @param  string|array|NPermission::ALL  resources
-	 * @param  string|array|NPermission::ALL  privileges
+	 * @param  string|array|Permission::ALL  roles
+	 * @param  string|array|Permission::ALL  resources
+	 * @param  string|array|Permission::ALL  privileges
 	 * @param  IPermissionAssertion  assertion
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	public function deny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL, IPermissionAssertion $assertion = NULL)
 	{
@@ -488,10 +488,10 @@ class NPermission extends NObject implements IAuthorizator
 	 * of the given Roles, Resources, and privileges. Existing rules to which the remove
 	 * operation does not apply would remain in the
 	 *
-	 * @param  string|array|NPermission::ALL  roles
-	 * @param  string|array|NPermission::ALL  resources
-	 * @param  string|array|NPermission::ALL  privileges
-	 * @return NPermission  provides a fluent interface
+	 * @param  string|array|Permission::ALL  roles
+	 * @param  string|array|Permission::ALL  resources
+	 * @param  string|array|Permission::ALL  privileges
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeAllow($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL)
 	{
@@ -506,10 +506,10 @@ class NPermission extends NObject implements IAuthorizator
 	 * of the given Roles, Resources, and privileges. Existing rules to which the remove
 	 * operation does not apply would remain in the
 	 *
-	 * @param  string|array|NPermission::ALL  roles
-	 * @param  string|array|NPermission::ALL  resources
-	 * @param  string|array|NPermission::ALL  privileges
-	 * @return NPermission  provides a fluent interface
+	 * @param  string|array|Permission::ALL  roles
+	 * @param  string|array|Permission::ALL  resources
+	 * @param  string|array|Permission::ALL  privileges
+	 * @return Permission  provides a fluent interface
 	 */
 	public function removeDeny($roles = self::ALL, $resources = self::ALL, $privileges = self::ALL)
 	{
@@ -520,16 +520,16 @@ class NPermission extends NObject implements IAuthorizator
 
 
 	/**
-	 * Performs operations on Access NControl List rules.
+	 * Performs operations on Access Control List rules.
 	 *
 	 * @param  bool  operation add?
 	 * @param  bool  type
-	 * @param  string|array|NPermission::ALL  roles
-	 * @param  string|array|NPermission::ALL  resources
-	 * @param  string|array|NPermission::ALL  privileges
+	 * @param  string|array|Permission::ALL  roles
+	 * @param  string|array|Permission::ALL  resources
+	 * @param  string|array|Permission::ALL  privileges
 	 * @param  IPermissionAssertion assertion
 	 * @throws InvalidStateException
-	 * @return NPermission  provides a fluent interface
+	 * @return Permission  provides a fluent interface
 	 */
 	protected function setRule($toAdd, $type, $roles, $resources, $privileges, IPermissionAssertion $assertion = NULL)
 	{
@@ -635,9 +635,9 @@ class NPermission extends NObject implements IAuthorizator
 	/**
 	 * Returns TRUE if and only if the Role has access to the Resource.
 	 *
-	 * If either $role or $resource is NPermission::ALL, then the query applies to all Roles or all Resources,
-	 * respectively. Both may be NPermission::ALL to query whether the ACL has a "blacklist" rule
-	 * (allow everything to all). By default, NPermission creates a "whitelist" rule (deny
+	 * If either $role or $resource is Permission::ALL, then the query applies to all Roles or all Resources,
+	 * respectively. Both may be Permission::ALL to query whether the ACL has a "blacklist" rule
+	 * (allow everything to all). By default, Permission creates a "whitelist" rule (deny
 	 * everything to all), and this method would return FALSE unless this default has
 	 * been overridden (i.e., by executing $acl->allow()).
 	 *
@@ -650,9 +650,9 @@ class NPermission extends NObject implements IAuthorizator
 	 * and its respective parents are checked similarly before the lower-priority parents of
 	 * the Role are checked.
 	 *
-	 * @param  string|NPermission::ALL|IRole  role
-	 * @param  string|NPermission::ALL|IResource  resource
-	 * @param  string|NPermission::ALL  privilege
+	 * @param  string|Permission::ALL|IRole  role
+	 * @param  string|Permission::ALL|IResource  resource
+	 * @param  string|Permission::ALL  privilege
 	 * @throws InvalidStateException
 	 * @return bool
 	 */
@@ -897,17 +897,17 @@ class NPermission extends NObject implements IAuthorizator
 	 * the rule is not applicable, then this method returns NULL. Otherwise, the
 	 * rule type applies and is returned as either ALLOW or DENY.
 	 *
-	 * If $resource or $role is NPermission::ALL, then this means that the rule must apply to
+	 * If $resource or $role is Permission::ALL, then this means that the rule must apply to
 	 * all Resources or Roles, respectively.
 	 *
-	 * If $privilege is NPermission::ALL, then the rule must apply to all privileges.
+	 * If $privilege is Permission::ALL, then the rule must apply to all privileges.
 	 *
-	 * If all three parameters are NPermission::ALL, then the default ACL rule type is returned,
+	 * If all three parameters are Permission::ALL, then the default ACL rule type is returned,
 	 * based on whether its assertion method passes.
 	 *
-	 * @param  string|NPermission::ALL  role
-	 * @param  string|NPermission::ALL  resource
-	 * @param  string|NPermission::ALL  privilege
+	 * @param  string|Permission::ALL  role
+	 * @param  string|Permission::ALL  resource
+	 * @param  string|Permission::ALL  privilege
 	 * @return bool|NULL
 	 */
 	private function getRuleType($resource, $role, $privilege)
@@ -951,13 +951,13 @@ class NPermission extends NObject implements IAuthorizator
 	/**
 	 * Returns the rules associated with a Resource and a Role, or NULL if no such rules exist.
 	 *
-	 * If either $resource or $role is NPermission::ALL, this means that the rules returned are for all Resources or all Roles,
-	 * respectively. Both can be NPermission::ALL to return the default rule set for all Resources and all Roles.
+	 * If either $resource or $role is Permission::ALL, this means that the rules returned are for all Resources or all Roles,
+	 * respectively. Both can be Permission::ALL to return the default rule set for all Resources and all Roles.
 	 *
 	 * If the $create parameter is TRUE, then a rule set is first created and then returned to the caller.
 	 *
-	 * @param  string|NPermission::ALL  resource
-	 * @param  string|NPermission::ALL  role
+	 * @param  string|Permission::ALL  resource
+	 * @param  string|Permission::ALL  role
 	 * @param  boolean  create
 	 * @return array|NULL
 	 */

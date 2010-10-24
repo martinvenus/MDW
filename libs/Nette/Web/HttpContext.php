@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NHttpContext extends NObject
+class HttpContext extends Object
 {
 
 
@@ -84,7 +84,7 @@ class NHttpContext extends NObject
 	 */
 	public function getRequest()
 	{
-		return NEnvironment::getHttpRequest();
+		return Environment::getHttpRequest();
 	}
 
 
@@ -94,7 +94,7 @@ class NHttpContext extends NObject
 	 */
 	public function getResponse()
 	{
-		return NEnvironment::getHttpResponse();
+		return Environment::getHttpResponse();
 	}
 
 }

@@ -19,7 +19,7 @@
  *
  * @property-read bool $frozen
  */
-abstract class NFreezableObject extends NObject
+abstract class FreezableObject extends Object
 {
 	/** @var bool */
 	private $frozen = FALSE;

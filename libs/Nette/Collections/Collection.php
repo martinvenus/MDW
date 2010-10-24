@@ -19,7 +19,7 @@
  *
  * @property-read bool $frozen
  */
-abstract class NCollection extends ArrayObject implements ICollection
+abstract class Collection extends ArrayObject implements ICollection
 {
 	/** @var string  type (class, interface, PHP type) */
 	private $itemType;
@@ -234,7 +234,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 	/**
 	 * Protected exchangeArray().
 	 * @param  array  new array
-	 * @return NCollection  provides a fluent interface
+	 * @return Collection  provides a fluent interface
 	 */
 	protected function setArray($array)
 	{
@@ -244,16 +244,16 @@ abstract class NCollection extends ArrayObject implements ICollection
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
@@ -264,7 +264,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 	 */
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
@@ -287,7 +287,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 	 */
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
@@ -298,7 +298,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 	 */
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
@@ -310,7 +310,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 	 */
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 
@@ -326,7 +326,7 @@ abstract class NCollection extends ArrayObject implements ICollection
 
 
 
-	/********************* NFreezableObject behaviour ****************d*g**/
+	/********************* FreezableObject behaviour ****************d*g**/
 
 
 

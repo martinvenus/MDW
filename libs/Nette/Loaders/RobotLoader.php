@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NRobotLoader extends NAutoLoader
+class RobotLoader extends AutoLoader
 {
 	/** @var array */
 	public $scanDirs;
@@ -73,8 +73,8 @@ class NRobotLoader extends NAutoLoader
 			$this->rebuild();
 		}
 
-		if (isset($this->list[strtolower(__CLASS__)]) && class_exists('NNetteLoader', FALSE)) {
-			NNetteLoader::getInstance()->unregister();
+		if (isset($this->list[strtolower(__CLASS__)]) && class_exists('NetteLoader', FALSE)) {
+			NetteLoader::getInstance()->unregister();
 		}
 
 		parent::register();
@@ -92,7 +92,7 @@ class NRobotLoader extends NAutoLoader
 		$type = ltrim(strtolower($type), '\\'); // PHP namespace bug #49143
 		if (isset($this->list[$type])) {
 			if ($this->list[$type] !== FALSE) {
-				NLimitedScope::load($this->list[$type][0]);
+				LimitedScope::load($this->list[$type][0]);
 				self::$count++;
 			}
 
@@ -112,7 +112,7 @@ class NRobotLoader extends NAutoLoader
 			}
 
 			if ($this->list[$type] !== FALSE) {
-				NLimitedScope::load($this->list[$type][0]);
+				LimitedScope::load($this->list[$type][0]);
 				self::$count++;
 			}
 		}
@@ -358,11 +358,11 @@ class NRobotLoader extends NAutoLoader
 
 
 	/**
-	 * @return NCache
+	 * @return Cache
 	 */
 	protected function getCache()
 	{
-		return NEnvironment::getCache('Nette.RobotLoader');
+		return Environment::getCache('Nette.RobotLoader');
 	}
 
 
@@ -382,7 +382,7 @@ class NRobotLoader extends NAutoLoader
 	 */
 	protected function isProduction()
 	{
-		return NEnvironment::isProduction();
+		return Environment::isProduction();
 	}
 
 }

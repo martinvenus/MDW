@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NGenericRecursiveIterator extends IteratorIterator implements RecursiveIterator, Countable
+class GenericRecursiveIterator extends IteratorIterator implements RecursiveIterator, Countable
 {
 
 	/**

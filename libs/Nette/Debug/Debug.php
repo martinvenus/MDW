@@ -13,11 +13,11 @@
 
 
 /**
- * NDebug static class.
+ * Debug static class.
  *
  * @author     David Grudl
  */
-final class NDebug
+final class Debug
 {
 	/** @var bool determines whether a server is running in production mode */
 	public static $productionMode;
@@ -34,23 +34,23 @@ final class NDebug
 	/** @var bool is AJAX request detected? */
 	private static $ajaxDetected;
 
-	/** @var array payload filled by {@link NDebug::consoleDump()} */
+	/** @var array payload filled by {@link Debug::consoleDump()} */
 	private static $consoleData;
 
-	/********************* NDebug::dump() ****************d*g**/
+	/********************* Debug::dump() ****************d*g**/
 
-	/** @var int  how many nested levels of array/object properties display {@link NDebug::dump()} */
+	/** @var int  how many nested levels of array/object properties display {@link Debug::dump()} */
 	public static $maxDepth = 3;
 
-	/** @var int  how long strings display {@link NDebug::dump()} */
+	/** @var int  how long strings display {@link Debug::dump()} */
 	public static $maxLen = 150;
 
-	/** @var int  display location? {@link NDebug::dump()} */
+	/** @var int  display location? {@link Debug::dump()} */
 	public static $showLocation = FALSE;
 
 	/********************* errors and exceptions reporing ****************d*g**/
 
-	/**#@+ server modes {@link NDebug::enable()} */
+	/**#@+ server modes {@link Debug::enable()} */
 	const DEVELOPMENT = FALSE;
 	const PRODUCTION = TRUE;
 	const DETECT = NULL;
@@ -68,7 +68,7 @@ final class NDebug
 	/** @var int interval for sending email is 2 days */
 	public static $emailSnooze = 172800;
 
-	/** @var bool {@link NDebug::enable()} */
+	/** @var bool {@link Debug::enable()} */
 	private static $enabled = FALSE;
 
 	/** @var string  name of the file where script errors should be logged */
@@ -94,7 +94,7 @@ final class NDebug
 
 	/********************* profiler ****************d*g**/
 
-	/** @var bool {@link NDebug::enableProfiler()} */
+	/** @var bool {@link Debug::enableProfiler()} */
 	private static $enabledProfiler = FALSE;
 
 	/** @var array  free counters for your usage */
@@ -251,7 +251,7 @@ final class NDebug
 
 
 	/**
-	 * Dumps information about a variable in Nette NDebug Console.
+	 * Dumps information about a variable in Nette Debug Console.
 	 * @param  mixed  variable to dump
 	 * @param  string optional title
 	 * @return mixed  variable itself
@@ -430,8 +430,8 @@ final class NDebug
 		}
 
 		if (self::$productionMode === self::DETECT) {
-			if (class_exists('NEnvironment')) {
-				self::$productionMode = NEnvironment::isProduction();
+			if (class_exists('Environment')) {
+				self::$productionMode = Environment::isProduction();
 
 			} elseif (isset($_SERVER['SERVER_ADDR']) || isset($_SERVER['LOCAL_ADDR'])) { // IP address based detection
 				$addr = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : $_SERVER['LOCAL_ADDR'];
@@ -448,12 +448,12 @@ final class NDebug
 		if (self::$productionMode && $logFile !== FALSE) {
 			self::$logFile = 'log/php_error.log';
 
-			if (class_exists('NEnvironment')) {
+			if (class_exists('Environment')) {
 				if (is_string($logFile)) {
-					self::$logFile = NEnvironment::expand($logFile);
+					self::$logFile = Environment::expand($logFile);
 
 				} else try {
-					self::$logFile = NEnvironment::expand('%logDir%/php_error.log');
+					self::$logFile = Environment::expand('%logDir%/php_error.log');
 
 				} catch (InvalidStateException $e) {
 				}
@@ -502,7 +502,7 @@ final class NDebug
 
 
 	/**
-	 * Is NDebug enabled?
+	 * Is Debug enabled?
 	 * @return bool
 	 */
 	public static function isEnabled()
@@ -513,7 +513,7 @@ final class NDebug
 
 
 	/**
-	 * NDebug exception handler.
+	 * Debug exception handler.
 	 * @param  Exception
 	 * @return void
 	 * @internal
@@ -618,7 +618,7 @@ final class NDebug
 				if (!headers_sent()) {
 					header('HTTP/1.1 500 Internal Server Error');
 				}
-				echo 'NDebug fatal error: ', get_class($e), ': ', ($e->getCode() ? '#' . $e->getCode() . ' ' : '') . $e->getMessage(), "\n";
+				echo 'Debug fatal error: ', get_class($e), ': ', ($e->getCode() ? '#' . $e->getCode() . ' ' : '') . $e->getMessage(), "\n";
 				exit;
 			}
 
@@ -674,8 +674,8 @@ final class NDebug
 	 */
 	public static function _paintBlueScreen(Exception $exception)
 	{
-		if (class_exists('NEnvironment', FALSE)) {
-			$application = NEnvironment::getServiceLocator()->hasService('Nette\\Application\\Application', TRUE) ? NEnvironment::getServiceLocator()->getService('Nette\\Application\\Application') : NULL;
+		if (class_exists('Environment', FALSE)) {
+			$application = Environment::getServiceLocator()->hasService('Nette\\Application\\Application', TRUE) ? Environment::getServiceLocator()->getService('Nette\\Application\\Application') : NULL;
 		}
 
 		$colophons = self::$colophons;
@@ -807,7 +807,7 @@ final class NDebug
 				$arr[] = htmlSpecialChars($name) . ' = <strong>' . htmlSpecialChars($value) . '</strong>';
 			}
 
-			$autoloaded = class_exists('NAutoLoader', FALSE) ? NAutoLoader::$count : 0;
+			$autoloaded = class_exists('AutoLoader', FALSE) ? AutoLoader::$count : 0;
 			$s = '<span>' . count(get_included_files()) . '/' .  $autoloaded . ' files</span>, ';
 
 			$exclude = array('stdClass', 'Exception', 'ErrorException', 'Traversable', 'IteratorAggregate', 'Iterator', 'ArrayAccess', 'Serializable', 'Closure');
@@ -835,7 +835,7 @@ final class NDebug
 			}
 			$arr[] = 'PHP ' . htmlSpecialChars(PHP_VERSION);
 			if (isset($_SERVER['SERVER_SOFTWARE'])) $arr[] = htmlSpecialChars($_SERVER['SERVER_SOFTWARE']);
-			if (class_exists('NFramework')) $arr[] = htmlSpecialChars('Nette Framework ' . NFramework::VERSION) . ' <i>(revision ' . htmlSpecialChars(NFramework::REVISION) . ')</i>';
+			if (class_exists('Framework')) $arr[] = htmlSpecialChars('Nette Framework ' . Framework::VERSION) . ' <i>(revision ' . htmlSpecialChars(Framework::REVISION) . ')</i>';
 		}
 		return $arr;
 	}
@@ -956,4 +956,4 @@ final class NDebug
 
 
 
-NDebug::_init();
+Debug::_init();

@@ -33,7 +33,7 @@ if (PHP_VERSION_ID < 50200) {
 define('NETTE', TRUE);
 define('NETTE_DIR', dirname(__FILE__));
 define('NETTE_VERSION_ID', 906); // v0.9.6
-define('NETTE_PACKAGE', 'PHP 5.2 prefixed');
+define('NETTE_PACKAGE', 'PHP 5.2');
 
 
 
@@ -48,4 +48,4 @@ require_once dirname(__FILE__) . '/Loaders/AutoLoader.php';
 require_once dirname(__FILE__) . '/Loaders/NetteLoader.php';
 
 
-NNetteLoader::getInstance()->register();
+NetteLoader::getInstance()->register();

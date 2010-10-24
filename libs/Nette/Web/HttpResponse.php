@@ -13,7 +13,7 @@
 
 
 /**
- * NHttpResponse class.
+ * HttpResponse class.
  *
  * @author     David Grudl
  *
@@ -21,7 +21,7 @@
  * @property-read array $headers
  * @property-read mixed $sent
  */
-final class NHttpResponse extends NObject implements IHttpResponse
+final class HttpResponse extends Object implements IHttpResponse
 {
 	/** @var bool  Send invisible garbage for IE 6? */
 	private static $fixIE = TRUE;
@@ -43,7 +43,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	/**
 	 * Sets HTTP response code.
 	 * @param  int
-	 * @return NHttpResponse  provides a fluent interface
+	 * @return HttpResponse  provides a fluent interface
 	 * @throws InvalidArgumentException  if code is invalid
 	 * @throws InvalidStateException  if HTTP headers have been sent
 	 */
@@ -89,7 +89,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	 * Sends a HTTP header and replaces a previous one.
 	 * @param  string  header name
 	 * @param  string  header value
-	 * @return NHttpResponse  provides a fluent interface
+	 * @return HttpResponse  provides a fluent interface
 	 * @throws InvalidStateException  if HTTP headers have been sent
 	 */
 	public function setHeader($name, $value)
@@ -130,7 +130,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	 * Sends a Content-type HTTP header.
 	 * @param  string  mime-type
 	 * @param  string  charset
-	 * @return NHttpResponse  provides a fluent interface
+	 * @return HttpResponse  provides a fluent interface
 	 * @throws InvalidStateException  if HTTP headers have been sent
 	 */
 	public function setContentType($type, $charset = NULL)
@@ -165,7 +165,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	/**
 	 * Sets the number of seconds before a page cached on a browser expires.
 	 * @param  string|int|DateTime  time, value 0 means "until the browser is closed"
-	 * @return NHttpResponse  provides a fluent interface
+	 * @return HttpResponse  provides a fluent interface
 	 * @throws InvalidStateException  if HTTP headers have been sent
 	 */
 	public function setExpiration($time)
@@ -176,7 +176,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 			return $this;
 		}
 
-		$time = NTools::createDateTime($time);
+		$time = Tools::createDateTime($time);
 		$this->setHeader('Cache-Control', 'max-age=' . ($time->format('U') - time()));
 		$this->setHeader('Expires', self::date($time));
 		return $this;
@@ -247,7 +247,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	 */
 	public static function date($time = NULL)
 	{
-		$time = NTools::createDateTime($time);
+		$time = Tools::createDateTime($time);
 		$time->setTimezone(new DateTimeZone('GMT'));
 		return $time->format('D, d M Y H:i:s \G\M\T');
 	}
@@ -309,7 +309,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 	 * @param  string
 	 * @param  string
 	 * @param  bool
-	 * @return NHttpResponse  provides a fluent interface
+	 * @return HttpResponse  provides a fluent interface
 	 * @throws InvalidStateException  if HTTP headers have been sent
 	 */
 	public function setCookie($name, $value, $time, $path = NULL, $domain = NULL, $secure = NULL)
@@ -321,7 +321,7 @@ final class NHttpResponse extends NObject implements IHttpResponse
 		setcookie(
 			$name,
 			$value,
-			$time ? NTools::createDateTime($time)->format('U') : 0,
+			$time ? Tools::createDateTime($time)->format('U') : 0,
 			$path === NULL ? $this->cookiePath : (string) $path,
 			$domain === NULL ? $this->cookieDomain : (string) $domain, //  . '; httponly'
 			$secure === NULL ? $this->cookieSecure : (bool) $secure,

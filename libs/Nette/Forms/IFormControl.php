@@ -40,7 +40,7 @@ interface IFormControl
 	function getValue();
 
 	/**
-	 * @return NRules
+	 * @return Rules
 	 */
 	function getRules();
 

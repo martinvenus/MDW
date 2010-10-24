@@ -13,11 +13,11 @@
 
 
 /**
- * NTemplate cache storage.
+ * Template cache storage.
  *
  * @author     David Grudl
  */
-class NTemplateCacheStorage extends NFileStorage
+class TemplateCacheStorage extends FileStorage
 {
 
 	/**

@@ -22,7 +22,7 @@
  * @property-read mixed $selectedItem
  * @property-read bool $firstSkipped
  */
-class NSelectBox extends NFormControl
+class SelectBox extends FormControl
 {
 	/** @var array */
 	private $items = array();
@@ -87,7 +87,7 @@ class NSelectBox extends NFormControl
 	/**
 	 * Ignores the first item in select box.
 	 * @param  string
-	 * @return NSelectBox  provides a fluent interface
+	 * @return SelectBox  provides a fluent interface
 	 */
 	public function skipFirst($item = NULL)
 	{
@@ -130,7 +130,7 @@ class NSelectBox extends NFormControl
 	/**
 	 * Sets items from which to choose.
 	 * @param  array
-	 * @return NSelectBox  provides a fluent interface
+	 * @return SelectBox  provides a fluent interface
 	 */
 	public function setItems(array $items, $useKeys = TRUE)
 	{
@@ -193,14 +193,14 @@ class NSelectBox extends NFormControl
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{
 		$control = parent::getControl();
 		$selected = $this->getValue();
 		$selected = is_array($selected) ? array_flip($selected) : array($selected => TRUE);
-		$option = NHtml::el('option');
+		$option = Html::el('option');
 
 		foreach ($this->items as $key => $value) {
 			if (!is_array($value)) {
@@ -212,7 +212,7 @@ class NSelectBox extends NFormControl
 			}
 
 			foreach ($value as $key2 => $value2) {
-				if ($value2 instanceof NHtml) {
+				if ($value2 instanceof Html) {
 					$dest->add((string) $value2->selected(isset($selected[$key2])));
 
 				} elseif ($this->useKeys) {

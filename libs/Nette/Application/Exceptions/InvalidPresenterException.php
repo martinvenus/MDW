@@ -17,6 +17,6 @@
  *
  * @author     David Grudl
  */
-class NInvalidPresenterException extends NInvalidLinkException
+class InvalidPresenterException extends InvalidLinkException
 {
 }

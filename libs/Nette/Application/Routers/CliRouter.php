@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NCliRouter extends NObject implements IRouter
+class CliRouter extends Object implements IRouter
 {
 	const PRESENTER_KEY = 'action';
 
@@ -37,9 +37,9 @@ class NCliRouter extends NObject implements IRouter
 
 
 	/**
-	 * Maps command line arguments to a NPresenterRequest object.
+	 * Maps command line arguments to a PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @return NPresenterRequest|NULL
+	 * @return PresenterRequest|NULL
 	 */
 	public function match(IHttpRequest $httpRequest)
 	{
@@ -89,7 +89,7 @@ class NCliRouter extends NObject implements IRouter
 			$presenter = substr($presenter, 0, $a);
 		}
 
-		return new NPresenterRequest(
+		return new PresenterRequest(
 			$presenter,
 			'CLI',
 			$params
@@ -101,10 +101,10 @@ class NCliRouter extends NObject implements IRouter
 	/**
 	 * This router is only unidirectional.
 	 * @param  IHttpRequest
-	 * @param  NPresenterRequest
+	 * @param  PresenterRequest
 	 * @return NULL
 	 */
-	public function constructUrl(NPresenterRequest $appRequest, IHttpRequest $httpRequest)
+	public function constructUrl(PresenterRequest $appRequest, IHttpRequest $httpRequest)
 	{
 		return NULL;
 	}

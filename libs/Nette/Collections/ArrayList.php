@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NArrayList extends NCollection implements IList
+class ArrayList extends Collection implements IList
 {
 	/** @var int */
 	protected $base = 0;

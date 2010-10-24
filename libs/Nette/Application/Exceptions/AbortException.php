@@ -18,6 +18,6 @@
  *
  * @author     David Grudl
  */
-class NAbortException extends Exception
+class AbortException extends Exception
 {
 }

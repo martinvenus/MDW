@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NConfigAdapterIni implements IConfigAdapter
+final class ConfigAdapterIni implements IConfigAdapter
 {
 
 	/** @var string  key nesting separator (key1> key2> key3) */
@@ -54,9 +54,9 @@ final class NConfigAdapterIni implements IConfigAdapter
 			throw new FileNotFoundException("File '$file' is missing or is not readable.");
 		}
 
-		NTools::tryError();
+		Tools::tryError();
 		$ini = parse_ini_file($file, TRUE);
-		if (NTools::catchError($msg)) {
+		if (Tools::catchError($msg)) {
 			throw new Exception($msg);
 		}
 
@@ -97,7 +97,7 @@ final class NConfigAdapterIni implements IConfigAdapter
 							throw new InvalidStateException("Missing parent section [$parent] in '$file'.");
 						}
 					}
-					$secData = NArrayTools::mergeTree($secData, $cursor);
+					$secData = ArrayTools::mergeTree($secData, $cursor);
 				}
 
 				$secName = trim($parts[0]);
@@ -120,7 +120,7 @@ final class NConfigAdapterIni implements IConfigAdapter
 			}
 
 			if (is_array($secData) && is_array($cursor)) {
-				$secData = NArrayTools::mergeTree($secData, $cursor);
+				$secData = ArrayTools::mergeTree($secData, $cursor);
 			}
 
 			$cursor = $secData;
@@ -141,7 +141,7 @@ final class NConfigAdapterIni implements IConfigAdapter
 
 	/**
 	 * Write INI file.
-	 * @param  NConfig to save
+	 * @param  Config to save
 	 * @param  string  file
 	 * @param  string  section name
 	 * @return void

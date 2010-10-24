@@ -13,11 +13,11 @@
 
 
 /**
- * NCache dummy storage.
+ * Cache dummy storage.
  *
  * @author     David Grudl
  */
-class NDummyStorage extends NObject implements ICacheStorage
+class DummyStorage extends Object implements ICacheStorage
 {
 
 	/**

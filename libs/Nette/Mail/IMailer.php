@@ -22,9 +22,9 @@ interface IMailer
 
 	/**
 	 * Sends e-mail.
-	 * @param  NMail
+	 * @param  Mail
 	 * @return void
 	 */
-	function send(NMail $mail);
+	function send(Mail $mail);
 
 }

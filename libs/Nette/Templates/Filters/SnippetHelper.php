@@ -13,11 +13,11 @@
 
 
 /**
- * NControl snippet template helper.
+ * Control snippet template helper.
  *
  * @author     David Grudl
  */
-class NSnippetHelper extends NObject
+class SnippetHelper extends Object
 {
 	/** @var bool */
 	public static $outputAllowed = TRUE;
@@ -37,13 +37,13 @@ class NSnippetHelper extends NObject
 
 
 	/**
-	 * Starts conditional snippet rendering. Returns NSnippetHelper object if snippet was started.
-	 * @param  NControl control
+	 * Starts conditional snippet rendering. Returns SnippetHelper object if snippet was started.
+	 * @param  Control control
 	 * @param  string  snippet name
 	 * @param  string  start element
-	 * @return NSnippetHelper
+	 * @return SnippetHelper
 	 */
-	public static function create(NControl $control, $name = NULL, $tag = 'div')
+	public static function create(Control $control, $name = NULL, $tag = 'div')
 	{
 		if (self::$outputAllowed) { // rendering flow or non-AJAX request
 			$obj = new self;

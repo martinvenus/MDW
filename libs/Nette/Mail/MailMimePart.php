@@ -21,7 +21,7 @@
  * @property   string $body
  * @property-read array $headers
  */
-class NMailMimePart extends NObject
+class MailMimePart extends Object
 {
 	/**#@+ encoding */
 	const ENCODING_BASE64 = 'base64';
@@ -51,7 +51,7 @@ class NMailMimePart extends NObject
 	 * @param  string
 	 * @param  string|array  value or pair email => name
 	 * @param  bool
-	 * @return NMailMimePart  provides a fluent interface
+	 * @return MailMimePart  provides a fluent interface
 	 */
 	public function setHeader($name, $value, $append = FALSE)
 	{
@@ -71,7 +71,7 @@ class NMailMimePart extends NObject
 			}
 
 			foreach ($value as $email => $name) {
-				if ($name !== NULL && !NString::checkEncoding($name)) {
+				if ($name !== NULL && !String::checkEncoding($name)) {
 					throw new InvalidArgumentException("Name is not valid UTF-8 string.");
 				}
 
@@ -87,7 +87,7 @@ class NMailMimePart extends NObject
 
 		} else {
 			$value = (string) $value;
-			if (!NString::checkEncoding($value)) {
+			if (!String::checkEncoding($value)) {
 				throw new InvalidArgumentException("Header is not valid UTF-8 string.");
 			}
 			$this->headers[$name] = preg_replace('#[\r\n]+#', ' ', $value);
@@ -112,7 +112,7 @@ class NMailMimePart extends NObject
 	/**
 	 * Removes a header.
 	 * @param  string
-	 * @return NMailMimePart  provides a fluent interface
+	 * @return MailMimePart  provides a fluent interface
 	 */
 	public function clearHeader($name)
 	{
@@ -177,7 +177,7 @@ class NMailMimePart extends NObject
 	 * Sets Content-Type header.
 	 * @param  string
 	 * @param  string
-	 * @return NMailMimePart  provides a fluent interface
+	 * @return MailMimePart  provides a fluent interface
 	 */
 	public function setContentType($contentType, $charset = NULL)
 	{
@@ -190,7 +190,7 @@ class NMailMimePart extends NObject
 	/**
 	 * Sets Content-Transfer-Encoding header.
 	 * @param  string
-	 * @return NMailMimePart  provides a fluent interface
+	 * @return MailMimePart  provides a fluent interface
 	 */
 	public function setEncoding($encoding)
 	{
@@ -213,10 +213,10 @@ class NMailMimePart extends NObject
 
 	/**
 	 * Adds or creates new multipart.
-	 * @param  NMailMimePart
-	 * @return NMailMimePart
+	 * @param  MailMimePart
+	 * @return MailMimePart
 	 */
-	public function addPart(NMailMimePart $part = NULL)
+	public function addPart(MailMimePart $part = NULL)
 	{
 		return $this->parts[] = $part === NULL ? new self : $part;
 	}
@@ -226,7 +226,7 @@ class NMailMimePart extends NObject
 	/**
 	 * Sets textual body.
 	 * @param  mixed
-	 * @return NMailMimePart  provides a fluent interface
+	 * @return MailMimePart  provides a fluent interface
 	 */
 	public function setBody($body)
 	{

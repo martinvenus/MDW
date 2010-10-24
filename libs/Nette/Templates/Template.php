@@ -13,11 +13,11 @@
 
 
 /**
- * NTemplate stored in file.
+ * Template stored in file.
  *
  * @author     David Grudl
  */
-class NTemplate extends NBaseTemplate implements IFileTemplate
+class Template extends BaseTemplate implements IFileTemplate
 {
 	/** @var int */
 	public static $cacheExpire = FALSE;
@@ -46,7 +46,7 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 	/**
 	 * Sets the path to the template file.
 	 * @param  string  template file path
-	 * @return NTemplate  provides a fluent interface
+	 * @return Template  provides a fluent interface
 	 */
 	public function setFile($file)
 	{
@@ -86,7 +86,7 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 
 		$this->__set('template', $this);
 
-		$cache = new NCache($this->getCacheStorage(), 'Nette.Template');
+		$cache = new Cache($this->getCacheStorage(), 'Nette.Template');
 		$key = md5($this->file) . '.' . basename($this->file);
 		$cached = $content = $cache[$key];
 
@@ -96,13 +96,13 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 			}
 
 			if (!$this->getFilters()) {
-				NLimitedScope::load($this->file, $this->getParams());
+				LimitedScope::load($this->file, $this->getParams());
 				return;
 			}
 
 			try {
 				$shortName = $this->file;
-				$shortName = str_replace(NEnvironment::getVariable('appDir'), "\xE2\x80\xA6", $shortName);
+				$shortName = str_replace(Environment::getVariable('appDir'), "\xE2\x80\xA6", $shortName);
 			} catch (Exception $foo) {
 			}
 
@@ -111,20 +111,20 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 				$key,
 				$content,
 				array(
-					NCache::FILES => $this->file,
-					NCache::EXPIRE => self::$cacheExpire,
+					Cache::FILES => $this->file,
+					Cache::EXPIRE => self::$cacheExpire,
 				)
 			);
 			$cache->release();
 			$cached = $cache[$key];
 		}
 
-		if ($cached !== NULL && self::$cacheStorage instanceof NTemplateCacheStorage) {
-			NLimitedScope::load($cached['file'], $this->getParams());
+		if ($cached !== NULL && self::$cacheStorage instanceof TemplateCacheStorage) {
+			LimitedScope::load($cached['file'], $this->getParams());
 			fclose($cached['handle']);
 
 		} else {
-			NLimitedScope::evaluate($content, $this->getParams());
+			LimitedScope::evaluate($content, $this->getParams());
 		}
 	}
 
@@ -135,8 +135,8 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 
 
 	/**
-	 * NSet cache storage.
-	 * @param  NCache
+	 * Set cache storage.
+	 * @param  Cache
 	 * @return void
 	 */
 	public static function setCacheStorage(ICacheStorage $storage)
@@ -152,7 +152,7 @@ class NTemplate extends NBaseTemplate implements IFileTemplate
 	public static function getCacheStorage()
 	{
 		if (self::$cacheStorage === NULL) {
-			self::$cacheStorage = new NTemplateCacheStorage(NEnvironment::getVariable('tempDir'));
+			self::$cacheStorage = new TemplateCacheStorage(Environment::getVariable('tempDir'));
 		}
 		return self::$cacheStorage;
 	}

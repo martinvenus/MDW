@@ -21,12 +21,12 @@
  * @property-read string $contentType
  * @property-read int $size
  * @property-read string $temporaryFile
- * @property-read NImage $image
+ * @property-read Image $image
  * @property-read int $error
  * @property-read array $imageSize
  * @property-read bool $ok
  */
-class NHttpUploadedFile extends NObject
+class HttpUploadedFile extends Object
 {
 	/* @var string */
 	private $name;
@@ -79,7 +79,7 @@ class NHttpUploadedFile extends NObject
 	public function getContentType()
 	{
 		if ($this->isOk() && $this->type === NULL) {
-			$this->type = NTools::detectMimeType($this->tmpName);
+			$this->type = Tools::detectMimeType($this->tmpName);
 		}
 		return $this->type;
 	}
@@ -144,7 +144,7 @@ class NHttpUploadedFile extends NObject
 	/**
 	 * Move uploaded file to new location.
 	 * @param  string
-	 * @return NHttpUploadedFile  provides a fluent interface
+	 * @return HttpUploadedFile  provides a fluent interface
 	 */
 	public function move($dest)
 	{
@@ -176,11 +176,11 @@ class NHttpUploadedFile extends NObject
 
 	/**
 	 * Returns the image.
-	 * @return NImage
+	 * @return Image
 	 */
 	public function getImage()
 	{
-		return NImage::fromFile($this->tmpName);
+		return Image::fromFile($this->tmpName);
 	}
 
 

@@ -13,11 +13,11 @@
 
 
 /**
- * NCache file storage.
+ * Cache file storage.
  *
  * @author     David Grudl
  */
-class NFileStorage extends NObject implements ICacheStorage
+class FileStorage extends Object implements ICacheStorage
 {
 	/**
 	 * Atomic thread safe logic:
@@ -128,7 +128,7 @@ class NFileStorage extends NObject implements ICacheStorage
 				break;
 			}
 
-			if (!empty($meta[self::META_CALLBACKS]) && !NCache::checkCallbacks($meta[self::META_CALLBACKS])) {
+			if (!empty($meta[self::META_CALLBACKS]) && !Cache::checkCallbacks($meta[self::META_CALLBACKS])) {
 				break;
 			}
 
@@ -162,16 +162,16 @@ class NFileStorage extends NObject implements ICacheStorage
 			self::META_TIME => microtime(),
 		);
 
-		if (!empty($dp[NCache::EXPIRE])) {
-			if (empty($dp[NCache::SLIDING])) {
-				$meta[self::META_EXPIRE] = $dp[NCache::EXPIRE] + time(); // absolute time
+		if (!empty($dp[Cache::EXPIRE])) {
+			if (empty($dp[Cache::SLIDING])) {
+				$meta[self::META_EXPIRE] = $dp[Cache::EXPIRE] + time(); // absolute time
 			} else {
-				$meta[self::META_DELTA] = (int) $dp[NCache::EXPIRE]; // sliding time
+				$meta[self::META_DELTA] = (int) $dp[Cache::EXPIRE]; // sliding time
 			}
 		}
 
-		if (!empty($dp[NCache::ITEMS])) {
-			foreach ((array) $dp[NCache::ITEMS] as $item) {
+		if (!empty($dp[Cache::ITEMS])) {
+			foreach ((array) $dp[Cache::ITEMS] as $item) {
 				$depFile = $this->getCacheFile($item);
 				$m = $this->readMeta($depFile, LOCK_SH);
 				$meta[self::META_ITEMS][$depFile] = $m[self::META_TIME];
@@ -179,8 +179,8 @@ class NFileStorage extends NObject implements ICacheStorage
 			}
 		}
 
-		if (!empty($dp[NCache::CALLBACKS])) {
-			$meta[self::META_CALLBACKS] = $dp[NCache::CALLBACKS];
+		if (!empty($dp[Cache::CALLBACKS])) {
+			$meta[self::META_CALLBACKS] = $dp[Cache::CALLBACKS];
 		}
 
 		$cacheFile = $this->getCacheFile($key);
@@ -198,17 +198,17 @@ class NFileStorage extends NObject implements ICacheStorage
 			}
 		}
 
-		if (!empty($dp[NCache::TAGS]) || isset($dp[NCache::PRIORITY])) {
+		if (!empty($dp[Cache::TAGS]) || isset($dp[Cache::PRIORITY])) {
 			$db = $this->getDb();
 			$dbFile = sqlite_escape_string($cacheFile);
 			$query = '';
-			if (!empty($dp[NCache::TAGS])) {
-				foreach ((array) $dp[NCache::TAGS] as $tag) {
+			if (!empty($dp[Cache::TAGS])) {
+				foreach ((array) $dp[Cache::TAGS] as $tag) {
 					$query .= "INSERT INTO cache (file, tag) VALUES ('$dbFile', '" . sqlite_escape_string($tag) . "');";
 				}
 			}
-			if (isset($dp[NCache::PRIORITY])) {
-				$query .= "INSERT INTO cache (file, priority) VALUES ('$dbFile', '" . (int) $dp[NCache::PRIORITY] . "');";
+			if (isset($dp[Cache::PRIORITY])) {
+				$query .= "INSERT INTO cache (file, priority) VALUES ('$dbFile', '" . (int) $dp[Cache::PRIORITY] . "');";
 			}
 			if (!sqlite_exec($db, "BEGIN; DELETE FROM cache WHERE file = '$dbFile'; $query COMMIT;")) {
 				sqlite_exec($db, "ROLLBACK");
@@ -271,7 +271,7 @@ class NFileStorage extends NObject implements ICacheStorage
 	 */
 	public function clean(array $conds)
 	{
-		$all = !empty($conds[NCache::ALL]);
+		$all = !empty($conds[Cache::ALL]);
 		$collector = empty($conds);
 
 		// cleaning using file iterator
@@ -311,16 +311,16 @@ class NFileStorage extends NObject implements ICacheStorage
 		}
 
 		// cleaning using journal
-		if (!empty($conds[NCache::TAGS])) {
+		if (!empty($conds[Cache::TAGS])) {
 			$db = $this->getDb();
-			foreach ((array) $conds[NCache::TAGS] as $tag) {
+			foreach ((array) $conds[Cache::TAGS] as $tag) {
 				$tmp[] = "'" . sqlite_escape_string($tag) . "'";
 			}
 			$query[] = "tag IN (" . implode(',', $tmp) . ")";
 		}
 
-		if (isset($conds[NCache::PRIORITY])) {
-			$query[] = "priority <= " . (int) $conds[NCache::PRIORITY];
+		if (isset($conds[Cache::PRIORITY])) {
+			$query[] = "priority <= " . (int) $conds[Cache::PRIORITY];
 		}
 
 		if (isset($query)) {
@@ -395,7 +395,7 @@ class NFileStorage extends NObject implements ICacheStorage
 	protected function getCacheFile($key)
 	{
 		if ($this->useDirs) {
-			$key = explode(NCache::NAMESPACE_SEPARATOR, $key, 2);
+			$key = explode(Cache::NAMESPACE_SEPARATOR, $key, 2);
 			return $this->dir . '/c' . (isset($key[1]) ? '-' . urlencode($key[0]) . '/_' . urlencode($key[1]) : '_' . urlencode($key[0]));
 		} else {
 			return $this->dir . '/c_' . urlencode($key);

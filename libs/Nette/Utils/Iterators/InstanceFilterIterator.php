@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NInstanceFilterIterator extends FilterIterator implements Countable
+class InstanceFilterIterator extends FilterIterator implements Countable
 {
 	/** @var string */
 	private $type;

@@ -20,12 +20,12 @@
  * @property   mixed $validationScope
  * @property-read bool $submittedBy
  */
-class NSubmitButton extends NButton implements ISubmitterControl
+class SubmitButton extends Button implements ISubmitterControl
 {
-	/** @var array of function(NSubmitButton $sender); Occurs when the button is clicked and form is successfully validated */
+	/** @var array of function(SubmitButton $sender); Occurs when the button is clicked and form is successfully validated */
 	public $onClick;
 
-	/** @var array of function(NSubmitButton $sender); Occurs when the button is clicked and form is not validated */
+	/** @var array of function(SubmitButton $sender); Occurs when the button is clicked and form is not validated */
 	public $onInvalidClick;
 
 	/** @var mixed */
@@ -47,7 +47,7 @@ class NSubmitButton extends NButton implements ISubmitterControl
 	/**
 	 * Sets 'pressed' indicator.
 	 * @param  bool
-	 * @return NSubmitButton  provides a fluent interface
+	 * @return SubmitButton  provides a fluent interface
 	 */
 	public function setValue($value)
 	{
@@ -76,7 +76,7 @@ class NSubmitButton extends NButton implements ISubmitterControl
 	/**
 	 * Sets the validation scope. Clicking the button validates only the controls within the specified scope.
 	 * @param  mixed
-	 * @return NSubmitButton  provides a fluent interface
+	 * @return SubmitButton  provides a fluent interface
 	 */
 	public function setValidationScope($scope)
 	{

@@ -13,7 +13,7 @@
 
 
 /**
- * Custom output for NDebug.
+ * Custom output for Debug.
  *
  * @author     David Grudl
  */

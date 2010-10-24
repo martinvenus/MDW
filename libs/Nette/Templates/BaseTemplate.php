@@ -13,16 +13,16 @@
 
 
 /**
- * NTemplate.
+ * Template.
  *
  * @author     David Grudl
  */
-abstract class NBaseTemplate extends NObject implements ITemplate
+abstract class BaseTemplate extends Object implements ITemplate
 {
 	/** @var bool */
 	public $warnOnUndefined = TRUE;
 
-	/** @var array of function(NBaseTemplate $sender); Occurs before a template is compiled - implement to customize the filters */
+	/** @var array of function(BaseTemplate $sender); Occurs before a template is compiled - implement to customize the filters */
 	public $onPrepareFilters = array();
 
 	/** @var array */
@@ -98,7 +98,7 @@ abstract class NBaseTemplate extends NObject implements ITemplate
 			if (func_num_args() && func_get_arg(0)) {
 				throw $e;
 			} else {
-				NDebug::toStringException($e);
+				Debug::toStringException($e);
 			}
 		}
 	}
@@ -204,7 +204,7 @@ abstract class NBaseTemplate extends NObject implements ITemplate
 	/**
 	 * Sets translate adapter.
 	 * @param  ITranslator
-	 * @return NBaseTemplate  provides a fluent interface
+	 * @return BaseTemplate  provides a fluent interface
 	 */
 	public function setTranslator(ITranslator $translator = NULL)
 	{
@@ -238,7 +238,7 @@ abstract class NBaseTemplate extends NObject implements ITemplate
 	/**
 	 * Sets all parameters.
 	 * @param  array
-	 * @return NBaseTemplate  provides a fluent interface
+	 * @return BaseTemplate  provides a fluent interface
 	 */
 	public function setParams(array $params)
 	{

@@ -13,7 +13,7 @@
 
 
 /**
- * Represents conditional ACL NRules with Assertions.
+ * Represents conditional ACL Rules with Assertions.
  *
  * @author     David Grudl
  */
@@ -23,14 +23,14 @@ interface IPermissionAssertion
 	 * Returns true if and only if the assertion conditions are met.
 	 *
 	 * This method is passed the ACL, Role, Resource, and privilege to which the authorization query applies. If the
-	 * $role, $resource, or $privilege parameters are NPermission::ALL, it means that the query applies to all Roles,
+	 * $role, $resource, or $privilege parameters are Permission::ALL, it means that the query applies to all Roles,
 	 * Resources, or privileges, respectively.
 	 *
-	 * @param  NPermission
+	 * @param  Permission
 	 * @param  string  role
 	 * @param  string  resource
 	 * @param  string|NULL  privilege
 	 * @return bool
 	 */
-	public function assert(NPermission $acl, $roleId, $resourceId, $privilege);
+	public function assert(Permission $acl, $roleId, $resourceId, $privilege);
 }

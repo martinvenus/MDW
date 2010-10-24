@@ -13,12 +13,12 @@
 
 
 /**
- * NAnnotations support for PHP.
+ * Annotations support for PHP.
  *
  * @author     David Grudl
  * @Annotation
  */
-final class NAnnotationsParser
+final class AnnotationsParser
 {
 	/** @internal single & double quoted PHP string */
 	const RE_STRING = '\'(?:\\\\.|[^\'\\\\])*\'|"(?:\\\\.|[^"\\\\])*"';
@@ -80,7 +80,7 @@ final class NAnnotationsParser
 		}
 
 		if (self::$useReflection === NULL) { // detects whether is reflection available
-			self::$useReflection = (bool) NClassReflection::from(__CLASS__)->getDocComment();
+			self::$useReflection = (bool) ClassReflection::from(__CLASS__)->getDocComment();
 		}
 
 		if (self::$useReflection) {
@@ -288,11 +288,11 @@ final class NAnnotationsParser
 
 
 	/**
-	 * @return NCache
+	 * @return Cache
 	 */
 	protected static function getCache()
 	{
-		return NEnvironment::getCache('Nette.Annotations');
+		return Environment::getCache('Nette.Annotations');
 	}
 
 }

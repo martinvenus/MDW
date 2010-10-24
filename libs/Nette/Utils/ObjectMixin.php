@@ -13,11 +13,11 @@
 
 
 /**
- * NObject behaviour mixin.
+ * Object behaviour mixin.
  *
  * @author     David Grudl
  */
-final class NObjectMixin
+final class ObjectMixin
 {
 	/** @var array */
 	private static $methods;
@@ -43,7 +43,7 @@ final class NObjectMixin
 	 */
 	public static function call($_this, $name, $args)
 	{
-		$class = new NClassReflection($_this);
+		$class = new ClassReflection($_this);
 
 		if ($name === '') {
 			throw new MemberAccessException("Call to class '$class->name' method without name.");
@@ -97,7 +97,7 @@ final class NObjectMixin
 		$m = 'get' . $name;
 		if (isset(self::$methods[$class][$m])) {
 			// ampersands:
-			// - uses &__get() because declaration should be forward compatible (e.g. with NHtml)
+			// - uses &__get() because declaration should be forward compatible (e.g. with Html)
 			// - doesn't call &$_this->$m because user could bypass property setter by: $x = & $obj->property; $x = 'new value';
 			$val = $_this->$m();
 			return $val;

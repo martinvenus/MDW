@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-abstract class NAutoLoader extends NObject
+abstract class AutoLoader extends Object
 {
 	/** @var array  list of registered loaders */
 	static private $loaders = array();
@@ -45,7 +45,7 @@ abstract class NAutoLoader extends NObject
 
 	/**
 	 * Return all registered autoloaders.
-	 * @return array of NAutoLoader
+	 * @return array of AutoLoader
 	 */
 	final public static function getLoaders()
 	{

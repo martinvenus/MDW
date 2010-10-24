@@ -13,24 +13,24 @@
 
 
 /**
- * NEnvironment helper.
+ * Environment helper.
  *
  * @author     David Grudl
  */
-class NConfigurator extends NObject
+class Configurator extends Object
 {
 	/** @var string */
 	public $defaultConfigFile = '%appDir%/config.ini';
 
 	/** @var array */
 	public $defaultServices = array(
-		'Nette\\Application\\Application' => 'NApplication',
-		'Nette\\Web\\HttpContext' => 'NHttpContext',
-		'Nette\\Web\\IHttpRequest' => 'NHttpRequest',
-		'Nette\\Web\\IHttpResponse' => 'NHttpResponse',
-		'Nette\\Web\\IUser' => 'NUser',
+		'Nette\\Application\\Application' => 'Application',
+		'Nette\\Web\\HttpContext' => 'HttpContext',
+		'Nette\\Web\\IHttpRequest' => 'HttpRequest',
+		'Nette\\Web\\IHttpResponse' => 'HttpResponse',
+		'Nette\\Web\\IUser' => 'User',
 		'Nette\\Caching\\ICacheStorage' => array(__CLASS__, 'createCacheStorage'),
-		'Nette\\Web\\Session' => 'NSession',
+		'Nette\\Web\\Session' => 'Session',
 		'Nette\\Loaders\\RobotLoader' => array(__CLASS__, 'createRobotLoader'),
 	);
 
@@ -47,10 +47,10 @@ class NConfigurator extends NObject
 		case 'environment':
 			// environment name autodetection
 			if ($this->detect('console')) {
-				return NEnvironment::CONSOLE;
+				return Environment::CONSOLE;
 
 			} else {
-				return NEnvironment::getMode('production') ? NEnvironment::PRODUCTION : NEnvironment::DEVELOPMENT;
+				return Environment::getMode('production') ? Environment::PRODUCTION : Environment::DEVELOPMENT;
 			}
 
 		case 'production':
@@ -86,14 +86,14 @@ class NConfigurator extends NObject
 
 	/**
 	 * Loads global configuration from file and process it.
-	 * @param  string|NConfig  file name or NConfig object
-	 * @return NConfig
+	 * @param  string|Config  file name or Config object
+	 * @return Config
 	 */
 	public function loadConfig($file)
 	{
-		$name = NEnvironment::getName();
+		$name = Environment::getName();
 
-		if ($file instanceof NConfig) {
+		if ($file instanceof Config) {
 			$config = $file;
 			$file = NULL;
 
@@ -101,14 +101,14 @@ class NConfigurator extends NObject
 			if ($file === NULL) {
 				$file = $this->defaultConfigFile;
 			}
-			$file = NEnvironment::expand($file);
-			$config = NConfig::fromFile($file, $name, 0);
+			$file = Environment::expand($file);
+			$config = Config::fromFile($file, $name, 0);
 		}
 
 		// process environment variables
-		if ($config->variable instanceof NConfig) {
+		if ($config->variable instanceof Config) {
 			foreach ($config->variable as $key => $value) {
-				NEnvironment::setVariable($key, $value);
+				Environment::setVariable($key, $value);
 			}
 		}
 
@@ -116,8 +116,8 @@ class NConfigurator extends NObject
 
 		// process services
 		$runServices = array();
-		$locator = NEnvironment::getServiceLocator();
-		if ($config->service instanceof NConfig) {
+		$locator = Environment::getServiceLocator();
+		if ($config->service instanceof Config) {
 			foreach ($config->service as $key => $value) {
 				$key = strtr($key, '-', '\\'); // limited INI chars
 				if (is_string($value)) {
@@ -141,13 +141,13 @@ class NConfigurator extends NObject
 			unset($config->set);
 		}
 
-		if ($config->php instanceof NConfig) {
+		if ($config->php instanceof Config) {
 			if (PATH_SEPARATOR !== ';' && isset($config->php->include_path)) {
 				$config->php->include_path = str_replace(';', PATH_SEPARATOR, $config->php->include_path);
 			}
 
 			foreach ($config->php as $key => $value) { // flatten INI dots
-				if ($value instanceof NConfig) {
+				if ($value instanceof Config) {
 					unset($config->php->$key);
 					foreach ($value as $k => $v) {
 						$config->php->{"$key.$k"} = $v;
@@ -201,7 +201,7 @@ class NConfigurator extends NObject
 		}
 
 		// define constants
-		if ($config->const instanceof NConfig) {
+		if ($config->const instanceof Config) {
 			foreach ($config->const as $key => $value) {
 				define($key, $value);
 			}
@@ -210,7 +210,7 @@ class NConfigurator extends NObject
 		// set modes
 		if (isset($config->mode)) {
 			foreach($config->mode as $mode => $state) {
-				NEnvironment::setMode($mode, $state);
+				Environment::setMode($mode, $state);
 			}
 		}
 
@@ -235,7 +235,7 @@ class NConfigurator extends NObject
 	 */
 	public function createServiceLocator()
 	{
-		$locator = new NServiceLocator;
+		$locator = new ServiceLocator;
 		foreach ($this->defaultServices as $name => $service) {
 			$locator->addService($name, $service);
 		}
@@ -249,20 +249,20 @@ class NConfigurator extends NObject
 	 */
 	public static function createCacheStorage()
 	{
-		return new NFileStorage(NEnvironment::getVariable('tempDir'));
+		return new FileStorage(Environment::getVariable('tempDir'));
 	}
 
 
 
 	/**
-	 * @return NRobotLoader
+	 * @return RobotLoader
 	 */
 	public static function createRobotLoader($options)
 	{
-		$loader = new NRobotLoader;
-		$loader->autoRebuild = !NEnvironment::isProduction();
-		//$loader->setCache(NEnvironment::getCache('Nette.NRobotLoader'));
-		$dirs = isset($options['directory']) ? $options['directory'] : array(NEnvironment::getVariable('appDir'), NEnvironment::getVariable('libsDir'));
+		$loader = new RobotLoader;
+		$loader->autoRebuild = !Environment::isProduction();
+		//$loader->setCache(Environment::getCache('Nette.RobotLoader'));
+		$dirs = isset($options['directory']) ? $options['directory'] : array(Environment::getVariable('appDir'), Environment::getVariable('libsDir'));
 		$loader->addDirectory($dirs);
 		$loader->register();
 		return $loader;

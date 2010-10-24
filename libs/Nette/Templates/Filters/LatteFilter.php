@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NLatteFilter extends NObject
+class LatteFilter extends Object
 {
 	/** @internal single & double quoted PHP string */
 	const RE_STRING = '\'(?:\\\\.|[^\'\\\\])*\'|"(?:\\\\.|[^"\\\\])*"';
@@ -63,7 +63,7 @@ class NLatteFilter extends NObject
 	/**
 	 * Sets a macro handler.
 	 * @param  ILatteHandler
-	 * @return NLatteFilter  provides a fluent interface
+	 * @return LatteFilter  provides a fluent interface
 	 */
 	public function setHandler($handler)
 	{
@@ -80,7 +80,7 @@ class NLatteFilter extends NObject
 	public function getHandler()
 	{
 		if ($this->handler === NULL) {
-			$this->handler = new NLatteMacros;
+			$this->handler = new LatteMacros;
 		}
 		return $this->handler;
 	}
@@ -99,7 +99,7 @@ class NLatteFilter extends NObject
 		}
 
 		// context-aware escaping
-		$this->context = NLatteFilter::CONTEXT_NONE;
+		$this->context = LatteFilter::CONTEXT_NONE;
 		$this->escape = '$template->escape';
 
 		// initialize handlers
@@ -179,17 +179,17 @@ class NLatteFilter extends NObject
 
 		} elseif (!empty($matches['comment'])) { // <!--
 			$this->context = self::CONTEXT_COMMENT;
-			$this->escape = 'NTemplateHelpers::escapeHtmlComment';
+			$this->escape = 'TemplateHelpers::escapeHtmlComment';
 
 		} elseif (empty($matches['closing'])) { // <tag
 			$tag = $this->tags[] = (object) NULL;
 			$tag->name = $matches['tag'];
 			$tag->closing = FALSE;
-			$tag->isMacro = NString::startsWith($tag->name, self::HTML_PREFIX);
+			$tag->isMacro = String::startsWith($tag->name, self::HTML_PREFIX);
 			$tag->attrs = array();
 			$tag->pos = strlen($this->output);
 			$this->context = self::CONTEXT_TAG;
-			$this->escape = 'NTemplateHelpers::escapeHtml';
+			$this->escape = 'TemplateHelpers::escapeHtml';
 
 		} else { // </tag
 			do {
@@ -198,14 +198,14 @@ class NLatteFilter extends NObject
 					//throw new InvalidStateException("End tag for element '$matches[tag]' which is not open on line $this->line.");
 					$tag = (object) NULL;
 					$tag->name = $matches['tag'];
-					$tag->isMacro = NString::startsWith($tag->name, self::HTML_PREFIX);
+					$tag->isMacro = String::startsWith($tag->name, self::HTML_PREFIX);
 				}
 			} while (strcasecmp($tag->name, $matches['tag']));
 			$this->tags[] = $tag;
 			$tag->closing = TRUE;
 			$tag->pos = strlen($this->output);
 			$this->context = self::CONTEXT_TAG;
-			$this->escape = 'NTemplateHelpers::escapeHtml';
+			$this->escape = 'TemplateHelpers::escapeHtml';
 		}
 		return $matches;
 	}
@@ -227,7 +227,7 @@ class NLatteFilter extends NObject
 			$tag->closing = TRUE;
 			$tag->pos = strlen($this->output);
 			$this->context = self::CONTEXT_TAG;
-			$this->escape = 'NTemplateHelpers::escapeHtml';
+			$this->escape = 'TemplateHelpers::escapeHtml';
 		}
 		return $matches;
 	}
@@ -249,7 +249,7 @@ class NLatteFilter extends NObject
 
 		} elseif (!empty($matches['end'])) { // end of HTML tag />
 			$tag = end($this->tags);
-			$isEmpty = !$tag->closing && ($matches['end'][0] === '/' || isset(NHtml::$emptyElements[strtolower($tag->name)]));
+			$isEmpty = !$tag->closing && ($matches['end'][0] === '/' || isset(Html::$emptyElements[strtolower($tag->name)]));
 
 			if ($tag->isMacro || !empty($tag->attrs)) {
 				if ($tag->isMacro) {
@@ -280,10 +280,10 @@ class NLatteFilter extends NObject
 
 			if (!$tag->closing && (strcasecmp($tag->name, 'script') === 0 || strcasecmp($tag->name, 'style') === 0)) {
 				$this->context = self::CONTEXT_CDATA;
-				$this->escape = strcasecmp($tag->name, 'style') ? 'NTemplateHelpers::escapeJs' : 'NTemplateHelpers::escapeCss';
+				$this->escape = strcasecmp($tag->name, 'style') ? 'TemplateHelpers::escapeJs' : 'TemplateHelpers::escapeCss';
 			} else {
 				$this->context = self::CONTEXT_TEXT;
-				$this->escape = 'NTemplateHelpers::escapeHtml';
+				$this->escape = 'TemplateHelpers::escapeHtml';
 				if ($tag->closing) array_pop($this->tags);
 			}
 
@@ -292,7 +292,7 @@ class NLatteFilter extends NObject
 			$value = empty($matches['value']) ? TRUE : $matches['value'];
 
 			// special attribute?
-			if ($isSpecial = NString::startsWith($name, self::HTML_PREFIX)) {
+			if ($isSpecial = String::startsWith($name, self::HTML_PREFIX)) {
 				$name = substr($name, strlen(self::HTML_PREFIX));
 			}
 			$tag = end($this->tags);
@@ -309,8 +309,8 @@ class NLatteFilter extends NObject
 				$this->context = self::CONTEXT_ATTRIBUTE;
 				$this->quote = $value;
 				$this->escape = strncasecmp($name, 'on', 2)
-					? (strcasecmp($name, 'style') ? 'NTemplateHelpers::escapeHtml' : 'NTemplateHelpers::escapeHtmlCss')
-					: 'NTemplateHelpers::escapeHtmlJs';
+					? (strcasecmp($name, 'style') ? 'TemplateHelpers::escapeHtml' : 'TemplateHelpers::escapeHtmlCss')
+					: 'TemplateHelpers::escapeHtmlJs';
 			}
 		}
 		return $matches;
@@ -330,7 +330,7 @@ class NLatteFilter extends NObject
 
 		if ($matches && empty($matches['macro'])) { // (attribute end) '"
 			$this->context = self::CONTEXT_TAG;
-			$this->escape = 'NTemplateHelpers::escapeHtml';
+			$this->escape = 'TemplateHelpers::escapeHtml';
 		}
 		return $matches;
 	}
@@ -349,7 +349,7 @@ class NLatteFilter extends NObject
 
 		if ($matches && empty($matches['macro'])) { // --\s*>
 			$this->context = self::CONTEXT_TEXT;
-			$this->escape = 'NTemplateHelpers::escapeHtml';
+			$this->escape = 'TemplateHelpers::escapeHtml';
 		}
 		return $matches;
 	}
@@ -401,7 +401,7 @@ class NLatteFilter extends NObject
 	 * Changes macro delimiters.
 	 * @param  string  left regular expression
 	 * @param  string  right regular expression
-	 * @return NLatteFilter  provides a fluent interface
+	 * @return LatteFilter  provides a fluent interface
 	 */
 	public function setDelimiters($left, $right)
 	{
@@ -510,7 +510,7 @@ class NLatteFilter extends NObject
 
 
 	/**
-	 * NCallback for formatArgs().
+	 * Callback for formatArgs().
 	 */
 	private static function cbArgs($matches)
 	{
@@ -557,5 +557,5 @@ class NLatteFilter extends NObject
 
 
 /** @deprecated */
-class NCurlyBracketsFilter extends NLatteFilter {}
-class NCurlyBracketsMacros extends NLatteMacros {}
+class CurlyBracketsFilter extends LatteFilter {}
+class CurlyBracketsMacros extends LatteMacros {}

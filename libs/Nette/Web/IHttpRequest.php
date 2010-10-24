@@ -30,7 +30,7 @@ interface IHttpRequest
 
 	/**
 	 * Returns URL object.
-	 * @return NUriScript
+	 * @return UriScript
 	 */
 	function getUri();
 
@@ -63,7 +63,7 @@ interface IHttpRequest
 	/**
 	 * Returns uploaded file.
 	 * @param  string key (or more keys)
-	 * @return NHttpUploadedFile
+	 * @return HttpUploadedFile
 	 */
 	function getFile($key);
 

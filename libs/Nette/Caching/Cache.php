@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NCache extends NObject implements ArrayAccess
+class Cache extends Object implements ArrayAccess
 {
 	/**#@+ dependency */
 	const PRIORITY = 'priority';
@@ -99,13 +99,13 @@ class NCache extends NObject implements ArrayAccess
 	/**
 	 * Writes item into the cache.
 	 * Dependencies are:
-	 * - NCache::PRIORITY => (int) priority
-	 * - NCache::EXPIRE => (timestamp) expiration
-	 * - NCache::SLIDING => (bool) use sliding expiration?
-	 * - NCache::TAGS => (array) tags
-	 * - NCache::FILES => (array|string) file names
-	 * - NCache::ITEMS => (array|string) cache items
-	 * - NCache::CONSTS => (array|string) cache items
+	 * - Cache::PRIORITY => (int) priority
+	 * - Cache::EXPIRE => (timestamp) expiration
+	 * - Cache::SLIDING => (bool) use sliding expiration?
+	 * - Cache::TAGS => (array) tags
+	 * - Cache::FILES => (array|string) file names
+	 * - Cache::ITEMS => (array|string) cache items
+	 * - Cache::CONSTS => (array|string) cache items
 	 *
 	 * @param  string key
 	 * @param  mixed  value
@@ -122,8 +122,8 @@ class NCache extends NObject implements ArrayAccess
 		$key = $this->namespace . self::NAMESPACE_SEPARATOR . $key;
 
 		// convert expire into relative amount of seconds
-		if (!empty($dp[NCache::EXPIRE])) {
-			$dp[NCache::EXPIRE] = NTools::createDateTime($dp[NCache::EXPIRE])->format('U') - time();
+		if (!empty($dp[Cache::EXPIRE])) {
+			$dp[Cache::EXPIRE] = Tools::createDateTime($dp[Cache::EXPIRE])->format('U') - time();
 		}
 
 		// convert FILES into CALLBACKS
@@ -151,15 +151,15 @@ class NCache extends NObject implements ArrayAccess
 			unset($dp[self::CONSTS]);
 		}
 
-		if ($data instanceof NCallback || $data instanceof Closure) {
-			NEnvironment::enterCriticalSection('Nette\Caching/' . $key);
+		if ($data instanceof Callback || $data instanceof Closure) {
+			Environment::enterCriticalSection('Nette\Caching/' . $key);
 			$data = $data->__invoke();
-			NEnvironment::leaveCriticalSection('Nette\Caching/' . $key);
+			Environment::leaveCriticalSection('Nette\Caching/' . $key);
 		}
 
 		if (is_object($data)) {
 			$dp[self::CALLBACKS][] = array(array(__CLASS__, 'checkSerializationVersion'), get_class($data),
-				NClassReflection::from($data)->getAnnotation('serializationVersion'));
+				ClassReflection::from($data)->getAnnotation('serializationVersion'));
 		}
 
 		$this->data = $data;
@@ -176,9 +176,9 @@ class NCache extends NObject implements ArrayAccess
 	/**
 	 * Removes items from the cache by conditions.
 	 * Conditions are:
-	 * - NCache::PRIORITY => (int) priority
-	 * - NCache::TAGS => (array) tags
-	 * - NCache::ALL => TRUE
+	 * - Cache::PRIORITY => (int) priority
+	 * - Cache::TAGS => (array) tags
+	 * - Cache::ALL => TRUE
 	 *
 	 * @param  array
 	 * @return void
@@ -314,7 +314,7 @@ class NCache extends NObject implements ArrayAccess
 	 */
 	private static function checkSerializationVersion($class, $value)
 	{
-		return NClassReflection::from($class)->getAnnotation('serializationVersion') === $value;
+		return ClassReflection::from($class)->getAnnotation('serializationVersion') === $value;
 	}
 
 }

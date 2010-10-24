@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NBadSignalException extends NBadRequestException
+class BadSignalException extends BadRequestException
 {
 	/** @var int */
 	protected $defaultCode = 403;

@@ -17,6 +17,6 @@
  *
  * @author     David Grudl
  */
-class NAuthenticationException extends Exception
+class AuthenticationException extends Exception
 {
 }

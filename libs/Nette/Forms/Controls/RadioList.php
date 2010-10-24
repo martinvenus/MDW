@@ -13,20 +13,20 @@
 
 
 /**
- * NSet of radio button controls.
+ * Set of radio button controls.
  *
  * @author     David Grudl
  *
  * @property   array $items
- * @property-read NHtml $separatorPrototype
- * @property-read NHtml $containerPrototype
+ * @property-read Html $separatorPrototype
+ * @property-read Html $containerPrototype
  */
-class NRadioList extends NFormControl
+class RadioList extends FormControl
 {
-	/** @var NHtml  separator element template */
+	/** @var Html  separator element template */
 	protected $separator;
 
-	/** @var NHtml  container element template */
+	/** @var Html  container element template */
 	protected $container;
 
 	/** @var array */
@@ -42,8 +42,8 @@ class NRadioList extends NFormControl
 	{
 		parent::__construct($label);
 		$this->control->type = 'radio';
-		$this->container = NHtml::el();
-		$this->separator = NHtml::el('br');
+		$this->container = Html::el();
+		$this->separator = Html::el('br');
 		if ($items !== NULL) $this->setItems($items);
 	}
 
@@ -64,7 +64,7 @@ class NRadioList extends NFormControl
 	/**
 	 * Sets options from which to choose.
 	 * @param  array
-	 * @return NRadioList  provides a fluent interface
+	 * @return RadioList  provides a fluent interface
 	 */
 	public function setItems(array $items)
 	{
@@ -87,7 +87,7 @@ class NRadioList extends NFormControl
 
 	/**
 	 * Returns separator HTML element template.
-	 * @return NHtml
+	 * @return Html
 	 */
 	final public function getSeparatorPrototype()
 	{
@@ -98,7 +98,7 @@ class NRadioList extends NFormControl
 
 	/**
 	 * Returns container HTML element template.
-	 * @return NHtml
+	 * @return Html
 	 */
 	final public function getContainerPrototype()
 	{
@@ -110,7 +110,7 @@ class NRadioList extends NFormControl
 	/**
 	 * Generates control's HTML element.
 	 * @param  mixed
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl($key = NULL)
 	{
@@ -126,7 +126,7 @@ class NRadioList extends NFormControl
 		$id = $control->id;
 		$counter = -1;
 		$value = $this->value === NULL ? NULL : (string) $this->getValue();
-		$label = NHtml::el('label');
+		$label = Html::el('label');
 
 		foreach ($this->items as $k => $val) {
 			$counter++;
@@ -136,7 +136,7 @@ class NRadioList extends NFormControl
 			$control->checked = (string) $k === $value;
 			$control->value = $k;
 
-			if ($val instanceof NHtml) {
+			if ($val instanceof Html) {
 				$label->setHtml($val);
 			} else {
 				$label->setText($this->translate($val));

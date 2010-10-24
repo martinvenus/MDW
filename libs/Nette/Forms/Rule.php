@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NRule extends NObject
+final class Rule extends Object
 {
 	/** type */
 	const CONDITION = 1;
@@ -46,7 +46,7 @@ final class NRule extends NObject
 	/** @var string (only for VALIDATOR type) */
 	public $message;
 
-	/** @var NRules (only for CONDITION type)  */
+	/** @var Rules (only for CONDITION type)  */
 	public $subRules;
 
 }

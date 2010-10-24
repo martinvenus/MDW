@@ -39,7 +39,7 @@
  * @property-read string $relativeUri
  * @property-read string $pathInfo
  */
-class NUriScript extends NUri
+class UriScript extends Uri
 {
 	/** @var string */
 	private $scriptPath = '';
@@ -49,7 +49,7 @@ class NUriScript extends NUri
 	/**
 	 * Sets the script-path part of URI.
 	 * @param  string
-	 * @return NUriScript  provides a fluent interface
+	 * @return UriScript  provides a fluent interface
 	 */
 	public function setScriptPath($value)
 	{

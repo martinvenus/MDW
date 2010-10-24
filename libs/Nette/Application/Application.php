@@ -17,14 +17,14 @@
  *
  * @author     David Grudl
  */
-class NApplication extends NObject
+class Application extends Object
 {
 	/** @var int */
 	public static $maxLoop = 20;
 
 	/** @var array */
 	public $defaultServices = array(
-		'Nette\\Application\\IRouter' => 'NMultiRouter',
+		'Nette\\Application\\IRouter' => 'MultiRouter',
 		'Nette\\Application\\IPresenterLoader' => array(__CLASS__, 'createPresenterLoader'),
 	);
 
@@ -34,28 +34,28 @@ class NApplication extends NObject
 	/** @var string */
 	public $errorPresenter;
 
-	/** @var array of function(NApplication $sender); Occurs before the application loads presenter */
+	/** @var array of function(Application $sender); Occurs before the application loads presenter */
 	public $onStartup;
 
-	/** @var array of function(NApplication $sender, Exception $e = NULL); Occurs before the application shuts down */
+	/** @var array of function(Application $sender, Exception $e = NULL); Occurs before the application shuts down */
 	public $onShutdown;
 
-	/** @var array of function(NApplication $sender, NPresenterRequest $request); Occurs when a new request is ready for dispatch */
+	/** @var array of function(Application $sender, PresenterRequest $request); Occurs when a new request is ready for dispatch */
 	public $onRequest;
 
-	/** @var array of function(NApplication $sender, Exception $e); Occurs when an unhandled exception occurs in the application */
+	/** @var array of function(Application $sender, Exception $e); Occurs when an unhandled exception occurs in the application */
 	public $onError;
 
 	/** @var array of string */
 	public $allowedMethods = array('GET', 'POST', 'HEAD', 'PUT', 'DELETE');
 
-	/** @var array of NPresenterRequest */
+	/** @var array of PresenterRequest */
 	private $requests = array();
 
-	/** @var NPresenter */
+	/** @var Presenter */
 	private $presenter;
 
-	/** @var NServiceLocator */
+	/** @var ServiceLocator */
 	private $serviceLocator;
 
 
@@ -72,8 +72,8 @@ class NApplication extends NObject
 		$httpRequest->setEncoding('UTF-8');
 		$httpResponse->setHeader('X-Powered-By', 'Nette Framework');
 
-		if (NEnvironment::getVariable('baseUri') === NULL) {
-			NEnvironment::setVariable('baseUri', $httpRequest->getUri()->getBasePath());
+		if (Environment::getVariable('baseUri') === NULL) {
+			Environment::setVariable('baseUri', $httpRequest->getUri()->getBasePath());
 		}
 
 		// autostarts session
@@ -99,7 +99,7 @@ class NApplication extends NObject
 		do {
 			try {
 				if (count($this->requests) > self::$maxLoop) {
-					throw new NApplicationException('Too many loops detected in application life cycle.');
+					throw new ApplicationException('Too many loops detected in application life cycle.');
 				}
 
 				if (!$request) {
@@ -107,8 +107,8 @@ class NApplication extends NObject
 
 					// default router
 					$router = $this->getRouter();
-					if ($router instanceof NMultiRouter && !count($router)) {
-						$router[] = new NSimpleRouter(array(
+					if ($router instanceof MultiRouter && !count($router)) {
+						$router[] = new SimpleRouter(array(
 							'presenter' => 'Default',
 							'action' => 'default',
 						));
@@ -116,13 +116,13 @@ class NApplication extends NObject
 
 					// routing
 					$request = $router->match($httpRequest);
-					if (!($request instanceof NPresenterRequest)) {
+					if (!($request instanceof PresenterRequest)) {
 						$request = NULL;
-						throw new NBadRequestException('No route for HTTP request.');
+						throw new BadRequestException('No route for HTTP request.');
 					}
 
 					if (strcasecmp($request->getPresenterName(), $this->errorPresenter) === 0) {
-						throw new NBadRequestException('Invalid request.');
+						throw new BadRequestException('Invalid request.');
 					}
 				}
 
@@ -134,8 +134,8 @@ class NApplication extends NObject
 				try {
 					$class = $this->getPresenterLoader()->getPresenterClass($presenter);
 					$request->setPresenterName($presenter);
-				} catch (NInvalidPresenterException $e) {
-					throw new NBadRequestException($e->getMessage(), 404, $e);
+				} catch (InvalidPresenterException $e) {
+					throw new BadRequestException($e->getMessage(), 404, $e);
 				}
 				$request->freeze();
 
@@ -144,7 +144,7 @@ class NApplication extends NObject
 				$response = $this->presenter->run($request);
 
 				// Send response
-				if ($response instanceof NForwardingResponse) {
+				if ($response instanceof ForwardingResponse) {
 					$request = $response->getRequest();
 					continue;
 
@@ -156,7 +156,7 @@ class NApplication extends NObject
 			} catch (Exception $e) {
 				// fault barrier
 				if ($this->catchExceptions === NULL) {
-					$this->catchExceptions = NEnvironment::isProduction();
+					$this->catchExceptions = Environment::isProduction();
 				}
 
 				$this->onError($this, $e);
@@ -167,29 +167,29 @@ class NApplication extends NObject
 				}
 
 				if ($repeatedError) {
-					$e = new NApplicationException('An error occured while executing error-presenter', 0, $e);
+					$e = new ApplicationException('An error occured while executing error-presenter', 0, $e);
 				}
 
 				if (!$httpResponse->isSent()) {
-					$httpResponse->setCode($e instanceof NBadRequestException ? $e->getCode() : 500);
+					$httpResponse->setCode($e instanceof BadRequestException ? $e->getCode() : 500);
 				}
 
 				if (!$repeatedError && $this->errorPresenter) {
 					$repeatedError = TRUE;
-					$request = new NPresenterRequest(
+					$request = new PresenterRequest(
 						$this->errorPresenter,
-						NPresenterRequest::FORWARD,
+						PresenterRequest::FORWARD,
 						array('exception' => $e)
 					);
 					// continue
 
 				} else { // default error handler
 					echo "<meta name='robots' content='noindex'>\n\n";
-					if ($e instanceof NBadRequestException) {
+					if ($e instanceof BadRequestException) {
 						echo "<title>404 Not Found</title>\n\n<h1>Not Found</h1>\n\n<p>The requested URL was not found on this server.</p>";
 
 					} else {
-						NDebug::processException($e, FALSE);
+						Debug::processException($e, FALSE);
 						echo "<title>500 Internal Server Error</title>\n\n<h1>Server Error</h1>\n\n",
 							"<p>The server encountered an internal error and was unable to complete your request. Please try again later.</p>";
 					}
@@ -206,7 +206,7 @@ class NApplication extends NObject
 
 	/**
 	 * Returns all processed requests.
-	 * @return array of NPresenterRequest
+	 * @return array of PresenterRequest
 	 */
 	final public function getRequests()
 	{
@@ -217,7 +217,7 @@ class NApplication extends NObject
 
 	/**
 	 * Returns current presenter.
-	 * @return NPresenter
+	 * @return Presenter
 	 */
 	final public function getPresenter()
 	{
@@ -237,7 +237,7 @@ class NApplication extends NObject
 	final public function getServiceLocator()
 	{
 		if ($this->serviceLocator === NULL) {
-			$this->serviceLocator = new NServiceLocator(NEnvironment::getServiceLocator());
+			$this->serviceLocator = new ServiceLocator(Environment::getServiceLocator());
 
 			foreach ($this->defaultServices as $name => $service) {
 				if (!$this->serviceLocator->hasService($name)) {
@@ -277,7 +277,7 @@ class NApplication extends NObject
 	/**
 	 * Changes router.
 	 * @param  IRouter
-	 * @return NApplication  provides a fluent interface
+	 * @return Application  provides a fluent interface
 	 */
 	public function setRouter(IRouter $router)
 	{
@@ -307,7 +307,7 @@ class NApplication extends NObject
 	 */
 	public static function createPresenterLoader()
 	{
-		return new NPresenterLoader(NEnvironment::getVariable('appDir'));
+		return new PresenterLoader(Environment::getVariable('appDir'));
 	}
 
 
@@ -346,8 +346,8 @@ class NApplication extends NObject
 		if (isset($session[$key])) {
 			$request = clone $session[$key];
 			unset($session[$key]);
-			$request->setFlag(NPresenterRequest::RESTORED, TRUE);
-			$this->presenter->terminate(new NForwardingResponse($request));
+			$request->setFlag(PresenterRequest::RESTORED, TRUE);
+			$this->presenter->terminate(new ForwardingResponse($request));
 		}
 	}
 
@@ -362,7 +362,7 @@ class NApplication extends NObject
 	 */
 	protected function getHttpRequest()
 	{
-		return NEnvironment::getHttpRequest();
+		return Environment::getHttpRequest();
 	}
 
 
@@ -372,17 +372,17 @@ class NApplication extends NObject
 	 */
 	protected function getHttpResponse()
 	{
-		return NEnvironment::getHttpResponse();
+		return Environment::getHttpResponse();
 	}
 
 
 
 	/**
-	 * @return NSession
+	 * @return Session
 	 */
 	protected function getSession($namespace = NULL)
 	{
-		return NEnvironment::getSession($namespace);
+		return Environment::getSession($namespace);
 	}
 
 }

@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NTextInput extends NTextBase
+class TextInput extends TextBase
 {
 
 	/**
@@ -47,7 +47,7 @@ class NTextInput extends NTextBase
 		if ($this->control->maxlength && iconv_strlen($value, 'UTF-8') > $this->control->maxlength) {
 			$value = iconv_substr($value, 0, $this->control->maxlength, 'UTF-8');
 		}
-		return NString::trim(strtr($value, "\r\n", '  '));
+		return String::trim(strtr($value, "\r\n", '  '));
 	}
 
 
@@ -55,7 +55,7 @@ class NTextInput extends NTextBase
 	/**
 	 * Sets or unsets the password mode.
 	 * @param  bool
-	 * @return NTextInput  provides a fluent interface
+	 * @return TextInput  provides a fluent interface
 	 */
 	public function setPasswordMode($mode = TRUE)
 	{
@@ -67,7 +67,7 @@ class NTextInput extends NTextBase
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{
@@ -80,7 +80,7 @@ class NTextInput extends NTextBase
 
 
 
-	public function notifyRule(NRule $rule)
+	public function notifyRule(Rule $rule)
 	{
 		if (is_string($rule->operation) && strcasecmp($rule->operation, ':length') === 0 && !$rule->isNegative) {
 			$this->control->maxlength = is_array($rule->arg) ? $rule->arg[1] : $rule->arg;

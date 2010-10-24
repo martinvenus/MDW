@@ -13,10 +13,10 @@
 
 
 /**
- * Manipulation with large images using NImageMagick.
+ * Manipulation with large images using ImageMagick.
  *
  * <code>
- * $image = NImage::fromFile('bigphoto.jpg');
+ * $image = Image::fromFile('bigphoto.jpg');
  * $image->resize(150, 100);
  * $image->sharpen();
  * $image->send();
@@ -24,9 +24,9 @@
  *
  * @author     David Grudl
  */
-class NImageMagick extends NImage
+class ImageMagick extends Image
 {
-	/** @var string  path to NImageMagick library */
+	/** @var string  path to ImageMagick library */
 	public static $path = '';
 
 	/** @var string */
@@ -113,7 +113,7 @@ class NImageMagick extends NImage
 	 * @param  mixed  width in pixels or percent
 	 * @param  mixed  height in pixels or percent
 	 * @param  int    flags
-	 * @return NImageMagick  provides a fluent interface
+	 * @return ImageMagick  provides a fluent interface
 	 */
 	public function resize($width, $height, $flags = self::FIT)
 	{
@@ -137,7 +137,7 @@ class NImageMagick extends NImage
 	 * @param  int  y-coordinate
 	 * @param  int  width
 	 * @param  int  height
-	 * @return NImageMagick  provides a fluent interface
+	 * @return ImageMagick  provides a fluent interface
 	 */
 	public function crop($left, $top, $width, $height)
 	{

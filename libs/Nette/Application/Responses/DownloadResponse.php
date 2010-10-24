@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NDownloadResponse extends NObject implements IPresenterResponse
+class DownloadResponse extends Object implements IPresenterResponse
 {
 	/** @var string */
 	private $file;
@@ -38,7 +38,7 @@ class NDownloadResponse extends NObject implements IPresenterResponse
 	public function __construct($file, $name = NULL, $contentType = NULL)
 	{
 		if (!is_file($file)) {
-			throw new NBadRequestException("File '$file' doesn't exist.");
+			throw new BadRequestException("File '$file' doesn't exist.");
 		}
 
 		$this->file = $file;
@@ -87,8 +87,8 @@ class NDownloadResponse extends NObject implements IPresenterResponse
 	 */
 	public function send()
 	{
-		NEnvironment::getHttpResponse()->setContentType($this->contentType);
-		NEnvironment::getHttpResponse()->setHeader('Content-Disposition', 'attachment; filename="' . $this->name . '"');
+		Environment::getHttpResponse()->setContentType($this->contentType);
+		Environment::getHttpResponse()->setHeader('Content-Disposition', 'attachment; filename="' . $this->name . '"');
 		readfile($this->file);
 	}
 

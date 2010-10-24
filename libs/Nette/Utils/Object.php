@@ -13,7 +13,7 @@
 
 
 /**
- * NObject is the ultimate ancestor of all instantiable classes.
+ * Object is the ultimate ancestor of all instantiable classes.
  *
  * It defines some handful methods and enhances object core of PHP:
  *   - access to undeclared members throws exceptions
@@ -51,9 +51,9 @@
  * @author     David Grudl
  *
  * @property-read string $class
- * @property-read NClassReflection $reflection
+ * @property-read ClassReflection $reflection
  */
-abstract class NObject
+abstract class Object
 {
 
 	/**
@@ -69,11 +69,11 @@ abstract class NObject
 
 	/**
 	 * Access to reflection.
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
@@ -87,7 +87,7 @@ abstract class NObject
 	 */
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
@@ -120,7 +120,7 @@ abstract class NObject
 		} else {
 			list($class, $name) = explode('::', $name);
 		}
-		$class = new NClassReflection($class);
+		$class = new ClassReflection($class);
 		if ($callback === NULL) {
 			return $class->getExtensionMethod($name);
 		} else {
@@ -138,7 +138,7 @@ abstract class NObject
 	 */
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
@@ -152,7 +152,7 @@ abstract class NObject
 	 */
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
@@ -164,7 +164,7 @@ abstract class NObject
 	 */
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

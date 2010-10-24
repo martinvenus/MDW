@@ -17,13 +17,13 @@
  *
  * @author     David Grudl
  */
-class NMethodReflection extends ReflectionMethod
+class MethodReflection extends ReflectionMethod
 {
 
 	/**
 	 * @param  string|object
 	 * @param  string
-	 * @return NMethodReflection
+	 * @return MethodReflection
 	 */
 	public static function from($class, $method)
 	{
@@ -79,11 +79,11 @@ class NMethodReflection extends ReflectionMethod
 
 
 	/**
-	 * @return NCallback
+	 * @return Callback
 	 */
 	public function getCallback()
 	{
-		return new NCallback(parent::getDeclaringClass()->getName(), $this->getName());
+		return new Callback(parent::getDeclaringClass()->getName(), $this->getName());
 	}
 
 
@@ -100,21 +100,21 @@ class NMethodReflection extends ReflectionMethod
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getDeclaringClass()
 	{
-		return new NClassReflection(parent::getDeclaringClass()->getName());
+		return new ClassReflection(parent::getDeclaringClass()->getName());
 	}
 
 
 
 	/**
-	 * @return NExtensionReflection
+	 * @return ExtensionReflection
 	 */
 	public function getExtension()
 	{
-		return ($name = $this->getExtensionName()) ? new NExtensionReflection($name) : NULL;
+		return ($name = $this->getExtensionName()) ? new ExtensionReflection($name) : NULL;
 	}
 
 
@@ -123,14 +123,14 @@ class NMethodReflection extends ReflectionMethod
 	{
 		$me = array(parent::getDeclaringClass()->getName(), $this->getName());
 		foreach ($res = parent::getParameters() as $key => $val) {
-			$res[$key] = new NParameterReflection($me, $val->getName());
+			$res[$key] = new ParameterReflection($me, $val->getName());
 		}
 		return $res;
 	}
 
 
 
-	/********************* NAnnotations support ****************d*g**/
+	/********************* Annotations support ****************d*g**/
 
 
 
@@ -141,7 +141,7 @@ class NMethodReflection extends ReflectionMethod
 	 */
 	public function hasAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return !empty($res[$name]);
 	}
 
@@ -154,7 +154,7 @@ class NMethodReflection extends ReflectionMethod
 	 */
 	public function getAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return isset($res[$name]) ? end($res[$name]) : NULL;
 	}
 
@@ -166,49 +166,49 @@ class NMethodReflection extends ReflectionMethod
 	 */
 	public function getAnnotations()
 	{
-		return NAnnotationsParser::getAll($this);
+		return AnnotationsParser::getAll($this);
 	}
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
 
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
 
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
 
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
 
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

@@ -18,16 +18,16 @@
  * @author     David Grudl
  *
  * @property-read ArrayIterator $controls
- * @property-read NForm $form
+ * @property-read Form $form
  * @property-read bool $valid
  * @property   array $values
  */
-class NFormContainer extends NComponentContainer implements ArrayAccess, INamingContainer
+class FormContainer extends ComponentContainer implements ArrayAccess, INamingContainer
 {
-	/** @var array of function(NForm $sender); Occurs when the form is validated */
+	/** @var array of function(Form $sender); Occurs when the form is validated */
 	public $onValidate;
 
-	/** @var NFormGroup */
+	/** @var FormGroup */
 	protected $currentGroup;
 
 	/** @var bool */
@@ -43,7 +43,7 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Fill-in with default values.
 	 * @param  array|Traversable  values used to fill the form
 	 * @param  bool     erase other default values?
-	 * @return NFormContainer  provides a fluent interface
+	 * @return FormContainer  provides a fluent interface
 	 */
 	public function setDefaults($values, $erase = FALSE)
 	{
@@ -60,7 +60,7 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Fill-in with values.
 	 * @param  array|Traversable  values used to fill the form
 	 * @param  bool     erase other controls?
-	 * @return NFormContainer  provides a fluent interface
+	 * @return FormContainer  provides a fluent interface
 	 */
 	public function setValues($values, $erase = FALSE)
 	{
@@ -167,10 +167,10 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 
 
 	/**
-	 * @param  NFormGroup
-	 * @return NFormContainer  provides a fluent interface
+	 * @param  FormGroup
+	 * @return FormContainer  provides a fluent interface
 	 */
-	public function setCurrentGroup(NFormGroup $group = NULL)
+	public function setCurrentGroup(FormGroup $group = NULL)
 	{
 		$this->currentGroup = $group;
 		return $this;
@@ -210,11 +210,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	/**
 	 * Returns form.
 	 * @param  bool   throw exception if form doesn't exist?
-	 * @return NForm
+	 * @return Form
 	 */
 	public function getForm($need = TRUE)
 	{
-		return $this->lookup('NForm', $need);
+		return $this->lookup('Form', $need);
 	}
 
 
@@ -229,11 +229,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  label
 	 * @param  int  width of the control
 	 * @param  int  maximum number of characters the user may enter
-	 * @return NTextInput
+	 * @return TextInput
 	 */
 	public function addText($name, $label = NULL, $cols = NULL, $maxLength = NULL)
 	{
-		return $this[$name] = new NTextInput($label, $cols, $maxLength);
+		return $this[$name] = new TextInput($label, $cols, $maxLength);
 	}
 
 
@@ -244,11 +244,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  label
 	 * @param  int  width of the control
 	 * @param  int  maximum number of characters the user may enter
-	 * @return NTextInput
+	 * @return TextInput
 	 */
 	public function addPassword($name, $label = NULL, $cols = NULL, $maxLength = NULL)
 	{
-		$control = new NTextInput($label, $cols, $maxLength);
+		$control = new TextInput($label, $cols, $maxLength);
 		$control->setPasswordMode(TRUE);
 		return $this[$name] = $control;
 	}
@@ -261,11 +261,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  label
 	 * @param  int  width of the control
 	 * @param  int  height of the control in text lines
-	 * @return NTextArea
+	 * @return TextArea
 	 */
 	public function addTextArea($name, $label = NULL, $cols = 40, $rows = 10)
 	{
-		return $this[$name] = new NTextArea($label, $cols, $rows);
+		return $this[$name] = new TextArea($label, $cols, $rows);
 	}
 
 
@@ -274,11 +274,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Adds control that allows the user to upload files.
 	 * @param  string  control name
 	 * @param  string  label
-	 * @return NFileUpload
+	 * @return FileUpload
 	 */
 	public function addFile($name, $label = NULL)
 	{
-		return $this[$name] = new NFileUpload($label);
+		return $this[$name] = new FileUpload($label);
 	}
 
 
@@ -287,11 +287,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Adds hidden form control used to store a non-displayed value.
 	 * @param  string  control name
 	 * @param  mixed   default value
-	 * @return NHiddenField
+	 * @return HiddenField
 	 */
 	public function addHidden($name, $default = NULL)
 	{
-		$control = new NHiddenField;
+		$control = new HiddenField;
 		$control->setDefaultValue($default);
 		return $this[$name] = $control;
 	}
@@ -302,11 +302,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Adds check box control to the form.
 	 * @param  string  control name
 	 * @param  string  caption
-	 * @return NCheckbox
+	 * @return Checkbox
 	 */
 	public function addCheckbox($name, $caption = NULL)
 	{
-		return $this[$name] = new NCheckbox($caption);
+		return $this[$name] = new Checkbox($caption);
 	}
 
 
@@ -316,11 +316,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  control name
 	 * @param  string  label
 	 * @param  array   options from which to choose
-	 * @return NRadioList
+	 * @return RadioList
 	 */
 	public function addRadioList($name, $label = NULL, array $items = NULL)
 	{
-		return $this[$name] = new NRadioList($label, $items);
+		return $this[$name] = new RadioList($label, $items);
 	}
 
 
@@ -331,11 +331,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  label
 	 * @param  array   items from which to choose
 	 * @param  int     number of rows that should be visible
-	 * @return NSelectBox
+	 * @return SelectBox
 	 */
 	public function addSelect($name, $label = NULL, array $items = NULL, $size = NULL)
 	{
-		return $this[$name] = new NSelectBox($label, $items, $size);
+		return $this[$name] = new SelectBox($label, $items, $size);
 	}
 
 
@@ -346,11 +346,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  label
 	 * @param  array   options from which to choose
 	 * @param  int     number of rows that should be visible
-	 * @return NMultiSelectBox
+	 * @return MultiSelectBox
 	 */
 	public function addMultiSelect($name, $label = NULL, array $items = NULL, $size = NULL)
 	{
-		return $this[$name] = new NMultiSelectBox($label, $items, $size);
+		return $this[$name] = new MultiSelectBox($label, $items, $size);
 	}
 
 
@@ -359,11 +359,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Adds button used to submit form.
 	 * @param  string  control name
 	 * @param  string  caption
-	 * @return NSubmitButton
+	 * @return SubmitButton
 	 */
 	public function addSubmit($name, $caption = NULL)
 	{
-		return $this[$name] = new NSubmitButton($caption);
+		return $this[$name] = new SubmitButton($caption);
 	}
 
 
@@ -372,11 +372,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * Adds push buttons with no default behavior.
 	 * @param  string  control name
 	 * @param  string  caption
-	 * @return NButton
+	 * @return Button
 	 */
 	public function addButton($name, $caption)
 	{
-		return $this[$name] = new NButton($caption);
+		return $this[$name] = new Button($caption);
 	}
 
 
@@ -386,11 +386,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	 * @param  string  control name
 	 * @param  string  URI of the image
 	 * @param  string  alternate text for the image
-	 * @return NImageButton
+	 * @return ImageButton
 	 */
 	public function addImage($name, $src = NULL, $alt = NULL)
 	{
-		return $this[$name] = new NImageButton($src, $alt);
+		return $this[$name] = new ImageButton($src, $alt);
 	}
 
 
@@ -398,11 +398,11 @@ class NFormContainer extends NComponentContainer implements ArrayAccess, INaming
 	/**
 	 * Adds naming container to the form.
 	 * @param  string  name
-	 * @return NFormContainer
+	 * @return FormContainer
 	 */
 	public function addContainer($name)
 	{
-		$control = new NFormContainer;
+		$control = new FormContainer;
 		$control->currentGroup = $this->currentGroup;
 		return $this[$name] = $control;
 	}

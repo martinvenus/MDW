@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NCheckbox extends NFormControl
+class Checkbox extends FormControl
 {
 
 	/**
@@ -35,7 +35,7 @@ class NCheckbox extends NFormControl
 	/**
 	 * Sets control's value.
 	 * @param  bool
-	 * @return NCheckbox  provides a fluent interface
+	 * @return Checkbox  provides a fluent interface
 	 */
 	public function setValue($value)
 	{
@@ -47,7 +47,7 @@ class NCheckbox extends NFormControl
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{

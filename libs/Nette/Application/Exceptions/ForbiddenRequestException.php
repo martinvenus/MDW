@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NForbiddenRequestException extends NBadRequestException
+class ForbiddenRequestException extends BadRequestException
 {
 	/** @var int */
 	protected $defaultCode = 403;

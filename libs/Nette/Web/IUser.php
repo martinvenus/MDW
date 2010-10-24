@@ -13,7 +13,7 @@
 
 
 /**
- * NUser authentication and authorization.
+ * User authentication and authorization.
  *
  * @author     David Grudl
  */
@@ -26,7 +26,7 @@ interface IUser
 	 * @param  string
 	 * @param  mixed
 	 * @return void
-	 * @throws NAuthenticationException if authentication was not successful
+	 * @throws AuthenticationException if authentication was not successful
 	 */
 	function login($username, $password, $extra = NULL);
 

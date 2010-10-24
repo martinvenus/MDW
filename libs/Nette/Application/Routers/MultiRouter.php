@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NMultiRouter extends NArrayList implements IRouter
+class MultiRouter extends ArrayList implements IRouter
 {
 	/** @var array */
 	private $cachedRoutes;
@@ -32,9 +32,9 @@ class NMultiRouter extends NArrayList implements IRouter
 
 
 	/**
-	 * Maps HTTP request to a NPresenterRequest object.
+	 * Maps HTTP request to a PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @return NPresenterRequest|NULL
+	 * @return PresenterRequest|NULL
 	 */
 	public function match(IHttpRequest $httpRequest)
 	{
@@ -50,19 +50,19 @@ class NMultiRouter extends NArrayList implements IRouter
 
 
 	/**
-	 * Constructs absolute URL from NPresenterRequest object.
+	 * Constructs absolute URL from PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @param  NPresenterRequest
+	 * @param  PresenterRequest
 	 * @return string|NULL
 	 */
-	public function constructUrl(NPresenterRequest $appRequest, IHttpRequest $httpRequest)
+	public function constructUrl(PresenterRequest $appRequest, IHttpRequest $httpRequest)
 	{
 		if ($this->cachedRoutes === NULL) {
 			$routes = array();
 			$routes['*'] = array();
 
 			foreach ($this as $route) {
-				$presenter = $route instanceof NRoute ? $route->getTargetPresenter() : NULL;
+				$presenter = $route instanceof Route ? $route->getTargetPresenter() : NULL;
 
 				if ($presenter === FALSE) continue;
 

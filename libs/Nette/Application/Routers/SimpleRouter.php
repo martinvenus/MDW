@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NSimpleRouter extends NObject implements IRouter
+class SimpleRouter extends Object implements IRouter
 {
 	const PRESENTER_KEY = 'presenter';
 	const MODULE_KEY = 'module';
@@ -59,9 +59,9 @@ class NSimpleRouter extends NObject implements IRouter
 
 
 	/**
-	 * Maps HTTP request to a NPresenterRequest object.
+	 * Maps HTTP request to a PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @return NPresenterRequest|NULL
+	 * @return PresenterRequest|NULL
 	 */
 	public function match(IHttpRequest $httpRequest)
 	{
@@ -76,25 +76,25 @@ class NSimpleRouter extends NObject implements IRouter
 		$presenter = $this->module . $params[self::PRESENTER_KEY];
 		unset($params[self::PRESENTER_KEY]);
 
-		return new NPresenterRequest(
+		return new PresenterRequest(
 			$presenter,
 			$httpRequest->getMethod(),
 			$params,
 			$httpRequest->getPost(),
 			$httpRequest->getFiles(),
-			array(NPresenterRequest::SECURED => $httpRequest->isSecured())
+			array(PresenterRequest::SECURED => $httpRequest->isSecured())
 		);
 	}
 
 
 
 	/**
-	 * Constructs absolute URL from NPresenterRequest object.
+	 * Constructs absolute URL from PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @param  NPresenterRequest
+	 * @param  PresenterRequest
 	 * @return string|NULL
 	 */
-	public function constructUrl(NPresenterRequest $appRequest, IHttpRequest $httpRequest)
+	public function constructUrl(PresenterRequest $appRequest, IHttpRequest $httpRequest)
 	{
 		$params = $appRequest->getParams();
 

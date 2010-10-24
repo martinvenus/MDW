@@ -17,31 +17,31 @@
  *
  * @author     David Grudl
  */
-class NSendmailMailer extends NObject implements IMailer
+class SendmailMailer extends Object implements IMailer
 {
 
 	/**
 	 * Sends e-mail.
-	 * @param  NMail
+	 * @param  Mail
 	 * @return void
 	 */
-	public function send(NMail $mail)
+	public function send(Mail $mail)
 	{
 		$tmp = clone $mail;
 		$tmp->setHeader('Subject', NULL);
 		$tmp->setHeader('To', NULL);
 
-		$parts = explode(NMail::EOL . NMail::EOL, $tmp->generateMessage(), 2);
+		$parts = explode(Mail::EOL . Mail::EOL, $tmp->generateMessage(), 2);
 
-		NTools::tryError();
+		Tools::tryError();
 		$res = mail(
-			str_replace(NMail::EOL, PHP_EOL, $mail->getEncodedHeader('To')),
-			str_replace(NMail::EOL, PHP_EOL, $mail->getEncodedHeader('Subject')),
-			str_replace(NMail::EOL, PHP_EOL, $parts[1]),
-			str_replace(NMail::EOL, PHP_EOL, $parts[0])
+			str_replace(Mail::EOL, PHP_EOL, $mail->getEncodedHeader('To')),
+			str_replace(Mail::EOL, PHP_EOL, $mail->getEncodedHeader('Subject')),
+			str_replace(Mail::EOL, PHP_EOL, $parts[1]),
+			str_replace(Mail::EOL, PHP_EOL, $parts[0])
 		);
 
-		if (NTools::catchError($msg)) {
+		if (Tools::catchError($msg)) {
 			throw new InvalidStateException($msg);
 
 		} elseif (!$res) {

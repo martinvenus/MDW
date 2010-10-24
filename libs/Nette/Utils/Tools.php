@@ -13,11 +13,11 @@
 
 
 /**
- * NTools library.
+ * Tools library.
  *
  * @author     David Grudl
  */
-final class NTools
+final class Tools
 {
 	/** minute in seconds */
 	const MINUTE = 60;

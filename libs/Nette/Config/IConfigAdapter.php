@@ -30,7 +30,7 @@ interface IConfigAdapter
 
 	/**
 	 * Writes configuration to file.
-	 * @param  NConfig to save
+	 * @param  Config to save
 	 * @param  string  file
 	 * @param  string  section name
 	 * @return void

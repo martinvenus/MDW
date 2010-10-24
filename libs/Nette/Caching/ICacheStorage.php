@@ -13,7 +13,7 @@
 
 
 /**
- * NCache storage.
+ * Cache storage.
  *
  * @author     David Grudl
  */

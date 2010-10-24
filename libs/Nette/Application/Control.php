@@ -13,13 +13,13 @@
 
 
 /**
- * NControl is renderable component.
+ * Control is renderable component.
  *
  * @author     David Grudl
  *
  * @property-read ITemplate $template
  */
-abstract class NControl extends NPresenterComponent implements IPartiallyRenderable
+abstract class Control extends PresenterComponent implements IPartiallyRenderable
 {
 	/** @var ITemplate */
 	private $template;
@@ -56,7 +56,7 @@ abstract class NControl extends NPresenterComponent implements IPartiallyRendera
 	 */
 	protected function createTemplate()
 	{
-		$template = new NTemplate;
+		$template = new Template;
 		$presenter = $this->getPresenter(FALSE);
 		$template->onPrepareFilters[] = array($this, 'templatePrepareFilters');
 
@@ -64,7 +64,7 @@ abstract class NControl extends NPresenterComponent implements IPartiallyRendera
 		$template->component = $this; // DEPRECATED!
 		$template->control = $this;
 		$template->presenter = $presenter;
-		$template->baseUri = NEnvironment::getVariable('baseUri');
+		$template->baseUri = Environment::getVariable('baseUri');
 		$template->basePath = rtrim($template->baseUri, '/');
 
 		// flash message
@@ -77,7 +77,7 @@ abstract class NControl extends NPresenterComponent implements IPartiallyRendera
 		}
 
 		// default helpers
-		$template->registerHelper('escape', 'NTemplateHelpers::escapeHtml');
+		$template->registerHelper('escape', 'TemplateHelpers::escapeHtml');
 		$template->registerHelper('escapeUrl', 'rawurlencode');
 		$template->registerHelper('stripTags', 'strip_tags');
 		$template->registerHelper('nl2br', 'nl2br');
@@ -85,7 +85,7 @@ abstract class NControl extends NPresenterComponent implements IPartiallyRendera
 		$template->registerHelper('repeat', 'str_repeat');
 		$template->registerHelper('implode', 'implode');
 		$template->registerHelper('number', 'number_format');
-		$template->registerHelperLoader('NTemplateHelpers::loader');
+		$template->registerHelperLoader('TemplateHelpers::loader');
 
 		return $template;
 	}
@@ -94,13 +94,13 @@ abstract class NControl extends NPresenterComponent implements IPartiallyRendera
 
 	/**
 	 * Descendant can override this method to customize template compile-time filters.
-	 * @param  NTemplate
+	 * @param  Template
 	 * @return void
 	 */
 	public function templatePrepareFilters($template)
 	{
 		// default filters
-		$template->registerFilter(new NLatteFilter);
+		$template->registerFilter(new LatteFilter);
 	}
 
 

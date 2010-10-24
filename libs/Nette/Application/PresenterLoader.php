@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NPresenterLoader implements IPresenterLoader
+class PresenterLoader implements IPresenterLoader
 {
 	/** @var bool */
 	public $caseSensitive = FALSE;
@@ -43,7 +43,7 @@ class NPresenterLoader implements IPresenterLoader
 	/**
 	 * @param  string  presenter name
 	 * @return string  class name
-	 * @throws NInvalidPresenterException
+	 * @throws InvalidPresenterException
 	 */
 	public function getPresenterClass(& $name)
 	{
@@ -53,7 +53,7 @@ class NPresenterLoader implements IPresenterLoader
 		}
 
 		if (!is_string($name) || !preg_match("#^[a-zA-Z\x7f-\xff][a-zA-Z0-9\x7f-\xff:]*$#", $name)) {
-			throw new NInvalidPresenterException("Presenter name must be alphanumeric string, '$name' is invalid.");
+			throw new InvalidPresenterException("Presenter name must be alphanumeric string, '$name' is invalid.");
 		}
 
 		$class = $this->formatPresenterClass($name);
@@ -62,30 +62,30 @@ class NPresenterLoader implements IPresenterLoader
 			// internal autoloading
 			$file = $this->formatPresenterFile($name);
 			if (is_file($file) && is_readable($file)) {
-				NLimitedScope::load($file);
+				LimitedScope::load($file);
 			}
 
 			if (!class_exists($class)) {
-				throw new NInvalidPresenterException("Cannot load presenter '$name', class '$class' was not found in '$file'.");
+				throw new InvalidPresenterException("Cannot load presenter '$name', class '$class' was not found in '$file'.");
 			}
 		}
 
-		$reflection = new NClassReflection($class);
+		$reflection = new ClassReflection($class);
 		$class = $reflection->getName();
 
 		if (!$reflection->implementsInterface('IPresenter')) {
-			throw new NInvalidPresenterException("Cannot load presenter '$name', class '$class' is not Nette\\Application\\IPresenter implementor.");
+			throw new InvalidPresenterException("Cannot load presenter '$name', class '$class' is not Nette\\Application\\IPresenter implementor.");
 		}
 
 		if ($reflection->isAbstract()) {
-			throw new NInvalidPresenterException("Cannot load presenter '$name', class '$class' is abstract.");
+			throw new InvalidPresenterException("Cannot load presenter '$name', class '$class' is abstract.");
 		}
 
 		// canonicalize presenter name
 		$realName = $this->unformatPresenterClass($class);
 		if ($name !== $realName) {
 			if ($this->caseSensitive) {
-				throw new NInvalidPresenterException("Cannot load presenter '$name', case mismatch. Real name is '$realName'.");
+				throw new InvalidPresenterException("Cannot load presenter '$name', case mismatch. Real name is '$realName'.");
 			} else {
 				$this->cache[$name] = array($class, $realName);
 				$name = $realName;

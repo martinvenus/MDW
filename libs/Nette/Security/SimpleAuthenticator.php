@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NSimpleAuthenticator extends NObject implements IAuthenticator
+class SimpleAuthenticator extends Object implements IAuthenticator
 {
 	/** @var array */
 	private $userlist;
@@ -35,10 +35,10 @@ class NSimpleAuthenticator extends NObject implements IAuthenticator
 
 	/**
 	 * Performs an authentication against e.g. database.
-	 * and returns IIdentity on success or throws NAuthenticationException
+	 * and returns IIdentity on success or throws AuthenticationException
 	 * @param  array
 	 * @return IIdentity
-	 * @throws NAuthenticationException
+	 * @throws AuthenticationException
 	 */
 	public function authenticate(array $credentials)
 	{
@@ -47,14 +47,14 @@ class NSimpleAuthenticator extends NObject implements IAuthenticator
 			if (strcasecmp($name, $credentials[self::USERNAME]) === 0) {
 				if (strcasecmp($pass, $credentials[self::PASSWORD]) === 0) {
 					// matched!
-					return new NIdentity($name);
+					return new Identity($name);
 				}
 
-				throw new NAuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
+				throw new AuthenticationException("Invalid password.", self::INVALID_CREDENTIAL);
 			}
 		}
 
-		throw new NAuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
+		throw new AuthenticationException("User '$username' not found.", self::IDENTITY_NOT_FOUND);
 	}
 
 }

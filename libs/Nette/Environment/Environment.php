@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NEnvironment
+final class Environment
 {
 	/**#@+ environment name */
 	const DEVELOPMENT = 'development';
@@ -31,7 +31,7 @@ final class NEnvironment
 	const PERFORMANCE = 'performance';
 	/**#@-*/
 
-	/** @var NConfigurator */
+	/** @var Configurator */
 	private static $configurator;
 
 	/** @var string  the mode of current application */
@@ -76,11 +76,11 @@ final class NEnvironment
 
 
 	/**
-	 * Sets "class behind NEnvironment" configurator.
-	 * @param  NConfigurator
+	 * Sets "class behind Environment" configurator.
+	 * @param  Configurator
 	 * @return void
 	 */
-	public static function setConfigurator(NConfigurator $configurator)
+	public static function setConfigurator(Configurator $configurator)
 	{
 		self::$configurator = $configurator;
 	}
@@ -88,13 +88,13 @@ final class NEnvironment
 
 
 	/**
-	 * Gets "class behind NEnvironment" configurator.
-	 * @return NConfigurator
+	 * Gets "class behind Environment" configurator.
+	 * @return Configurator
 	 */
 	public static function getConfigurator()
 	{
 		if (self::$configurator === NULL) {
-			self::$configurator = new NConfigurator;
+			self::$configurator = new Configurator;
 		}
 		return self::$configurator;
 	}
@@ -287,7 +287,7 @@ final class NEnvironment
 
 
 	/**
-	 * @see NEnvironment::expand()
+	 * @see Environment::expand()
 	 * @param  array
 	 * @return string
 	 */
@@ -355,7 +355,7 @@ final class NEnvironment
 
 
 	/**
-	 * Adds new NEnvironment::get<Service>() method.
+	 * Adds new Environment::get<Service>() method.
 	 * @param  string  service name
 	 * @param  string  alias name
 	 * @return void
@@ -385,7 +385,7 @@ final class NEnvironment
 
 
 	/**
-	 * @return NHttpRequest
+	 * @return HttpRequest
 	 */
 	public static function getHttpRequest()
 	{
@@ -395,7 +395,7 @@ final class NEnvironment
 
 
 	/**
-	 * @return NHttpContext
+	 * @return HttpContext
 	 */
 	public static function getHttpContext()
 	{
@@ -405,7 +405,7 @@ final class NEnvironment
 
 
 	/**
-	 * @return NHttpResponse
+	 * @return HttpResponse
 	 */
 	public static function getHttpResponse()
 	{
@@ -415,7 +415,7 @@ final class NEnvironment
 
 
 	/**
-	 * @return NApplication
+	 * @return Application
 	 */
 	public static function getApplication()
 	{
@@ -425,7 +425,7 @@ final class NEnvironment
 
 
 	/**
-	 * @return NUser
+	 * @return User
 	 */
 	public static function getUser()
 	{
@@ -440,11 +440,11 @@ final class NEnvironment
 
 	/**
 	 * @param  string
-	 * @return NCache
+	 * @return Cache
 	 */
 	public static function getCache($namespace = '')
 	{
-		return new NCache(
+		return new Cache(
 			self::getService('Nette\\Caching\\ICacheStorage'),
 			$namespace
 		);
@@ -455,7 +455,7 @@ final class NEnvironment
 	/**
 	 * Returns instance of session or session namespace.
 	 * @param  string
-	 * @return NSession
+	 * @return Session
 	 */
 	public static function getSession($namespace = NULL)
 	{
@@ -471,7 +471,7 @@ final class NEnvironment
 
 	/**
 	 * Loads global configuration from file and process it.
-	 * @param  string|NConfig  file name or NConfig object
+	 * @param  string|Config  file name or Config object
 	 * @return ArrayObject
 	 */
 	public static function loadConfig($file = NULL)

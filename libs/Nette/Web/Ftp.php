@@ -16,15 +16,15 @@
  * Access to a FTP server.
  *
  * <code>
- * $ftp = new NFtp;
+ * $ftp = new Ftp;
  * $ftp->connect('ftp.example.com');
  * $ftp->login('anonymous', 'example@example.com');
- * $ftp->get('file.txt', 'README', NFtp::ASCII);
+ * $ftp->get('file.txt', 'README', Ftp::ASCII);
  * </code>
  *
  * @author     David Grudl
  */
-class NFtp extends NObject
+class Ftp extends Object
 {
 	/**#@+ FTP constant alias */
 	const ASCII = FTP_ASCII;
@@ -64,7 +64,7 @@ class NFtp extends NObject
 	 * @param  array   arguments
 	 * @return mixed
 	 * @throws MemberAccessException
-	 * @throws NFtpException
+	 * @throws FtpException
 	 */
 	public function __call($name, $args)
 	{
@@ -88,7 +88,7 @@ class NFtp extends NObject
 		}
 
 
-		NTools::tryError();
+		Tools::tryError();
 
 		if ($func === 'ftp_connect' || $func === 'ftp_ssl_connect') {
 			$this->state = array($name => $args);
@@ -96,8 +96,8 @@ class NFtp extends NObject
 			$res = NULL;
 
 		} elseif (!is_resource($this->resource)) {
-			NTools::catchError($msg);
-			throw new NFtpException("Not connected to FTP server. Call connect() or ssl_connect() first.");
+			Tools::catchError($msg);
+			throw new FtpException("Not connected to FTP server. Call connect() or ssl_connect() first.");
 
 		} else {
 			if ($func === 'ftp_login' || $func === 'ftp_pasv') {
@@ -112,8 +112,8 @@ class NFtp extends NObject
 			}
 		}
 
-		if (NTools::catchError($msg) && !$silent) {
-			throw new NFtpException($msg);
+		if (Tools::catchError($msg) && !$silent) {
+			throw new FtpException($msg);
 		}
 
 		return $res;
@@ -157,7 +157,7 @@ class NFtp extends NObject
 		$current = $this->pwd();
 		try {
 			$this->chdir($dir);
-		} catch (NFtpException $e) {
+		} catch (FtpException $e) {
 		}
 		$this->chdir($current);
 		return empty($e);
@@ -178,9 +178,9 @@ class NFtp extends NObject
 			$path .= array_shift($parts);
 			try {
 				if ($path !== '') $this->mkdir($path);
-			} catch (NFtpException $e) {
+			} catch (FtpException $e) {
 				if (!$this->isDir($path)) {
-					throw new NFtpException("Cannot create directory '$path'.");
+					throw new FtpException("Cannot create directory '$path'.");
 				}
 			}
 			$path .= '/';
@@ -195,6 +195,6 @@ class NFtp extends NObject
  * FTP server exception.
  *
  */
-class NFtpException extends Exception
+class FtpException extends Exception
 {
 }

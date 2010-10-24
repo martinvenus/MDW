@@ -39,7 +39,7 @@
  * @property-read string $authority
  * @property-read string $hostUri
  */
-class NUri extends NFreezableObject
+class Uri extends FreezableObject
 {
 	/** @var array */
 	public static $defaultPorts = array(
@@ -108,7 +108,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the scheme part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setScheme($value)
 	{
@@ -133,7 +133,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the user name part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setUser($value)
 	{
@@ -158,7 +158,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the password part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setPassword($value)
 	{
@@ -205,7 +205,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the host part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setHost($value)
 	{
@@ -230,7 +230,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the port part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setPort($value)
 	{
@@ -255,7 +255,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the path part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setPath($value)
 	{
@@ -280,7 +280,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the query part of URI.
 	 * @param  string|array
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setQuery($value)
 	{
@@ -319,7 +319,7 @@ class NUri extends NFreezableObject
 	/**
 	 * Sets the fragment part of URI.
 	 * @param  string
-	 * @return NUri  provides a fluent interface
+	 * @return Uri  provides a fluent interface
 	 */
 	public function setFragment($value)
 	{

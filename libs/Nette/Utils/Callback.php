@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NCallback extends NObject
+final class Callback extends Object
 {
 	/** @var callback */
 	private $cb;

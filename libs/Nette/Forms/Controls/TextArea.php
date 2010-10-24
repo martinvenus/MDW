@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NTextArea extends NTextBase
+class TextArea extends TextBase
 {
 
 	/**
@@ -39,7 +39,7 @@ class NTextArea extends NTextBase
 
 	/**
 	 * Generates control's HTML element.
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl()
 	{

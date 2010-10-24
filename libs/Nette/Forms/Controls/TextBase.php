@@ -19,7 +19,7 @@
  *
  * @property   string $emptyValue
  */
-abstract class NTextBase extends NFormControl
+abstract class TextBase extends FormControl
 {
 	/** @var string */
 	protected $emptyValue = '';
@@ -32,7 +32,7 @@ abstract class NTextBase extends NFormControl
 	/**
 	 * Sets control's value.
 	 * @param  string
-	 * @return NTextBase  provides a fluent interface
+	 * @return TextBase  provides a fluent interface
 	 */
 	public function setValue($value)
 	{
@@ -60,7 +60,7 @@ abstract class NTextBase extends NFormControl
 	/**
 	 * Sets the special value which is treated as empty string.
 	 * @param  string
-	 * @return NTextBase  provides a fluent interface
+	 * @return TextBase  provides a fluent interface
 	 */
 	public function setEmptyValue($value)
 	{
@@ -84,7 +84,7 @@ abstract class NTextBase extends NFormControl
 	/**
 	 * Appends input string filter callback.
 	 * @param  callback
-	 * @return NTextBase  provides a fluent interface
+	 * @return TextBase  provides a fluent interface
 	 */
 	public function addFilter($filter)
 	{
@@ -94,7 +94,7 @@ abstract class NTextBase extends NFormControl
 
 
 
-	public function notifyRule(NRule $rule)
+	public function notifyRule(Rule $rule)
 	{
 		if (is_string($rule->operation) && strcasecmp($rule->operation, ':float') === 0) {
 			$this->addFilter(array(__CLASS__, 'filterFloat'));
@@ -107,11 +107,11 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Min-length validator: has control's value minimal length?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @param  int  length
 	 * @return bool
 	 */
-	public static function validateMinLength(NTextBase $control, $length)
+	public static function validateMinLength(TextBase $control, $length)
 	{
 		return iconv_strlen($control->getValue(), 'UTF-8') >= $length;
 	}
@@ -120,11 +120,11 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Max-length validator: is control's value length in limit?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @param  int  length
 	 * @return bool
 	 */
-	public static function validateMaxLength(NTextBase $control, $length)
+	public static function validateMaxLength(TextBase $control, $length)
 	{
 		return iconv_strlen($control->getValue(), 'UTF-8') <= $length;
 	}
@@ -133,11 +133,11 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Length validator: is control's value length in range?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @param  array  min and max length pair
 	 * @return bool
 	 */
-	public static function validateLength(NTextBase $control, $range)
+	public static function validateLength(TextBase $control, $range)
 	{
 		if (!is_array($range)) {
 			$range = array($range, $range);
@@ -150,10 +150,10 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Email validator: is control's value valid email address?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @return bool
 	 */
-	public static function validateEmail(NTextBase $control)
+	public static function validateEmail(TextBase $control)
 	{
 		$atom = "[-a-z0-9!#$%&'*+/=?^_`{|}~]"; // RFC 5322 unquoted characters in local-part
 		$localPart = "(\"([ !\\x23-\\x5B\\x5D-\\x7E]*|\\\\[ -~])+\"|$atom+(\\.$atom+)*)"; // quoted or unquoted
@@ -166,10 +166,10 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * URL validator: is control's value valid URL?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @return bool
 	 */
-	public static function validateUrl(NTextBase $control)
+	public static function validateUrl(TextBase $control)
 	{
 		return (bool) preg_match('/^.+\.[a-z]{2,6}(\\/.*)?$/i', $control->getValue());
 	}
@@ -178,11 +178,11 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Regular expression validator: matches control's value regular expression?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @param  string
 	 * @return bool
 	 */
-	public static function validateRegexp(NTextBase $control, $regexp)
+	public static function validateRegexp(TextBase $control, $regexp)
 	{
 		return (bool) preg_match($regexp, $control->getValue());
 	}
@@ -191,10 +191,10 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Integer validator: is a control's value decimal number?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @return bool
 	 */
-	public static function validateInteger(NTextBase $control)
+	public static function validateInteger(TextBase $control)
 	{
 		return (bool) preg_match('/^-?[0-9]+$/', $control->getValue());
 	}
@@ -203,10 +203,10 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Float validator: is a control's value float number?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @return bool
 	 */
-	public static function validateFloat(NTextBase $control)
+	public static function validateFloat(TextBase $control)
 	{
 		return (bool) preg_match('/^-?[0-9]*[.,]?[0-9]+$/', $control->getValue());
 	}
@@ -215,11 +215,11 @@ abstract class NTextBase extends NFormControl
 
 	/**
 	 * Rangle validator: is a control's value number in specified range?
-	 * @param  NTextBase
+	 * @param  TextBase
 	 * @param  array  min and max value pair
 	 * @return bool
 	 */
-	public static function validateRange(NTextBase $control, $range)
+	public static function validateRange(TextBase $control, $range)
 	{
 		return ($range[0] === NULL || $control->getValue() >= $range[0]) && ($range[1] === NULL || $control->getValue() <= $range[1]);
 	}

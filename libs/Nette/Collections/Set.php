@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NSet extends NCollection implements ISet
+class Set extends Collection implements ISet
 {
 
 

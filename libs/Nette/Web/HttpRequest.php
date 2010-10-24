@@ -13,12 +13,12 @@
 
 
 /**
- * NHttpRequest provides access scheme for request sent via HTTP.
+ * HttpRequest provides access scheme for request sent via HTTP.
  *
  * @author     David Grudl
  *
- * @property   NUriScript $uri
- * @property-read NUri $originalUri
+ * @property   UriScript $uri
+ * @property-read Uri $originalUri
  * @property-read array $query
  * @property-read array $post
  * @property-read string $postRaw
@@ -26,12 +26,12 @@
  * @property-read array $cookies
  * @property-read string $method
  * @property-read array $headers
- * @property-read NUri $referer
+ * @property-read Uri $referer
  * @property-read string $remoteAddress
  * @property-read string $remoteHost
  * @property-read bool $secured
  */
-class NHttpRequest extends NObject implements IHttpRequest
+class HttpRequest extends Object implements IHttpRequest
 {
 	/** @var array */
 	protected $query;
@@ -45,13 +45,13 @@ class NHttpRequest extends NObject implements IHttpRequest
 	/** @var array */
 	protected $cookies;
 
-	/** @var NUriScript {@link NHttpRequest::getUri()} */
+	/** @var UriScript {@link HttpRequest::getUri()} */
 	protected $uri;
 
-	/** @var NUri  {@link NHttpRequest::getOriginalUri()} */
+	/** @var Uri  {@link HttpRequest::getOriginalUri()} */
 	protected $originalUri;
 
-	/** @var array  {@link NHttpRequest::getHeaders()} */
+	/** @var array  {@link HttpRequest::getHeaders()} */
 	protected $headers;
 
 	/** @var array */
@@ -71,7 +71,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 
 	/**
 	 * Returns URL object.
-	 * @return NUriScript
+	 * @return UriScript
 	 */
 	final public function getUri()
 	{
@@ -85,10 +85,10 @@ class NHttpRequest extends NObject implements IHttpRequest
 
 	/**
 	 * Sets URL object.
-	 * @param  NUriScript
-	 * @return NHttpRequest  provides a fluent interface
+	 * @param  UriScript
+	 * @return HttpRequest  provides a fluent interface
 	 */
-	public function setUri(NUriScript $uri)
+	public function setUri(UriScript $uri)
 	{
 		$this->uri = clone $uri;
 		$this->query = NULL;
@@ -101,7 +101,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 
 	/**
 	 * Returns URL object.
-	 * @return NUri
+	 * @return Uri
 	 */
 	final public function getOriginalUri()
 	{
@@ -152,7 +152,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 	 */
 	protected function detectUri()
 	{
-		$uri = $this->uri = new NUriScript;
+		$uri = $this->uri = new UriScript;
 		$uri->scheme = $this->isSecured() ? 'https' : 'http';
 		$uri->user = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '';
 		$uri->password = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : '';
@@ -191,7 +191,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 		}
 
 		$tmp = explode('?', $requestUri, 2);
-		$this->originalUri = new NUri($uri);
+		$this->originalUri = new Uri($uri);
 		$this->originalUri->path = $tmp[0];
 		$this->originalUri->query = isset($tmp[1]) ? $tmp[1] : '';
 		$this->originalUri->freeze();
@@ -203,9 +203,9 @@ class NHttpRequest extends NObject implements IHttpRequest
 
 		// normalized uri
 		$uri->canonicalize();
-		$uri->path = NString::fixEncoding($uri->path);
+		$uri->path = String::fixEncoding($uri->path);
 
-		// detect base URI-path - inspired by Zend NFramework (c) Zend Technologies USA Inc. (http://www.zend.com), new BSD license
+		// detect base URI-path - inspired by Zend Framework (c) Zend Technologies USA Inc. (http://www.zend.com), new BSD license
 		$filename = isset($_SERVER['SCRIPT_FILENAME']) ? basename($_SERVER['SCRIPT_FILENAME']) : NULL;
 		$scriptPath = '';
 
@@ -331,7 +331,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 	/**
 	 * Returns uploaded file.
 	 * @param  string key (or more keys)
-	 * @return NHttpUploadedFile
+	 * @return HttpUploadedFile
 	 */
 	final public function getFile($key)
 	{
@@ -339,7 +339,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 			$this->initialize();
 		}
 		$args = func_get_args();
-		return NArrayTools::get($this->files, $args);
+		return ArrayTools::get($this->files, $args);
 	}
 
 
@@ -403,7 +403,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 	 * Recursively converts and checks encoding.
 	 * @param  array
 	 * @param  string
-	 * @return NHttpRequest  provides a fluent interface
+	 * @return HttpRequest  provides a fluent interface
 	 */
 	public function setEncoding($encoding)
 	{
@@ -462,10 +462,10 @@ class NHttpRequest extends NObject implements IHttpRequest
 						}
 						if ($enc) {
 							if ($utf) {
-								$v = NString::fixEncoding($v);
+								$v = String::fixEncoding($v);
 
 							} else {
-								if (!NString::checkEncoding($v)) {
+								if (!String::checkEncoding($v)) {
 									$v = iconv($this->encoding, 'UTF-8//IGNORE', $v);
 								}
 								$v = html_entity_decode($v, ENT_QUOTES, 'UTF-8');
@@ -480,7 +480,7 @@ class NHttpRequest extends NObject implements IHttpRequest
 		}
 
 
-		// structure $files and create NHttpUploadedFile objects
+		// structure $files and create HttpUploadedFile objects
 		$this->files = array();
 		$list = array();
 		if (!empty($_FILES)) {
@@ -500,9 +500,9 @@ class NHttpRequest extends NObject implements IHttpRequest
 					$v['name'] = stripSlashes($v['name']);
 				}
 				if ($enc) {
-					$v['name'] = preg_replace($nonChars, '', NString::fixEncoding($v['name']));
+					$v['name'] = preg_replace($nonChars, '', String::fixEncoding($v['name']));
 				}
-				$v['@'] = new NHttpUploadedFile($v);
+				$v['@'] = new HttpUploadedFile($v);
 				continue;
 			}
 
@@ -611,12 +611,12 @@ class NHttpRequest extends NObject implements IHttpRequest
 
 	/**
 	 * Returns referrer.
-	 * @return NUri|NULL
+	 * @return Uri|NULL
 	 */
 	final public function getReferer()
 	{
 		$uri = self::getHeader('referer');
-		return $uri ? new NUri($uri) : NULL;
+		return $uri ? new Uri($uri) : NULL;
 	}
 
 

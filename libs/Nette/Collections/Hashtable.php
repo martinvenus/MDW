@@ -16,7 +16,7 @@
  * The exception that is thrown when the key specified for accessing
  * an element in a collection does not match any key.
  */
-class NKeyNotFoundException extends RuntimeException
+class KeyNotFoundException extends RuntimeException
 {
 }
 
@@ -27,7 +27,7 @@ class NKeyNotFoundException extends RuntimeException
  *
  * @author     David Grudl
  */
-class NHashtable extends NCollection implements IMap
+class Hashtable extends Collection implements IMap
 {
 	/** @var bool */
 	private $throwKeyNotFound = FALSE;
@@ -144,7 +144,7 @@ class NHashtable extends NCollection implements IMap
 
 
 	/**
-	 * Do throw NKeyNotFoundException?
+	 * Do throw KeyNotFoundException?
 	 * @return void
 	 */
 	public function throwKeyNotFound($val = TRUE)
@@ -181,7 +181,7 @@ class NHashtable extends NCollection implements IMap
 	 * Returns item (ArrayAccess implementation).
 	 * @param  string key
 	 * @return mixed
-	 * @throws NKeyNotFoundException, InvalidArgumentException
+	 * @throws KeyNotFoundException, InvalidArgumentException
 	 */
 	public function offsetGet($key)
 	{
@@ -193,7 +193,7 @@ class NHashtable extends NCollection implements IMap
 			return parent::offsetGet($key);
 
 		} elseif ($this->throwKeyNotFound) {
-			throw new NKeyNotFoundException;
+			throw new KeyNotFoundException;
 
 		} else {
 			return NULL;

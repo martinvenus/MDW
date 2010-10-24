@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NArrayTools
+final class ArrayTools
 {
 
 	/**
@@ -32,7 +32,7 @@ final class NArrayTools
 
 	/**
 	 * Returns array item or $default if item is not set.
-	 * Example: $val = NArrayTools::get($arr, 'i', 123);
+	 * Example: $val = ArrayTools::get($arr, 'i', 123);
 	 * @param  mixed  array
 	 * @param  mixed  key
 	 * @param  mixed  default value

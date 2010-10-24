@@ -16,7 +16,7 @@
  * Basic manipulation with images.
  *
  * <code>
- * $image = NImage::fromFile('nette.jpg');
+ * $image = Image::fromFile('nette.jpg');
  * $image->resize(150, 100);
  * $image->sharpen();
  * $image->send();
@@ -28,7 +28,7 @@
  * @property-read int $height
  * @property-read resource $imageResource
  */
-class NImage extends NObject
+class Image extends Object
 {
 	/** {@link resize()} allows enlarging image (it only shrinks images by default) */
 	const ENLARGE = 1;
@@ -82,7 +82,7 @@ class NImage extends NObject
 	 * Opens image from file.
 	 * @param  string
 	 * @param  mixed  detected image format
-	 * @return NImage
+	 * @return Image
 	 */
 	public static function fromFile($file, & $format = NULL)
 	{
@@ -92,7 +92,7 @@ class NImage extends NObject
 
 		$info = @getimagesize($file); // @ - files smaller than 12 bytes causes read error
 		if (self::$useImageMagick && (empty($info) || $info[0] * $info[1] > 9e5)) { // cca 1024x768
-			return new NImageMagick($file, $format);
+			return new ImageMagick($file, $format);
 		}
 
 		switch ($format = $info[2]) {
@@ -107,7 +107,7 @@ class NImage extends NObject
 
 		default:
 			if (self::$useImageMagick) {
-				return new NImageMagick($file, $format);
+				return new ImageMagick($file, $format);
 			}
 			throw new Exception("Unknown image type or file '$file' not found.");
 		}
@@ -119,7 +119,7 @@ class NImage extends NObject
 	 * Create a new image from the image stream in the string.
 	 * @param  string
 	 * @param  mixed  detected image format
-	 * @return NImage
+	 * @return Image
 	 */
 	public static function fromString($s, & $format = NULL)
 	{
@@ -149,7 +149,7 @@ class NImage extends NObject
 	 * @param  int
 	 * @param  int
 	 * @param  array
-	 * @return NImage
+	 * @return Image
 	 */
 	public static function fromBlank($width, $height, $color = NULL)
 	{
@@ -212,7 +212,7 @@ class NImage extends NObject
 	/**
 	 * Sets image resource.
 	 * @param  resource
-	 * @return NImage  provides a fluent interface
+	 * @return Image  provides a fluent interface
 	 */
 	protected function setImageResource($image)
 	{
@@ -241,7 +241,7 @@ class NImage extends NObject
 	 * @param  mixed  width in pixels or percent
 	 * @param  mixed  height in pixels or percent
 	 * @param  int    flags
-	 * @return NImage  provides a fluent interface
+	 * @return Image  provides a fluent interface
 	 */
 	public function resize($width, $height, $flags = self::FIT)
 	{
@@ -345,7 +345,7 @@ class NImage extends NObject
 	 * @param  mixed  y-offset in pixels or percent
 	 * @param  int    width
 	 * @param  int    height
-	 * @return NImage  provides a fluent interface
+	 * @return Image  provides a fluent interface
 	 */
 	public function crop($left, $top, $width, $height)
 	{
@@ -376,7 +376,7 @@ class NImage extends NObject
 
 	/**
 	 * Sharpen image.
-	 * @return NImage  provides a fluent interface
+	 * @return Image  provides a fluent interface
 	 */
 	public function sharpen()
 	{
@@ -392,13 +392,13 @@ class NImage extends NObject
 
 	/**
 	 * Puts another image into this image.
-	 * @param  NImage
+	 * @param  Image
 	 * @param  mixed  x-coordinate in pixels or percent
 	 * @param  mixed  y-coordinate in pixels or percent
 	 * @param  int  opacity 0..100
-	 * @return NImage  provides a fluent interface
+	 * @return Image  provides a fluent interface
 	 */
-	public function place(NImage $image, $left = 0, $top = 0, $opacity = 100)
+	public function place(Image $image, $left = 0, $top = 0, $opacity = 100)
 	{
 		$opacity = max(0, min(100, (int) $opacity));
 
@@ -488,7 +488,7 @@ class NImage extends NObject
 			return $this->toString();
 
 		} catch (Exception $e) {
-			NDebug::toStringException($e);
+			Debug::toStringException($e);
 		}
 	}
 

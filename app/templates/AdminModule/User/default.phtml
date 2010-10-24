@@ -1,0 +1,14 @@
+@{block content}
+
+@{widget confirmForm}
+
+<div class="clear"> </div>
+
+<a href="{link userChange}"><img src="{$baseUri}images/quick_add.gif" alt="Add new entry" /></a>
+
+<div class="clear"> </div>
+
+{snippet users}
+{* vykreslení v šabloně *}
+@{widget users}
+{/snippet}

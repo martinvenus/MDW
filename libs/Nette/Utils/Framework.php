@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NFramework
+final class Framework
 {
 
 	/**#@+ Nette Framework version identification */

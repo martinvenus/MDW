@@ -25,18 +25,18 @@ interface IRouter
 	/**#@-*/
 
 	/**
-	 * Maps HTTP request to a NPresenterRequest object.
+	 * Maps HTTP request to a PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @return NPresenterRequest|NULL
+	 * @return PresenterRequest|NULL
 	 */
 	function match(IHttpRequest $httpRequest);
 
 	/**
-	 * Constructs absolute URL from NPresenterRequest object.
+	 * Constructs absolute URL from PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @param  NPresenterRequest
+	 * @param  PresenterRequest
 	 * @return string|NULL
 	 */
-	function constructUrl(NPresenterRequest $appRequest, IHttpRequest $httpRequest);
+	function constructUrl(PresenterRequest $appRequest, IHttpRequest $httpRequest);
 
 }

@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NExtensionReflection extends ReflectionExtension
+class ExtensionReflection extends ReflectionExtension
 {
 
 	public function __toString()
@@ -35,7 +35,7 @@ class NExtensionReflection extends ReflectionExtension
 	{
 		$res = array();
 		foreach (parent::getClassNames() as $val) {
-			$res[$val] = new NClassReflection($val);
+			$res[$val] = new ClassReflection($val);
 		}
 		return $res;
 	}
@@ -45,51 +45,51 @@ class NExtensionReflection extends ReflectionExtension
 	public function getFunctions()
 	{
 		foreach ($res = parent::getFunctions() as $key => $val) {
-			$res[$key] = new NFunctionReflection($key);
+			$res[$key] = new FunctionReflection($key);
 		}
 		return $res;
 	}
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
 
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
 
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
 
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
 
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NPropertyReflection extends ReflectionProperty
+class PropertyReflection extends ReflectionProperty
 {
 
 	public function __toString()
@@ -32,16 +32,16 @@ class NPropertyReflection extends ReflectionProperty
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getDeclaringClass()
 	{
-		return new NClassReflection(parent::getDeclaringClass()->getName());
+		return new ClassReflection(parent::getDeclaringClass()->getName());
 	}
 
 
 
-	/********************* NAnnotations support ****************d*g**/
+	/********************* Annotations support ****************d*g**/
 
 
 
@@ -52,7 +52,7 @@ class NPropertyReflection extends ReflectionProperty
 	 */
 	public function hasAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return !empty($res[$name]);
 	}
 
@@ -65,7 +65,7 @@ class NPropertyReflection extends ReflectionProperty
 	 */
 	public function getAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return isset($res[$name]) ? end($res[$name]) : NULL;
 	}
 
@@ -77,49 +77,49 @@ class NPropertyReflection extends ReflectionProperty
 	 */
 	public function getAnnotations()
 	{
-		return NAnnotationsParser::getAll($this);
+		return AnnotationsParser::getAll($this);
 	}
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
 
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
 
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
 
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
 
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

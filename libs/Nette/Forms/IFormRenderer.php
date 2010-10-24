@@ -22,9 +22,9 @@ interface IFormRenderer
 
 	/**
 	 * Provides complete form rendering.
-	 * @param  NForm
+	 * @param  Form
 	 * @return string
 	 */
-	function render(NForm $form);
+	function render(Form $form);
 
 }

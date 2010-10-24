@@ -13,13 +13,13 @@
 
 
 /**
- * NComponentContainer is default implementation of IComponentContainer.
+ * ComponentContainer is default implementation of IComponentContainer.
  *
  * @author     David Grudl
  *
  * @property-read ArrayIterator $components
  */
-class NComponentContainer extends NComponent implements IComponentContainer
+class ComponentContainer extends Component implements IComponentContainer
 {
 	/** @var array of IComponent */
 	private $components = array();
@@ -164,7 +164,7 @@ class NComponentContainer extends NComponent implements IComponentContainer
 
 
 	/**
-	 * NComponent factory. Delegates the creation of components to a createComponent<Name> method.
+	 * Component factory. Delegates the creation of components to a createComponent<Name> method.
 	 * @param  string      component name
 	 * @return IComponent  the created component (optionally)
 	 */
@@ -187,14 +187,14 @@ class NComponentContainer extends NComponent implements IComponentContainer
 	 */
 	final public function getComponents($deep = FALSE, $filterType = NULL)
 	{
-		$iterator = new NRecursiveComponentIterator($this->components);
+		$iterator = new RecursiveComponentIterator($this->components);
 		if ($deep) {
 			$deep = $deep > 0 ? RecursiveIteratorIterator::SELF_FIRST : RecursiveIteratorIterator::CHILD_FIRST;
 			$iterator = new RecursiveIteratorIterator($iterator, $deep);
 		}
 		if ($filterType) {
 			if ($a = strrpos($filterType, '\\')) $filterType = substr($filterType, $a + 1); // fix namespace
-			$iterator = new NInstanceFilterIterator($iterator, $filterType);
+			$iterator = new InstanceFilterIterator($iterator, $filterType);
 		}
 		return $iterator;
 	}
@@ -218,7 +218,7 @@ class NComponentContainer extends NComponent implements IComponentContainer
 
 
 	/**
-	 * NObject cloning.
+	 * Object cloning.
 	 */
 	public function __clone()
 	{
@@ -250,11 +250,11 @@ class NComponentContainer extends NComponent implements IComponentContainer
 
 
 /**
- * Recursive component iterator. See NComponentContainer::getComponents().
+ * Recursive component iterator. See ComponentContainer::getComponents().
  *
  * @author     David Grudl
  */
-class NRecursiveComponentIterator extends RecursiveArrayIterator implements Countable
+class RecursiveComponentIterator extends RecursiveArrayIterator implements Countable
 {
 
 	/**

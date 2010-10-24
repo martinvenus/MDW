@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NServiceLocator extends NObject implements IServiceLocator
+class ServiceLocator extends Object implements IServiceLocator
 {
 	/** @var IServiceLocator */
 	private $parent;
@@ -56,7 +56,7 @@ class NServiceLocator extends NObject implements IServiceLocator
 
 		$lower = strtolower($name);
 		if (isset($this->registry[$lower])) { // only for instantiated services?
-			throw new NAmbiguousServiceException("Service named '$name' has been already registered.");
+			throw new AmbiguousServiceException("Service named '$name' has been already registered.");
 		}
 
 		if (is_object($service)) {
@@ -124,7 +124,7 @@ class NServiceLocator extends NObject implements IServiceLocator
 			if (is_string($factory) && strpos($factory, ':') === FALSE) { // class name
 				if ($a = strrpos($factory, '\\')) $factory = substr($factory, $a + 1); // fix namespace
 				if (!class_exists($factory)) {
-					throw new NAmbiguousServiceException("Cannot instantiate service '$name', class '$factory' not found.");
+					throw new AmbiguousServiceException("Cannot instantiate service '$name', class '$factory' not found.");
 				}
 				$service = new $factory;
 				if ($options && method_exists($service, 'setOptions')) {
@@ -138,7 +138,7 @@ class NServiceLocator extends NObject implements IServiceLocator
 				}
 				$service = $factory->invoke($options);
 				if (!is_object($service)) {
-					throw new NAmbiguousServiceException("Cannot instantiate service '$name', value returned by '$factory' is not object.");
+					throw new AmbiguousServiceException("Cannot instantiate service '$name', value returned by '$factory' is not object.");
 				}
 			}
 
@@ -195,6 +195,6 @@ class NServiceLocator extends NObject implements IServiceLocator
  *
  * @author     David Grudl
  */
-class NAmbiguousServiceException extends Exception
+class AmbiguousServiceException extends Exception
 {
 }

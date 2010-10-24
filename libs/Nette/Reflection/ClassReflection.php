@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NClassReflection extends ReflectionClass
+class ClassReflection extends ReflectionClass
 {
 
 	/** @var array (method => array(type => callback)) */
@@ -27,7 +27,7 @@ class NClassReflection extends ReflectionClass
 
 	/**
 	 * @param  string|object
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public static function from($class)
 	{
@@ -61,7 +61,7 @@ class NClassReflection extends ReflectionClass
 	 * Adds a method to class.
 	 * @param  string  method name
 	 * @param  mixed   callback or closure
-	 * @return NClassReflection  provides a fluent interface
+	 * @return ClassReflection  provides a fluent interface
 	 */
 	public function setExtensionMethod($name, $callback)
 	{
@@ -125,21 +125,21 @@ class NClassReflection extends ReflectionClass
 
 
 	/**
-	 * @return NMethodReflection
+	 * @return MethodReflection
 	 */
 	public function getConstructor()
 	{
-		return ($ref = parent::getConstructor()) ? NMethodReflection::import($ref) : NULL;
+		return ($ref = parent::getConstructor()) ? MethodReflection::import($ref) : NULL;
 	}
 
 
 
 	/**
-	 * @return NExtensionReflection
+	 * @return ExtensionReflection
 	 */
 	public function getExtension()
 	{
-		return ($name = $this->getExtensionName()) ? new NExtensionReflection($name) : NULL;
+		return ($name = $this->getExtensionName()) ? new ExtensionReflection($name) : NULL;
 	}
 
 
@@ -156,11 +156,11 @@ class NClassReflection extends ReflectionClass
 
 
 	/**
-	 * @return NMethodReflection
+	 * @return MethodReflection
 	 */
 	public function getMethod($name)
 	{
-		return new NMethodReflection($this->getName(), $name);
+		return new MethodReflection($this->getName(), $name);
 	}
 
 
@@ -168,7 +168,7 @@ class NClassReflection extends ReflectionClass
 	public function getMethods($filter = -1)
 	{
 		foreach ($res = parent::getMethods($filter) as $key => $val) {
-			$res[$key] = new NMethodReflection($this->getName(), $val->getName());
+			$res[$key] = new MethodReflection($this->getName(), $val->getName());
 		}
 		return $res;
 	}
@@ -176,7 +176,7 @@ class NClassReflection extends ReflectionClass
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getParentClass()
 	{
@@ -188,7 +188,7 @@ class NClassReflection extends ReflectionClass
 	public function getProperties($filter = -1)
 	{
 		foreach ($res = parent::getProperties($filter) as $key => $val) {
-			$res[$key] = new NPropertyReflection($this->getName(), $val->getName());
+			$res[$key] = new PropertyReflection($this->getName(), $val->getName());
 		}
 		return $res;
 	}
@@ -196,16 +196,16 @@ class NClassReflection extends ReflectionClass
 
 
 	/**
-	 * @return NPropertyReflection
+	 * @return PropertyReflection
 	 */
 	public function getProperty($name)
 	{
-		return new NPropertyReflection($this->getName(), $name);
+		return new PropertyReflection($this->getName(), $name);
 	}
 
 
 
-	/********************* NAnnotations support ****************d*g**/
+	/********************* Annotations support ****************d*g**/
 
 
 
@@ -216,7 +216,7 @@ class NClassReflection extends ReflectionClass
 	 */
 	public function hasAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return !empty($res[$name]);
 	}
 
@@ -229,7 +229,7 @@ class NClassReflection extends ReflectionClass
 	 */
 	public function getAnnotation($name)
 	{
-		$res = NAnnotationsParser::getAll($this);
+		$res = AnnotationsParser::getAll($this);
 		return isset($res[$name]) ? end($res[$name]) : NULL;
 	}
 
@@ -241,49 +241,49 @@ class NClassReflection extends ReflectionClass
 	 */
 	public function getAnnotations()
 	{
-		return NAnnotationsParser::getAll($this);
+		return AnnotationsParser::getAll($this);
 	}
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
 	/**
-	 * @return NClassReflection
+	 * @return ClassReflection
 	 */
 	public function getReflection()
 	{
-		return new NClassReflection($this);
+		return new ClassReflection($this);
 	}
 
 
 
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
 
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
 
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
 
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

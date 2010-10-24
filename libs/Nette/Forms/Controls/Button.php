@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NButton extends NFormControl
+class Button extends FormControl
 {
 
 	/**
@@ -45,7 +45,7 @@ class NButton extends NFormControl
 	/**
 	 * Generates control's HTML element.
 	 * @param  string
-	 * @return NHtml
+	 * @return Html
 	 */
 	public function getControl($caption = NULL)
 	{

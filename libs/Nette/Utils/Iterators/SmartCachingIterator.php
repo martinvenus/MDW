@@ -23,7 +23,7 @@
  * @property-read bool $odd
  * @property-read bool $even
  */
-class NSmartCachingIterator extends CachingIterator implements Countable
+class SmartCachingIterator extends CachingIterator implements Countable
 {
 	/** @var int */
 	private $counter = 0;
@@ -185,7 +185,7 @@ class NSmartCachingIterator extends CachingIterator implements Countable
 
 
 
-	/********************* NObject behaviour ****************d*g**/
+	/********************* Object behaviour ****************d*g**/
 
 
 
@@ -198,7 +198,7 @@ class NSmartCachingIterator extends CachingIterator implements Countable
 	 */
 	public function __call($name, $args)
 	{
-		return NObjectMixin::call($this, $name, $args);
+		return ObjectMixin::call($this, $name, $args);
 	}
 
 
@@ -211,7 +211,7 @@ class NSmartCachingIterator extends CachingIterator implements Countable
 	 */
 	public function &__get($name)
 	{
-		return NObjectMixin::get($this, $name);
+		return ObjectMixin::get($this, $name);
 	}
 
 
@@ -225,7 +225,7 @@ class NSmartCachingIterator extends CachingIterator implements Countable
 	 */
 	public function __set($name, $value)
 	{
-		return NObjectMixin::set($this, $name, $value);
+		return ObjectMixin::set($this, $name, $value);
 	}
 
 
@@ -237,7 +237,7 @@ class NSmartCachingIterator extends CachingIterator implements Countable
 	 */
 	public function __isset($name)
 	{
-		return NObjectMixin::has($this, $name);
+		return ObjectMixin::has($this, $name);
 	}
 
 

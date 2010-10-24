@@ -13,7 +13,7 @@
 
 
 /**
- * Default macros for filter NLatteFilter.
+ * Default macros for filter LatteFilter.
  *
  * - {$variable} with escaping
  * - {!$variable} without escaping
@@ -44,7 +44,7 @@
  *
  * @author     David Grudl
  */
-class NLatteMacros extends NObject
+class LatteMacros extends Object
 {
 	/** @var array */
 	public static $defaultMacros = array(
@@ -60,7 +60,7 @@ class NLatteMacros extends NObject
 		'snippet' => '<?php %:macroSnippet% ?>',
 		'/snippet' => '<?php %:macroSnippetEnd% ?>',
 
-		'cache' => '<?php if ($_cb->foo = NCachingHelper::create($_cb->key = md5(__FILE__) . __LINE__, $template->getFile(), array(%%))) { $_cb->caches[] = $_cb->foo ?>',
+		'cache' => '<?php if ($_cb->foo = CachingHelper::create($_cb->key = md5(__FILE__) . __LINE__, $template->getFile(), array(%%))) { $_cb->caches[] = $_cb->foo ?>',
 		'/cache' => '<?php array_pop($_cb->caches)->save(); } if (!empty($_cb->caches)) end($_cb->caches)->addItem($_cb->key) ?>',
 
 		'if' => '<?php if (%%): ?>',
@@ -89,13 +89,13 @@ class NLatteMacros extends NObject
 		'widget' => '<?php %:macroWidget% ?>',
 		'control' => '<?php %:macroWidget% ?>',
 
-		'attr' => '<?php echo NHtml::el(NULL)->%:macroAttr%attributes() ?>',
+		'attr' => '<?php echo Html::el(NULL)->%:macroAttr%attributes() ?>',
 		'contentType' => '<?php %:macroContentType% ?>',
-		'status' => '<?php NEnvironment::getHttpResponse()->setCode(%%) ?>',
+		'status' => '<?php Environment::getHttpResponse()->setCode(%%) ?>',
 		'var' => '<?php %:macroAssign% ?>',
 		'assign' => '<?php %:macroAssign% ?>',
 		'default' => '<?php %:macroDefault% ?>',
-		'dump' => '<?php NDebug::consoleDump(%:macroDump%, "Template " . str_replace(NEnvironment::getVariable("appDir"), "\xE2\x80\xA6", $template->getFile())) ?>',
+		'dump' => '<?php Debug::consoleDump(%:macroDump%, "Template " . str_replace(Environment::getVariable("appDir"), "\xE2\x80\xA6", $template->getFile())) ?>',
 		'debugbreak' => '<?php if (function_exists("debugbreak")) debugbreak(); elseif (function_exists("xdebug_break")) xdebug_break() ?>',
 
 		'!_' => '<?php echo %:macroTranslate% ?>',
@@ -111,7 +111,7 @@ class NLatteMacros extends NObject
 	/** @var array */
 	public $macros;
 
-	/** @var NLatteFilter */
+	/** @var LatteFilter */
 	private $filter;
 
 	/** @var array */
@@ -149,7 +149,7 @@ class NLatteMacros extends NObject
 
 	/**
 	 * Initializes parsing.
-	 * @param  NLatteFilter
+	 * @param  LatteFilter
 	 * @param  string
 	 * @return void
 	 */
@@ -161,8 +161,8 @@ class NLatteMacros extends NObject
 		$this->extends = NULL;
 		$this->uniq = substr(md5(uniqid('', TRUE)), 0, 10);
 
-		$filter->context = NLatteFilter::CONTEXT_TEXT;
-		$filter->escape = 'NTemplateHelpers::escapeHtml';
+		$filter->context = LatteFilter::CONTEXT_TEXT;
+		$filter->escape = 'TemplateHelpers::escapeHtml';
 
 		// remove comments
 		$s = preg_replace('#\\{\\*.*?\\*\\}[\r\n]*#s', '', $s);
@@ -170,7 +170,7 @@ class NLatteMacros extends NObject
 		// snippets support (temporary solution)
 		$s = preg_replace(
 			'#@(\\{[^}]+?\\})#s',
-			'<?php } ?>$1<?php if (NSnippetHelper::$outputAllowed) { ?>',
+			'<?php } ?>$1<?php if (SnippetHelper::$outputAllowed) { ?>',
 			$s
 		);
 	}
@@ -193,14 +193,14 @@ class NLatteMacros extends NObject
 		}
 
 		// snippets support (temporary solution)
-		$s = "<?php\nif (" . 'NSnippetHelper::$outputAllowed' . ") {\n?>$s<?php\n}\n?>";
+		$s = "<?php\nif (" . 'SnippetHelper::$outputAllowed' . ") {\n?>$s<?php\n}\n?>";
 
 		// extends support
 		if ($this->namedBlocks || $this->extends) {
 			$s = "<?php\n"
 				. 'if ($_cb->extends) { ob_start(); }' . "\n"
 				. '?>' . $s . "<?php\n"
-				. 'if ($_cb->extends) { ob_end_clean(); NLatteMacros::includeTemplate($_cb->extends, get_defined_vars(), $template)->render(); }' . "\n";
+				. 'if ($_cb->extends) { ob_end_clean(); LatteMacros::includeTemplate($_cb->extends, get_defined_vars(), $template)->render(); }' . "\n";
 		}
 
 		// named blocks
@@ -214,7 +214,7 @@ class NLatteMacros extends NObject
 
 		// internal state holder
 		$s = "<?php\n"
-			. '$_cb = NLatteMacros::initRuntime($template, ' . var_export($this->extends, TRUE) . ', ' . var_export($this->uniq, TRUE) . "); unset(\$_extends);\n"
+			. '$_cb = LatteMacros::initRuntime($template, ' . var_export($this->extends, TRUE) . ', ' . var_export($this->uniq, TRUE) . "); unset(\$_extends);\n"
 			. '?>' . $s;
 	}
 
@@ -249,7 +249,7 @@ class NLatteMacros extends NObject
 
 
 	/**
-	 * NCallback for self::macro().
+	 * Callback for self::macro().
 	 */
 	private function cbMacro($m)
 	{
@@ -345,7 +345,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroVar($var, $modifiers)
 	{
-		return NLatteFilter::formatModifiers('$' . $var, $modifiers);
+		return LatteFilter::formatModifiers('$' . $var, $modifiers);
 	}
 
 
@@ -355,7 +355,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroTranslate($var, $modifiers)
 	{
-		return NLatteFilter::formatModifiers($var, 'translate|' . $modifiers);
+		return LatteFilter::formatModifiers($var, 'translate|' . $modifiers);
 	}
 
 
@@ -399,15 +399,15 @@ class NLatteMacros extends NObject
 	 */
 	public function macroInclude($content, $modifiers)
 	{
-		$destination = NLatteFilter::fetchToken($content); // destination [,] [params]
-		$params = NLatteFilter::formatArray($content) . ($content ? ' + ' : '');
+		$destination = LatteFilter::fetchToken($content); // destination [,] [params]
+		$params = LatteFilter::formatArray($content) . ($content ? ' + ' : '');
 
 		if ($destination === NULL) {
 			throw new InvalidStateException("Missing destination in {include} on line {$this->filter->line}.");
 
 		} elseif ($destination[0] === '#') { // include #block
 			$destination = ltrim($destination, '#');
-			if (!preg_match('#^' . NLatteFilter::RE_IDENTIFIER . '$#', $destination)) {
+			if (!preg_match('#^' . LatteFilter::RE_IDENTIFIER . '$#', $destination)) {
 				throw new InvalidStateException("Included block name must be alphanumeric string, '$destination' given on line {$this->filter->line}.");
 			}
 
@@ -424,17 +424,17 @@ class NLatteMacros extends NObject
 			$params .= 'get_defined_vars()';
 			$cmd = isset($this->namedBlocks[$destination]) && !$parent
 				? "call_user_func(reset(\$_cb->blocks[$name]), $params)"
-				: 'NLatteMacros::callBlock' . ($parent ? 'Parent' : '') . "(\$_cb->blocks, $name, $params)";
+				: 'LatteMacros::callBlock' . ($parent ? 'Parent' : '') . "(\$_cb->blocks, $name, $params)";
 			return $modifiers
-				? "ob_start(); $cmd; echo " . NLatteFilter::formatModifiers('ob_get_clean()', $modifiers)
+				? "ob_start(); $cmd; echo " . LatteFilter::formatModifiers('ob_get_clean()', $modifiers)
 				: $cmd;
 
 		} else { // include "file"
-			$destination = NLatteFilter::formatString($destination);
+			$destination = LatteFilter::formatString($destination);
 			$params .= '$template->getParams()';
 			return $modifiers
-				? 'echo ' . NLatteFilter::formatModifiers('NLatteMacros::includeTemplate' . "($destination, $params, \$_cb->templates[" . var_export($this->uniq, TRUE) . '])->__toString(TRUE)', $modifiers)
-				: 'NLatteMacros::includeTemplate' . "($destination, $params, \$_cb->templates[" . var_export($this->uniq, TRUE) . '])->render()';
+				? 'echo ' . LatteFilter::formatModifiers('LatteMacros::includeTemplate' . "($destination, $params, \$_cb->templates[" . var_export($this->uniq, TRUE) . '])->__toString(TRUE)', $modifiers)
+				: 'LatteMacros::includeTemplate' . "($destination, $params, \$_cb->templates[" . var_export($this->uniq, TRUE) . '])->render()';
 		}
 	}
 
@@ -445,7 +445,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroExtends($content)
 	{
-		$destination = NLatteFilter::fetchToken($content); // destination
+		$destination = LatteFilter::fetchToken($content); // destination
 		if ($destination === NULL) {
 			throw new InvalidStateException("Missing destination in {extends} on line {$this->filter->line}.");
 		}
@@ -456,7 +456,7 @@ class NLatteMacros extends NObject
 			throw new InvalidStateException("Multiple {extends} declarations are not allowed; on line {$this->filter->line}.");
 		}
 		$this->extends = $destination !== 'none';
-		return $this->extends ? '$_cb->extends = ' . NLatteFilter::formatString($destination) : '';
+		return $this->extends ? '$_cb->extends = ' . LatteFilter::formatString($destination) : '';
 	}
 
 
@@ -471,7 +471,7 @@ class NLatteMacros extends NObject
 			return $this->macroCapture($content, $modifiers);
 		}
 
-		$name = NLatteFilter::fetchToken($content); // block [,] [params]
+		$name = LatteFilter::fetchToken($content); // block [,] [params]
 
 		if ($name === NULL) { // anonymous block
 			$this->blocks[] = array(self::BLOCK_ANONYMOUS, NULL, $modifiers);
@@ -479,7 +479,7 @@ class NLatteMacros extends NObject
 
 		} else { // #block
 			$name = ltrim($name, '#');
-			if (!preg_match('#^' . NLatteFilter::RE_IDENTIFIER . '$#', $name)) {
+			if (!preg_match('#^' . LatteFilter::RE_IDENTIFIER . '$#', $name)) {
 				throw new InvalidStateException("Block name must be alphanumeric string, '$name' given on line {$this->filter->line}.");
 
 			} elseif (isset($this->namedBlocks[$name])) {
@@ -522,7 +522,7 @@ class NLatteMacros extends NObject
 			return "{/block $name}";
 
 		} else { // anonymous block
-			return $modifiers === '' ? '' : 'echo ' . NLatteFilter::formatModifiers('ob_get_clean()', $modifiers);
+			return $modifiers === '' ? '' : 'echo ' . LatteFilter::formatModifiers('ob_get_clean()', $modifiers);
 		}
 	}
 
@@ -534,13 +534,13 @@ class NLatteMacros extends NObject
 	public function macroSnippet($content)
 	{
 		$args = array('');
-		if ($snippet = NLatteFilter::fetchToken($content)) {  // [name [,]] [tag]
-			$args[] = NLatteFilter::formatString($snippet);
+		if ($snippet = LatteFilter::fetchToken($content)) {  // [name [,]] [tag]
+			$args[] = LatteFilter::formatString($snippet);
 		}
 		if ($content) {
-			$args[] = NLatteFilter::formatString($content);
+			$args[] = LatteFilter::formatString($content);
 		}
-		return '} if ($_cb->foo = NSnippetHelper::create($control' . implode(', ', $args) . ')) { $_cb->snippets[] = $_cb->foo';
+		return '} if ($_cb->foo = SnippetHelper::create($control' . implode(', ', $args) . ')) { $_cb->snippets[] = $_cb->foo';
 	}
 
 
@@ -550,7 +550,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroSnippetEnd($content)
 	{
-		return 'array_pop($_cb->snippets)->finish(); } if (NSnippetHelper::$outputAllowed) {';
+		return 'array_pop($_cb->snippets)->finish(); } if (SnippetHelper::$outputAllowed) {';
 	}
 
 
@@ -560,7 +560,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroCapture($content, $modifiers)
 	{
-		$name = NLatteFilter::fetchToken($content); // $variable
+		$name = LatteFilter::fetchToken($content); // $variable
 
 		if (substr($name, 0, 1) !== '$') {
 			throw new InvalidStateException("Invalid capture block parameter '$name' on line {$this->filter->line}.");
@@ -583,7 +583,7 @@ class NLatteMacros extends NObject
 			throw new InvalidStateException("Tag {/capture $content} was not expected here on line {$this->filter->line}.");
 		}
 
-		return $name . '=' . NLatteFilter::formatModifiers('ob_get_clean()', $modifiers);
+		return $name . '=' . LatteFilter::formatModifiers('ob_get_clean()', $modifiers);
 	}
 
 
@@ -607,7 +607,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroForeach($content)
 	{
-		return '$iterator = $_cb->its[] = new NSmartCachingIterator(' . preg_replace('# +as +#i', ') as ', $content, 1);
+		return '$iterator = $_cb->its[] = new SmartCachingIterator(' . preg_replace('# +as +#i', ') as ', $content, 1);
 	}
 
 
@@ -628,32 +628,32 @@ class NLatteMacros extends NObject
 	public function macroContentType($content)
 	{
 		if (strpos($content, 'html') !== FALSE) {
-			$this->filter->escape = 'NTemplateHelpers::escapeHtml';
-			$this->filter->context = NLatteFilter::CONTEXT_TEXT;
+			$this->filter->escape = 'TemplateHelpers::escapeHtml';
+			$this->filter->context = LatteFilter::CONTEXT_TEXT;
 
 		} elseif (strpos($content, 'xml') !== FALSE) {
-			$this->filter->escape = 'NTemplateHelpers::escapeXml';
-			$this->filter->context = NLatteFilter::CONTEXT_NONE;
+			$this->filter->escape = 'TemplateHelpers::escapeXml';
+			$this->filter->context = LatteFilter::CONTEXT_NONE;
 
 		} elseif (strpos($content, 'javascript') !== FALSE) {
-			$this->filter->escape = 'NTemplateHelpers::escapeJs';
-			$this->filter->context = NLatteFilter::CONTEXT_NONE;
+			$this->filter->escape = 'TemplateHelpers::escapeJs';
+			$this->filter->context = LatteFilter::CONTEXT_NONE;
 
 		} elseif (strpos($content, 'css') !== FALSE) {
-			$this->filter->escape = 'NTemplateHelpers::escapeCss';
-			$this->filter->context = NLatteFilter::CONTEXT_NONE;
+			$this->filter->escape = 'TemplateHelpers::escapeCss';
+			$this->filter->context = LatteFilter::CONTEXT_NONE;
 
 		} elseif (strpos($content, 'plain') !== FALSE) {
 			$this->filter->escape = '';
-			$this->filter->context = NLatteFilter::CONTEXT_NONE;
+			$this->filter->context = LatteFilter::CONTEXT_NONE;
 
 		} else {
 			$this->filter->escape = '$template->escape';
-			$this->filter->context = NLatteFilter::CONTEXT_NONE;
+			$this->filter->context = LatteFilter::CONTEXT_NONE;
 		}
 
 		// temporary solution
-		return strpos($content, '/') ? 'NEnvironment::getHttpResponse()->setHeader("Content-Type", "' . $content . '")' : '';
+		return strpos($content, '/') ? 'Environment::getHttpResponse()->setHeader("Content-Type", "' . $content . '")' : '';
 	}
 
 
@@ -673,15 +673,15 @@ class NLatteMacros extends NObject
 	 */
 	public function macroWidget($content)
 	{
-		$pair = NLatteFilter::fetchToken($content); // widget[:method]
+		$pair = LatteFilter::fetchToken($content); // widget[:method]
 		if ($pair === NULL) {
 			throw new InvalidStateException("Missing widget name in {widget} on line {$this->filter->line}.");
 		}
 		$pair = explode(':', $pair, 2);
-		$widget = NLatteFilter::formatString($pair[0]);
+		$widget = LatteFilter::formatString($pair[0]);
 		$method = isset($pair[1]) ? ucfirst($pair[1]) : '';
-		$method = preg_match('#^(' . NLatteFilter::RE_IDENTIFIER . '|)$#', $method) ? "render$method" : "{\"render$method\"}";
-		$param = NLatteFilter::formatArray($content);
+		$method = preg_match('#^(' . LatteFilter::RE_IDENTIFIER . '|)$#', $method) ? "render$method" : "{\"render$method\"}";
+		$param = LatteFilter::formatArray($content);
 		if (strpos($content, '=>') === FALSE) $param = substr($param, 6, -1); // removes array()
 		return ($widget[0] === '$' ? "if (is_object($widget)) {$widget}->$method($param); else " : '')
 			. "\$control->getWidget($widget)->$method($param)";
@@ -694,7 +694,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroLink($content, $modifiers)
 	{
-		return NLatteFilter::formatModifiers('$control->link(' . $this->formatLink($content) .')', $modifiers);
+		return LatteFilter::formatModifiers('$control->link(' . $this->formatLink($content) .')', $modifiers);
 	}
 
 
@@ -704,7 +704,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroPlink($content, $modifiers)
 	{
-		return NLatteFilter::formatModifiers('$presenter->link(' . $this->formatLink($content) .')', $modifiers);
+		return LatteFilter::formatModifiers('$presenter->link(' . $this->formatLink($content) .')', $modifiers);
 	}
 
 
@@ -714,7 +714,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroIfCurrent($content)
 	{
-		return $content ? 'try { $presenter->link(' . $this->formatLink($content) . '); } catch (NInvalidLinkException $e) {}' : '';
+		return $content ? 'try { $presenter->link(' . $this->formatLink($content) . '); } catch (InvalidLinkException $e) {}' : '';
 	}
 
 
@@ -724,7 +724,7 @@ class NLatteMacros extends NObject
 	 */
 	private function formatLink($content)
 	{
-		return NLatteFilter::formatString(NLatteFilter::fetchToken($content)) . NLatteFilter::formatArray($content, ', '); // destination [,] args
+		return LatteFilter::formatString(LatteFilter::fetchToken($content)) . LatteFilter::formatArray($content, ', '); // destination [,] args
 	}
 
 
@@ -738,9 +738,9 @@ class NLatteMacros extends NObject
 			throw new InvalidStateException("Missing arguments in {var} or {assign} on line {$this->filter->line}.");
 		}
 		if (strpos($content, '=>') === FALSE) { // back compatibility
-			return '$' . ltrim(NLatteFilter::fetchToken($content), '$') . ' = ' . NLatteFilter::formatModifiers($content === '' ? 'NULL' : $content, $modifiers);
+			return '$' . ltrim(LatteFilter::fetchToken($content), '$') . ' = ' . LatteFilter::formatModifiers($content === '' ? 'NULL' : $content, $modifiers);
 		}
-		return 'extract(' . NLatteFilter::formatArray($content) . ')';
+		return 'extract(' . LatteFilter::formatArray($content) . ')';
 	}
 
 
@@ -753,7 +753,7 @@ class NLatteMacros extends NObject
 		if (!$content) {
 			throw new InvalidStateException("Missing arguments in {default} on line {$this->filter->line}.");
 		}
-		return 'extract(' . NLatteFilter::formatArray($content) . ', EXTR_SKIP)';
+		return 'extract(' . LatteFilter::formatArray($content) . ', EXTR_SKIP)';
 	}
 
 
@@ -773,7 +773,7 @@ class NLatteMacros extends NObject
 	 */
 	public function macroModifiers($content, $modifiers)
 	{
-		return NLatteFilter::formatModifiers($content, $modifiers);
+		return LatteFilter::formatModifiers($content, $modifiers);
 	}
 
 
@@ -822,7 +822,7 @@ class NLatteMacros extends NObject
 	 * @param  mixed      included file name or template
 	 * @param  array      parameters
 	 * @param  ITemplate  current template
-	 * @return NTemplate
+	 * @return Template
 	 */
 	public static function includeTemplate($destination, $params, $template)
 	{

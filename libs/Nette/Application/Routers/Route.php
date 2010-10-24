@@ -18,7 +18,7 @@
  *
  * @author     David Grudl
  */
-class NRoute extends NObject implements IRouter
+class Route extends Object implements IRouter
 {
 	const PRESENTER_KEY = 'presenter';
 	const MODULE_KEY = 'module';
@@ -33,7 +33,7 @@ class NRoute extends NObject implements IRouter
 	const RELATIVE = 3;
 	/**#@-*/
 
-	/**#@+ key used in {@link NRoute::$styles} or metadata {@link NRoute::__construct} */
+	/**#@+ key used in {@link Route::$styles} or metadata {@link Route::__construct} */
 	const VALUE = 'value';
 	const PATTERN = 'pattern';
 	const FILTER_IN = 'filterIn';
@@ -41,7 +41,7 @@ class NRoute extends NObject implements IRouter
 	const FILTER_TABLE = 'filterTable';
 	/**#@-*/
 
-	/**#@+ @internal fixity types - how to handle default value? {@link NRoute::$metadata} */
+	/**#@+ @internal fixity types - how to handle default value? {@link Route::$metadata} */
 	const OPTIONAL = 0;
 	const PATH_OPTIONAL = 1;
 	const CONSTANT = 2;
@@ -124,9 +124,9 @@ class NRoute extends NObject implements IRouter
 
 
 	/**
-	 * Maps HTTP request to a NPresenterRequest object.
+	 * Maps HTTP request to a PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @return NPresenterRequest|NULL
+	 * @return PresenterRequest|NULL
 	 */
 	public function match(IHttpRequest $httpRequest)
 	{
@@ -207,7 +207,7 @@ class NRoute extends NObject implements IRouter
 		}
 
 
-		// 5) BUILD NPresenterRequest
+		// 5) BUILD PresenterRequest
 		if (!isset($params[self::PRESENTER_KEY])) {
 			throw new InvalidStateException('Missing presenter in route definition.');
 		}
@@ -223,25 +223,25 @@ class NRoute extends NObject implements IRouter
 			unset($params[self::PRESENTER_KEY]);
 		}
 
-		return new NPresenterRequest(
+		return new PresenterRequest(
 			$presenter,
 			$httpRequest->getMethod(),
 			$params,
 			$httpRequest->getPost(),
 			$httpRequest->getFiles(),
-			array(NPresenterRequest::SECURED => $httpRequest->isSecured())
+			array(PresenterRequest::SECURED => $httpRequest->isSecured())
 		);
 	}
 
 
 
 	/**
-	 * Constructs absolute URL from NPresenterRequest object.
+	 * Constructs absolute URL from PresenterRequest object.
 	 * @param  IHttpRequest
-	 * @param  NPresenterRequest
+	 * @param  PresenterRequest
 	 * @return string|NULL
 	 */
-	public function constructUrl(NPresenterRequest $appRequest, IHttpRequest $httpRequest)
+	public function constructUrl(PresenterRequest $appRequest, IHttpRequest $httpRequest)
 	{
 		if ($this->flags & self::ONE_WAY) {
 			return NULL;
@@ -712,7 +712,7 @@ class NRoute extends NObject implements IRouter
 
 
 
-	/********************* NRoute::$styles manipulator ****************d*g**/
+	/********************* Route::$styles manipulator ****************d*g**/
 
 
 
@@ -744,7 +744,7 @@ class NRoute extends NObject implements IRouter
 	/**
 	 * Changes style property value.
 	 * @param  string  style name (#style, urlParameter, ?queryParameter)
-	 * @param  string  property name (NRoute::PATTERN, NRoute::FILTER_IN, NRoute::FILTER_OUT, NRoute::FILTER_TABLE)
+	 * @param  string  property name (Route::PATTERN, Route::FILTER_IN, Route::FILTER_OUT, Route::FILTER_TABLE)
 	 * @param  mixed   property value
 	 * @param  void
 	 */

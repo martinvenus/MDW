@@ -14,23 +14,23 @@
 
 
 /**
- * NCallback factory.
+ * Callback factory.
  * @param  mixed   class, object, function, callback
  * @param  string  method
- * @return NCallback
+ * @return Callback
  */
 function callback($callback, $m = NULL)
 {
-	return ($m === NULL && $callback instanceof NCallback) ? $callback : new NCallback($callback, $m);
+	return ($m === NULL && $callback instanceof Callback) ? $callback : new Callback($callback, $m);
 }
 
 
 
 /**
- * NDebug::dump shortcut.
+ * Debug::dump shortcut.
  */
 function dump($var)
 {
-	foreach (func_get_args() as $arg) NDebug::dump($arg);
+	foreach (func_get_args() as $arg) Debug::dump($arg);
 	return $var;
 }

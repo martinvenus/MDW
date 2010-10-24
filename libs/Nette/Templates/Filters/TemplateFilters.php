@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-final class NTemplateFilters
+final class TemplateFilters
 {
 
 	/**
@@ -41,7 +41,7 @@ final class NTemplateFilters
 	 */
 	public static function removePhp($s)
 	{
-		return preg_replace('#\x01@php:p\d+@\x02#', '<?php ?>', $s); // NTemplate hides PHP code in these snippets
+		return preg_replace('#\x01@php:p\d+@\x02#', '<?php ?>', $s); // Template hides PHP code in these snippets
 	}
 
 
@@ -88,7 +88,7 @@ final class NTemplateFilters
 
 
 	/**
-	 * NCallback for self::netteLinks.
+	 * Callback for self::netteLinks.
 	 * Parses a "nette" URI (scheme is 'nette') and converts to real URI
 	 */
 	private static function netteLinksCb($m)
@@ -136,7 +136,7 @@ final class NTemplateFilters
 
 
 	/**
-	 * NCallback for self::texyBlocks.
+	 * Callback for self::texyBlocks.
 	 */
 	private static function texyCb($m)
 	{

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Nette Framework - NInstantClientScript template.
+ * Nette Framework - InstantClientScript template.
  *
  * @author     David Grudl
  * @license    http://nette.org/license  Nette license
  * @link       http://nette.org
  *
  * @param      string    $formName
- * @param      this      NInstantClientScript
+ * @param      this      InstantClientScript
  * @return     void
  * @package Nette\Forms
  */
@@ -32,7 +32,7 @@ nette.forms[<?php echo $formName ?>] = {
 <?php foreach ($this->validateScripts as $name => $validateScript): ?>
 		<?php echo json_encode((string) $name) ?>: function(sender) {
 			var res, val, form = sender.form || sender;
-<?php echo NString::indent($validateScript, 3) ?>
+<?php echo String::indent($validateScript, 3) ?>
 		}<?php echo --$count ? ',' : '' ?>
 
 <?php endforeach ?>
@@ -40,7 +40,7 @@ nette.forms[<?php echo $formName ?>] = {
 
 	toggle: function(sender) {
 		var visible, res, form = sender.form || sender;
-<?php echo NString::indent($this->toggleScript, 2) ?>
+<?php echo String::indent($this->toggleScript, 2) ?>
 	}
 }
 

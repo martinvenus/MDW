@@ -13,7 +13,7 @@
 
 
 /**
- * NMail provides functionality to compose and send both text and MIME-compliant multipart e-mail messages.
+ * Mail provides functionality to compose and send both text and MIME-compliant multipart e-mail messages.
  *
  * @author     David Grudl
  *
@@ -23,7 +23,7 @@
  * @property   int $priority
  * @property   string $htmlBody
  */
-class NMail extends NMailMimePart
+class Mail extends MailMimePart
 {
 	/**#@+ Priority */
 	const HIGH = 1;
@@ -32,7 +32,7 @@ class NMail extends NMailMimePart
 	/**#@-*/
 
 	/** @var IMailer */
-	public static $defaultMailer = 'NSendmailMailer';
+	public static $defaultMailer = 'SendmailMailer';
 
 	/** @var array */
 	public static $defaultHeaders = array(
@@ -71,7 +71,7 @@ class NMail extends NMailMimePart
 	 * Sets the sender of the message.
 	 * @param  string  e-mail or format "John Doe" <doe@example.com>
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setFrom($email, $name = NULL)
 	{
@@ -96,7 +96,7 @@ class NMail extends NMailMimePart
 	 * Adds the reply-to address.
 	 * @param  string  e-mail or format "John Doe" <doe@example.com>
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function addReplyTo($email, $name = NULL)
 	{
@@ -109,7 +109,7 @@ class NMail extends NMailMimePart
 	/**
 	 * Sets the subject of the message.
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setSubject($subject)
 	{
@@ -134,7 +134,7 @@ class NMail extends NMailMimePart
 	 * Adds email recipient.
 	 * @param  string  e-mail or format "John Doe" <doe@example.com>
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function addTo($email, $name = NULL) // addRecipient()
 	{
@@ -148,7 +148,7 @@ class NMail extends NMailMimePart
 	 * Adds carbon copy email recipient.
 	 * @param  string  e-mail or format "John Doe" <doe@example.com>
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function addCc($email, $name = NULL)
 	{
@@ -162,7 +162,7 @@ class NMail extends NMailMimePart
 	 * Adds blind carbon copy email recipient.
 	 * @param  string  e-mail or format "John Doe" <doe@example.com>
 	 * @param  string
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function addBcc($email, $name = NULL)
 	{
@@ -192,7 +192,7 @@ class NMail extends NMailMimePart
 	/**
 	 * Sets the Return-Path header of the message.
 	 * @param  string  e-mail
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setReturnPath($email)
 	{
@@ -216,7 +216,7 @@ class NMail extends NMailMimePart
 	/**
 	 * Sets email priority.
 	 * @param  int
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setPriority($priority)
 	{
@@ -241,7 +241,7 @@ class NMail extends NMailMimePart
 	 * Sets HTML body.
 	 * @param  string|ITemplate
 	 * @param  mixed base-path or FALSE to disable parsing
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setHtmlBody($html, $basePath = NULL)
 	{
@@ -268,15 +268,15 @@ class NMail extends NMailMimePart
 	 * @param  string
 	 * @param  string
 	 * @param  string
-	 * @return NMailMimePart
+	 * @return MailMimePart
 	 */
 	public function addEmbeddedFile($file, $content = NULL, $contentType = NULL)
 	{
-		$part = new NMailMimePart;
+		$part = new MailMimePart;
 		$part->setBody($content === NULL ? $this->readFile($file, $contentType) : (string) $content);
 		$part->setContentType($contentType ? $contentType : 'application/octet-stream');
 		$part->setEncoding(self::ENCODING_BASE64);
-		$part->setHeader('Content-Disposition', 'inline; filename="' . NString::fixEncoding(basename($file)) . '"');
+		$part->setHeader('Content-Disposition', 'inline; filename="' . String::fixEncoding(basename($file)) . '"');
 		$part->setHeader('Content-ID', '<' . md5(uniqid('', TRUE)) . '>');
 		return $this->inlines[$file] = $part;
 	}
@@ -288,15 +288,15 @@ class NMail extends NMailMimePart
 	 * @param  string
 	 * @param  string
 	 * @param  string
-	 * @return NMailMimePart
+	 * @return MailMimePart
 	 */
 	public function addAttachment($file, $content = NULL, $contentType = NULL)
 	{
-		$part = new NMailMimePart;
+		$part = new MailMimePart;
 		$part->setBody($content === NULL ? $this->readFile($file, $contentType) : (string) $content);
 		$part->setContentType($contentType ? $contentType : 'application/octet-stream');
 		$part->setEncoding(self::ENCODING_BASE64);
-		$part->setHeader('Content-Disposition', 'attachment; filename="' . NString::fixEncoding(basename($file)) . '"');
+		$part->setHeader('Content-Disposition', 'attachment; filename="' . String::fixEncoding(basename($file)) . '"');
 		return $this->attachments[] = $part;
 	}
 
@@ -339,7 +339,7 @@ class NMail extends NMailMimePart
 	/**
 	 * Sets the mailer.
 	 * @param  IMailer
-	 * @return NMail  provides a fluent interface
+	 * @return Mail  provides a fluent interface
 	 */
 	public function setMailer(IMailer $mailer)
 	{

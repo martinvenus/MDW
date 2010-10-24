@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NBadRequestException extends Exception
+class BadRequestException extends Exception
 {
 	/** @var int */
 	protected $defaultCode = 404;

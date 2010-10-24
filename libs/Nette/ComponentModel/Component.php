@@ -13,7 +13,7 @@
 
 
 /**
- * NComponent is the base class for all components.
+ * Component is the base class for all components.
  *
  * Components are objects implementing IComponent. They has parent component and own name.
  *
@@ -22,7 +22,7 @@
  * @property-read string $name
  * @property IComponentContainer $parent
  */
-abstract class NComponent extends NObject implements IComponent
+abstract class Component extends Object implements IComponent
 {
 	/** @var IComponentContainer */
 	private $parent;
@@ -188,7 +188,7 @@ abstract class NComponent extends NObject implements IComponent
 	 * not be called by applications
 	 * @param  IComponentContainer  New parent or null if this component is being removed from a parent
 	 * @param  string
-	 * @return NComponent  provides a fluent interface
+	 * @return Component  provides a fluent interface
 	 * @throws InvalidStateException
 	 */
 	public function setParent(IComponentContainer $parent = NULL, $name = NULL)
@@ -248,7 +248,7 @@ abstract class NComponent extends NObject implements IComponent
 	{
 		if ($this instanceof IComponentContainer) {
 			foreach ($this->getComponents() as $component) {
-				if ($component instanceof NComponent) {
+				if ($component instanceof Component) {
 					$component->refreshMonitors($depth + 1, $missing, $listeners);
 				}
 			}
@@ -304,14 +304,14 @@ abstract class NComponent extends NObject implements IComponent
 
 
 	/**
-	 * NObject cloning.
+	 * Object cloning.
 	 */
 	public function __clone()
 	{
 		if ($this->parent === NULL) {
 			return;
 
-		} elseif ($this->parent instanceof NComponentContainer) {
+		} elseif ($this->parent instanceof ComponentContainer) {
 			$this->parent = $this->parent->_isCloning();
 			if ($this->parent === NULL) { // not cloning
 				$this->refreshMonitors(0);

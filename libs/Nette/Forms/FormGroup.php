@@ -20,7 +20,7 @@
  * @property-read array $controls
  * @property-read array $options
  */
-class NFormGroup extends NObject
+class FormGroup extends Object
 {
 	/** @var SplObjectStorage */
 	protected $controls;
@@ -38,7 +38,7 @@ class NFormGroup extends NObject
 
 
 	/**
-	 * @return NFormGroup  provides a fluent interface
+	 * @return FormGroup  provides a fluent interface
 	 */
 	public function add()
 	{
@@ -72,15 +72,15 @@ class NFormGroup extends NObject
 
 	/**
 	 * Sets user-specific option.
-	 * Options recognized by NConventionalRenderer
-	 * - 'label' - textual or NHtml object label
+	 * Options recognized by ConventionalRenderer
+	 * - 'label' - textual or Html object label
 	 * - 'visual' - indicates visual group
-	 * - 'container' - container as NHtml object
-	 * - 'description' - textual or NHtml object description
+	 * - 'container' - container as Html object
+	 * - 'description' - textual or Html object description
 	 * - 'embedNext' - describes how render next group
 	 * @param  string key
 	 * @param  mixed  value
-	 * @return NFormGroup  provides a fluent interface
+	 * @return FormGroup  provides a fluent interface
 	 */
 	public function setOption($key, $value)
 	{

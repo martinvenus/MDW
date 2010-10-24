@@ -13,11 +13,11 @@
 
 
 /**
- * NString tools library.
+ * String tools library.
  *
  * @author     David Grudl
  */
-final class NString
+final class String
 {
 
 	/**

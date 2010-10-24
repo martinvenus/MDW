@@ -13,10 +13,10 @@
 
 
 /**
- * NLink generation exception.
+ * Link generation exception.
  *
  * @author     David Grudl
  */
-class NInvalidLinkException extends Exception
+class InvalidLinkException extends Exception
 {
 }

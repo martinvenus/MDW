@@ -13,12 +13,12 @@
 
 
 /**
- * NAnnotations support for PHP.
+ * Annotations support for PHP.
  *
  * @author     David Grudl
  * @deprecated
  */
-final class NAnnotations
+final class Annotations
 {
 	/** @var bool */
 	public static $useReflection;
@@ -34,7 +34,7 @@ final class NAnnotations
 	public static function has(Reflector $r, $name)
 	{
 		trigger_error(__METHOD__ . '() is deprecated; use getReflection()->hasAnnotation() instead.', E_USER_WARNING);
-		$cache = NAnnotationsParser::getAll($r);
+		$cache = AnnotationsParser::getAll($r);
 		return !empty($cache[$name]);
 	}
 
@@ -49,7 +49,7 @@ final class NAnnotations
 	public static function get(Reflector $r, $name)
 	{
 		trigger_error(__METHOD__ . '() is deprecated; use getReflection()->getAnnotation() instead.', E_USER_WARNING);
-		$cache = NAnnotationsParser::getAll($r);
+		$cache = AnnotationsParser::getAll($r);
 		return isset($cache[$name]) ? end($cache[$name]) : NULL;
 	}
 
@@ -64,7 +64,7 @@ final class NAnnotations
 	public static function getAll(Reflector $r, $name = NULL)
 	{
 		trigger_error(__METHOD__ . '() is deprecated; use getReflection()->getAnnotations() instead.', E_USER_WARNING);
-		$cache = NAnnotationsParser::getAll($r);
+		$cache = AnnotationsParser::getAll($r);
 
 		if ($name === NULL) {
 			return $cache;

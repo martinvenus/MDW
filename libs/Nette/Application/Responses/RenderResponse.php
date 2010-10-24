@@ -17,7 +17,7 @@
  *
  * @author     David Grudl
  */
-class NRenderResponse extends NObject implements IPresenterResponse
+class RenderResponse extends Object implements IPresenterResponse
 {
 	/** @var mixed */
 	private $source;
