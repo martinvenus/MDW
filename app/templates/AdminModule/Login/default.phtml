@@ -1,28 +1,8 @@
-<?php
-
-$form['userName']->getControlPrototype()->class = "small";
-$form['password']->getControlPrototype()->class = "small";
-
-?>
-
 {block #content}
 
 <h2>Zadejte své přihlašovavcí údaje:</h2>
 
-<?php $form->render('begin') ?>
-<br />
-<?php $form->render('errors') ?>
-
-<fieldset>
-    <label>{!$form['userName']->label}</label>
-    <span class="small_input">{!$form['userName']->control}</span>
-    <label>{!$form['password']->label}</label>
-    <span class="small_input">{!$form['password']->control}</span><br /><br /><br /><br />
-    {!$form['login']->control}<br /><br />
-    <a href="#" class="button" title="Submit"><span>Submit</span></a>
-    <span class="clear"></span>
-</fieldset>
-</form>
+{include '../@form.phtml', form => $presenter['loginForm']}
 
 {/block}
 

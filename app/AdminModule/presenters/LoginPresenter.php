@@ -30,44 +30,42 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
         $this->backlink = '';
     }
 
-    public function actionDefault($backlink) {
+    protected function createComponentLoginForm($backlink){
 
         $this->backlink = $backlink;
 
-        $this->form = new AppForm($this, 'login');
+        $form = new AppForm;
 
-        $this->form->addText('userName', 'Uživatelské jméno:')
+        $form->addText('userName', 'Uživatelské jméno:')
                 ->addRule(Form::FILLED, 'Uživatelské jméno musí být vyplněno.');
 
-        $this->form->addPassword('password', 'Přístupové heslo:')
+        $form->addPassword('password', 'Přístupové heslo:')
                 ->addRule(Form::FILLED, 'Přístupové heslo musí být vyplněno.');
         //->addRule(Form::MIN_LENGTH, 'Heslo musí být minimálně %d znaků', 12);
 
 
-        $this->form->addSubmit('login', 'Přihlásit');
+        $form->addSubmit('login', 'Přihlásit');
 
 
-        $this->form->onSubmit[] = array($this, 'FormSubmitted');
-
-        $this->template->form = $this->form;
-
-        if (!isset($this->template->result)) {
-
-            $this->template->result = "";
-
-        }
+        $form->onSubmit[] = callback($this, 'loginFormSubmitted');
 
         $this->user->setAuthenticationHandler(new UsersModel());
+
+        return $form;
+
     }
+
+
 
     /*
      * Metoda zpracovávající data z formuláře
      * @param $form data z formuláře
      */
 
-    function FormSubmitted(Form $form) {
+    
+    public function loginFormSubmitted($formular){
 
-        $formular = $this->form->getValues();
+        $formular = $formular->getValues();
 
         try {
             // Ověření přihlašovacích údajů uživatele

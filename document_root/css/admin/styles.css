@@ -505,3 +505,37 @@ p#pagin a, p#pagin a:visited	{
 p#pagin a:hover	{
 	text-decoration: underline;
 }
+
+#form_table tr.highlight	{
+	background: #f2f2f2 url(../../images/admin/bg_td_highlight.png) repeat-x left top;
+}
+#form_table td	{
+	height: 40px;
+        padding-left: 5px;
+	color: #6c6c6c;
+	font-size: 10px;
+	text-align: left;
+	border: solid 1px #d5d5d5;
+	border-left: 0;
+}
+
+#form_table label {
+    padding-bottom: 25px;
+}
+
+#form_table td.action	{
+	border-right: 0;
+}
+#form_table td a, #form_table td a:visited	{
+	color: #566a97;
+}
+#form_table td a:hover	{
+	text-decoration: underline;
+}
+#form_table input.submit{
+	float: left;
+	height: 30px;
+	font-size: 1.4em;
+	padding: 7px 5px;
+	line-height: 1.25em;
+}

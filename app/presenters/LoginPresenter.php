@@ -18,7 +18,7 @@
 class LoginPresenter extends BasePresenter
 {
 
-
+    
 	/**
 	 * Login form component factory.
 	 * @return mixed
