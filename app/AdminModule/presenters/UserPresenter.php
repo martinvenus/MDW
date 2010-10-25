@@ -167,7 +167,7 @@ class Admin_UserPresenter extends Admin_BasePresenter {
 
         $form->addConfirmer(
                 'userDelete',
-                array($this, 'userDelete'),
+                array($this, 'actionUserDelete'),
                 array($this, 'questionUserDelete')
         );
 
