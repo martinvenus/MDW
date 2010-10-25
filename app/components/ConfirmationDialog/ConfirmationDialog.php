@@ -13,8 +13,22 @@
  * @package    ConfirmationDialog
  */
 
+
+/* //UNCOMMENT IF YOU ARE USING NETTE WITHOUT NAMESPACES 
+use \Nette\Application\Control;
+use \Nette\Application\AppForm;
+use \Nette\Web\Html;
+use \Nette\Environment;
+*/
+
 class ConfirmationDialog extends Control
 {
+
+    public static $_strings = array(
+		'yes' => 'Yes',
+		'no' => 'No',
+		'expired' => 'Confirmation token expires. Please try action again.',
+	);
 
 	/** @var \Nette\Application\AppForm */
 	private $form;
@@ -40,9 +54,9 @@ class ConfirmationDialog extends Control
 
 		$this->form = new AppForm($this, 'form');
 
-		$this->form->addSubmit('yes', _('Yes'))
+		$this->form->addSubmit('yes', self::$_strings['yes'])
 			->onClick[] = array($this, 'confirmClicked');
-		$this->form->addSubmit('no', _('No'))
+		$this->form->addSubmit('no', self::$_strings['no'])
 			->onClick[] = array($this, 'cancelClicked');
 		$this->form->addHidden('token');
 
@@ -222,7 +236,7 @@ class ConfirmationDialog extends Control
 		if (!isset($this->session->{$values['token']}))
 		{
 			//TODO should be here some notification?
-			$this->presenter->flashMessage(_('Confirmation token expires. Please try action again.'));
+			$this->presenter->flashMessage(self::$_string['expired']);
 			$this->invalidateControl();
 			return;
 		}
@@ -283,7 +297,7 @@ class ConfirmationDialog extends Control
 	protected function createTemplate()
 	{
 		$template = parent::createTemplate();
-		//$template->registerFilter('Nette\Templates\CurlyBracketsFilter::invoke');
+		$template->registerFilter('Nette\Templates\CurlyBracketsFilter::invoke');
 		$template->setFile(dirname(__FILE__) . '/form.phtml');
 		return $template;
 	}

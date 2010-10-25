@@ -22,6 +22,15 @@ abstract class Admin_BasePresenter extends BasePresenter {
 
         parent::startup();
 
+        if (!function_exists('lcfirst')) {
+
+            function lcfirst($str) {
+                $str{0} = strtolower($str{0});
+                return $str;
+            }
+
+        }
+
         if (Environment::getServiceLocator()->hasService('User') === false) {
             Environment::getServiceLocator()->addService('User', new User());
         }
