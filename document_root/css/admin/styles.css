@@ -245,65 +245,8 @@ strong	{
 .tabs li a:hover	{
 	color: #6c6c6c;
 }
-#content form	{
-	margin-bottom: 20px;
-	background: url(../../images/admin/bg_content_form.png) repeat-y left top;
-}
-#content fieldset	{
-	padding: 0 0 18px 18px;
-	background: url(../../images/admin/bg_content_fieldset.png) no-repeat left bottom;
-}
-#content label	{
-	height: 1%;
-	clear: both;
-	color: #6c6c6c;
-	display: block;
-	font-size: 1.2em;
-	font-weight: bold;
-	line-height: 1.25em;
-	padding: 15px 0 5px 0;
-}
-#content .large_input, #content .medium_input, #content .small_input	{
-	float: left;
-	height: 30px;
-}
-#content input	{
-	float: left;
-	height: 16px;
-	font-size: 1.4em;
-	padding: 7px 5px;
-	line-height: 1.25em;
-}
-#content .large_input	{
-	background: #aaa url(../../images/admin/bg_input_large.png) no-repeat left top;
-}
-#content input.large	{
-	width: 450px;
-	background: #aaa url(../../images/admin/bg_input_large.png) no-repeat left top;
-}
-#content input.large:focus	{
-	background: #eee url(../../images/admin/bg_input_large.png) no-repeat left bottom;
-}
-#content .medium_input	{
-	background: #aaa url(../../images/admin/bg_input_medium.png) no-repeat left top;
-}
-#content input.medium	{
-	width: 350px;
-	background: #aaa url(../../images/admin/bg_input_medium.png) no-repeat left top;
-}
-#content input.medium:focus	{
-	background: #eee url(../../images/admin/bg_input_medium.png) no-repeat left bottom;
-}
-#content .small_input	{
-	background: #aaa url(../../images/admin/bg_input_small.png) no-repeat left top;
-}
-#content input.small	{
-	width: 240px;
-	background: #aaa url(../../images/admin/bg_input_small.png) no-repeat left top;
-}
-#content input.small:focus	{
-	background: #eee url(../../images/admin/bg_input_small.png) no-repeat left bottom;
-}
+
+
 #content span.positive	{
 	float: left;
 	height: 16px;
@@ -328,32 +271,7 @@ strong	{
 	margin: 7px 0 0 10px;
 	background: url(../../images/admin/icon_negative.png) no-repeat left top;
 }
-#content form p	{
-	clear: both;
-	color: #aeaeae;
-	padding: 5px 0;
-	font-size: 1.1em;
-}
-#content .textarea	{
-	width: 693px;
-	height: 150px;
-	display: block;
-	margin-bottom: 20px;
-	background: #aaa url(../../images/admin/bg_textarea.png) no-repeat left top;
-}
-#content textarea	{
-	padding: 5px;
-	width: 683px;
-	height: 140px;
-	display: block;
-	overflow: auto;
-	font-size: 1.4em;
-	line-height: 1.25em;
-	background: #aaa url(../../images/admin/bg_textarea.png) no-repeat left top;
-}
-#content textarea:focus	{
-	background: #eee url(../../images/admin/bg_textarea.png) no-repeat left bottom;
-}
+
 #content a.button, #content a.button:visited	{
 	float: left;
 	height: 25px;
@@ -432,9 +350,7 @@ strong	{
 	margin: 0 auto;
 	border-collapse: collapse;
 }
-#content tr.highlight	{
-	background: #f2f2f2 url(../../images/admin/bg_td_highlight.png) repeat-x left top;
-}
+
 #content th	{
 	height: 42px;
 	color: #6c6c6c;
@@ -442,100 +358,44 @@ strong	{
 	text-align: left;
 	text-indent: 20px;
 	font-weight: bold;
+	width: 250px;
 	vertical-align: middle;
 }
-#content th.col1, #content th.col2, #content th.col3, #content th.col4	{
-	width: 146px;
-}
+
 #content td	{
-	height: 28px;
 	color: #6c6c6c;
+	height: 42px;
 	font-size: 1.2em;
-	text-align: center;
-	vertical-align: middle;
-	border: solid 1px #d5d5d5;
-	border-left: 0;
-}
-#content td.action	{
-	border-right: 0;
-}
-#content td a, #content td a:visited	{
-	color: #566a97;
-}
-#content td a:hover	{
-	text-decoration: underline;
-}
-#content table ul	{
-	width: 96px;
-	margin: 0 auto;
-}
-#content table li	{
-	float: left;
-	padding: 0 4px;
-}
-#content table li a, #content table li a:visited	{
-	float: left;
-	width: 16px;
-	height: 16px;
-	display: block;
-	cursor: pointer;
-}
-#content a.add, #content a.add:visited	{
-	background: url(../../images/admin/icon_add.png) no-repeat center center;
-}
-#content a.edit, #content a.edit:visited	{
-	background: url(../../images/admin/icon_edit.png) no-repeat center center;
-}
-#content a.delete, #content a.delete:visited	{
-	background: url(../../images/admin/icon_delete.png) no-repeat center center;
-}
-#content a.mark, #content a.mark:visited	{
-	background: url(../../images/admin/icon_mark2.png) no-repeat center center;
-}
-p#pagin	{
-	color: #566a97;
-	padding: 20px 0;
-	font-size: 1.2em;
-	text-align: center;
-	background: url(../../images/admin/bg_content_fieldset.png) no-repeat left bottom;
-}
-p#pagin a, p#pagin a:visited	{
-	color: #566a97;
-}
-p#pagin a:hover	{
-	text-decoration: underline;
-}
-
-#form_table tr.highlight	{
-	background: #f2f2f2 url(../../images/admin/bg_td_highlight.png) repeat-x left top;
-}
-#form_table td	{
-	height: 40px;
-        padding-left: 5px;
-	color: #6c6c6c;
-	font-size: 10px;
 	text-align: left;
+}
+
+#content td input	{
+	color: #6c6c6c;
+	height: 26px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 1.2em;
 	border: solid 1px #d5d5d5;
-	border-left: 0;
+	text-align: left;
 }
 
-#form_table label {
-    padding-bottom: 25px;
+#content td select	{
+	width: 200px;
+	color: #6c6c6c;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-size: 1.2em;
+	border: solid 1px #d5d5d5;
+	text-align: left;
+	margin-top: 10px;
+	height: 50px;
 }
 
-#form_table td.action	{
-	border-right: 0;
-}
-#form_table td a, #form_table td a:visited	{
-	color: #566a97;
-}
-#form_table td a:hover	{
-	text-decoration: underline;
-}
-#form_table input.submit{
-	float: left;
-	height: 30px;
-	font-size: 1.4em;
-	padding: 7px 5px;
-	line-height: 1.25em;
+#content fieldset	{
+	font-size: 1.2em;
+	color: #6c6c6c;
+	border: solid 1px #d5d5d5;
+	padding 20px 20px 20px 20px;
+	margin-bottom: 20px;
+	text-indent: 5px;
 }
