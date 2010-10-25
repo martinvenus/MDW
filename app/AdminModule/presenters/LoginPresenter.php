@@ -85,7 +85,7 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
              * Uživatel bude odhlášen při zavření prohlížeče
              * Při odhlášení uživatele bude smazána identita
              */
-            $this->user->setExpiration(1 * 60, TRUE, TRUE);
+            $this->user->setExpiration(120 * 60, TRUE, TRUE);
         } catch (Exception $e) {
 
             $this->flashMessage('Bylo zadáno špatné uživatelské jméno nebo heslo.');
