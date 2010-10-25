@@ -30,51 +30,44 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
         $this->backlink = '';
     }
 
-        /*
-     * Vykreslení stránky pro administraci automobilů
-    */
-    public function renderDefault($backlink) {
-
-        $this['loginForm']; // získá komponentu
+    public function actionDefault($backlink) {
 
         $this->backlink = $backlink;
 
-    }
+        $this->form = new AppForm($this, 'login');
 
-    protected function createComponentLoginForm(){
-
-        $form = new AppForm;
-
-        $form->addText('userName', 'Uživatelské jméno:')
+        $this->form->addText('userName', 'Uživatelské jméno:')
                 ->addRule(Form::FILLED, 'Uživatelské jméno musí být vyplněno.');
 
-        $form->addPassword('password', 'Přístupové heslo:')
+        $this->form->addPassword('password', 'Přístupové heslo:')
                 ->addRule(Form::FILLED, 'Přístupové heslo musí být vyplněno.');
         //->addRule(Form::MIN_LENGTH, 'Heslo musí být minimálně %d znaků', 12);
 
 
-        $form->addSubmit('login', 'Přihlásit');
+        $this->form->addSubmit('login', 'Přihlásit');
 
 
-        $form->onSubmit[] = callback($this, 'loginFormSubmitted');
+        $this->form->onSubmit[] = array($this, 'FormSubmitted');
+
+        $this->template->form = $this->form;
+
+        if (!isset($this->template->result)) {
+
+            $this->template->result = "";
+
+        }
 
         $this->user->setAuthenticationHandler(new UsersModel());
-
-        return $form;
-
     }
-
-
 
     /*
      * Metoda zpracovávající data z formuláře
      * @param $form data z formuláře
      */
 
-    
-    public function loginFormSubmitted($formular){
+    function FormSubmitted(Form $form) {
 
-        $formular = $formular->getValues();
+        $formular = $this->form->getValues();
 
         try {
             // Ověření přihlašovacích údajů uživatele
@@ -88,12 +81,12 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
             $this->user->setExpiration(120 * 60, TRUE, TRUE);
         } catch (Exception $e) {
 
-            $this->flashMessage('Bylo zadáno špatné uživatelské jméno nebo heslo.');
+            $this->flashMessage('Wrong user name or password given.');
         }
 
         if ($this->user->isLoggedIn()) {
 
-            $this->flashMessage('Přihlášení proběhlo úspěšně.');
+            $this->flashMessage('You are sucesfully logged in.');
 
             if (!empty($this->backlink)) {
                 $this->getApplication()->restoreRequest($this->backlink);
