@@ -16,7 +16,6 @@
 abstract class Admin_BasePresenter extends BasePresenter {
 
     protected $user;
-    public $oldLayoutMode = FALSE;
 
     public function startup() {
 
