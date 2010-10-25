@@ -345,13 +345,13 @@ strong	{
 #content .box	{
 	background: url(../../images/admin/bg_content_form.png) repeat-y left top;
 }
-#content table	{
+#content fieldset table	{
 	width: 726px;
 	margin: 0 auto;
 	border-collapse: collapse;
 }
 
-#content th	{
+#content fieldset th	{
 	height: 42px;
 	color: #6c6c6c;
 	font-size: 1.2em;
@@ -362,14 +362,14 @@ strong	{
 	vertical-align: middle;
 }
 
-#content td	{
+#content fieldset td	{
 	color: #6c6c6c;
 	height: 42px;
 	font-size: 1.2em;
 	text-align: left;
 }
 
-#content td input	{
+#content fieldset td input	{
 	color: #6c6c6c;
 	height: 26px;
 	padding-left: 5px;
@@ -379,7 +379,7 @@ strong	{
 	text-align: left;
 }
 
-#content td select	{
+#content fieldset td select	{
 	width: 200px;
 	color: #6c6c6c;
 	padding-left: 5px;
