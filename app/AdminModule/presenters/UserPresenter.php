@@ -1,12 +1,11 @@
 <?php
+
 /**
  * Rally-Base
  *
  * @copyright  Copyright (c) 2010 Martin Venuš
  * @package    Rally-Base
  */
-
-
 
 /**
  * Administrace uživatelů
@@ -15,36 +14,37 @@
  * @package    Rally-Base
  */
 class Admin_UserPresenter extends Admin_BasePresenter {
+
     /** @var Form */
     protected $form;
 
     /*
-    * Zavolá funkci verifyUser, která ověří, zda je uživatel přihlášen
-    * V případě že není -> přesměruje na přihlášení
-    */
+     * Zavolá funkci verifyUser, která ověří, zda je uživatel přihlášen
+     * V případě že není -> přesměruje na přihlášení
+     */
+
     public function startup() {
 
         parent::startup();
 
         $this->verifyUser();
-
     }
 
     /*
      * Metoda, která ověří právo přístupu k dané akci
      * Právo provádět změny u všech uživatelů má pouze Administrator
      * Každý uživatel může změnit své údaje a své heslo
-    */
+     */
+
     function access($id=-1) {
 
 
-        if ($id==-1) {
+        if ($id == -1) {
             if (!$this->user->isInRole('Administrator')) {
                 $this->flashMessage("Pouze administrátoři mají přístup k tomuto objektu.");
                 $this->redirect('Default:');
             }
-        }
-        else {
+        } else {
             if ((!$this->user->isInRole('Administrator')) && $this->user->getIdentity()->id != $id) {
                 $this->flashMessage("Pouze administrátoři nebo vlastník objektu má přístup k tomuto objektu.");
                 $this->redirect('Default:');
@@ -54,19 +54,20 @@ class Admin_UserPresenter extends Admin_BasePresenter {
 
     /*
      * Vykreslení stránky pro administraci automobilů
-    */
+     */
+
     public function renderDefault() {
 
         $this->access();
 
         $this['users']; // získá komponentu
-
     }
 
     /*
      * Komponenta datagagrid pro vykreslení tabulky aut
      * @return grid
-    */
+     */
+
     protected function createComponentUsers() {
 
         $grid = new DataGrid;
@@ -80,8 +81,12 @@ class Admin_UserPresenter extends Admin_BasePresenter {
         $grid->addColumn('icq', 'ICQ')->addFilter();
         $grid->addColumn('mobile', 'Mobilní telefon')->addFilter();
         $grid->addColumn('active', 'Aktivní')->addSelectboxFilter(array(1 => 'Yes', 0 => 'No'));
+        $grid->addColumn('holiday', 'Dovolená')->addSelectboxFilter(array(1 => 'Yes', 0 => 'No'));
 
         $grid->multiOrder = FALSE; // order by one column only
+
+        $grid['holiday']->replacement['1'] = 'Ano';
+        $grid['holiday']->replacement['0'] = 'Ne';
 
         $grid['active']->replacement['1'] = 'Ano';
         $grid['active']->replacement['0'] = 'Ne';
@@ -93,6 +98,7 @@ class Admin_UserPresenter extends Admin_BasePresenter {
         $grid->keyName = 'id';
 
         $grid->addAction('Aktivovat/Deaktivovat', 'userActivateChange!', Html::el('span')->setText('Aktivace/Deaktivace'), $useAjax = TRUE);
+        $grid->addAction('Dovolená', 'userHolidayChange!', Html::el('span')->setText('Dovolená'), $useAjax = TRUE);
         $grid->addAction('Editovat', 'userChangeRedirect', Html::el('span')->setText('Editovat'), $useAjax = FALSE);
         $grid->addAction('Změnit heslo', 'userPasswordChangeRedirect', Html::el('span')->setText('Změnit heslo'), $useAjax = FALSE);
         $grid->addAction('Smazat', 'confirmForm:confirmUserDelete!', Html::el('span')->setText('Smazat'), $useAjax = TRUE);
@@ -111,7 +117,8 @@ class Admin_UserPresenter extends Admin_BasePresenter {
     /*
      * Funkce invertuje sloupec active v DB
      * @param $id id záznamu, který má být změněn
-    */
+     */
+
     public function handleUserActivateChange($id) {
 
         $this->access();
@@ -120,19 +127,41 @@ class Admin_UserPresenter extends Admin_BasePresenter {
             BaseModel::activeChange('user', $id);
             dibi::query('COMMIT');
             $this->flashMessage("Stav uživatele byl úspěšně změněn.");
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             dibi::query('ROLLBACK');
             Debug::processException($e);
-            $this->flashMessage(ERROR_MESSAGE . " Error description: " .$e->getMessage(), 'error');
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
         }
 
         $this->invalidateControl('users');
     }
 
     /*
-    * Komponenta pro potvrzení akce smazání záznamu
-    */
+     * Funkce invertuje sloupec active v DB
+     * @param $id id záznamu, který má být změněn
+     */
+
+    public function handleUserHolidayChange($id) {
+
+        $this->access();
+
+        try {
+            BaseModel::activeChange('user', $id, 'holiday');
+            dibi::query('COMMIT');
+            $this->flashMessage("Stav uživatele - dovolená byl úspěšně změněn..");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            Debug::processException($e);
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+        }
+
+        $this->invalidateControl('users');
+    }
+
+    /*
+     * Komponenta pro potvrzení akce smazání záznamu
+     */
+
     function createComponentConfirmForm() {
         $form = new ConfirmationDialog();
 
@@ -146,20 +175,22 @@ class Admin_UserPresenter extends Admin_BasePresenter {
     }
 
     /*
-    * Otázka pro smazání
-    */
+     * Otázka pro smazání
+     */
+
     function questionUserDelete($dialog, $params) {
 
         $data = BaseModel::getItem('user', $params['id']);
 
-        return "Opravdu chcete smazat uživatele s uživatelským jménem ".$data['userName']."?";
+        return "Opravdu chcete smazat uživatele s uživatelským jménem " . $data['userName'] . "?";
     }
 
     /*
      * Metoda, která vykreslí formulář pro vytvoření event. úpravy uživatele
      * @param $action new=0, edit=1, password=2 - určuje typ akce
      * @param $id id uživatele
-    */
+     */
+
     public function actionUserChange($akce=0, $id=-1) {
         $this->access($id);
 
@@ -256,8 +287,7 @@ class Admin_UserPresenter extends Admin_BasePresenter {
 
             $this->form->addSubmit('ok', 'Aktualizovat');
             //            ->onClick[] = array($this, 'OkClicked'); // nebo 'OkClickHandler'
-        }
-        else {
+        } else {
             $data['navrhHesla'] = UsersModel::genPass();
 
             // Nastavíme výchozí hodnoty pro formulář
@@ -268,14 +298,14 @@ class Admin_UserPresenter extends Admin_BasePresenter {
         }
 
         $this->template->form = $this->form;
-
     }
 
     /*
      * Zpracování odeslaného formuláře
      * @param $form data z formuláře
      * Zpracování se liší podle akce
-    */
+     */
+
     function UserFormSubmitted(Form $form) {
 
         $data = $form->getValues(); // vezmeme data z formuláře
@@ -292,66 +322,55 @@ class Admin_UserPresenter extends Admin_BasePresenter {
                     dibi::query('COMMIT');
                     $this->flashMessage("Uživatel byl úspěšně vytvořen.");
                     $redirect = true;
-                }
-                else {
+                } else {
                     $this->flashMessage("Uživatel se zadaným uživatelským jménem již existuje. Vyberte prosím jiné uživatelské jméno.");
                     $redirect = false;
                 }
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
-                $this->flashMessage(ERROR_MESSAGE . " Error description: " .$e->getMessage(), 'error');
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             }
 
             if ($redirect) {
                 $this->redirect('User:default');
             }
-
-        }
-        elseif($action == 1) {
+        } elseif ($action == 1) {
 
             //editujeme uživatele
             try {
                 UsersModel::editUser($data);
                 $this->flashMessage("Užovatel byl úspěšně aktualizován.");
                 dibi::query('COMMIT');
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
-                $this->flashMessage(ERROR_MESSAGE . " Error description: " .$e->getMessage(), 'error');
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             }
 
             if ($this->user->isInRole('Administrator')) {
                 $this->redirect('User:default');
-            }
-            else {
+            } else {
                 $this->redirect('User:default');
             }
-        }
-        elseif($action == 2) {
+        } elseif ($action == 2) {
             //měníme pouze heslo
             try {
                 UsersModel::editPassword($data);
                 $this->flashMessage("Heslo bylo úspěšně změněno.");
                 dibi::query('COMMIT');
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
-                $this->flashMessage(ERROR_MESSAGE . " Error description: " .$e->getMessage(), 'error');
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             }
 
             if ($this->user->isInRole('Administrator')) {
                 $this->redirect('User:default');
-            }
-            else {
+            } else {
                 $this->redirect('Default:');
             }
-
         }
-
     }
 
     /*
@@ -360,7 +379,8 @@ class Admin_UserPresenter extends Admin_BasePresenter {
      * @param $id id mazaného uživatele
      * @param $return informace z dotazu, zda chce uživatel akci skutečně provést
      * 0=informace ještě nezískána, 1=chce, 2=nechce
-    */
+     */
+
     public function actionUserDelete($id) {
 
         $this->access();
@@ -371,22 +391,19 @@ class Admin_UserPresenter extends Admin_BasePresenter {
         if ($pom->id == $id) {
             $this->flashMessage("Nemůžete smazat sám sebe.");
             $this->redirect('User:default');
-        }
-        else {
+        } else {
             try {
                 UsersModel::delUser($id);
                 $this->flashMessage("Uživatel byl úspěšně smazán.");
                 dibi::query('COMMIT');
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
-                $this->flashMessage(ERROR_MESSAGE . " Error description: " .$e->getMessage(), 'error');
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             }
 
             $this->redirect('User:default');
         }
-
     }
 
     /*
@@ -394,15 +411,16 @@ class Admin_UserPresenter extends Admin_BasePresenter {
      * Nastaví zprávu
      * Smaže identitu
      * Přesměruje na přihlášení
-    */
+     */
+
     public function actionLogout() {
 
         // odhlásí uživatele a zároveň smaže identitu
         $this->user->logout(TRUE);
         $this->flashMessage('Odhlášení bylo úspěšné.');
         $this->redirect('Login:');
-
     }
 
 }
+
 ?>
