@@ -22,11 +22,20 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->verifyUser();
     }
 
+    public function actionDefault() {
+
+        //$this->access();
+
+        //$this['newTickets']; // získá komponentu
+
+    }
+
+
     /*
      * Vykreslení stránky s tickety
      */
 
-    public function renderDefault() {
+    public function actionMyTickets() {
 
         //$this->access();
 
@@ -42,6 +51,38 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         $grid = new DataGrid;
         $grid->bindDataTable(TicketsModel::getMyTickets($this->user->getIdentity()->id));
+
+        $grid->addColumn('ticketId', 'Tiket')->addFilter();
+        $grid->addColumn('priority', 'Priorita')->addFilter();
+        $grid->addColumn('subject', 'Předmět')->addFilter();
+        $grid->addColumn('name', 'Autor')->addFilter();
+        $grid->addColumn('status', 'Status')->addSelectboxFilter(array('Uzavřený' => 'Uzavřený', 'Otevřený' => 'Otevřený'));
+        $grid->addColumn('updated', 'Časová značka')->addFilter();
+
+        $grid->addActionColumn('Akce');
+
+        $grid->addAction('Zobrazit', 'showTicket', Html::el('span')->setText('Zobrazit'), $useAjax = FALSE);
+
+        $grid->multiOrder = FALSE; // order by one column only
+
+        $grid->displayedItems = array(10, 20, 50, 75, 100, 500, 1000); // roletka pro výběr počtu řádků na stránku
+
+        $grid->keyName = 'id';
+
+        $grid['updated']->formatCallback[] = array($this, 'updatedFormat');
+
+        return $grid;
+    }
+
+    /*
+     * Komponenta datagagrid pro vykreslení tabulky mojich ticketů
+     * @return grid
+     */
+
+    protected function createComponentNewTickets() {
+
+        $grid = new DataGrid;
+        $grid->bindDataTable(TicketsModel::getNewTickets(UsersModel::getDepartment($this->user->getIdentity()->id)));
 
         $grid->addColumn('ticketId', 'Tiket')->addFilter();
         $grid->addColumn('priority', 'Priorita')->addFilter();

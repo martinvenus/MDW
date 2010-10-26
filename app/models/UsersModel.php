@@ -212,6 +212,21 @@ class UsersModel extends Object implements IAuthenticator
 
     }
 
+
+    /*
+     * Metoda, která vrátí informace o oddělení uživatele
+     * TODO: Přepsat univerzálně aby mohl mít user více oddělení!
+     */
+    public static function getDepartment($staffId){
+
+        $result = dibi::query('SELECT departmentId FROM userDepartment WHERE staffId=%i', $staffId);
+
+        $single = $result->fetchSingle();
+
+        return $single;
+
+    }
+
      /*
      * Metoda, která vrátí dataSource všech uživatelů v systému
      * @throws DibiException
