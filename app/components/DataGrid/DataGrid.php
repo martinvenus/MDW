@@ -72,7 +72,7 @@ class DataGrid extends Control implements ArrayAccess, INamingContainer
 	protected $onOperationSubmit;
 
 	/** @var bool  can datagrid save his state into session? */
-	public $rememberState = TRUE;
+	public $rememberState = FALSE;
 
 	/** @var int|string  session timeout (default: until is browser closed) */
 	public $timeout = 0;

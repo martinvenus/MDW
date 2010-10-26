@@ -16,7 +16,7 @@ if (strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) {
     /*
      * Databáze
      */
-    $db_mysql = "mdw_wsolution_cz";    /*
+    $db_mysql = "mdw_wsolution_cz";   
 
 /*
  * Připojení pro produkční nasazení
