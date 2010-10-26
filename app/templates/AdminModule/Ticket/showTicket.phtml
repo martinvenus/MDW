@@ -1,0 +1,52 @@
+@{block content}
+
+<fieldset>
+    <legend>&nbsp;<strong>Uživatel</strong>&nbsp;</legend>
+    <table>
+        <tr>
+            <th>Předmět:</th>
+            <td>{$detaily->subject}</td>
+        </tr>
+        <tr>
+            <th>Autor:</th>
+            <td>{$detaily->name}</td>
+        </tr>
+        <tr>
+            <th>IP adresa:</th>
+            <td>{$detaily->ipAddress}</td>
+        </tr>
+        <tr>
+            <th>E-mail/telefon:</th>
+            <td>{$detaily->email} &nbsp;&nbsp;/&nbsp;&nbsp; {$detaily->phone}</td>
+        </tr>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend>&nbsp;<strong>Data a časy</strong>&nbsp;</legend>
+    <table>
+        <tr>
+            <th>Datum přidání:</th>
+            <td>{$detaily->created|datumCas}</td>
+        </tr>
+        <tr>
+            <th>Datum poslední změny:</th>
+            <td>{$detaily->updated|datumCas}</td>
+        </tr>
+    </table>
+</fieldset>
+
+{foreach $zpravy as $zprava}
+<fieldset>
+    <legend>&nbsp;<strong>{$zprava->name}{if ($zprava->name == $detaily->name)} (autor tiketu){/if}</strong>, {$zprava->date|datumCas}&nbsp;</legend>
+    <p>
+        {$zprava->message}
+    </p>
+</fieldset>
+{/foreach}
+
+{/block}
+
+{block #head}
+<h2><span>Detaily tiketu č. {$detaily->ticketID}</span></h2>
+{/block}

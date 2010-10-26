@@ -345,6 +345,15 @@ strong	{
 #content .box	{
 	background: url(../../images/admin/bg_content_form.png) repeat-y left top;
 }
+
+#content fieldset p	{
+	width: 500px;
+	color: #6c6c6c;
+	font-size: 1.2em;
+	text-align: left;
+	padding: 20px 20px 20px 20px;
+}
+
 #content fieldset table	{
 	width: 726px;
 	margin: 0 auto;

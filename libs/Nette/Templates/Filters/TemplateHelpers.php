@@ -254,8 +254,20 @@ final class TemplateHelpers
 	{
 		return preg_replace($pattern, $replacement, $subject);
 	}
-
-
+	
+	/**
+	 * /dev/null.
+	 * @param  mixed
+	 * @return string
+	 */
+	public static function datumCas($value)
+	{
+		if ($value > 0) {
+            return Date('d.m.Y H:i', $value);
+    } else {
+            return null;
+    }
+	}
 
 	/**
 	 * /dev/null.
