@@ -23,8 +23,16 @@
 </fieldset>
 
 <fieldset>
-    <legend>&nbsp;<strong>Data a časy</strong>&nbsp;</legend>
+    <legend>&nbsp;<strong>Ticket</strong>&nbsp;</legend>
     <table>
+        <tr>
+            <th>Status:</th>
+            <td>{$detaily->status}</td>
+        </tr>
+        <tr>
+            <th>Priorita:</th>
+            <td>{$detaily->priority}</td>
+        </tr>
         <tr>
             <th>Datum přidání:</th>
             <td>{$detaily->created|datumCas}</td>
@@ -32,6 +40,24 @@
         <tr>
             <th>Datum poslední změny:</th>
             <td>{$detaily->updated|datumCas}</td>
+        </tr>
+    </table>
+</fieldset>
+
+<fieldset>
+    <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
+    <table>
+        <tr>
+            <th>Odpovědět přímo</th>
+        </tr>
+        <tr>
+            <th>Prohledat znalostní bázi</th>
+        </tr>
+        <tr>
+            <th>Předat tiket</th>
+        </tr>
+        <tr>
+            <th>Změtit status tiketu</th>
         </tr>
     </table>
 </fieldset>
