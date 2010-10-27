@@ -20,7 +20,7 @@ class Admin_DefaultPresenter extends Admin_BasePresenter
 
 	public function actionDefault()
 	{
-		
+		$this->redirect('Ticket:');
 	}
 
 }

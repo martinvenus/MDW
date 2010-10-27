@@ -44,7 +44,7 @@
     </table>
 </fieldset>
 
-<fieldset>
+<fieldset n:if="$detaily->staffId!=NULL">
     <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
     <table>
         <tr>
@@ -58,6 +58,15 @@
         </tr>
         <tr>
             <th>Změtit status tiketu</th>
+        </tr>
+    </table>
+</fieldset>
+
+<fieldset n:if="$detaily->staffId==NULL">
+    <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
+    <table>
+        <tr>
+            <th><a href="{link Ticket:takeTicket, $detaily->id}" title="Přijmout tiket mezi své">Přijmout tiket mezi své</a></th>
         </tr>
     </table>
 </fieldset>

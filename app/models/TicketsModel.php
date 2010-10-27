@@ -5,58 +5,68 @@
  *
  * @author     Jaroslav Líbal
  */
-class TicketsModel
-{
-
-
-     /*
+class TicketsModel {
+    /*
      * Metoda, která vrátí dataSource uživatelových ticketů v systému
      * @throws DibiException
      */
-    public static function getMyTickets($id){
+
+    public static function getMyTickets($id) {
 
         $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE staffId=%i ORDER BY closed ASC, updated DESC', $id);
 
         return $rowset;
     }
 
-         /*
+    /*
      * Metoda, která vrátí dataSource uživatelových ticketů v systému
      * @throws DibiException
      */
-    public static function getNewTickets($id){
 
-        $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE (status=%s) AND (departmentId=%i) ORDER BY closed ASC, updated DESC', "Nový", $id);
+    public static function getNewTickets($id) {
+
+        $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE (staffId IS NULL) AND (departmentId=%i) ORDER BY closed ASC, updated DESC', $id);
 
         return $rowset;
     }
-
 
     /*
      * Metoda, která vrátí deaily ticketu
      * @throws DibiException
      */
-    public static function getTicketDetails($id){
+
+    public static function getTicketDetails($id) {
 
         $result = dibi::query('SELECT * FROM ticket WHERE id=%i LIMIT 1', $id);
         $all = $result->fetchAll();
 
         return $all[0];
-
     }
 
     /*
      * Metoda, která vrátí všechny zprávy k tiketu
      * @throws DibiException
      */
-    public static function getTicketMessages($id){
+
+    public static function getTicketMessages($id) {
 
         $result = dibi::query('SELECT * FROM ticketMessage WHERE ticketID=%i ORDER BY date DESC', $id);
         $all = $result->fetchAll();
 
         return $all;
+    }
+
+    /*
+     * Prideleni tiketu zamestnanci
+     * @throws DibiException
+     */
+
+    public static function setTicketStaff($id, $staff) {
+
+        dibi::query('UPDATE ticket SET `staffId`=%i WHERE `id` = %i', $staff, $id);
 
     }
 
 }
+
 ?>

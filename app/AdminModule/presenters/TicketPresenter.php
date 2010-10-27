@@ -25,11 +25,9 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     public function actionDefault() {
 
         //$this->access();
-
-        //$this['newTickets']; // získá komponentu
-
+        $this['newTickets']; // získá komponentu
+        
     }
-
 
     /*
      * Vykreslení stránky s tickety
@@ -118,6 +116,22 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->template->detaily = TicketsModel::getTicketDetails($id);
         $this->template->zpravy = TicketsModel::getTicketMessages($id);
         $this->template->registerHelper('blogUrl', array('BlogHelpers', 'blogUrl'));
+    }
+
+    public function actionTakeTicket($id) {
+
+        try {
+            TicketsModel::setTicketStaff($id, $this->user->getIdentity()->id);
+            dibi::query('COMMIT');
+            $this->flashMessage("Tcket byl úspěšně přijat.");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+            $this->redirect('Ticket:');
+        }
+
+        $this->redirect('Ticket:myTickets');
+        
     }
 
 }
