@@ -115,7 +115,25 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     public function actionShowTicket($id) {
         $this->template->detaily = TicketsModel::getTicketDetails($id);
         $this->template->zpravy = TicketsModel::getTicketMessages($id);
+        $this->template->zamestnanci = UsersModel::getStaffNames();
         $this->template->registerHelper('blogUrl', array('BlogHelpers', 'blogUrl'));
+    }
+
+    public function actionForwardTicket($id) {
+
+
+
+        $this->form = new AppForm($this, 'fwdTicket');
+
+        $this->form->addSelect('colleagues', "Zvolte kolegu:", UsersModel::getMyColleagues(UsersModel::getDepartment($this->user->getIdentity()->id)));
+
+        $this->form->addSubmit('forward', 'Předat');
+
+
+        $this->form->onSubmit[] = array($this, 'ForwardFormProcess');
+
+        $this->template->form = $this->form;
+
     }
 
     public function actionTakeTicket($id) {

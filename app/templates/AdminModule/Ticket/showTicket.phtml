@@ -34,6 +34,16 @@
             <td>{$detaily->priority}</td>
         </tr>
         <tr>
+            <th>Přiřazeno zaměstnanci:</th>
+            <td>
+                {if isset($zamestnanci[$detaily->staffId])}
+                {$zamestnanci[$detaily->staffId]}
+                {else}
+                -
+                {/if}
+            </td>
+        </tr>
+        <tr>
             <th>Datum přidání:</th>
             <td>{$detaily->created|datumCas}</td>
         </tr>
@@ -54,7 +64,7 @@
             <th>Prohledat znalostní bázi</th>
         </tr>
         <tr>
-            <th>Předat tiket</th>
+            <th><a href="{link Ticket:forwardTicket, $detaily->id}" title="Předat tiket kolegovi z oddělení">Předat tiket kolegovi z oddělení</a></th>
         </tr>
         <tr>
             <th>Změtit status tiketu</th>
