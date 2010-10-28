@@ -61,10 +61,52 @@ class TicketsModel {
      * @throws DibiException
      */
 
-    public static function setTicketStaff($id, $staff) {
+    public static function setTicketStaff($id, $staff, $form) {
 
-        dibi::query('UPDATE ticket SET `staffId`=%i WHERE `id` = %i', $staff, $id);
+        dibi::query('UPDATE ticket SET `staffId`=%i, `updated`=%i WHERE `id` = %i', $staff, $form['time'], $id);
 
+        dibi::query('INSERT INTO ticketMessage ( `ticketId`,
+`name`,
+`message`,
+`date`
+) VALUES (%i, %s, %s, %i)',
+                        $id,
+                        $form['name'],
+                        $form['comment'],
+                        $form['time']
+        );
+    }
+
+    public static function forwardTicket($form) {
+
+        dibi::query('UPDATE ticket SET `staffId` = %i, `updated` = %i WHERE id = %i LIMIT 1', $form['colleague'], $form['time'], $form['tiket']);
+
+        dibi::query('INSERT INTO ticketMessage ( `ticketId`,
+`name`,
+`message`,
+`date`
+) VALUES (%i, %s, %s, %i)',
+                        $form['tiket'],
+                        $form['name'],
+                        $form['comment'],
+                        $form['time']
+        );
+    }
+
+    public static function changeDepartment($form) {
+
+        dibi::query('UPDATE ticket SET `staffId` = NULL, `departmentId` = %i, `updated` = %i WHERE id = %i LIMIT 1', $form['department'], $form['time'], $form['tiket']);
+
+        dibi::query('INSERT INTO ticketMessage ( `ticketId`,
+`name`,
+`message`,
+`date`
+) VALUES (%i, %s, %s, %i)',
+                        $form['tiket'],
+                        $form['name'],
+                        $form['comment'],
+                        $form['time']
+        );
     }
 
 }

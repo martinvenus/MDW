@@ -34,6 +34,7 @@ class UsersModel extends Object implements IAuthenticator {
         }
 
         foreach ($result as $n => $row
+
             );
 
         // Z výsledku odebereme heslo - kvůli bezpečnosti aplikace
@@ -185,6 +186,7 @@ class UsersModel extends Object implements IAuthenticator {
         $result = dibi::query('SELECT * FROM user WHERE id=%i LIMIT 1', $id);
 
         foreach ($result as $n => $row
+
             );
 
         unset($result);
@@ -217,6 +219,19 @@ class UsersModel extends Object implements IAuthenticator {
     public static function getDepartment($staffId) {
 
         $result = dibi::query('SELECT departmentId FROM userDepartment WHERE staffId=%i', $staffId);
+
+        $single = $result->fetchSingle();
+
+        return $single;
+    }
+
+    /*
+     * Metoda, která vrátí název oddělení
+     */
+
+    public static function getDepartmentName($departmentId) {
+
+        $result = dibi::query('SELECT name FROM department WHERE id=%i', $departmentId);
 
         $single = $result->fetchSingle();
 
@@ -342,6 +357,34 @@ class UsersModel extends Object implements IAuthenticator {
     public static function getStaffNames() {
 
         $result = dibi::query('SELECT id, CONCAT(user.firstName," ", user.Surname) FROM user');
+
+        $pairs = $result->fetchPairs();
+
+        return $pairs;
+    }
+
+    /*
+     * Metoda, která vrátí jméno konkrétního zaměstnance
+     * @throws DibiException
+     */
+
+    public static function getStaffName($staffId) {
+
+        $result = dibi::query('SELECT CONCAT(user.firstName," ", user.Surname) FROM user WHERE id=%i', $staffId);
+
+        $single = $result->fetchSingle();
+
+        return $single;
+    }
+
+    /*
+     * Metoda, která vrátí názvy oddělení
+     * @throws DibiException
+     */
+
+    public static function getAllDepartments() {
+
+        $result = dibi::query('SELECT id, name FROM department');
 
         $pairs = $result->fetchPairs();
 

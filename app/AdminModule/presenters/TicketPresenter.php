@@ -26,7 +26,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         //$this->access();
         $this['newTickets']; // získá komponentu
-        
     }
 
     /*
@@ -121,25 +120,101 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
     public function actionForwardTicket($id) {
 
-
-
         $this->form = new AppForm($this, 'fwdTicket');
 
-        $this->form->addSelect('colleagues', "Zvolte kolegu:", UsersModel::getMyColleagues(UsersModel::getDepartment($this->user->getIdentity()->id)));
+        $this->form->addHidden('tiket', $id);
+
+        $this->form->addSelect('colleague', "Zvolte kolegu:", UsersModel::getMyColleagues(UsersModel::getDepartment($this->user->getIdentity()->id)));
 
         $this->form->addSubmit('forward', 'Předat');
-
 
         $this->form->onSubmit[] = array($this, 'ForwardFormProcess');
 
         $this->template->form = $this->form;
+    }
 
+    /*
+     * Zpracování odeslaného formuláře
+     * @param $form data z formuláře
+     */
+
+    function ForwardFormProcess(Form $form) {
+
+        $data = $form->getValues(); // vezmeme data z formuláře
+
+        $data['comment'] = "Tiket předán od uživatele " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . " uživateli  " . UsersModel::getStaffName($data['colleague']) . ".";
+
+        $data['time'] = time();
+
+        $data['name'] = "System";
+
+
+        try {
+            TicketsModel::forwardTicket($data);
+            dibi::query('COMMIT');
+            $this->flashMessage("Tiket byl úspěšně předán kolegovi.");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            Debug::processException($e);
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+        }
+
+        $this->redirect('Ticket:myTickets');
+    }
+
+    public function actionChangeDepartment($id) {
+
+        $this->form = new AppForm($this, 'chngDepartment');
+
+        $this->form->addHidden('tiket', $id);        
+
+        $this->form->addSelect('department', "Zvolte oddělení:", UsersModel::getAllDepartments());
+
+        $this->form->addSubmit('forward', 'Předat');
+
+        $this->form->onSubmit[] = array($this, 'DepartmentFormProcess');
+
+        $this->template->form = $this->form;
+    }
+
+    /*
+     * Zpracování odeslaného formuláře
+     * @param $form data z formuláře
+     */
+
+    function DepartmentFormProcess(Form $form) {
+
+        $data = $form->getValues(); // vezmeme data z formuláře
+
+        $data['comment'] = "Tiket předán uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . " z \"" . UsersModel::getDepartmentName(UsersModel::getDepartment($this->user->getIdentity()->id)) . "\" do \"" . UsersModel::getDepartmentName($data['department']) . "\".";
+
+        $data['time'] = time();
+
+        $data['name'] = "System";
+
+        try {
+            TicketsModel::changeDepartment($data);
+            dibi::query('COMMIT');
+            $this->flashMessage("Tiket byl úspěšně předán danému oddělení.");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            Debug::processException($e);
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+        }
+
+        $this->redirect('Ticket:');
     }
 
     public function actionTakeTicket($id) {
 
+        $data['comment'] = "Tiket byl přijat uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . ".";
+
+        $data['time'] = time();
+
+        $data['name'] = "System";
+
         try {
-            TicketsModel::setTicketStaff($id, $this->user->getIdentity()->id);
+            TicketsModel::setTicketStaff($id, $this->user->getIdentity()->id, $data);
             dibi::query('COMMIT');
             $this->flashMessage("Tcket byl úspěšně přijat.");
         } catch (Exception $e) {
@@ -149,7 +224,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         }
 
         $this->redirect('Ticket:myTickets');
-        
     }
 
 }
