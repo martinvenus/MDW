@@ -431,6 +431,89 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->redirect('Ticket:showTicket', $data['tiket']);
     }
 
+    /*
+     * Metoda pro přidání tiketu
+     */
+
+    function actionAddTicket() {
+
+        $data['name'] = $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname;
+        $data['ipAddress'] = $_SERVER['SERVER_ADDR'];
+
+
+        $departs = TicketsModel::getAllDepartments();
+
+        $this->form = new AppForm($this, 'Ticket');
+
+        $this->form->addText('name', 'Jméno a příjmení:')
+                ->addRule(Form::FILLED, 'Jméno musí být vyplněno.');
+
+        $this->form->addText('email', 'E-mail:')
+                ->addRule(Form::FILLED, 'E-mail musí být vyplněn.')
+                ->addRule(Form::EMAIL, 'Zadaný e-mail není platný.');
+
+        $this->form->addText('mobile', 'Telefon:')
+                ->addRule(Form::NUMERIC, 'Telefon musí být číslo.')
+                ->addRule(Form::MAX_LENGTH, 'Telefon může mít nejvýše %d znaků.', 20);
+
+        $this->form->addSelect('departmentId', 'Oddělení:', $departs)
+                ->addRule(Form::FILLED, 'Zadejte oddělení.');
+
+        $this->form->addText('subject', 'Předmět ', 48)
+                ->addRule(Form::FILLED, 'Předmět musí být vyplněn.')
+                ->addRule(Form::MAX_LENGTH, 'Předmět může mít nejvýše %d znaků.', 255);
+
+        $this->form->addTextarea('ticketMessage', 'Zpráva:')
+                ->addRule(Form::FILLED, 'Uveďte zprávu.');
+
+        $this->form->addSubmit('ok', 'Vytvořit ticket');
+
+        $this->form->setDefaults($data);
+
+        //Define hidden values
+        $this->form->addHidden('staffId', NULL); //TODO: Zjistit jak definovat staffId
+        $this->form->addHidden('priority', 5); //TODO: Highest priority if admin, not defined if user
+        $this->form->addHidden('status', 'Otevřený');
+        $this->form->addHidden('source', 'web');
+        $this->form->addHidden('closed', 0);
+        $this->form->addHidden('created', time());
+        $this->form->addHidden('updated', time());
+        $this->form->addHidden('ip', $data['ipAddress']);
+
+        //Send to template
+        $this->form->onSubmit[] = array($this, 'addTicketFormSubmitted');
+        $this->template->form = $this->form;
+
+    }
+
+    function genTicketID($id=0){
+
+        do{
+            $cislice = "1234567890";
+            $date = time();
+            //$cas = date('B');
+            $tid = '';
+            for ($i = 0; $i < 5; $i++) {
+                $chars = $cislice;
+                $numChars = strlen($chars);
+                $tid[$i] = substr($chars, mt_rand(1, $numChars) - 1, 1);
+            }
+
+            // Zamícháme pole
+            shuffle($tid);
+            $tidfin = '';
+            for($i=0; $i<count($tid); $i++){
+                $tidfin.=$tid[$i];
+            }
+            $ticketID = $id.'-'.$date.'-'.$tidfin;
+
+        }//check in DB if such ticketID exists
+         while (count(dibi::query('SELECT ticketID FROM ticket WHERE ticketID=%s', $ticketID)) > 0);
+
+         return $ticketID;
+    }
+
+
 }
 
 ?>
