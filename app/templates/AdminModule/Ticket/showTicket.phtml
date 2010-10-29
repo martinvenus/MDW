@@ -58,7 +58,10 @@
     <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
     <table>
         <tr>
-            <th>Odpovědět</th>
+            <th><a href="{link Ticket:addReply, $detaily->id, 0}" title="Odpovědět">Odpovědět</a></th>
+        </tr>
+        <tr>
+            <th><a href="{link Ticket:addReply, $detaily->id, 1}" title="Interní poznámka">Přidat interní poznámku</a></th>
         </tr>
         <tr>
             <th><a href="{link Ticket:forwardTicket, $detaily->id}" title="Předat tiket kolegovi z oddělení">Předat tiket kolegovi z oddělení</a></th>

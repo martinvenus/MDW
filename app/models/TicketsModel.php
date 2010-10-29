@@ -109,6 +109,22 @@ class TicketsModel {
         );
     }
 
+        public static function addReply($form) {
+
+        dibi::query('UPDATE ticket SET `updated` = %i WHERE id = %i LIMIT 1', $form['time'], $form['tiket']);
+
+        dibi::query('INSERT INTO ticketMessage ( `ticketId`,
+`name`,
+`message`,
+`date`
+) VALUES (%i, %s, %s, %i)',
+                        $form['tiket'],
+                        $form['name'],
+                        $form['message'],
+                        $form['time']
+        );
+    }
+
 }
 
 ?>
