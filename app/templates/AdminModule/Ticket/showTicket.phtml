@@ -56,7 +56,7 @@
 
 <fieldset n:if="$detaily->staffId!=NULL">
     <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
-    <table>
+    <table n:if="$detaily->closed==0">
         <tr>
             <th><a href="{link Ticket:addReply, $detaily->id, 0}" title="Odpovědět">Odpovědět</a></th>
         </tr>
@@ -70,7 +70,21 @@
             <th><a href="{link Ticket:changeDepartment, $detaily->id}" title="Předat tiket do oddělení">Předat tiket do jiného oddělení</a></th>
         </tr>
         <tr>
-            <th>Změnit status tiketu</th>
+            <th><a href="{link Ticket:returnTicket, $detaily->id}" title="Vzdát se tiketu">Vzdát se tiketu</a></th>
+        </tr>
+        <tr>
+            <th><a href="{link Ticket:changeClosed, $detaily->id, 1}" title="Uzavřít tiket">Uzavřít tiket</a></th>
+        </tr>
+    </table>
+    <table n:if="$detaily->closed==1">
+        <tr>
+            <th><a href="{link Ticket:addReply, $detaily->id, 1}" title="Interní poznámka">Přidat interní poznámku</a></th>
+        </tr>
+        <tr>
+            <th><a href="{link Ticket:changeClosed, $detaily->id, 0}" title="Otevřít tiket">Otevřít tiket</a></th>
+        </tr>
+        <tr>
+            <th><a href="{link Ticket:returnTicket, $detaily->id}" title="Vzdát se tiketu">Vzdát se tiketu</a></th>
         </tr>
     </table>
 </fieldset>
@@ -79,7 +93,7 @@
     <legend>&nbsp;<strong>Akce</strong>&nbsp;</legend>
     <table>
         <tr>
-            <th><a href="{link Ticket:takeTicket, $detaily->id}" title="Přijmout tiket mezi své">Přijmout tiket mezi své</a></th>
+            <th><a href="{link Ticket:takeTicket, $detaily->id}" title="Přijmout tiket">Přijmout tiket</a></th>
         </tr>
     </table>
 </fieldset>

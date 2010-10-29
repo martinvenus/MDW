@@ -44,6 +44,17 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     }
 
     /*
+     * Vykreslení stránky s tickety aktuálního uživatele
+     */
+
+    public function actionClosedTickets() {
+
+        //$this->access();
+
+        $this['closedTickets']; // získá komponentu
+    }
+
+    /*
      * Komponenta datagagrid pro vykreslení tabulky ticketů aktuálního uživatele
      * @return grid
      */
@@ -84,6 +95,38 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         $grid = new DataGrid;
         $grid->bindDataTable(TicketsModel::getNewTickets(UsersModel::getDepartment($this->user->getIdentity()->id)));
+
+        $grid->addColumn('ticketId', 'Tiket')->addFilter();
+        $grid->addColumn('priority', 'Priorita')->addFilter();
+        $grid->addColumn('subject', 'Předmět')->addFilter();
+        $grid->addColumn('name', 'Autor')->addFilter();
+        $grid->addColumn('status', 'Status')->addSelectboxFilter(array('Uzavřený' => 'Uzavřený', 'Otevřený' => 'Otevřený'));
+        $grid->addColumn('updated', 'Časová značka')->addFilter();
+
+        $grid->addActionColumn('Akce');
+
+        $grid->addAction('Zobrazit', 'showTicket', Html::el('span')->setText('Zobrazit'), $useAjax = FALSE);
+
+        $grid->multiOrder = FALSE; // order by one column only
+
+        $grid->displayedItems = array(10, 20, 50, 75, 100, 500, 1000); // roletka pro výběr počtu řádků na stránku
+
+        $grid->keyName = 'id';
+
+        $grid['updated']->formatCallback[] = array($this, 'updatedFormat');
+
+        return $grid;
+    }
+
+    /*
+     * Komponenta datagagrid pro vykreslení tabulky nepřiřazených tiketů
+     * @return grid
+     */
+
+    protected function createComponentClosedTickets() {
+
+        $grid = new DataGrid;
+        $grid->bindDataTable(TicketsModel::getClosedTickets(UsersModel::getDepartment($this->user->getIdentity()->id)));
 
         $grid->addColumn('ticketId', 'Tiket')->addFilter();
         $grid->addColumn('priority', 'Priorita')->addFilter();
@@ -234,6 +277,45 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     }
 
     /*
+     * Metoda pro otevření/uzavření tiketu
+     * @param $id ID tiketu
+     * @param $status Nastavení hodnoty 0 - otevřít, 1 - uzavřít
+     */
+
+    public function actionChangeClosed($id, $status) {
+
+        $data['type'] = 3; // 3 = systémová zpráva
+
+        $data['tiket'] = $id;
+
+        if ($status == 1) {
+            $data['comment'] = "Tiket uzavřen uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . ".";
+            $data['closed'] = 1;
+            $data['status'] = "Uzavřený";
+        } else {
+            $data['comment'] = "Tiket otevřen uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . ".";
+            $data['closed'] = 0;
+            $data['status'] = "Otevřený";
+        }
+
+        $data['time'] = time();
+
+        $data['name'] = "System";
+
+        try {
+            TicketsModel::changeClosed($data);
+            dibi::query('COMMIT');
+            $this->flashMessage("Status tiketu byl úspěšně nastaven.");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            Debug::processException($e);
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+        }
+
+        $this->redirect('Ticket:showTicket', $id);
+    }
+
+    /*
      * Metoda pro přijetí tiketu
      * @param $id ID tiketu
      */
@@ -251,14 +333,42 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         try {
             TicketsModel::setTicketStaff($id, $this->user->getIdentity()->id, $data);
             dibi::query('COMMIT');
-            $this->flashMessage("Tcket byl úspěšně přijat.");
+            $this->flashMessage("Tiket byl úspěšně přijat.");
         } catch (Exception $e) {
             dibi::query('ROLLBACK');
             $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             $this->redirect('Ticket:');
         }
 
-        $this->redirect('Ticket:myTickets');
+        $this->redirect('Ticket:showTicket', $id);
+    }
+
+    /*
+     * Metoda pro vrácení tiketu
+     * @param $id ID tiketu
+     */
+
+    public function actionReturnTicket($id) {
+
+        $data['type'] = 3; // 3 = systémová zpráva
+
+        $data['comment'] = "Uživatel " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . " se vzdal tiketu.";
+
+        $data['time'] = time();
+
+        $data['name'] = "System";
+
+        try {
+            TicketsModel::setTicketStaff($id, NULL, $data);
+            dibi::query('COMMIT');
+            $this->flashMessage("Vzdal jste se tiketu.");
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+            $this->redirect('Ticket:');
+        }
+
+        $this->redirect('Ticket:showTicket', $id);
     }
 
     /*

@@ -19,13 +19,25 @@ class TicketsModel {
     }
 
     /*
-     * Metoda, která vrátí dataSource uživatelových ticketů v systému
+     * Metoda, která vrátí dataSource nových ticketů v systému
      * @throws DibiException
      */
 
     public static function getNewTickets($id) {
 
-        $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE (staffId IS NULL) AND (departmentId=%i) ORDER BY closed ASC, updated DESC', $id);
+        $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE (staffId IS NULL) AND (departmentId=%i) AND (closed=%i) ORDER BY updated DESC', $id, 0);
+
+        return $rowset;
+    }
+
+        /*
+     * Metoda, která vrátí dataSource uzavřených tiketů v systému
+     * @throws DibiException
+     */
+
+    public static function getClosedTickets($id) {
+
+        $rowset = dibi::dataSource('SELECT id, ticketId, priority, name, subject, status, updated FROM ticket WHERE (departmentId=%i) AND (closed=%i) ORDER BY updated DESC', $id, 1);
 
         return $rowset;
     }
@@ -130,6 +142,33 @@ class TicketsModel {
                         $form['message'],
                         $form['time'],
                         $form['type']
+        );
+    }
+
+    /*
+     * Metoda, která otevře/uzavře tiket
+     * @throws DibiException
+     */
+
+    public static function changeClosed($data) {
+
+        if ($data['closed'] == 1) {
+            dibi::query('UPDATE ticket SET `staffId` = NULL, `closed` = %i, `status`=%s, `updated` = %i WHERE id = %i LIMIT 1', $data['closed'], $data['status'], $data['time'], $data['tiket']);
+        } else {
+            dibi::query('UPDATE ticket SET `closed` = %i, `status`=%s, `updated` = %i WHERE id = %i LIMIT 1', $data['closed'], $data['status'], $data['time'], $data['tiket']);
+        }
+
+        dibi::query('INSERT INTO ticketMessage ( `ticketId`,
+`name`,
+`message`,
+`date`,
+`type`
+) VALUES (%i, %s, %s, %i, %i)',
+                        $data['tiket'],
+                        $data['name'],
+                        $data['comment'],
+                        $data['time'],
+                        $data['type']
         );
     }
 
