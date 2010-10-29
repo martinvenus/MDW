@@ -161,6 +161,8 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         $data = $form->getValues(); // vezmeme data z formuláře
 
+        $data['type'] = 3; // 3 = systémová zpráva
+
         $data['comment'] = "Tiket předán od uživatele " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . " uživateli  " . UsersModel::getStaffName($data['colleague']) . ".";
 
         $data['time'] = time();
@@ -210,6 +212,8 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         $data = $form->getValues(); // vezmeme data z formuláře
 
+        $data['type'] = 3; // 3 = systémová zpráva
+
         $data['comment'] = "Tiket předán uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . " z \"" . UsersModel::getDepartmentName(UsersModel::getDepartment($this->user->getIdentity()->id)) . "\" do \"" . UsersModel::getDepartmentName($data['department']) . "\".";
 
         $data['time'] = time();
@@ -235,6 +239,8 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      */
 
     public function actionTakeTicket($id) {
+
+        $data['type'] = 3; // 3 = systémová zpráva
 
         $data['comment'] = "Tiket byl přijat uživatelem " . $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname . ".";
 
@@ -291,25 +297,26 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
 
         $data['name'] = $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname;
 
-        if($data['internal']==1){
-           $data['name'] = $data['name'] . " (interní poznámka)";
+        if ($data['internal'] == 1) {
+            $data['type'] = 2;
+        } else {
+            $data['type'] = 1;
         }
 
         try {
             TicketsModel::addReply($data);
             dibi::query('COMMIT');
-            if($data['internal']==0){
+            if ($data['internal'] == 0) {
                 // TODO: Odeslání mailu
-                $this->flashMessage("Odeslání mailu autorovi bude doprogramováno později.");
+                $this->flashMessage("Odeslání mailu autorovi tiketu bude doprogramováno později.");
             }
-            
         } catch (Exception $e) {
             dibi::query('ROLLBACK');
             Debug::processException($e);
             $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
         }
 
-        $this->flashMessage("Odpověď/poznámka byla úspěšně uložena.");
+        $this->flashMessage("Odpověď/interní poznámka byla úspěšně uložena.");
 
         $this->redirect('Ticket:showTicket', $data['tiket']);
     }

@@ -88,7 +88,17 @@
 <fieldset>
     <legend>&nbsp;<strong>{$zprava->name}{if ($zprava->name == $detaily->name)} (autor tiketu){/if}</strong>, {$zprava->date|datumCas}&nbsp;</legend>
     <p>
-        {$zprava->message}
+        {if $zprava->type==0}
+        <span class='original'>Zpráva:</span><br /><br />
+        {elseif $zprava->type==1}
+        <span class='reply'>Odpověď:</span><br /><br />
+        {elseif $zprava->type==2}
+        <span class='internal'>Interní poznámka:</span><br /><br />
+        {elseif $zprava->type==3}
+        <span class='system'>Informace:</span><br /><br />
+        {/if}
+
+        {!$zprava->message}
     </p>
 </fieldset>
 {/foreach}
