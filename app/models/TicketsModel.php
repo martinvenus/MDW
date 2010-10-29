@@ -30,7 +30,7 @@ class TicketsModel {
         return $rowset;
     }
 
-        /*
+    /*
      * Metoda, která vrátí dataSource uzavřených tiketů v systému
      * @throws DibiException
      */
@@ -66,6 +66,19 @@ class TicketsModel {
         $all = $result->fetchAll();
 
         return $all;
+    }
+
+    /*
+     * Metoda, která vrátí počet stejných ID tiketů
+     * @throws DibiException
+     */
+
+    public static function checkTicketId($id) {
+
+        $result = dibi::query('SELECT * FROM ticket WHERE ticketID=%s', $id);
+        $count = count($result);
+
+        return $count;
     }
 
     /*
@@ -170,6 +183,57 @@ class TicketsModel {
                         $data['time'],
                         $data['type']
         );
+    }
+
+    public static function addTicket(array $form) {
+        dibi::query('INSERT INTO ticket (
+            `ticketID`,
+            `staffId`,
+            `departmentId`,
+            `priority`,
+            `name`,
+            `email`,
+            `phone`,
+            `ipAddress`,
+            `subject`,
+            `status`,
+            `source`,
+            `closed`,
+            `created`,
+            `updated`)
+            VALUES (%s, %iN, %i, %i, %s, %s, %s, %s, %s, %s, %s, %i, %i, %i)',
+                        $form['tid'],
+                        $form['staffId'],
+                        $form['departmentId'],
+                        $form['priority'],
+                        $form['name'],
+                        $form['email'],
+                        $form['mobile'],
+                        $form['ip'],
+                        $form['subject'],
+                        $form['status'],
+                        $form['source'],
+                        $form['closed'],
+                        $form['created'],
+                        $form['updated']
+        );
+
+        $last = dibi::insertId();
+
+        dibi::query('INSERT INTO ticketMessage (
+            `ticketId`,
+            `name`,
+            `message`,
+            `date`,
+            `type`)
+            VALUES (%i, %s, %s, %i, %i)',
+                        $last,
+                        $form['name'],
+                        $form['ticketMessage'],
+                        $form['created'],
+                        $form['type']
+        );
+        
     }
 
 }

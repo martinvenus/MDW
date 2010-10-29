@@ -441,7 +441,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $data['ipAddress'] = $_SERVER['SERVER_ADDR'];
 
 
-        $departs = TicketsModel::getAllDepartments();
+        $departs = UsersModel::getAllDepartments();
 
         $this->form = new AppForm($this, 'Ticket');
 
@@ -466,7 +466,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->form->addTextarea('ticketMessage', 'Zpráva:')
                 ->addRule(Form::FILLED, 'Uveďte zprávu.');
 
-        $this->form->addSubmit('ok', 'Vytvořit ticket');
+        $this->form->addSubmit('ok', 'Vytvořit tiket');
 
         $this->form->setDefaults($data);
 
@@ -481,17 +481,46 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->form->addHidden('ip', $data['ipAddress']);
 
         //Send to template
-        $this->form->onSubmit[] = array($this, 'addTicketFormSubmitted');
+        $this->form->onSubmit[] = array($this, 'addTicketFormProcess');
         $this->template->form = $this->form;
-
     }
 
-    function genTicketID($id=0){
+    /*
+     * Zpracování odeslaného formuláře pro přidání tiketu
+     * @param $form data z formuláře
+     */
 
-        do{
+    function addTicketFormProcess(Form $form) {
+
+        $data = $form->getValues(); // vezmeme data z formuláře
+
+        $data['time'] = time();
+
+        $data['type'] = 0;
+
+        $data['tid'] = $this->genTicketID($data['departmentId']);
+        
+        try {
+            TicketsModel::addTicket($data);
+            dibi::query('COMMIT');
+        } catch (Exception $e) {
+            dibi::query('ROLLBACK');
+            Debug::processException($e);
+            $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+        }
+
+        $this->flashMessage("Váš tiket byl úspěšně přidán.");
+
+        $this->redirect('Ticket:');
+    }
+
+    protected function genTicketID($department) {
+
+        do {
+
             $cislice = "1234567890";
             $date = time();
-            //$cas = date('B');
+
             $tid = '';
             for ($i = 0; $i < 5; $i++) {
                 $chars = $cislice;
@@ -502,17 +531,17 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
             // Zamícháme pole
             shuffle($tid);
             $tidfin = '';
-            for($i=0; $i<count($tid); $i++){
+            for ($i = 0; $i < count($tid); $i++) {
                 $tidfin.=$tid[$i];
             }
-            $ticketID = $id.'-'.$date.'-'.$tidfin;
-
+            $ticketID = $department . '-' . $date . '-' . $tidfin;
         }//check in DB if such ticketID exists
-         while (count(dibi::query('SELECT ticketID FROM ticket WHERE ticketID=%s', $ticketID)) > 0);
+        
+        while (TicketsModel::checkTicketId($ticketID) > 0);
 
-         return $ticketID;
+        return $ticketID;
+
     }
-
 
 }
 
