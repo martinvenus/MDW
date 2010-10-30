@@ -98,10 +98,10 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Komponenta datagagrid pro vykreslení tabulky nepřiřazených tiketů
      * @return grid
      */
-
     protected function createComponentNewTickets() {
 
         $grid = new DataGrid;
+        
         $grid->bindDataTable(TicketsModel::getNewTickets(UsersModel::getDepartment($this->user->getIdentity()->id)));
 
         $grid->addColumn('ticketId', 'Tiket')->addFilter();
