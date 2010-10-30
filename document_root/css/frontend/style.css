@@ -88,7 +88,7 @@ div.box-content-left div.text-container{
 	float: right;
 }
 
-h3.ticket-head{
+h2.ticket-head{
 	width: 150px;
 	height: 22px;
 	background:url(../../images/frontend/ticket.png) no-repeat;
