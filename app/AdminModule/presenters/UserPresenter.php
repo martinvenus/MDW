@@ -1,17 +1,17 @@
 <?php
-
 /**
- * Rally-Base
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 Martin Venuš
- * @package    Rally-Base
+ * @copyright  Copyright (c) 2010
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
  */
 
 /**
- * Administrace uživatelů
  *
- * @author     Martin Venuš
- * @package    Rally-Base
+ * User managment
+ *
  */
 class Admin_UserPresenter extends Admin_BasePresenter {
 

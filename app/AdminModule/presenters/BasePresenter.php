@@ -1,17 +1,17 @@
 <?php
-
 /**
- * My Application
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
+ * @copyright  Copyright (c) 2010 
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
  */
 
 /**
- * Base class for all application presenters.
  *
- * @author     John Doe
- * @package    MyApplication
+ * Base class for all application presenters
+ *
  */
 abstract class Admin_BasePresenter extends BasePresenter {
 
@@ -54,7 +54,6 @@ abstract class Admin_BasePresenter extends BasePresenter {
      * Metoda, která ověří, zda je uživatel přihlášen
      * V případě, že není -> přesměruje na přihlášení
      */
-
     protected function verifyUser() {
 
         $backlink = '';
