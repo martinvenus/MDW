@@ -77,7 +77,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $grid->addColumn('subject', 'Předmět')->addFilter();
         $grid->addColumn('name', 'Autor')->addFilter();
         $grid->addColumn('status', 'Status')->addSelectboxFilter(array('Uzavřený' => 'Uzavřený', 'Otevřený' => 'Otevřený'));
-        $grid->addColumn('updated', 'Časová značka')->addFilter();
+        $grid->addColumn('updated', 'Datum a čas')->addFilter();
 
         $grid->addActionColumn('Akce');
 
@@ -109,7 +109,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $grid->addColumn('subject', 'Předmět')->addFilter();
         $grid->addColumn('name', 'Autor')->addFilter();
         $grid->addColumn('status', 'Status')->addSelectboxFilter(array('Uzavřený' => 'Uzavřený', 'Otevřený' => 'Otevřený'));
-        $grid->addColumn('updated', 'Časová značka')->addFilter();
+        $grid->addColumn('updated', 'Datum a čas')->addFilter();
 
         $grid->addActionColumn('Akce');
 
@@ -141,7 +141,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $grid->addColumn('subject', 'Předmět')->addFilter();
         $grid->addColumn('name', 'Autor')->addFilter();
         $grid->addColumn('status', 'Status')->addSelectboxFilter(array('Uzavřený' => 'Uzavřený', 'Otevřený' => 'Otevřený'));
-        $grid->addColumn('updated', 'Časová značka')->addFilter();
+        $grid->addColumn('updated', 'Datum a čas')->addFilter();
 
         $grid->addActionColumn('Akce');
 
