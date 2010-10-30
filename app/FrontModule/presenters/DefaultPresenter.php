@@ -1,17 +1,17 @@
 <?php
-
 /**
- * My NApplication
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
+ * @copyright  Copyright (c) 2010
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
  */
 
 /**
- * Homepage presenter.
  *
- * @author     John Doe
- * @package    MyApplication
+ * Default presenter
+ *
  */
 class Front_DefaultPresenter extends Front_BasePresenter {
 

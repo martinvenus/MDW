@@ -1,21 +1,26 @@
 <?php
 
 /**
- * My NApplication bootstrap file.
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
+ * @copyright  Copyright (c) 2010
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
+ */
+/**
+ *
+ * Bootstrap file
+ *
  */
 // Step 1: Load Nette Framework
 // this allows load Nette Framework classes automatically so that
 // you don't have to litter your code with 'require' statements
 require LIBS_DIR . '/Nette/loader.php';
 
-Environment::setMode('production', FALSE);
-
-
+//Environment::setMode('production', FALSE);
 // Step 2: Configure environment
-// 2a) enable NDebug for better exception and error visualisation
+// 2a) enable Debug for better exception and error visualisation
 Debug::enable();
 
 // 2b) load configuration from config.ini file
@@ -38,9 +43,6 @@ dibi::connect(array(
             'username' => $user_mysql,
             'password' => $pass_mysql,
             'database' => $db_mysql,
-            //'username' => 'rally_test',
-            //'password' => 'hQc5sQqHmJCvQE9Z',
-            //'database' => 'rally_test',
             'charset' => 'utf8',
         ));
 

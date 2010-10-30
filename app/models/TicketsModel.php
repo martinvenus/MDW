@@ -1,9 +1,17 @@
 <?php
+/**
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
+ *
+ * @copyright  Copyright (c) 2010
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
+ */
 
 /**
- * Model pro správu ticketů
  *
- * @author     Jaroslav Líbal
+ * Model for ticket managment
+ *
  */
 class TicketsModel {
     /*
@@ -237,5 +245,3 @@ class TicketsModel {
     }
 
 }
-
-?>

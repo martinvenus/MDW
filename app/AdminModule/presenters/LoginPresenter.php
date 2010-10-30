@@ -1,17 +1,17 @@
 <?php
-
 /**
- * Přihlášení k systému
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 Martin Venuš, Jaroslav Líbal, Andrey Chervinka
+ * @copyright  Copyright (c) 2010
  * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
  */
 
 /**
- * Login Presenter
  *
- * @author     Martin Venuš
- * @package    RTS
+ * Login to the system
+ *
  */
 class Admin_LoginPresenter extends Admin_BasePresenter {
 

@@ -1,17 +1,17 @@
 <?php
-
 /**
- * Rally-Base
+ * Request Tracking System
+ * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
  *
- * @copyright  Copyright (c) 2010 Martin Venuš
- * @package    Rally-Base
+ * @copyright  Copyright (c) 2010
+ * @package    RTS
+ * @author     Andrey Chervinka, Jaroslav Líbal, Martin Venuš
  */
 
 /**
- * Model pro správu uživatelů
  *
- * @author     Martin Venuš
- * @package    Rally-Base
+ * Model for user managment
+ *
  */
 class UsersModel extends Object implements IAuthenticator {
     /*
@@ -19,7 +19,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @return IIdentity
      * @throws AuthenticationException
      */
-
     public function authenticate(array $credentials) {
 
         $row = null;
@@ -66,7 +65,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @param $form data z formuláře
      * @throws DibiException
      */
-
     public static function createUser(array $form) {
 
         $password = hash(HASH_TYPE, $form['password1']);
@@ -107,7 +105,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @param $form data z formuláře
      * @throws DibiException
      */
-
     public static function editUser(array $form) {
 
         $id = $form['id'];
@@ -134,7 +131,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @param $form data z formuláře
      * @throws DibiException
      */
-
     public static function editPassword(array $form) {
 
         $id = $form['id'];
@@ -148,7 +144,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @param $id id mazaného uživatele
      * @throws DibiException
      */
-
     public static function delUser($id) {
 
         dibi::query('UPDATE user SET active = 0 WHERE id = %i', $id);
@@ -160,7 +155,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @return $roles všechny dostupné role - id, role
      * @throws DibiException
      */
-
     public static function getRoles() {
 
         // Z databáze vybereme všechny role
@@ -180,7 +174,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @return $user informace o uživateli v asociativním poli
      * @throws DibiException
      */
-
     public static function getUser($id) {
 
         $result = dibi::query('SELECT * FROM user WHERE id=%i LIMIT 1', $id);
@@ -215,7 +208,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí informace o oddělení uživatele
      * TODO: Přepsat univerzálně aby mohl mít user více oddělení!
      */
-
     public static function getDepartment($staffId) {
 
         $result = dibi::query('SELECT departmentId FROM userDepartment WHERE staffId=%i', $staffId);
@@ -228,7 +220,6 @@ class UsersModel extends Object implements IAuthenticator {
     /*
      * Metoda, která vrátí název oddělení
      */
-
     public static function getDepartmentName($departmentId) {
 
         $result = dibi::query('SELECT name FROM department WHERE id=%i', $departmentId);
@@ -242,7 +233,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí dataSource všech uživatelů v systému
      * @throws DibiException
      */
-
     public static function getUsers() {
 
         $rowset = dibi::dataSource('SELECT * FROM user');
@@ -257,7 +247,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @return $vysledek logická hodnota vyjadřující exitenci daného uživatele
      * @throws DibiException
      */
-
     public static function getUserByUserName($userName) {
 
         $result = dibi::query('SELECT * FROM user WHERE userName=%s LIMIT 1', $userName);
@@ -278,7 +267,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vygeneruje náhodné heslo jako návrh pro nového uživatele
      * @param $lenght délka hesla
      */
-
     public static function genPass($length=9) {
 
         $malaPismena = "abcdefghijklmnopqrstuvwxyz";
@@ -321,7 +309,6 @@ class UsersModel extends Object implements IAuthenticator {
      * @privilege akce, která je požadována
      * @userId id uživatele, který je vlastníkem daného resource
      */
-
     public static function isAllowed($resource, $privilege, $userId) {
 
         if (Environment::getUser()->isAllowed($resource, $privilege)) {
@@ -339,7 +326,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí kolegy z oddělení
      * @throws DibiException
      */
-
     public static function getMyColleagues($id) {
 
         $result = dibi::query('SELECT user.id, CONCAT(user.firstName," ", user.Surname) FROM user, userDepartment WHERE (userDepartment.departmentId=%i) AND (user.id=userDepartment.staffId)', $id);
@@ -353,7 +339,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí jména všech zaměstnanců
      * @throws DibiException
      */
-
     public static function getStaffNames() {
 
         $result = dibi::query('SELECT id, CONCAT(user.firstName," ", user.Surname) FROM user');
@@ -367,7 +352,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí jméno konkrétního zaměstnance
      * @throws DibiException
      */
-
     public static function getStaffName($staffId) {
 
         $result = dibi::query('SELECT CONCAT(user.firstName," ", user.Surname) FROM user WHERE id=%i', $staffId);
@@ -381,7 +365,6 @@ class UsersModel extends Object implements IAuthenticator {
      * Metoda, která vrátí názvy oddělení
      * @throws DibiException
      */
-
     public static function getAllDepartments() {
 
         $result = dibi::query('SELECT id, name FROM department');
