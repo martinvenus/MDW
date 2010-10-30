@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <!-- Theme by AvianshGurung -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>MI-MDW - RT System</title>
+
+        <!-- Load the styles -->
+        <link href="{$basePath}/css/frontend/style.css" rel="stylesheet" type="text/css" />
+
+        <meta charset="UTF-8" />
+
+    </head>
+
+
+    <body>
+        <div id="wrapper">
+
+            <div id="header">
+                <!-- Begin Logo -->
+                <div id="logo">
+                    <h1>MI-MDW - RT System</h1>
+                </div>
+                <!-- End of Logo -->
+
+            </div>
+            <div id="container">
+                <!-- Begin Ticket -->
+                <div class="box">
+                    <div class="box-top">
+                    </div>
+                    <div class="box-mid">
+                        <div class="box-content">
+                            <div class="box-content-left">
+                                <div class="image-margin">
+                                    <img src="{$basePath}/images/frontend/ticket-icon.png" alt="Contact" width="168" height="132" />
+                                </div>
+                                <div class="text-container">
+                                    <h2 class="ticket-head">Přidání požadavku</h2>
+                                    <p class="module-heading-seperator"></p>
+                                    <p>Vítejte bla bla bla. Lorem ipsum dolor sit amet consectetuer penatibus morbi auctor pretium quis. Mauris enim justo pede condimentum.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-bot">
+                    </div>
+                </div>
+                <!--End Contact -->
+                <div class="marg">&nbsp;</div>
+                <div id="second-container">
+
+
+
+
+                    <!-- Begin Contact Form -->
+                    <div class="second-container-content">
+                        <div id="ticket">
+                            
+                            {snippet flashMessage}
+                            {foreach $flashes as $flash}
+                            <p id="congrats" class="alert">
+                                <h3>{$flash->message}</h3>
+                            </p>
+                            {/foreach}
+                            {/snippet}
+                            @{include #content}
+
+                        </div>
+                    </div>
+                    <!-- End of Ticket Form -->
+
+                    <div class="marg">&nbsp;</div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <div id="bottom-bg">
+            </div>
+
+        </div>
+
+
+    </body>
+</html>

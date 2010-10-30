@@ -374,4 +374,20 @@ class UsersModel extends Object implements IAuthenticator {
         return $pairs;
     }
 
+    /*
+     * Metoda, která vrátí názvy oddělení viditelných pro externí uživatele
+     * @throws DibiException
+     */
+
+    public static function getAllPublicDepartments() {
+
+        $result = dibi::query('SELECT id, name FROM department WHERE public=%i ORDER BY id DESC', 1);
+
+        $pairs = $result->fetchPairs();
+
+        return $pairs;
+    }
+
 }
+
+?>

@@ -448,7 +448,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $data['name'] = $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname;
         $data['ipAddress'] = $_SERVER['SERVER_ADDR'];
 
-
         $departs = UsersModel::getAllDepartments();
 
         $this->form = new AppForm($this, 'Ticket');
@@ -482,7 +481,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->form->addHidden('staffId', NULL); //TODO: Zjistit jak definovat staffId
         $this->form->addHidden('priority', 5); //TODO: Highest priority if admin, not defined if user
         $this->form->addHidden('status', 'Otevřený');
-        $this->form->addHidden('source', 'web');
+        $this->form->addHidden('source', 'admin');
         $this->form->addHidden('closed', 0);
         $this->form->addHidden('created', time());
         $this->form->addHidden('updated', time());
@@ -522,7 +521,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->redirect('Ticket:');
     }
 
-    protected function genTicketID($department) {
+    public static function genTicketID($department) {
 
         do {
 

@@ -39,7 +39,7 @@
 
         <div id="wrap">
             <div id="header">
-                <h1><a class="bg" href="#" title="Home"></a>Manager 1.0</h1>
+                <h1><a class="bg" href="{link Default:}" title="Home"></a>Manager 1.0</h1>
                 {if isset($user)}
                 <p id="status">Přihlášen <a href="{link User:userChange 1, $user->id}"><strong>{$user->firstName} {$user->surname}</strong></a>  |  <a href="{link User:userChange 2, $user->id}">Změnit heslo</a> | <a href="{link User:logout}">Odhlásit</a></p>
                 {/if}
