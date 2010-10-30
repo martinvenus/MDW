@@ -1,44 +1,28 @@
 {block content}
 
-<div id="header">
-	<h1>It works!</h1>
+    <?php $form->render('begin') ?><br />
+    <?php $form->render('errors') ?>
 
-	<h2>Congratulations on your first Nette Framework powered page.</h2>
-</div>
+    <!-- hidden fields -->
+    <div n:foreach="$form->getComponents(TRUE, 'Nette\Forms\HiddenField') as $control">{$control->control}</div>
 
-<div>
-	<p>{$message}</p>
+    <div class="lab">
+        {!$form['name']->label}<br />
+        {!$form['email']->label}<br />
+        {!$form['mobile']->label}<br />
+        {!$form['departmentId']->label}<br />
+        {!$form['subject']->label}<br />
+        {!$form['ticketMessage']->label}<br />
+    </div>
+    <div>
+        {!$form['name']->control}<br />
+        {!$form['email']->control}<br />
+        {!$form['mobile']->control}<br />
+        {!$form['departmentId']->control}<br />
+        {!$form['subject']->control}<br />
+        {!$form['ticketMessage']->control}<br />
+    </div>
+    <div class="but">{!$form['ok']->control}</div>
+</form>
 
-	<a href="http://nette.org" title="Nette Framework - The most innovative PHP framework"><img
-	src="{$basePath}/images/nette-powered2.gif" width="80" height="15" alt="Nette Framework powered"></a>
-</div>
-
-<style>
-	body {
-		margin: 0;
-		padding: 0;
-	}
-
-	div {
-		padding: .2em 1em;
-	}
-
-	#header {
-		background: #EEE;
-		border-bottom: 1px #DDD solid;
-	}
-
-	h1 {
-		color: #0056ad;
-		font-size: 30px;
-	}
-
-	h2 {
-		color: gray;
-		font-size: 20px;
-	}
-
-	img {
-		border: none;
-	}
-</style>
+{/block}
