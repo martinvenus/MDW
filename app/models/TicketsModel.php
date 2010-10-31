@@ -113,6 +113,11 @@ class TicketsModel {
         );
     }
 
+    /*
+     * Předání tiketu kolegovi z oddělení
+     * @param form data z formuláře
+     */
+
     public static function forwardTicket($form) {
 
         dibi::query('UPDATE ticket SET `staffId` = %i, `updated` = %i WHERE id = %i LIMIT 1', $form['colleague'], $form['time'], $form['tiket']);
@@ -131,6 +136,11 @@ class TicketsModel {
         );
     }
 
+    /*
+     * Předání tiketu do jiného oddělení
+     * @param form data z formuláře
+     */
+
     public static function changeDepartment($form) {
 
         dibi::query('UPDATE ticket SET `staffId` = NULL, `departmentId` = %i, `updated` = %i WHERE id = %i LIMIT 1', $form['department'], $form['time'], $form['tiket']);
@@ -148,6 +158,11 @@ class TicketsModel {
                         $form['type']
         );
     }
+
+    /*
+     * Přidání odpovědi k tiketu
+     * @param form data z formuláře
+     */
 
     public static function addReply($form) {
 
@@ -193,6 +208,11 @@ class TicketsModel {
                         $data['type']
         );
     }
+
+    /*
+     * Přidání nového tiketu do databáze
+     * @param form data z formuláře
+     */
 
     public static function addTicket(array $form) {
         dibi::query('INSERT INTO ticket (
