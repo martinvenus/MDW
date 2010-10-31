@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Request Tracking System
  * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
@@ -241,7 +242,6 @@ class TicketsModel {
                         $form['created'],
                         $form['type']
         );
-        
     }
 
 }

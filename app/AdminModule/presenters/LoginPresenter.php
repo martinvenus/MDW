@@ -30,6 +30,10 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
         $this->backlink = '';
     }
 
+    /*
+     * Přihlašovací formulář
+     * @param backlink odkaz na stránku, na které se uživatel nacházel před odhlášením
+     */
     public function actionDefault($backlink) {
 
         $this->backlink = $backlink;
@@ -41,8 +45,6 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
 
         $this->form->addPassword('password', 'Přístupové heslo:')
                 ->addRule(Form::FILLED, 'Přístupové heslo musí být vyplněno.');
-        //->addRule(Form::MIN_LENGTH, 'Heslo musí být minimálně %d znaků', 12);
-
 
         $this->form->addSubmit('login', 'Přihlásit');
 
@@ -61,10 +63,9 @@ class Admin_LoginPresenter extends Admin_BasePresenter {
     }
 
     /*
-     * Metoda zpracovávající data z formuláře
+     * Metoda zpracovávající data z přihlašovacího formuláře
      * @param $form data z formuláře
      */
-
     function FormSubmitted(Form $form) {
 
         $formular = $this->form->getValues();

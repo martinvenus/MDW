@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Request Tracking System
  * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
@@ -13,12 +14,13 @@
  * Default class
  *
  */
-class Admin_DefaultPresenter extends Admin_BasePresenter
-{
+class Admin_DefaultPresenter extends Admin_BasePresenter {
 
-	public function actionDefault()
-	{
-		$this->redirect('Ticket:');
-	}
+    /*
+     * Předměruje úvodní stránku na presenter Ticket
+     */
+    public function actionDefault() {
+        $this->redirect('Ticket:');
+    }
 
 }

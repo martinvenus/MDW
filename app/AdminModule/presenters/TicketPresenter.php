@@ -18,43 +18,32 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     /** @var Form */
     protected $form;
 
-    /*
-     * Zavolá funkci verifyUser, která ověří, zda je uživatel přihlášen
-     * V případě že není -> přesměruje na přihlášení
-     */
-
     public function startup() {
 
         parent::startup();
 
-        $this->verifyUser();
     }
 
     /*
-     * Defaultní akce presenteru
+     * Výchozí akce presenteru - zobrazí nové nepřiřazené tikety
      */
-
     public function actionDefault() {
 
-        //$this->access();
         $this['newTickets']; // získá komponentu
+
     }
 
     /*
-     * Vykreslení stránky s tickety aktuálního uživatele
+     * Vykreslení stránky s vlastními tikkety aktuálního uživatele
      */
-
     public function actionMyTickets() {
-
-        //$this->access();
 
         $this['myTickets']; // získá komponentu
     }
 
     /*
-     * Vykreslení stránky s tickety aktuálního uživatele
+     * Vykreslení stránky s tikkety aktuálního uživatele
      */
-
     public function actionClosedTickets() {
 
         //$this->access();
@@ -66,7 +55,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Komponenta datagagrid pro vykreslení tabulky ticketů aktuálního uživatele
      * @return grid
      */
-
     protected function createComponentMyTickets() {
 
         $grid = new DataGrid;
@@ -130,7 +118,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Komponenta datagagrid pro vykreslení tabulky nepřiřazených tiketů
      * @return grid
      */
-
     protected function createComponentClosedTickets() {
 
         $grid = new DataGrid;
@@ -162,7 +149,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda formátování data do tvaru d.m.Y H:i
      * @param $date Datum v unixtime
      */
-
     function updatedFormat($date) {
         if ($date > 0) {
             return Date('d.m.Y H:i', $date);
@@ -175,7 +161,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda pro zobrazení detailů tiketu
      * @param $id ID tiketu
      */
-
     public function actionShowTicket($id) {
         $this->template->detaily = TicketsModel::getTicketDetails($id);
         $this->template->zpravy = TicketsModel::getTicketMessages($id);
@@ -187,7 +172,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda pro předání tiketu kolegovi
      * @param $id ID tiketu
      */
-
     public function actionForwardTicket($id) {
 
         $this->form = new AppForm($this, 'fwdTicket');
@@ -207,7 +191,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Zpracování odeslaného formuláře pro předání tiketu kolegovi
      * @param $form data z formuláře
      */
-
     function ForwardFormProcess(Form $form) {
 
         $data = $form->getValues(); // vezmeme data z formuláře
@@ -238,7 +221,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda pro předání tiketu do jiného oddělení
      * @param $id ID tiketu
      */
-
     public function actionChangeDepartment($id) {
 
         $this->form = new AppForm($this, 'chngDepartment');
@@ -258,7 +240,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Zpracování odeslaného formuláře pro předání di jiného oddělení
      * @param $form data z formuláře
      */
-
     function DepartmentFormProcess(Form $form) {
 
         $data = $form->getValues(); // vezmeme data z formuláře
@@ -289,7 +270,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * @param $id ID tiketu
      * @param $status Nastavení hodnoty 0 - otevřít, 1 - uzavřít
      */
-
     public function actionChangeClosed($id, $status) {
 
         $data['type'] = 3; // 3 = systémová zpráva
@@ -327,7 +307,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda pro přijetí tiketu
      * @param $id ID tiketu
      */
-
     public function actionTakeTicket($id) {
 
         $data['type'] = 3; // 3 = systémová zpráva
@@ -355,7 +334,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Metoda pro vrácení tiketu
      * @param $id ID tiketu
      */
-
     public function actionReturnTicket($id) {
 
         $data['type'] = 3; // 3 = systémová zpráva
@@ -384,7 +362,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * @param $id ID tiketu
      * @param $internal Příznak zda se jedná o interní poznámku (neodešle mail zadavateli)
      */
-
     public function actionAddReply($id, $internal) {
 
         $this->form = new AppForm($this, 'sendReply');
@@ -406,7 +383,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Zpracování odeslaného formuláře pro přidání odpovědi nebo interní poznámky k tiketu
      * @param $form data z formuláře
      */
-
     function ReplyFormProcess(Form $form) {
 
         $data = $form->getValues(); // vezmeme data z formuláře        
@@ -442,7 +418,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     /*
      * Metoda pro přidání tiketu
      */
-
     function actionAddTicket() {
 
         $data['name'] = $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname;
@@ -496,7 +471,6 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
      * Zpracování odeslaného formuláře pro přidání tiketu
      * @param $form data z formuláře
      */
-
     function addTicketFormProcess(Form $form) {
 
         $data = $form->getValues(); // vezmeme data z formuláře
@@ -521,7 +495,11 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
         $this->redirect('Ticket:');
     }
 
-    public static function genTicketID($department) {
+    /*
+     * Metoda, která vygeneruje ID nového tiketu
+     * @param departmentId ID oddělení
+     */
+    public static function genTicketID($departmentId) {
 
         do {
 
@@ -541,8 +519,8 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
             for ($i = 0; $i < count($tid); $i++) {
                 $tidfin.=$tid[$i];
             }
-            $ticketID = $department . '-' . $date . '-' . $tidfin;
-        }//check in DB if such ticketID exists
+            $ticketID = $departmentId . '-' . $date . '-' . $tidfin;
+        }
         
         while (TicketsModel::checkTicketId($ticketID) > 0);
 
@@ -551,5 +529,3 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     }
 
 }
-
-?>

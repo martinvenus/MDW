@@ -53,9 +53,8 @@ class Admin_UserPresenter extends Admin_BasePresenter {
     }
 
     /*
-     * Vykreslení stránky pro administraci automobilů
+     * Vykreslení stránky pro administraci uživatelů
      */
-
     public function renderDefault() {
 
         $this->access();
@@ -64,10 +63,9 @@ class Admin_UserPresenter extends Admin_BasePresenter {
     }
 
     /*
-     * Komponenta datagagrid pro vykreslení tabulky aut
+     * Komponenta datagagrid pro vykreslení tabulky uživatelů
      * @return grid
      */
-
     protected function createComponentUsers() {
 
         $grid = new DataGrid;
@@ -106,10 +104,18 @@ class Admin_UserPresenter extends Admin_BasePresenter {
         return $grid;
     }
 
+    /*
+     * Přesměrování na editaci uživatele
+     * @param id ID uživatele
+     */
     public function actionUserChangeRedirect($id) {
         $this->redirect('userChange', 1, $id);
     }
 
+    /*
+     * Přesměrování na změnu hesla
+     * @param id ID uživatele
+     */
     public function actionUserPasswordChangeRedirect($id) {
         $this->redirect('userChange', 2, $id);
     }

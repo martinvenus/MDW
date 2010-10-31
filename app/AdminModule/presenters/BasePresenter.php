@@ -15,8 +15,17 @@
  */
 abstract class Admin_BasePresenter extends BasePresenter {
 
+    /*
+     * Udržuje identitu přihlášeného uživatele
+     */
     protected $user;
 
+    /*
+     * Konstruktor administračního rozhraní
+     * Registruje službu pro ověření přihlášení a správu přihlášeného uživatele - User
+     * Ověří, zda je uživatel přihlášen
+     * Definuje systémové zprávy a konstanty
+     */
     public function startup() {
 
         parent::startup();
