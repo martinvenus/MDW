@@ -25,7 +25,7 @@ class Front_DefaultPresenter extends Front_BasePresenter {
 
     function actionDefault() {
 
-        $data['ipAddress'] = $_SERVER['SERVER_ADDR'];
+        $data['ipAddress'] = $_SERVER['REMOTE_ADDR'];
 
         $departs = UsersModel::getAllPublicDepartments();
 
