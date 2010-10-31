@@ -421,7 +421,7 @@ class Admin_TicketPresenter extends Admin_BasePresenter {
     function actionAddTicket() {
 
         $data['name'] = $this->user->getidentity()->firstName . " " . $this->user->getidentity()->surname;
-        $data['ipAddress'] = $_SERVER['SERVER_ADDR'];
+        $data['ipAddress'] = $_SERVER['REMOTE_ADDR'];
 
         $departs = UsersModel::getAllDepartments();
 
