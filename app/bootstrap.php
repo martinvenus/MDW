@@ -57,6 +57,17 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
                 'presenter' => 'Default',
                     ), Route::ONE_WAY);
 
+    $router[] = new RestRoute('setTest', array(
+                'module' => 'Front',
+                'presenter' => 'Default',
+                'action' => 'setTest',
+                    ), RestRoute::METHOD_POST);
+
+    $router[] = new RestRoute('getTest', array(
+                'module' => 'Front',
+                'presenter' => 'Default',
+                'action' => 'getTest',
+                    ), RestRoute::METHOD_GET);
 
     $router[] = new Route('<module>/<presenter>/<action>/<id>', array(
                 'module' => 'Front',
@@ -68,7 +79,7 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
     $router[] = new SimpleRouter('Front:Default:default');
 }
 
-
+//RoutingDebugger::enable();
 
 // Step 5: Run the application!
 $application->run();

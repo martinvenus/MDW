@@ -101,7 +101,7 @@ class Route extends Object implements IRouter
 	private $type;
 
 	/** @var int */
-	private $flags;
+	protected $flags;
 
 
 

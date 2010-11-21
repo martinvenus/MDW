@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Request Tracking System
  * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
@@ -100,6 +101,17 @@ class Front_DefaultPresenter extends Front_BasePresenter {
         $this->redirect('Default:sent');
     }
 
-    
+    function actionGetTest($action) {
+        echo $action;
+    }
+
+    function actionSetTest($method) {
+        parse_str(file_get_contents('php://input'), $put_vars);
+        $data = $put_vars;
+
+        echo "XXX";
+        echo $data['phone'];
+        echo "XXX";
+    }
 
 }
