@@ -109,9 +109,9 @@ class Front_DefaultPresenter extends Front_BasePresenter {
         parse_str(file_get_contents('php://input'), $put_vars);
         $data = $put_vars;
 
-        echo "XXX";
-        echo $data['phone'];
-        echo "XXX";
+        print_r($data);
+
+        //print_r( apache_request_headers() );
     }
 
 }
