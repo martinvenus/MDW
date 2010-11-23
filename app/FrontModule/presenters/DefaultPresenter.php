@@ -106,12 +106,32 @@ class Front_DefaultPresenter extends Front_BasePresenter {
     }
 
     function actionSetTest($method) {
-        parse_str(file_get_contents('php://input'), $put_vars);
-        $data = $put_vars;
 
-        print_r($data);
+        $data = @file_get_contents('php://input');
 
-        //print_r( apache_request_headers() );
+        // Enable user error handling
+        libxml_use_internal_errors(true);
+
+        $xml = new DOMDocument();
+        $xml->load($data);
+
+        echo 'xsd/ticket.xsd';
+
+        if (!$xml->schemaValidate('xsd/ticket.xsd')) {
+            print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
+        } else {
+            echo "XML document is valid. Congratulation.";
+        }
+
+
+        if($data == "<xml><neco>JARDA</neco></xml>"){
+            echo "Ano";
+        }
+        else{
+            echo $data;
+        }
+        
+        
     }
 
 }
