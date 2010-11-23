@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{if isset($errors)}
+<errors>
+    {foreach $errors as $item}
+    <error>
+        <description>{$item}</description>
+    </error>
+    {/foreach}
+</errors>
+{else}
+<response>
+    <ticketId>123456</ticketId>
+</response>
+{/if}

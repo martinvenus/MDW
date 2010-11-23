@@ -17,4 +17,8 @@ abstract class Front_BasePresenter extends BasePresenter
 {
 	public $oldLayoutMode = FALSE;
 
+    public function startup() {
+        parent::startup();
+    }
+
 }

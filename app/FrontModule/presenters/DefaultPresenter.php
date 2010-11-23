@@ -100,38 +100,4 @@ class Front_DefaultPresenter extends Front_BasePresenter {
 
         $this->redirect('Default:sent');
     }
-
-    function actionGetTest($action) {
-        echo $action;
-    }
-
-    function actionSetTest($method) {
-
-        $data = @file_get_contents('php://input');
-
-        // Enable user error handling
-        libxml_use_internal_errors(true);
-
-        $xml = new DOMDocument();
-        $xml->load($data);
-
-        echo 'xsd/ticket.xsd';
-
-        if (!$xml->schemaValidate('xsd/ticket.xsd')) {
-            print '<b>DOMDocument::schemaValidate() Generated Errors!</b>';
-        } else {
-            echo "XML document is valid. Congratulation.";
-        }
-
-
-        if($data == "<xml><neco>JARDA</neco></xml>"){
-            echo "Ano";
-        }
-        else{
-            echo $data;
-        }
-        
-        
-    }
-
 }

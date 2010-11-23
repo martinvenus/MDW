@@ -57,10 +57,10 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
                 'presenter' => 'Default',
                     ), Route::ONE_WAY);
 
-    $router[] = new RestRoute('setTest', array(
+    $router[] = new RestRoute('api/v1/ticket', array(
                 'module' => 'Front',
-                'presenter' => 'Default',
-                'action' => 'setTest',
+                'presenter' => 'Rest',
+                'action' => 'createTicket',
                     ), RestRoute::METHOD_POST);
 
     $router[] = new RestRoute('getTest', array(
