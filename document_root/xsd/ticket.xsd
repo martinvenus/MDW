@@ -10,9 +10,9 @@
         <xs:element name="phone" type="xs:string" minOccurs="0" />
         <xs:element name="department" minOccurs="0">
            <xs:simpleType>
-             <xs:restriction base="xs:string">
-               <xs:enumeration value="Technické oddělení" />
-               <xs:enumeration value="Obchodní oddělení" />
+             <xs:restriction base="xs:integer">
+               <xs:enumeration value="1" />
+               <xs:enumeration value="2" />
              </xs:restriction>
            </xs:simpleType>
         </xs:element>
