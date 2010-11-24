@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{if isset($errors)}
+<errors>
+    {foreach $errors as $item}
+    <error>
+        <description>{$item}</description>
+    </error>
+    {/foreach}
+</errors>
+{else}
+<ticket>
+    <ticketId>{$ticket['ticketID']}</ticketId>
+    <priority>{$ticket['priority']}</priority>
+    <name>{$ticket['name']}</name>
+    <email>{$ticket['email']}</email>
+    <phone>{$ticket['phone']}</phone>
+    <ipAddress>{$ticket['ipAddress']}</ipAddress>
+    <subject>{$ticket['subject']}</subject>
+    <status>{$ticket['status']}</status>
+    <source>{$ticket['source']}</source>
+    <created unit="UnixTime">{$ticket['created']}</created>
+    <updated unit="UnixTime">{$ticket['updated']}</updated>
+
+    <messages>
+            {foreach $ticketMessages as $ticketMessage}
+        <message>
+            <name>{$ticketMessage['name']}</name>
+            <message>{$ticketMessage['message']}</message>
+            <date unit="UnixTime">{$ticketMessage['date']}</date>
+        </message>
+        {/foreach}
+    </messages>
+</ticket>
+{/if}

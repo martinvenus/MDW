@@ -14,7 +14,7 @@
  * Model for ticket managment
  *
  */
-class TicketsModel {
+class TicketsModel extends BaseModel {
     /*
      * Metoda, která vrátí dataSource uživatelových ticketů v systému
      * @throws DibiException
@@ -61,7 +61,11 @@ class TicketsModel {
         $result = dibi::query('SELECT * FROM ticket WHERE id=%i LIMIT 1', $id);
         $all = $result->fetchAll();
 
-        return $all[0];
+        if (count($result) > 0) {
+            return $all[0];
+        }
+
+        return NULL;
     }
 
     /*
@@ -72,6 +76,19 @@ class TicketsModel {
     public static function getTicketMessages($id) {
 
         $result = dibi::query('SELECT * FROM ticketMessage WHERE ticketID=%i ORDER BY date DESC', $id);
+        $all = $result->fetchAll();
+
+        return $all;
+    }
+
+     /*
+     * Metoda, která vrátí všechny zprávy k tiketu
+     * @throws DibiException
+     */
+
+    public static function getPublicTicketMessages($id) {
+
+        $result = dibi::query('SELECT * FROM ticketMessage WHERE ticketID=%i AND type != 2 ORDER BY date DESC', $id);
         $all = $result->fetchAll();
 
         return $all;

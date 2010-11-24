@@ -63,10 +63,18 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
                 'action' => 'createTicket',
                     ), RestRoute::METHOD_POST);
 
-    $router[] = new RestRoute('getTest', array(
+    $router[] = new RestRoute('api/v1/ticket/<ticketId>', array(
                 'module' => 'Front',
-                'presenter' => 'Default',
-                'action' => 'getTest',
+                'presenter' => 'Rest',
+                'action' => 'addMessageTicket',
+                'ticketId' => NULL,
+                    ), RestRoute::METHOD_PUT);
+
+    $router[] = new RestRoute('api/v1/ticket/<ticketId>', array(
+                'module' => 'Front',
+                'presenter' => 'Rest',
+                'action' => 'getTicket',
+                'ticketId' => NULL,
                     ), RestRoute::METHOD_GET);
 
     $router[] = new Route('<module>/<presenter>/<action>/<id>', array(
@@ -80,6 +88,5 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
 }
 
 //RoutingDebugger::enable();
-
 // Step 5: Run the application!
 $application->run();

@@ -20,6 +20,31 @@ class Front_RestPresenter extends Front_BasePresenter {
         echo $action;
     }
 
+    function actionGetTicket($ticketId) {
+
+        $errors = array();
+
+        $httpResponse = Environment::getHttpResponse();
+        $httpResponse->setContentType('application/xml');
+
+
+        $ticket = TicketsModel::getTicketDetails($ticketId);
+        $ticketMessages = TicketsModel::getPublicTicketMessages($ticketId);
+
+        if (count($ticket) == 0){
+            $httpResponse->setCode(404);
+            array_push($errors, 'Ticket with given ID does not exists.');
+        }
+        else {
+            $this->template->ticket = $ticket;
+            $this->template->ticketMessages = $ticketMessages;
+        }
+
+        if (count($errors) > 0) {
+            $this->template->errors = $errors;
+        }
+    }
+
     function actionCreateTicket() {
 
         $errors = array();
