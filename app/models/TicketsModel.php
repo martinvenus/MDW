@@ -69,6 +69,23 @@ class TicketsModel extends BaseModel {
     }
 
     /*
+     * Metoda, která vrátí deaily ticketu
+     * @throws DibiException
+     */
+
+    public static function getTicketDetailsByTicketID($ticketId) {
+
+        $result = dibi::query('SELECT * FROM ticket WHERE ticketId=%s LIMIT 1', $ticketId);
+        $all = $result->fetchAll();
+
+        if (count($result) > 0) {
+            return $all[0];
+        }
+
+        return NULL;
+    }
+
+    /*
      * Metoda, která vrátí všechny zprávy k tiketu
      * @throws DibiException
      */

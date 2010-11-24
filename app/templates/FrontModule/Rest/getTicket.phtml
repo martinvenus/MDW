@@ -18,15 +18,15 @@
     <subject>{$ticket['subject']}</subject>
     <status>{$ticket['status']}</status>
     <source>{$ticket['source']}</source>
-    <created unit="UnixTime">{$ticket['created']}</created>
-    <updated unit="UnixTime">{$ticket['updated']}</updated>
+    <created unit="unixTime">{$ticket['created']}</created>
+    <updated unit="unixTime">{$ticket['updated']}</updated>
 
     <messages>
             {foreach $ticketMessages as $ticketMessage}
         <message>
             <name>{$ticketMessage['name']}</name>
             <message>{$ticketMessage['message']}</message>
-            <date unit="UnixTime">{$ticketMessage['date']}</date>
+            <date unit="unixTime">{$ticketMessage['date']}</date>
         </message>
         {/foreach}
     </messages>

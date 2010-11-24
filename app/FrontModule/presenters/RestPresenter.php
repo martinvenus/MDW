@@ -16,10 +16,6 @@
  */
 class Front_RestPresenter extends Front_BasePresenter {
 
-    function actionGetTest($action) {
-        echo $action;
-    }
-
     function actionGetTicket($ticketId) {
 
         $errors = array();
@@ -28,14 +24,13 @@ class Front_RestPresenter extends Front_BasePresenter {
         $httpResponse->setContentType('application/xml');
 
 
-        $ticket = TicketsModel::getTicketDetails($ticketId);
-        $ticketMessages = TicketsModel::getPublicTicketMessages($ticketId);
+        $ticket = TicketsModel::getTicketDetailsByTicketID($ticketId);
+        $ticketMessages = TicketsModel::getPublicTicketMessages($ticket['id']);
 
-        if (count($ticket) == 0){
+        if (count($ticket) == 0) {
             $httpResponse->setCode(404);
             array_push($errors, 'Ticket with given ID does not exists.');
-        }
-        else {
+        } else {
             $this->template->ticket = $ticket;
             $this->template->ticketMessages = $ticketMessages;
         }
@@ -48,11 +43,18 @@ class Front_RestPresenter extends Front_BasePresenter {
     function actionCreateTicket() {
 
         $errors = array();
+        $error = false;
 
         $httpResponse = Environment::getHttpResponse();
         $httpResponse->setContentType('application/xml');
 
-        //TODO: Zavolat funkci na ověření typu obsahu
+        $verifyContentType = RestModel::verifyContentType('application/xml', Environment::getHttpRequest()->getHeader('Content-type'));
+
+        if ($verifyContentType == false) {
+            $httpResponse->setCode(400);
+            array_push($errors, 'Content type must be application/xml.');
+            $error = true;
+        }
 
         $data = @file_get_contents('php://input');
 
@@ -66,6 +68,7 @@ class Front_RestPresenter extends Front_BasePresenter {
         if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/ticket.xsd')) {
             $httpResponse->setCode(400);
             array_push($errors, 'XML document is invalid.');
+            $error = true;
         } else {
             //print 'XML document is valid.';
 
@@ -73,8 +76,16 @@ class Front_RestPresenter extends Front_BasePresenter {
 
             $pole = array();
 
-            //TODO: Zavolat funkci na ověření API key
-            if ($xml->apiKey == 1234567890) {
+            try {
+                RestModel::verifyAPIkey((String) $xml->apiKey);
+            } catch (AuthenticationException $e) {
+                $httpResponse->setCode(403);
+                array_push($errors, 'API Key is invalid.');
+                $error = true;
+            }
+
+
+            if ($error == false) {
 
                 // naplni se pole pro predani do modelu
                 foreach ($xml as $key => $item) {
@@ -109,17 +120,96 @@ class Front_RestPresenter extends Front_BasePresenter {
                     $httpResponse->setCode(500);
                     array_push($errors, 'Server database error.');
                 }
-            } else {
-                $httpResponse->setCode(403);
-                array_push($errors, 'API Key is invalid.');
             }
         }
 
         if (count($errors) > 0) {
             $this->template->errors = $errors;
-        }
-        else{
+        } else {
             $this->template->ticket = $pole['tid'];
+        }
+    }
+
+    function actionAddMessageTicket($ticketId) {
+        $errors = array();
+        $error = false;
+
+        $httpResponse = Environment::getHttpResponse();
+        $httpResponse->setContentType('application/xml');
+
+        $verifyContentType = RestModel::verifyContentType('application/xml', Environment::getHttpRequest()->getHeader('Content-type'));
+
+        if ($verifyContentType == false) {
+            $httpResponse->setCode(400);
+            array_push($errors, 'Content type must be application/xml.');
+            $error = true;
+        }
+
+        $ticket = TicketsModel::getTicketDetailsByTicketID($ticketId);
+
+        if (count($ticket) == 0) {
+            $httpResponse->setCode(404);
+            array_push($errors, 'Ticket with given ID does not exist.');
+            $error = true;
+        }
+
+        $data = @file_get_contents('php://input');
+
+        // Enable user error handling
+        libxml_use_internal_errors(true);
+
+        $xmlDOM = new DOMDocument();
+        $xmlDOM->loadXML($data);
+        //$xml->load($data);
+
+
+        if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/update.xsd')) {
+            $httpResponse->setCode(400);
+            array_push($errors, 'XML document is invalid.');
+            $error = true;
+        } else {
+            //print 'XML document is valid.';
+
+            $xml = simplexml_import_dom($xmlDOM);
+
+            $pole = array();
+
+            try {
+                RestModel::verifyAPIkey((String) $xml->apiKey);
+            } catch (AuthenticationException $e) {
+                $httpResponse->setCode(403);
+                array_push($errors, 'API Key is invalid.');
+                $error = true;
+            }
+
+            if ($error == false) {
+
+                // naplni se pole pro predani do modelu
+                foreach ($xml as $key => $item) {
+                    $pole[$key] = (String) $item;
+                }
+
+                $pole['tiket'] = $ticket['id'];
+                $pole['message'] = $pole['message'];
+                $pole['name'] = $pole['name'];
+                $pole['time'] = time();
+                $pole['type'] = 1;
+
+                try {
+                    TicketsModel::addReply($pole);
+                    dibi::query('COMMIT');
+                } catch (Exception $e) {
+                    dibi::query('ROLLBACK');
+                    Debug::processException($e);
+                    $httpResponse->setCode(500);
+                    array_push($errors, 'Server database error.');
+                }
+            }
+        }
+
+
+        if (count($errors) > 0) {
+            $this->template->errors = $errors;
         }
     }
 
