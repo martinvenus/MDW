@@ -46,11 +46,43 @@ class Front_RestPresenter extends Front_BasePresenter {
 
             $xml = simplexml_import_dom($xmlDOM);
 
+            $pole = array();
+
             //TODO: Zavolat funkci na ověření API key
             if ($xml->apiKey == 1234567890) {
+
+                // naplni se pole pro predani do modelu
                 foreach ($xml as $key => $item) {
-                    //echo $key . ' - ' . $item;
-                    //echo "<br /><br />";
+                    $pole[$key] = (String) $item;
+                }
+
+                $httpRquest = Environment::getHttpRequest();
+                $pole['ip'] = $httpRquest->getRemoteAddress();
+
+                $pole['departmentId'] = $pole['department'];
+                $pole['name'] = $pole['author'];
+                $pole['mobile'] = $pole['phone'];
+                $pole['email'] = $pole['mail'];
+                $pole['ticketMessage'] = $pole['description'];
+                $pole['staffId'] = NULL;
+                $pole['priority'] = 1;
+                $pole['status'] = "Otevřený";
+                $pole['source'] = "api";
+                $pole['closed'] = 0;
+                $pole['created'] = time();
+                $pole['updated'] = time();
+                $pole['time'] = time();
+                $pole['type'] = 0;
+                $pole['tid'] = Admin_TicketPresenter::genTicketID($pole['department']);
+
+                try {
+                    TicketsModel::addTicket($pole);
+                    dibi::query('COMMIT');
+                } catch (Exception $e) {
+                    dibi::query('ROLLBACK');
+                    Debug::processException($e);
+                    $httpResponse->setCode(500);
+                    array_push($errors, 'Server database error.');
                 }
             } else {
                 $httpResponse->setCode(403);
@@ -60,6 +92,9 @@ class Front_RestPresenter extends Front_BasePresenter {
 
         if (count($errors) > 0) {
             $this->template->errors = $errors;
+        }
+        else{
+            $this->template->ticket = $pole['tid'];
         }
     }
 
