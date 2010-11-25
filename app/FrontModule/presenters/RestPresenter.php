@@ -243,9 +243,8 @@ class Front_RestPresenter extends Front_BasePresenter {
 
         $xmlDOM = new DOMDocument();
         $xmlDOM->loadXML($data);
-        //$xml->load($data);
-        //TODO: Tady změň adresu na XSD
-        if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/update.xsd')) {
+
+        if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/close.xsd')) {
             $httpResponse->setCode(400);
             array_push($errors, 'XML document is invalid.');
             $error = true;
