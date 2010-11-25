@@ -213,4 +213,73 @@ class Front_RestPresenter extends Front_BasePresenter {
         }
     }
 
+    function actionCloseTicket($ticketId) {
+        $errors = array();
+        $error = false;
+
+        $httpResponse = Environment::getHttpResponse();
+        $httpResponse->setContentType('application/xml');
+
+        $verifyContentType = RestModel::verifyContentType('application/xml', Environment::getHttpRequest()->getHeader('Content-type'));
+
+        if ($verifyContentType == false) {
+            $httpResponse->setCode(400);
+            array_push($errors, 'Content type must be application/xml.');
+            $error = true;
+        }
+
+        $ticket = TicketsModel::getTicketDetailsByTicketID($ticketId);
+
+        if (count($ticket) == 0) {
+            $httpResponse->setCode(404);
+            array_push($errors, 'Ticket with given ID does not exist.');
+            $error = true;
+        }
+
+        $data = @file_get_contents('php://input');
+
+        // Enable user error handling
+        libxml_use_internal_errors(true);
+
+        $xmlDOM = new DOMDocument();
+        $xmlDOM->loadXML($data);
+        //$xml->load($data);
+
+        //TODO: Tady změň adresu na XSD
+        if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/update.xsd')) {
+            $httpResponse->setCode(400);
+            array_push($errors, 'XML document is invalid.');
+            $error = true;
+        } else {
+            $xml = simplexml_import_dom($xmlDOM);
+
+            try {
+                RestModel::verifyAPIkey((String) $xml->apiKey);
+            } catch (AuthenticationException $e) {
+                $httpResponse->setCode(403);
+                array_push($errors, 'API Key is invalid.');
+                $error = true;
+            }
+
+            if ($error == false) {
+
+                try {
+                    //TODO: Tady pošli data na uzavření tiketu
+                    TicketsModel::changeClosed($data);
+                    dibi::query('COMMIT');
+                } catch (Exception $e) {
+                    dibi::query('ROLLBACK');
+                    Debug::processException($e);
+                    $httpResponse->setCode(500);
+                    array_push($errors, 'Server database error.');
+                }
+            }
+        }
+
+
+        if (count($errors) > 0) {
+            $this->template->errors = $errors;
+        }
+    }
+
 }

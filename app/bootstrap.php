@@ -73,6 +73,13 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
     $router[] = new RestRoute('api/v1/ticket/<ticketId>', array(
                 'module' => 'Front',
                 'presenter' => 'Rest',
+                'action' => 'closeTicket',
+                'ticketId' => NULL,
+                    ), RestRoute::METHOD_PUT);
+
+    $router[] = new RestRoute('api/v1/ticket/<ticketId>', array(
+                'module' => 'Front',
+                'presenter' => 'Rest',
                 'action' => 'getTicket',
                 'ticketId' => NULL,
                     ), RestRoute::METHOD_GET);
