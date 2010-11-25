@@ -68,7 +68,7 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
                 'presenter' => 'Rest',
                 'action' => 'addMessageTicket',
                 'ticketId' => NULL,
-                    ), RestRoute::METHOD_PUT);
+                    ), RestRoute::METHOD_POST);
 
     $router[] = new RestRoute('api/v1/ticket/<ticketId>', array(
                 'module' => 'Front',

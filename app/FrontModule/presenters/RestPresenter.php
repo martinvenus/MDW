@@ -29,7 +29,7 @@ class Front_RestPresenter extends Front_BasePresenter {
 
         if (count($ticket) == 0) {
             $httpResponse->setCode(404);
-            array_push($errors, 'Ticket with given ID does not exists.');
+            array_push($errors, 'Ticket with given ID does not exist.');
         } else {
             $this->template->ticket = $ticket;
             $this->template->ticketMessages = $ticketMessages;
