@@ -1,7 +1,7 @@
 <?
 include 'RestClient.class.php';
 
-$twitter = RestClient::put("http://192.168.2.10/MDW/document_root/api/v1/ticket/2-1288540979-99167", '<?xml version="1.0" encoding="UTF-8"?>
+$twitter = RestClient::put("http://mdw.wsolution.cz/api/v1/ticket/", '<?xml version="1.0" encoding="UTF-8"?>
 <ticket>
     <apiKey>1234567890</apiKey>
 </ticket>', null, null, "application/xml");
