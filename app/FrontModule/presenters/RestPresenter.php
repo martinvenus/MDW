@@ -259,7 +259,7 @@ class Front_RestPresenter extends Front_BasePresenter {
                 $error = true;
             }
 
-            if ($error == false) {
+            if (($error == false) && ($ticket['closed'] == 0)) {
 
                 $pole['type'] = 3; // 3 = systémová zpráva
 
