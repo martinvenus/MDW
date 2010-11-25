@@ -244,7 +244,6 @@ class Front_RestPresenter extends Front_BasePresenter {
         $xmlDOM = new DOMDocument();
         $xmlDOM->loadXML($data);
         //$xml->load($data);
-
         //TODO: Tady změň adresu na XSD
         if (!$xmlDOM->schemaValidate(WWW_DIR . '/xsd/update.xsd')) {
             $httpResponse->setCode(400);
@@ -263,9 +262,21 @@ class Front_RestPresenter extends Front_BasePresenter {
 
             if ($error == false) {
 
+                $pole['type'] = 3; // 3 = systémová zpráva
+
+                $pole['tiket'] = $ticket['id'];
+
+                $pole['comment'] = "Tiket byl uzavřen na přání zadavatele.";
+                $pole['closed'] = 1;
+                $pole['status'] = "Uzavřený";
+
+                $pole['time'] = time();
+
+                $pole['name'] = "System";
+
                 try {
                     //TODO: Tady pošli data na uzavření tiketu
-                    TicketsModel::changeClosed($data);
+                    TicketsModel::changeClosed($pole);
                     dibi::query('COMMIT');
                 } catch (Exception $e) {
                     dibi::query('ROLLBACK');
