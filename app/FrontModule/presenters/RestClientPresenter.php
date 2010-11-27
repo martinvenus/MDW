@@ -25,16 +25,13 @@ class Front_RestClientPresenter extends Front_BasePresenter {
     <description>TEST</description>
 </project>';
 
-        $url = 'http://fit-mdw-ws10-102-7.appspot.com/rest/projects';
-        $test = RestClientModel::post($url,$data,null,null,"application/xml");
+        $url = 'http://fit-mdw-ws10-102-7.appspot.com/rest/projects?user=martin.venus@gmail.com';
+        $test = RestClientModel::post($url, $data, null, null, "application/xml");
 
-        //$test = RestClientModel::put("http://mdw.wsolution.cz/api/v1/ticket/2-1288540979-99167", $data, null, null, "application/xml");
-
-//$twitter = RestClient::get("http://mdw.wsolution.cz/api/v1/ticket/2-1288540979-99167", array('id'=>2-1288540979-99167));
         echo $test->getResponse();
-//var_dump($twitter->getResponseCode());
-//var_dump($twitter->getResponseMessage());
-//var_dump($twitter->getResponseContentType());
+        var_dump($test->getResponseCode());
+//var_dump($test->getResponseMessage());
+//var_dump($test->getResponseContentType());
     }
 
 }
