@@ -88,7 +88,7 @@ class Front_DefaultPresenter extends Front_BasePresenter {
         $data['tid'] = Admin_TicketPresenter::genTicketID($data['departmentId']);
 
         try {
-            TicketsModel::addTicket($data);
+            $data['ticketId'] = TicketsModel::addTicket($data);
             dibi::query('COMMIT');
         } catch (Exception $e) {
             dibi::query('ROLLBACK');
@@ -96,8 +96,11 @@ class Front_DefaultPresenter extends Front_BasePresenter {
             $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
         }
 
+        Front_RestClientPresenter::addProject($data);
+
         $this->flashMessage("Váš tiket byl úspěšně přidán.");
 
         $this->redirect('Default:sent');
     }
+
 }

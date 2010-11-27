@@ -296,6 +296,24 @@ class TicketsModel extends BaseModel {
                         $form['created'],
                         $form['type']
         );
+
+        return $last;
+        
+    }
+
+    /*
+     * Přidání ID projektu získaného pomocí API
+     * @param form data z formuláře
+     */
+
+    public static function addBribe($ticketId, $projectID) {
+        dibi::query('INSERT INTO ticketBribe (
+            `ticketID`,
+            `projectId`)
+            VALUES (%i, %s)',
+                        $ticketId,
+                        $projectId);
+
     }
 
 }

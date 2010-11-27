@@ -24,7 +24,7 @@ class Front_RestClientPresenter extends Front_BasePresenter {
     <description>kdde se to zobrazuje?</description>
 </project>';
 
-        $bribe='<bribe>
+        $bribe = '<bribe>
     <state>accepted</state>
     <oficialNote>{acception/rejection clarification}</oficialNote>
 </bribe>';
@@ -38,6 +38,63 @@ class Front_RestClientPresenter extends Front_BasePresenter {
         var_dump($test->getResponseCode());
 //var_dump($test->getResponseMessage());
 //var_dump($test->getResponseContentType());
+    }
+
+    /**
+     *
+     * Pridani tiketu do seznamu uplatku (vyuziti API jineho tymu)
+     * ID projektu ve vzdalenem systemu si ulozim do databaze
+     *
+     */
+    public static function addProject($detaily) {
+        $data = '<project>
+    <name>' . $detaily['tid'] . '</name>
+    <type>service</type>
+    <tags>RT System</tags>
+    <description>' . $detaily['ticketMessage'] . '</description>
+</project>';
+
+        $req = RestClientModel::post('http://fit-mdw-ws10-102-7.appspot.com/rest/projects?user=jardakiss@gmail.com', $data, null, null, 'application/xml');
+
+        if ($req->getResponseCode() == 201) {
+
+            $xmlDOM = new DOMDocument();
+            $response = $req->getResponse();
+
+            $xmlDOM->loadXML($response);
+
+            $xml = simplexml_import_dom($xmlDOM);
+
+
+            $projectId = (String) $xml->id;
+
+            // TODO: Az opravi API dodelat vlozeni do DB ticketBribe
+
+            echo $projectId;
+
+
+
+//
+//            try {
+//                TicketsModel::addBribe($detaily['ticketId'], $projectId);
+//                dibi::query('COMMIT');
+//            } catch (Exception $e) {
+//                dibi::query('ROLLBACK');
+//                Debug::processException($e);
+//            }
+        }
+    }
+
+    function actionTest() {
+        $data = '<?xml version="1.0" encoding="UTF-8" ?>
+<project>
+    <id>3w</id>
+</project>';
+
+        $xmlDOM = new DOMDocument();
+        $xmlDOM->loadXML($data);
+        $xml = simplexml_import_dom($xmlDOM);
+        $bribeId = (String) $xml->id;
     }
 
 }
