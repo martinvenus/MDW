@@ -6,7 +6,6 @@
 
 <table class="datagrid">
     <tr>
-        <th>ID</th>
         <th>Název zájezdu</th>
         <th>Lokalita</th>
         <th>Informace</th>
@@ -20,7 +19,6 @@
 
 {foreach $zajezdy as $zajezd}
     <tr>
-        <td>{$zajezd->zajezdId}</td>
         <td>{$zajezd->nazev}</td>
         <td>{$zajezd->lokalita}</td>
         <td>{$zajezd->informace}</td>
@@ -30,8 +28,9 @@
         <td>{$zajezd->strava}</td>
         <td>{$zajezd->typZajezdu}</td>
         <td>
-            {if @$orderedZajezdy[(int) $zajezd->zajezdId] > 0}
-            <a href="{link cancelZajezd $orderedZajezdy[$zajezd->zajezdId]}">Zrušit objednávku</a>
+            <?php $zajezdId = (int) $zajezd->zajezdId; ?>
+            {if @$orderedZajezdy[$zajezdId] > 0}
+            <a href="{link cancelZajezd $orderedZajezdy[$zajezdId]}">Zrušit objednávku</a>
             {else}
             <a href="{link orderZajezd $zajezd->zajezdId, $zajezd->caId, $zajezd->cena}">Objednat</a>
             {/if}
