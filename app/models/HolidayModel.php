@@ -11,7 +11,7 @@
 
 /**
  *
- * Model for bonus programe
+ * Model for bonus programm
  *
  */
 class HolidayModel extends BaseModel {
@@ -54,5 +54,4 @@ class HolidayModel extends BaseModel {
 
         return $result;
     }
-
 }

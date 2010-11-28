@@ -15,7 +15,8 @@
  *
  */
 class RestModel extends BaseModel {
-    /*
+
+    /**
      * Vytvoří tiket ve vzdáleném API
      * @action typ akce (0=vytvoření, 1=změna)
      * @param ticketId
@@ -23,7 +24,6 @@ class RestModel extends BaseModel {
      * @param description popis tiketu
      * @return návratová hodnota
      */
-
     public static function createTicketInRemoteAPI($ticketId, $subject, $description, $action = 0) {
         $data = '<project>
     <name>' . $ticketId . '</name>
@@ -45,6 +45,10 @@ class RestModel extends BaseModel {
         return $api;
     }
 
+    /**
+     * Metoda vrací všechny zájezdy načtené ze vzdáleného API
+     * @return zájezdy
+     */
     public static function getZajezdyFromApi() {
         $url = 'http://fit-mdw-ws10-103-5.appspot.com/rest/Zajezdy/xml';
 
@@ -53,12 +57,11 @@ class RestModel extends BaseModel {
         return $response;
     }
 
-    /*
+    /**
      * Metoda ověří, zda přijatá data jsou požadovaného typu
      * @param requiredContentType požadovaný typ dokumentu
      * @param givenContentType přijatý typ dokumentu
      */
-
     public static function verifyContentType($requiredContentType, $givenContentType) {
         trim($requiredContentType);
         trim($givenContentType);
@@ -70,11 +73,10 @@ class RestModel extends BaseModel {
         return false;
     }
 
-    /*
+    /**
      * Metoda ověří, zda je zadaný klíč platný
      * @param key API klíč
      */
-
     public static function verifyAPIkey($key) {
         $result = dibi::query('SELECT id FROM api WHERE `key`=%s AND active = 1', $key);
         $count = count($result);
@@ -90,6 +92,7 @@ class RestModel extends BaseModel {
      *
      * Pridani tiketu do seznamu uplatku (vyuziti API jineho tymu)
      * ID projektu ve vzdalenem systemu si ulozim do databaze
+     * @param detaily informace pro vložení projektu
      *
      */
     public static function addProject($detaily) {
@@ -122,6 +125,4 @@ class RestModel extends BaseModel {
             }
         }
     }
-
 }
-

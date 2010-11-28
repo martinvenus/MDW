@@ -26,7 +26,6 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
     /**
      * Výchozí akce presenteru
      */
-
     public function actionDefault() {
         $this->redirect('showZajezdy');
     }
