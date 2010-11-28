@@ -107,9 +107,9 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
         $url = "http://fit-mdw-ws10-103-5.appspot.com/rest/Objednavky/cancel/" . $objId;
 
-        $req = RestClientModel::put($url, null, null, null, 'application/xml');
+        $req = RestClientModel::put($url, null, null, null, 'text/html');
 
-        if ($req->getResponseCode() == 200) {
+        if ($req->getResponseCode() == 204) {
 
             try {
                 HolidayModel::removeBonus($objId);
