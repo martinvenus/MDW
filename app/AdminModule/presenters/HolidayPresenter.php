@@ -49,8 +49,7 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
     /**
      *
-     * Pridani tiketu do seznamu uplatku (vyuziti API jineho tymu)
-     * ID projektu ve vzdalenem systemu si ulozim do databaze
+     * Objednani zajezdu pro zamestnance (vyuziti API jineho tymu)
      *
      */
     public function actionOrderZajezd($zaId, $caId, $cena) {
@@ -94,6 +93,35 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
             }
         } else {
             $this->flashMessage("Zájezd se nepodařilo rezervovat.");
+        }
+
+        $this->redirect('Holiday:showZajezdy');
+    }
+
+    /**
+     *
+     * Zruseni objednavky zamestnance (vyuziti API jineho tymu)
+     *
+     */
+    public function actionCancelZajezd($objId) {
+
+        $url = "http://fit-mdw-ws10-103-5.appspot.com/rest/Objednavky/cancel/" . $objId;
+
+        $req = RestClientModel::put($url, null, null, null, 'application/xml');
+
+        if ($req->getResponseCode() == 200) {
+
+            try {
+                HolidayModel::removeBonus($objId);
+                dibi::query('COMMIT');
+                $this->flashMessage("Zájezd byl úspěšně zrušen.");
+            } catch (Exception $e) {
+                dibi::query('ROLLBACK');
+                Debug::processException($e);
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+            }
+        } else {
+            $this->flashMessage("Zájezd se nepodařilo zrušit.");
         }
 
         $this->redirect('Holiday:showZajezdy');

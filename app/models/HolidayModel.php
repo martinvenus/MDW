@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Request Tracking System
  * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
@@ -14,11 +15,8 @@
  *
  */
 class HolidayModel extends BaseModel {
-
-
     /*
-     * Přidání odpovědi k tiketu
-     * @param form data z formuláře
+     * Přidání bonusu pro uživatele
      */
 
     public static function addBonus($user, $zajezd, $objednavka) {
@@ -33,13 +31,21 @@ class HolidayModel extends BaseModel {
         );
     }
 
+    /*
+     * Zrušení bonusu pro uživatele
+     */
 
-    public static function getOrderedZajezdyByUserId($userId){
+    public static function removeBonus($objednavka) {
+
+        dibi::query('DELETE FROM bonusAPI WHERE orderId=%i', $objednavka);
         
+    }
+
+    public static function getOrderedZajezdyByUserId($userId) {
+
         $result = dibi::dataSource('SELECT * FROM bonusAPI WHERE userId = %i', $userId);
-        
+
         return $result;
-        
     }
 
 }
