@@ -48,10 +48,10 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
      * ID projektu ve vzdalenem systemu si ulozim do databaze
      *
      */
-    public static function orderZajezd($id) {
+    public function actionOrderZajezd($id) {
         $data = '<Objednavka>
     <caId>MiDWa</caId>
-    <cena>6000</cena>
+    <cena>0</cena>
     <datumVytvoreni>2010-11-20T17:59:20.002Z</datumVytvoreni>
     <osoby>
       <jmeno>' . $this->user->getidentity()->name . '</jmeno>
@@ -64,6 +64,8 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
   </Objednavka>';
 
         $req = RestClientModel::post('http://fit-mdw-ws10-103-5.appspot.com/rest/Objednavky', $data, null, null, 'application/xml');
+
+        print_r($req->getResponseCode());
 
         if ($req->getResponseCode() == 200) {
 
@@ -80,9 +82,8 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
             // TODO: Az opravi API dodelat vlozeni do DB ticketBribe
 
+
             echo $objednavkaId;
-
-
 
 //
 //            try {
@@ -92,6 +93,7 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 //                dibi::query('ROLLBACK');
 //                Debug::processException($e);
 //            }
+
         }
     }
 
