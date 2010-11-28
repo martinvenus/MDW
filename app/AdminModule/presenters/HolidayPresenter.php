@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Request Tracking System
  * MI-MDW at CZECH TECHNICAL UNIVERSITY IN PRAGUE
@@ -11,7 +10,7 @@
 
 /**
  *
- * Ticket managment
+ * Bonus managment
  *
  */
 class Admin_HolidayPresenter extends Admin_BasePresenter {
@@ -24,14 +23,18 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
         parent::startup();
     }
 
-    /*
+    /**
      * Výchozí akce presenteru
      */
 
     public function actionDefault() {
-        
+        $this->redirect('showZajezdy');
     }
 
+    /**
+     * Metoda zobrazí všechny dostupné zájezdy ze vzdáleného API
+     *
+     */
     function actionShowZajezdy() {
         $response = RestModel::getZajezdyFromAPI();
 
@@ -50,6 +53,9 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
     /**
      *
      * Objednani zajezdu pro zamestnance (vyuziti API jineho tymu)
+     * @param zaId ID zájezdu
+     * @param caId
+     * @param cena cena zájezdu
      *
      */
     public function actionOrderZajezd($zaId, $caId, $cena) {
@@ -85,7 +91,7 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
             try {
                 HolidayModel::addBonus($this->user->getidentity()->id, $zaId, $objednavkaId);
                 dibi::query('COMMIT');
-                $this->flashMessage("Zájezd byl úspěšně objednán");
+                $this->flashMessage("Zájezd byl úspěšně objednán.");
             } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
@@ -101,6 +107,7 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
     /**
      *
      * Zruseni objednavky zamestnance (vyuziti API jineho tymu)
+     * @param objId ID objednávky
      *
      */
     public function actionCancelZajezd($objId) {
