@@ -59,12 +59,11 @@ class Front_RestClientPresenter extends Front_BasePresenter {
         if ($req->getResponseCode() == 201) {
 
             $xmlDOM = new DOMDocument();
-            $response = $req->getResponse();
-
+            $response = (String) $req->getResponse();
+            $response = trim($response);
             $xmlDOM->loadXML($response);
 
             $xml = simplexml_import_dom($xmlDOM);
-
 
             $projectId = (String) $xml->id;
 
