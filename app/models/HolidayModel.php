@@ -15,6 +15,14 @@
  */
 class HolidayModel extends BaseModel {
 
+    public static function getOrderedZajezdyByUserId($userId){
+        
+        $result = dibi::dataSource('SELECT * FROM bonusAPI WHERE userId = %i', $userId);
+        
+        return $result;
+        
+    }
+
 }
 
 ?>

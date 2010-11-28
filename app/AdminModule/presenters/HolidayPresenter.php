@@ -39,6 +39,11 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
         $xml = simplexml_load_string($odpoved);
 
+        $orderedZajezdy = HolidayModel::getOrderedZajezdyByUserId($this->user->getIdentity()->id);
+
+        $orderedZajezdy = $orderedZajezdy->fetchPairs('zajezdId', 'orderId');
+
+        $this->template->orderedZajezdy = $orderedZajezdy;
         $this->template->zajezdy = $xml;
     }
 
