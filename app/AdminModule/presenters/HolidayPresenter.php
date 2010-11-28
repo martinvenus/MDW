@@ -86,15 +86,17 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
             try {
                 HolidayModel::addBonus($this->user->getidentity()->id, $zaId, $objednavkaId);
                 dibi::query('COMMIT');
+                $this->flashMessage("Zájezd byl úspěšně objednán");
             } catch (Exception $e) {
                 dibi::query('ROLLBACK');
                 Debug::processException($e);
                 $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
             }
-            $this->flashMessage("Zájezd byl úspěšně objednán");
         } else {
             $this->flashMessage("Zájezd se nepodařilo rezervovat.");
         }
+
+        $this->redirect('Holiday:showZajezdy');
     }
 
 }
