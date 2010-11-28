@@ -45,6 +45,14 @@ class RestModel extends BaseModel {
         return $api;
     }
 
+    public static function getZajezdyFromApi(){
+        $url = 'http://fit-mdw-ws10-103-5.appspot.com/rest/Zajezdy/xml';
+
+        $response = RestClientModel::get($url);
+
+        return $response;
+    }
+
     /*
      * Metoda ověří, zda přijatá data jsou požadovaného typu
      * @param requiredContentType požadovaný typ dokumentu

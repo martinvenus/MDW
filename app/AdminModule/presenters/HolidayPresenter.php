@@ -22,7 +22,6 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
     public function startup() {
 
         parent::startup();
-        
     }
 
     /*
@@ -31,6 +30,16 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
     public function actionDefault() {
         
+    }
+
+    function actionShowZajezdy() {
+        $response = RestModel::getZajezdyFromAPI();
+
+        $odpoved = trim($response->getResponse());
+
+        $xml = simplexml_load_string($odpoved);
+
+        $this->template->zajezdy = $xml;
     }
 
     /**
