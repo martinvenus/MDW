@@ -15,6 +15,24 @@
  */
 class HolidayModel extends BaseModel {
 
+    /*
+     * Přidání odpovědi k tiketu
+     * @param form data z formuláře
+     */
+
+    public static function addBonus($user, $zajezd, $objednavka) {
+
+        dibi::query('INSERT INTO bonusAPI ( `userId`,
+`zajezdId`,
+`orderId`
+) VALUES (%i, %s, %i)',
+                        $user,
+                        $zajezd,
+                        $objednavka
+        );
+    }
+
+
 }
 
 ?>

@@ -38,11 +38,11 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
      * ID projektu ve vzdalenem systemu si ulozim do databaze
      *
      */
-    public function actionOrderZajezd($id) {
+    public function actionOrderZajezd($zaId, $caId, $cena) {
         $data = '<Objednavka>
-    <caId>MiDWa</caId>
-    <cena>0</cena>
-    <datumVytvoreni>2010-11-20T17:59:20.002Z</datumVytvoreni>
+    <caId>' . $caId . '</caId>
+    <cena>' . $cena . '</cena>
+    <datumVytvoreni>' . date("Y-m-d\TH:i:s.u") . '</datumVytvoreni>
     <osoby>
       <jmeno>' . $this->user->getidentity()->name . '</jmeno>
       <prijmeni>' . $this->user->getidentity()->surname . '</prijmeni>
@@ -50,12 +50,10 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
     </osoby>
     <stav>prijata</stav>
     <uzivatelId>jardakiss@gmail.com</uzivatelId>
-    <zajezdId>' . $id . '</zajezdId>
+    <zajezdId>' . $zaId . '</zajezdId>
   </Objednavka>';
 
         $req = RestClientModel::post('http://fit-mdw-ws10-103-5.appspot.com/rest/Objednavky', $data, null, null, 'application/xml');
-
-        print_r($req->getResponseCode());
 
         if ($req->getResponseCode() == 200) {
 
@@ -70,20 +68,17 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
 
             $objednavkaId = (String) $xml->objednavkaId;
 
-            // TODO: Az opravi API dodelat vlozeni do DB ticketBribe
-
-
-            echo $objednavkaId;
-
-//
-//            try {
-//                TicketsModel::addBribe($detaily['ticketId'], $projectId);
-//                dibi::query('COMMIT');
-//            } catch (Exception $e) {
-//                dibi::query('ROLLBACK');
-//                Debug::processException($e);
-//            }
-
+            try {
+                HolidayModel::addBonus($this->user->getidentity()->id, $zaId, $objednavkaId);
+                dibi::query('COMMIT');
+            } catch (Exception $e) {
+                dibi::query('ROLLBACK');
+                Debug::processException($e);
+                $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
+            }
+            $this->flashMessage("Zájezd byl úspěšně objednán");
+        } else {
+            $this->flashMessage("Zájezd se nepodařilo rezervovat.");
         }
     }
 
