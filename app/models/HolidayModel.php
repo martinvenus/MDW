@@ -15,6 +15,7 @@
  */
 class HolidayModel extends BaseModel {
 
+
     /*
      * Přidání odpovědi k tiketu
      * @param form data z formuláře
@@ -32,6 +33,14 @@ class HolidayModel extends BaseModel {
         );
     }
 
+
+    public static function getOrderedZajezdyByUserId($userId){
+        
+        $result = dibi::dataSource('SELECT * FROM bonusAPI WHERE userId = %i', $userId);
+        
+        return $result;
+        
+    }
 
 }
 

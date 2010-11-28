@@ -32,6 +32,21 @@ class Admin_HolidayPresenter extends Admin_BasePresenter {
         
     }
 
+    function actionShowZajezdy() {
+        $response = RestModel::getZajezdyFromAPI();
+
+        $odpoved = trim($response->getResponse());
+
+        $xml = simplexml_load_string($odpoved);
+
+        $orderedZajezdy = HolidayModel::getOrderedZajezdyByUserId($this->user->getIdentity()->id);
+
+        $orderedZajezdy = $orderedZajezdy->fetchPairs('zajezdId', 'orderId');
+
+        $this->template->orderedZajezdy = $orderedZajezdy;
+        $this->template->zajezdy = $xml;
+    }
+
     /**
      *
      * Pridani tiketu do seznamu uplatku (vyuziti API jineho tymu)
