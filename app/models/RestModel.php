@@ -45,7 +45,7 @@ class RestModel extends BaseModel {
         return $api;
     }
 
-    public static function getZajezdyFromApi(){
+    public static function getZajezdyFromApi() {
         $url = 'http://fit-mdw-ws10-103-5.appspot.com/rest/Zajezdy/xml';
 
         $response = RestClientModel::get($url);
@@ -84,6 +84,43 @@ class RestModel extends BaseModel {
         }
 
         throw new AuthenticationException('Invalid API Key');
+    }
+
+    /**
+     *
+     * Pridani tiketu do seznamu uplatku (vyuziti API jineho tymu)
+     * ID projektu ve vzdalenem systemu si ulozim do databaze
+     *
+     */
+    public static function addProject($detaily) {
+        $data = '<project>
+    <name>' . $detaily['tid'] . '</name>
+    <type>service</type>
+    <tags>RT System</tags>
+    <description>' . $detaily['ticketMessage'] . '</description>
+</project>';
+
+        $req = RestClientModel::post('http://fit-mdw-ws10-102-7.appspot.com/rest/projects?user=ahJmaXQtbWR3LXdzMTAtMTAyLTdyCwsSBFVzZXIY4V0M', $data, null, null, 'application/xml');
+
+        if ($req->getResponseCode() == 201) {
+
+            $xmlDOM = new DOMDocument();
+            $response = (String) $req->getResponse();
+            $response = trim($response);
+            $xmlDOM->loadXML($response);
+
+            $xml = simplexml_import_dom($xmlDOM);
+
+            $projectId = (String) $xml->id;
+
+            try {
+                TicketsModel::addBribe($detaily['ticketId'], $projectId);
+                dibi::query('COMMIT');
+            } catch (Exception $e) {
+                dibi::query('ROLLBACK');
+                Debug::processException($e);
+            }
+        }
     }
 
 }

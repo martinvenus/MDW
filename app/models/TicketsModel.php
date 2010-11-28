@@ -306,9 +306,9 @@ class TicketsModel extends BaseModel {
      * @param form data z formuláře
      */
 
-    public static function addBribe($ticketId, $projectID) {
+    public static function addBribe($ticketId, $projectId) {
         dibi::query('INSERT INTO ticketBribe (
-            `ticketID`,
+            `ticketId`,
             `projectId`)
             VALUES (%i, %s)',
                         $ticketId,

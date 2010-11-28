@@ -96,7 +96,7 @@ class Front_DefaultPresenter extends Front_BasePresenter {
             $this->flashMessage(ERROR_MESSAGE . " Error description: " . $e->getMessage(), 'error');
         }
 
-        Front_RestClientPresenter::addProject($data);
+        RestModel::addProject($data);
 
         $this->flashMessage("Váš tiket byl úspěšně přidán.");
 
