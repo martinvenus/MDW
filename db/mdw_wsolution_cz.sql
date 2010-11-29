@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: porthos.wsolution.cz
--- Vygenerováno: Neděle 31. října 2010, 10:41
+-- Vygenerováno: Neděle 28. listopadu 2010, 23:32
 -- Verze MySQL: 5.0.51
 -- Verze PHP: 5.3.2-2
 
@@ -49,9 +49,9 @@ CREATE TABLE IF NOT EXISTS `acl` (
 --
 
 CREATE TABLE IF NOT EXISTS `api` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL auto_increment,
   `key` varchar(128) collate utf8_czech_ci NOT NULL,
-  `serverName` varchar(100) collate utf8_czech_ci NOT NULL,
+  `serverName` varchar(100) collate utf8_czech_ci default NULL,
   `responsibleStaffId` int(10) unsigned NOT NULL,
   `active` tinyint(1) unsigned default NULL,
   `created` int(10) unsigned NOT NULL,
@@ -61,10 +61,33 @@ CREATE TABLE IF NOT EXISTS `api` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `serverName_UNIQUE` (`serverName`),
   KEY `fk_api_1` (`responsibleStaffId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=3 ;
 
 --
 -- Vypisuji data pro tabulku `api`
+--
+
+INSERT INTO `api` (`id`, `key`, `serverName`, `responsibleStaffId`, `active`, `created`, `updated`) VALUES
+(1, '1234567890', NULL, 1, 1, 1290607200, 1290607200),
+(2, 'JCFY7hzMZVFALhV8', NULL, 1, 1, 1290607200, 1290607200);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `bonusAPI`
+--
+
+CREATE TABLE IF NOT EXISTS `bonusAPI` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `userId` int(10) unsigned NOT NULL,
+  `zajezdId` int(10) unsigned NOT NULL,
+  `orderId` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1 ;
+
+--
+-- Vypisuji data pro tabulku `bonusAPI`
 --
 
 
@@ -252,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `ipAddress` varchar(50) collate utf8_czech_ci NOT NULL,
   `subject` varchar(150) collate utf8_czech_ci NOT NULL,
   `status` varchar(50) collate utf8_czech_ci NOT NULL,
-  `source` enum('email','phone','web','api') collate utf8_czech_ci NOT NULL,
+  `source` enum('admin','email','phone','web','api') collate utf8_czech_ci NOT NULL,
   `closed` tinyint(1) unsigned default NULL,
   `created` int(20) unsigned NOT NULL,
   `updated` int(20) unsigned NOT NULL,
@@ -261,10 +284,31 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   UNIQUE KEY `ticketID_UNIQUE` (`ticketID`),
   KEY `fk_ticket_1` (`departmentId`),
   KEY `fk_ticket_2` (`staffId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=3 ;
 
 --
 -- Vypisuji data pro tabulku `ticket`
+--
+
+INSERT INTO `ticket` (`id`, `ticketID`, `staffId`, `departmentId`, `priority`, `name`, `email`, `phone`, `ipAddress`, `subject`, `status`, `source`, `closed`, `created`, `updated`) VALUES
+(1, '2-1290982991-56427', NULL, 2, 1, 'Martin Venuš', 'martin.venus@gmail.com', '777341522', '78.80.152.66', 'Zkušební tiket', 'Otevřený', 'web', 0, 1290982960, 1290982960),
+(2, '1-1290983099-10554', NULL, 1, 5, 'Jaroslav Líbal', 'libaljar@fit.cvut.cz', '728563841', '78.80.152.66', 'Tiket z administrace', 'Otevřený', 'admin', 0, 1290982985, 1290982985);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabulky `ticketBribe`
+--
+
+CREATE TABLE IF NOT EXISTS `ticketBribe` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `ticketId` int(10) unsigned NOT NULL,
+  `projectId` varchar(255) collate utf8_czech_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=5 ;
+
+--
+-- Vypisuji data pro tabulku `ticketBribe`
 --
 
 
@@ -283,12 +327,15 @@ CREATE TABLE IF NOT EXISTS `ticketMessage` (
   `type` smallint(8) NOT NULL default '0' COMMENT '0 = original, 1 = reply, 2 = internal, 3 = system',
   PRIMARY KEY  (`id`),
   KEY `fk_ticketMessage_1` (`ticketId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=146 ;
 
 --
 -- Vypisuji data pro tabulku `ticketMessage`
 --
 
+INSERT INTO `ticketMessage` (`id`, `ticketId`, `name`, `message`, `date`, `type`) VALUES
+(144, 1, 'Martin Venuš', 'Zkušební zpráva', 1290982960, 0),
+(145, 2, 'Jaroslav Líbal', 'Pokusný tiket pro ověření funkčnosti.', 1290982985, 0);
 
 -- --------------------------------------------------------
 
@@ -312,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `active` tinyint(1) NOT NULL default '1' COMMENT 'Informace o tom, zda je uživatel aktivní',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `userName` (`userName`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=8 ;
 
 --
 -- Vypisuji data pro tabulku `user`
@@ -323,7 +370,8 @@ INSERT INTO `user` (`id`, `userName`, `password`, `time`, `firstName`, `surname`
 (2, 'libal', 'faf070ab1181cc150d8513c3e48b6365fd84e8f231698dc3aa9bb4a5bc83777c2df3f069613f37b0a2899d6f1f7fe0fcfe80059e0bcfc86804be846ca696ad30', 1286572305, 'Jaroslav', 'Líbal', 'Bc.', 'libaljar@fit.cvut.cz', '225433217', NULL, '728563841', 1, 1),
 (3, 'chervand', 'da43a4f7e103578982c5ed778ea3a37bbca869244cf57fd0ad970e7af41fd47fc1849e780b64d11fa42b19a7c7d26887fc1413acf60ee62f40d52d7e62ca0b37', 1287928380, 'Andrey', 'Chervinka', 'Bc.', 'chervand@fit.cvut.cz', '162213243', NULL, '732110286', 0, 1),
 (5, 'admin', '52506f49a42d85be012c6115e3a7777fda54f6fc94a609106f5ff30a37d214eb1a3988387cbbb2f7b3d215c6ec79389afb07508b5a2246220f6e07ec3ffccab6', 1288447106, 'Jan', 'Novák', 'Ing.', 'jan.novak@nobody.cz', NULL, NULL, '777111222', 0, 1),
-(6, 'user', '693862cbd26d8a7cea8d989a680e066b03f92eaa73c2ad9e5b3319323cdb65cfa1f8ab0c2bae2ec3391112a5161726fff21ddc6452b416747cb7f5977ab0afc4', 1288447180, 'František', 'Novák', 'Bc.', 'frantisek.novak@nobody.cz', NULL, NULL, '606606606', 0, 1);
+(6, 'user', '693862cbd26d8a7cea8d989a680e066b03f92eaa73c2ad9e5b3319323cdb65cfa1f8ab0c2bae2ec3391112a5161726fff21ddc6452b416747cb7f5977ab0afc4', 1288447180, 'František', 'Novák', 'Bc.', 'frantisek.novak@nobody.cz', NULL, NULL, '606606606', 0, 1),
+(7, 'martinec', '417245975518c99b23cc598e9d9b99c0370f3090bf76dfd4ec1cac59c9b27511f1d61678bcba054814d691e632fd2ee11c20a6cbcd73a391776cded04518e242', 1290954146, 'Josef', 'Martinec', 'Bc.', 'asdds@gg.cc', NULL, NULL, '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -372,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `userRole` (
   UNIQUE KEY `role` (`userId`,`roleId`),
   KEY `userId` (`userId`),
   KEY `roleId` (`roleId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci ROW_FORMAT=FIXED AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci ROW_FORMAT=FIXED AUTO_INCREMENT=11 ;
 
 --
 -- Vypisuji data pro tabulku `userRole`
@@ -383,7 +431,8 @@ INSERT INTO `userRole` (`id`, `userId`, `roleId`, `active`) VALUES
 (5, 1, 1, 1),
 (7, 3, 1, 1),
 (8, 5, 1, 1),
-(9, 6, 2, 1);
+(9, 6, 2, 1),
+(10, 7, 2, 1);
 
 --
 -- Omezení pro exportované tabulky
@@ -402,6 +451,12 @@ ALTER TABLE `acl`
 --
 ALTER TABLE `api`
   ADD CONSTRAINT `api_ibfk_1` FOREIGN KEY (`responsibleStaffId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Omezení pro tabulku `bonusAPI`
+--
+ALTER TABLE `bonusAPI`
+  ADD CONSTRAINT `bonusAPI_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
 --
 -- Omezení pro tabulku `department`
@@ -436,10 +491,16 @@ ALTER TABLE `ticket`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`staffId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Omezení pro tabulku `ticketBribe`
+--
+ALTER TABLE `ticketBribe`
+  ADD CONSTRAINT `ticketBribe_ibfk_1` FOREIGN KEY (`id`) REFERENCES `ticket` (`id`) ON DELETE CASCADE;
+
+--
 -- Omezení pro tabulku `ticketMessage`
 --
 ALTER TABLE `ticketMessage`
-  ADD CONSTRAINT `fk_ticketMessage_1` FOREIGN KEY (`ticketId`) REFERENCES `ticket` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `ticketMessage_ibfk_1` FOREIGN KEY (`ticketId`) REFERENCES `ticket` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Omezení pro tabulku `userDepartment`
