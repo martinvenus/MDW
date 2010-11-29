@@ -28,11 +28,15 @@
         <td>{$zajezd->strava}</td>
         <td>{$zajezd->typZajezdu}</td>
         <td>
-            <?php $zajezdId = (int) $zajezd->zajezdId; ?>
+            <?php 
+            $zajezdId = (int) $zajezd->zajezdId;
+            $caId = (String) $zajezd->caId;
+            $cena = (int) $zajezd->cena;
+            ?>
             {if @$orderedZajezdy[$zajezdId] > 0}
             <a href="{link cancelZajezd $orderedZajezdy[$zajezdId]}">Zrušit objednávku</a>
             {else}
-            <a href="{link orderZajezd $zajezd->zajezdId, $zajezd->caId, $zajezd->cena}">Objednat</a>
+            <a href="{link orderZajezd $zajezdId, $caId, $cena}">Objednat</a>
             {/if}
         </td>
     </tr>
