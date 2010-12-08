@@ -16,6 +16,60 @@
  */
 class Front_RestPresenter extends Front_BasePresenter {
 
+    /**
+     * Služba pro testování škálovatelnosti
+     */
+    function actionGetBenchmark() {
+
+        // Volani cizího API
+
+        $response = RestModel::getZajezdyFromAPI();
+
+        $odpoved = trim($response->getResponse());
+
+        $xml = simplexml_load_string($odpoved);
+
+        // POST
+
+        $params = '<?xml version="1.0" encoding="UTF-8"?>
+<ticket>
+    <apiKey>1234567890</apiKey>
+    <author>Test Benchmark</author>
+    <mail>test@api.mdw</mail>
+    <phone>123456789</phone>
+    <department>2</department>
+    <subject>Test - benchmark</subject>
+    <description>Testovaci tiket pro overeni skalovatelnosti.</description>
+</ticket>
+';
+
+        $response = RestClientModel::post("http://mdw.wsolution.cz/api/v1/ticket/", $params, null, null, "application/xml");
+
+        $odpoved = trim($response->getResponse());
+
+        $xml = simplexml_load_string($odpoved);
+
+        $ticketId = (String) $xml->ticketId;
+
+        // UPDATE
+
+        $params = '<?xml version="1.0" encoding="UTF-8"?>
+<ticket>
+    <apiKey>1234567890</apiKey>
+</ticket>
+';
+
+        $url = "http://mdw.wsolution.cz/api/v1/ticket/" . $ticketId;
+
+        RestClientModel::put($url, $params, null, null, "application/xml");
+
+
+        // Složitá operace - řazení pole
+
+        BaseModel::sortRandomArray();
+
+    }
+
     function actionGetTicket($ticketId) {
 
         $errors = array();

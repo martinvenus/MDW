@@ -17,6 +17,14 @@
 class Front_RestClientPresenter extends Front_BasePresenter {
 
     function actionDefault() {
+
+        $response = RestModel::getZajezdyFromAPI();
+
+        $odpoved = trim($response->getResponse());
+
+        $xml = simplexml_load_string($odpoved);
+
+
         $data = '<project>
     <name>Zda_se_ze_ani_projekt_s_otaznikem_NEFUNGUJE</name>
     <type>service</type>
@@ -39,6 +47,5 @@ class Front_RestClientPresenter extends Front_BasePresenter {
 //var_dump($test->getResponseMessage());
 //var_dump($test->getResponseContentType());
     }
-
 
 }
