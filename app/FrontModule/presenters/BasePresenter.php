@@ -19,6 +19,8 @@ abstract class Front_BasePresenter extends BasePresenter
 
     public function startup() {
         parent::startup();
+
+        Debug::timer();
     }
 
 }

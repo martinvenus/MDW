@@ -63,4 +63,20 @@ class BaseModel {
     public static function deleteItem($source, $id) {
         dibi::query('DELETE FROM %n WHERE id = %i', $source, $id);
     }
+
+    /**
+     * Metoda pro testování výkonu aplikace
+     * @param int Velikost pole, které bude naplněno náhodnými hodnotami a seřazeno
+     */
+    public static function sortRandomArray($size = 500000){
+        $array = array();
+
+        for($i = 0; $i < $size; $i++) {
+            $array[$i] = rand(0, PHP_INT_MAX);
+        }
+
+        sort($array);
+
+        unset($array);
+    }
 }
