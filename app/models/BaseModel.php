@@ -68,7 +68,7 @@ class BaseModel {
      * Metoda pro testování výkonu aplikace
      * @param int Velikost pole, které bude naplněno náhodnými hodnotami a seřazeno
      */
-    public static function sortRandomArray($size = 500000){
+    public static function sortRandomArray($size = 10000){
         $array = array();
 
         for($i = 0; $i < $size; $i++) {

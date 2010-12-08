@@ -19,7 +19,7 @@ class Front_RestPresenter extends Front_BasePresenter {
     /**
      * Služba pro testování škálovatelnosti
      */
-    function actionGetBenchmark() {
+    function actionGetBenchmark($server = "mdw.wsolution.cz") {
 
         // Volani cizího API
 
@@ -43,7 +43,7 @@ class Front_RestPresenter extends Front_BasePresenter {
 </ticket>
 ';
 
-        $response = RestClientModel::post("http://mdw.wsolution.cz/api/v1/ticket/", $params, null, null, "application/xml");
+        $response = RestClientModel::post("http://". $server ."/api/v1/ticket/", $params, null, null, "application/xml");
 
         $odpoved = trim($response->getResponse());
 
@@ -59,7 +59,7 @@ class Front_RestPresenter extends Front_BasePresenter {
 </ticket>
 ';
 
-        $url = "http://mdw.wsolution.cz/api/v1/ticket/" . $ticketId;
+        $url = "http://". $server ."/api/v1/ticket/" . $ticketId;
 
         RestClientModel::put($url, $params, null, null, "application/xml");
 
